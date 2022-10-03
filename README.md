@@ -1,2 +1,2 @@
-# lboroCW-Trelno
-Team Project
+# Trelno
+Team Project (static at first)
