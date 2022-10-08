@@ -1,50 +1,65 @@
-## User
+# Data Design
 
-- Email: str
-- Password: hash
-- Rank: int
-- ?Name: str
-
-## Team
-
-- Leader: User
-- Users: set[User]
-
-## Task
-
-- Assigned: set[User | Team]
-
-## Project
-
-- Deadline: Datetime
-- Tasks: list[Task]
-- Assigned: set[User | Team]
-
-## Topic
-
-- Name: str
-
-## Post
-
-
+## Diagram
 
 ```mermaid
 classDiagram
-	class User {
-		+Email: String
-		+Password: hash
-		+Rank: int
-		+?Name: str
-	}
-	class Team {
-		-Leader: User
-		-User: set[User]
-	}
-	class Task {
-		+Name: str
-		-Assigned: set[User]
-	}
-	class Project {
-		
-	}
+direction LR
+
+User "1..n" --o "1" Team: users
+User "1" --o "1" Team: leader
+class User {
+  +email: str
+  +password: hash
+  +rank: int
+  +?name: str
+  +login(email: str, password: hash)$ User
+}
+class Team {
+  -leader: User
+  -user: set~User~
+}
+
+Task "0..n" --* "1" Project: tasks
+User "0..n" --o "0..n" Task: users
+class Task {
+  +name: str
+  -users: set~User~
+}
+Project "1" --* "1" _Assigned: assigned
+class Project {
+  +deadline: Datetime
+  +tasks: list~Task~
+  +assigned: _Assigned
+  +users() set~User~
+}
+User "0..n" --o "0..n" _Assigned: users
+Team "0..n" --o "0..n" _Assigned: teams
+class _Assigned {
+	+users: set~User~
+	+teams: set~Team~
+	+all() set~User~
+}
+
+Post "0..n" --* "1..n" Topic
+class Post {
+	+id: int
+	+?Data: str
+}
+class Topic {
+	+id: int
+	+name: str
+	+posts() set~Post~
+}
+
 ```
+
+## Decisions
+
+- The usage of ID's will allow for the display name to be changed without breaking all references.
+
+## To Be Decided
+### Post
+
+The data of a post depends on how we do it. If it's a wiki then we need nothing more than the link to data resource (html).
+We could also include some meta data to allow for searching such as title and stuff. Depending on how dynamic these pages are, author as well. If it's a forum we will do some sort of linked list of a comment thread or something.
