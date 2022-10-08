@@ -1,0 +1,30 @@
+:root {
+	/* Dark Mode */
+	--colour-text: #dde;
+	--colour-block: #000;
+	--colour-accent: #2f7cee;
+}
+
+@media print,
+(prefers-color-scheme: light) {
+	:root {
+		/* Light Mode */
+		--colour-text: #000;
+		--colour-block: #eee;
+		--colour-accent: #2f7cee;
+	}
+}
+
+
+
+body {
+	color: var(--colour-text);
+	background-color: var(--colour-block);
+
+	text-align: center;
+
+}
+
+h1 {
+	color: var(--colour-accent);
+}
