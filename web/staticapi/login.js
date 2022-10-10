@@ -5,7 +5,7 @@
  * @returns success and user object if valid credentials, else error
  */
 export function login(email, password) {
-  // TODO I will clean this up, once the user class is sorted
+  // TODO I will clean this up and use proper classes
   if (email == "king@make-it-all.co.uk" && password == "password") {
     return {
       status: "success",
