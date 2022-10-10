@@ -23,8 +23,9 @@ class Team {
 Task "0..n" --* "1" Project: tasks
 User "0..n" --o "0..n" Task: users
 class Task {
-  +name: str
+  +id: int
   +done: bool
+  +name: str
   +users: set~User~
 }
 Project "1" --* "1" _Assigned: assigned
