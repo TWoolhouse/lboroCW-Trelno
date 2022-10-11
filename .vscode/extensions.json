@@ -1,6 +1,7 @@
 {
 	"recommendations": [
 		"ritwickdey.liveserver",
-		"bierner.markdown-mermaid"
+		"bierner.markdown-mermaid",
+		"esbenp.prettier-vscode"
 	]
 }
