@@ -1,5 +1,3 @@
-import * as db from "./login.js";
-
 export class User {
   /** @property {Number} id Unique User ID */
   id;
