@@ -36,6 +36,7 @@ class ProjectTask {
 }
 Project "1" --* "1" _Assigned: assigned
 class Project {
+  +leader: User
   +created: Datetime
   +deadline: Datetime
   +tasks: list~ProjectTask~
