@@ -6,9 +6,15 @@ export class Task {
   /** @property {String} name Display Name */
   name;
 
-  constructor(id, done, users) {
+  /**
+   *
+   * @param {Number} id The database ID of this task
+   * @param {Boolean} done Has this task been completed
+   * @param {String} name Display name for the task.
+   */
+  constructor(id, done, name) {
     this.id = id;
     this.done = done;
-    this.users = users;
+    this.name = name;
   }
 }
