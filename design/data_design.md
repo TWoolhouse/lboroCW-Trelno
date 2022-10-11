@@ -10,8 +10,7 @@ class User {
   +id: int
   +email: str
   +rank: int
-  +?name: str
-  +login(email: str, password: hash)$ User
+  +name: str
 }
 class Team {
   +leader: User
@@ -53,6 +52,32 @@ class Topic {
 	+id: int
 	+name: str
 	+posts() set~Post~
+}
+
+```
+
+```mermaid
+classDiagram
+direction RL
+
+class DBCollection~T: DBMapper~ {
+	-snapshot: Array~T~
+	+url: str
+	+onChange: DBCollectionEvent => void
+	+add(item: T)
+}
+
+class DBCollectionEvent~T: DBMapper~ {
+	+all: Array~T~
+	+diff: Array~T~
+}
+DBCollection -- DBCollectionEvent
+
+DBMapper --o DBCollection: T
+class DBMapper~T~ {
+	<<interface>>
+	+ToObj(item: T) object
+	+ToType(obj: object) T
 }
 
 ```

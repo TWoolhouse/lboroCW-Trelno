@@ -7,27 +7,19 @@ export class User {
   email;
   /** @property {Number} rank User rank in the company */
   rank;
+  /** @property {String} name The users full name */
+  name;
 
   /**
    * @param {Number} id Unique User ID
    * @param {String} email Email Address
    * @param {Number} rank User rank in the company
+   * @param {String} name The users full name
    */
-  constructor(id, email, rank) {
+  constructor(id, email, rank, name) {
     this.id = id;
     this.email = email;
     this.rank = rank;
-  }
-
-  /**
-   * Obtains the user if the email & password are in the database
-   * @param {String} email User email
-   * @param {String} password User password
-   * @returns {User} Returns the User or null
-   */
-  static login(email, password) {
-    let res = db.login(email, password);
-    if (res.status == "success") return res.user;
-    return null;
+    this.name = name
   }
 }
