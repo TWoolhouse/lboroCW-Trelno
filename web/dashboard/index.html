@@ -1,24 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#1e1e1e" />
 
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="color-scheme" content="dark light">
-	<meta name="theme-color" content="#1e1e1e">
+    <link rel="stylesheet" href="/base.css" />
 
-	<link rel="stylesheet" href="/base.css">
+    <title>Dashboard</title>
+  </head>
 
-	<title>Trelno</title>
-</head>
+  <body>
+    <h1>Dashboard</h1>
 
-<body>
+    <section class="card">
+      <h2 class="title-card">To-Do List</h2>
+    </section>
 
-	<h1>Trelno</h1>
+    <section class="card">
+      <h2 class="title-card">Project Overview</h2>
 
-	<p>Hello world</p>
+      <div class="card-small">
+        <h3 class="title-card-small">Design Project</h3>
+        <p class="card-description">Progress</p>
+        <div class="progress-bar">
+          <div class="progress-bar-fill" style="width: 50%"></div>
+        </div>
+        <p class="card-description">8/14 Tasks Completed</p>
 
-</body>
+        <a href="#">View Team Members</a>
+      </div>
 
+      <div class="card-small">
+        <h3 class="title-card-small">Requirements Construction</h3>
+        <p class="card-description">Progress</p>
+        <div class="progress-bar">
+          <div class="progress-bar-fill" style="width: 80%"></div>
+        </div>
+        <p class="card-description">13/14 Tasks Completed</p>
+
+        <a href="#">View Team Members</a>
+      </div>
+    </section>
+
+    <section class="cards-container">
+      <div class="card-small-card">
+        <h2 class="title-card-small">Project 1</h2>
+        <p class="card-description">
+          Part one of team project, creating a static page for presentation
+        </p>
+        <a href="#">To-Dos</a>
+        <a href="#">View Team</a>
+      </div>
+    </section>
+  </body>
 </html>
