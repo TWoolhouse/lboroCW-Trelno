@@ -79,9 +79,25 @@ This document will contain all of the necessary information about the requiremen
 
 5. Data protection requirements
    1. The system **must** follow the GDPR regulations.
+   2. The system **must** follow any data protection measures included in the current system.
+
+<!-- Anything in itallics is more of a suggestion which we can discuss when we go through it-->
+6. General Requriements *(might want to adjust name or put these requirements in another sub title)*
+   1. The website **must** be responsive and cater for different platforms (mobile etc.).
+   2. The website desgin **should** be clear and self explanatory to use. 
+   3. *The website **must** be available at all times?*
+   4. *Any issues with the website **must** be resolved shortly after being reported?*
 
 
 ## Requirements details
 ***
 
 Will contain all the above requirements in a more detailed form.
+
+*An idea for the format of the details. Might want to simplify as it may make the document large?*
+1. Login, registration and account requirements
+   1. A user **must** register to be able to use the system.
+   - For a user to access the system, a registration is required to ensure sensative data is protected and no unauthorised access is permitted. 
+   - ...
+   2. A member of staff **must** have only one account registered in the system.
+   - ...
