@@ -1,4 +1,4 @@
-# Requirements document 
+# Requirements document
 
 This document will contain all of the necessary information about the requirements for the "Team Projects" module coursework. The first part will contain a general list of all of the requirements, while the second one will contain a detailed overview of all the mentioned requirements. Wish us luck.
 
@@ -21,7 +21,7 @@ This document will contain all of the necessary information about the requiremen
    7. A member of staff **must** be invited by a registered member to access the system.
    8. A user **must** be either a normal user, team leader or project manager.
    9. A project manager or team leader **should** be able to manage other users in the system.
-  
+
 2. Productivity Management requirements
    1. A user **must** be assigned to a team.
    2. A user **could** join a separate team.
@@ -45,7 +45,7 @@ This document will contain all of the necessary information about the requiremen
    20. A Project **could** have a complexity level assigned to it.
    21. A complexity level **could** be a minimum amount of users/teams assigned to it.
 
-3. Knowledege Management requirements
+3. Knowledge Management requirements
    1. A user **must** be able to assign a Post to one Topics.
    2. A user **could** assign a Post to multiple Topics.
    3. A user **must** be able to create one or multiple new Posts.
@@ -71,7 +71,7 @@ This document will contain all of the necessary information about the requiremen
    5. The manager dashboard **should** show how tasks are allocated to a user or a team.
    6. The manager dashboard **should** give a warning to manager/team leader if a user has too many tasks allocated.
    7. The manager dashboard **should** show how the progress of the project based on tasks completed.
-   8. The manager dashboard **could** show number of users or teams working on a certain Project. 
+   8. The manager dashboard **could** show number of users or teams working on a certain Project.
    9. The manager dashboard **could** show whether there are Topics with multiple unsolved issues.
    10. The manager dashboard **should** give a warning to manager/team leader if a project does not enough users/teams assigned to it.
    <!--WTF is a "subject areas where training should be given to employees"? Topics with lots of "Issues"?-->
@@ -84,7 +84,7 @@ This document will contain all of the necessary information about the requiremen
 <!-- Anything in itallics is more of a suggestion which we can discuss when we go through it-->
 6. General Requriements *(might want to adjust name or put these requirements in another sub title)*
    1. The website **must** be responsive and cater for different platforms (mobile etc.).
-   2. The website desgin **should** be clear and self explanatory to use. 
+   2. The website desgin **should** be clear and self explanatory to use.
    3. *The website **must** be available at all times?*
    4. *Any issues with the website **must** be resolved shortly after being reported?*
 
@@ -97,7 +97,7 @@ Will contain all the above requirements in a more detailed form.
 *An idea for the format of the details. Might want to simplify as it may make the document large?*
 1. Login, registration and account requirements
    1. A user **must** register to be able to use the system.
-   - For a user to access the system, a registration is required to ensure sensative data is protected and no unauthorised access is permitted. 
+   - For a user to access the system, a registration is required to ensure sensative data is protected and no unauthorised access is permitted.
    - ...
    2. A member of staff **must** have only one account registered in the system.
    - ...
