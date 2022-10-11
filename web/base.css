@@ -14,6 +14,14 @@
     --colour-block: #eee;
     --colour-accent: #2f7cee;
 
+    --colour-accent-trans: #2f7cee0d;
+
+    --colour-white: #fff;
+    --card-shadow: 0 4px 4px rgb(0, 0, 0, 0.25);
+    --card-radius: 40px;
+
+    --card-small-radius: 14px;
+
     font-family: "Roboto", sans-serif;
   }
 }
@@ -21,10 +29,35 @@
 body {
   color: var(--colour-text);
   background-color: var(--colour-block);
-
-  text-align: center;
 }
 
 h1 {
   color: var(--colour-accent);
+}
+
+.title-card {
+  font-size: 24px;
+}
+
+.card {
+  background-color: var(--colour-white);
+  color: var(--colour-text);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--card-radius);
+  padding: 0.2rem;
+  margin-block: 1rem;
+}
+
+.card-small {
+  margin: 0.5rem;
+  background-color: var(--colour-accent-trans);
+  padding: 1rem;
+  border-radius: var(--card-small-radius);
+}
+
+.title-card {
+  margin: 1.5rem;
+}
+.title-card-small {
+  margin: 0;
 }
