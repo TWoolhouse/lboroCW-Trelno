@@ -20,6 +20,6 @@ export class User {
     this.id = id;
     this.email = email;
     this.rank = rank;
-    this.name = name
+    this.name = name;
   }
 }
