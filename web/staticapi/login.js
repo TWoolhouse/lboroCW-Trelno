@@ -1,4 +1,4 @@
-import { User } from "./user";
+import { User } from "./user.js";
 
 /**
  * Fakes a DB call and returns temp example objects
