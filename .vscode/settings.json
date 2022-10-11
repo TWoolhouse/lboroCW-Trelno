@@ -1,3 +1,6 @@
 {
-	"liveServer.settings.root": "/web/"
+	"liveServer.settings.root": "/web/",
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
 }
