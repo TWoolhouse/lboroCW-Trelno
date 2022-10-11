@@ -1,5 +1,6 @@
 {
 	"recommendations": [
-		"ritwickdey.LiveServer"
+		"ritwickdey.liveserver",
+		"bierner.markdown-mermaid"
 	]
 }
