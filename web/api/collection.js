@@ -22,6 +22,10 @@ export class CollectionEvent {
 }
 
 /**
+ * @callback Collection_SyncCallback
+ */
+
+/**
  * @template T
  * @callback Collection_OnChange
  * @param {CollectionEvent<T>} event
@@ -63,21 +67,41 @@ export class Collection {
    * @param  {...T} items
    */
   add(...items) {
-    let old = [...this.snapshot];
-    for (const item of items) this.snapshot.push(item);
-    this.onChangeFunc(new CollectionEvent(old, [...this.snapshot]));
+    this.sync(() => {
+      for (const item of items) this.snapshot.push(item);
+    });
   }
   /**
    * Removes items from the collection
    * @param  {...T} items
    */
   remove(...items) {
+    this.sync(() => {
+      for (const item of items) {
+        let idx = this.snapshot.indexOf(item);
+        if (idx < 0) continue;
+        this.snapshot.splice(idx, 1);
+      }
+    });
+  }
+
+  /**
+   * Replaces the entire collection with a new array
+   * @param {...T} items Array to replace the current collection with
+   */
+  replace(...items) {
+    this.sync(() => {
+      this.snapshot = items;
+    });
+  }
+
+  /**
+   * Handles setting up and firing the CollectionEvent when editing the snapshot
+   * @param {Collection_SyncCallback} func
+   */
+  sync(func) {
     let old = [...this.snapshot];
-    for (const item of items) {
-      let idx = this.snapshot.indexOf(item);
-      if (idx < 0) continue;
-      this.snapshot.splice(idx, 1);
-    }
+    func();
     this.onChangeFunc(new CollectionEvent(old, [...this.snapshot]));
   }
 }

@@ -85,6 +85,7 @@ class Collection~T~ {
 	+[Symbol.iterator]() Generator~T~
 	+add(...items: T) void
 	+remove(...items: T) void
+	+replace(...items: T) void
 	-sync(func: void => void) void
 	-snapshot: Array~T~
 	-onChangeFunc: CollectionEvent~T~ => void
