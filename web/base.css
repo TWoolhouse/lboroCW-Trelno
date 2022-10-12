@@ -7,8 +7,7 @@
   --colour-accent: #2f7cee;
 }
 
-@media print,
-(prefers-color-scheme: light) {
+@media print, (prefers-color-scheme: light) {
   :root {
     /* Light Mode */
     --colour-text: #000;
@@ -30,10 +29,24 @@
 body {
   color: var(--colour-text);
   background-color: var(--colour-block);
+  margin: 0;
 }
 
-h1 {
+header.header {
+  background-color: var(--colour-white);
+  display: flex;
+  justify-content: space-between;
+}
+
+.header h1 {
+  margin: 0.5rem;
+}
+
+.mobile-nav-toggle {
+  background-color: transparent;
   color: var(--colour-accent);
+  border: none;
+  font-size: 2rem;
 }
 
 .title-card {
