@@ -10,7 +10,7 @@
   --colour-accent-trans: #2f7cee0d;
   --colour-highlight: #00000080;
 
-  --colour-mid-grey: #9d9d9d;
+  --colour-mid-grey: #A6ACBE;
 
   --card-shadow: 0 4px 4px rgb(0, 0, 0, 0.25);
   --card-radius: 40px;
@@ -22,12 +22,12 @@
   :root {
     /* Light Mode Overrides*/
     --colour-text: #000;
-    --colour-block: #d8d8d8;
+    --colour-block: #eee;
     --colour-accent: #2f7cee;
     /* --colour-accent-trans: #2f7cee0d; */
     --colour-highlight: #fff;
 
-    --colour-mid-grey: #d9d9d9;
+    --colour-mid-grey: #A6ACBE;
 
   }
 }
