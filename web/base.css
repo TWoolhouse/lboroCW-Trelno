@@ -7,7 +7,8 @@
   --colour-accent: #2f7cee;
 }
 
-@media print, (prefers-color-scheme: light) {
+@media print,
+(prefers-color-scheme: light) {
   :root {
     /* Light Mode */
     --colour-text: #000;
@@ -37,8 +38,10 @@ h1 {
 
 .title-card {
   font-size: 24px;
+  margin: 1.5rem;
 }
 
+/* utility class that (should) be able to be re used in a lot of pages) */
 .card {
   background-color: var(--colour-white);
   color: var(--colour-text);
@@ -48,6 +51,7 @@ h1 {
   margin-block: 1rem;
 }
 
+/* smaller 'sub-cards' */
 .card-small {
   margin: 0.5rem;
   background-color: var(--colour-accent-trans);
@@ -55,9 +59,6 @@ h1 {
   border-radius: var(--card-small-radius);
 }
 
-.title-card {
-  margin: 1.5rem;
-}
 .title-card-small {
   margin: 0;
 }
