@@ -49,19 +49,20 @@ class ProjectTask {
 	+task: Task
 	+users: Collection~User~
 }
-Project "1" --* "1" _Assigned: assigned
+Project "1" --* "1" ProjectAssignees: assigned
 class Project {
 	+leader: User
 	+created: Datetime
 	+deadline: Datetime
+	+name: String
 	+tasks: Array~ProjectTask~
-	+assigned: _Assigned
+	+assigned: ProjectAssignees
 	+users() Set~User~
 	+progress() Float
 }
-User "0..n" --o "0..n" _Assigned: users
-Team "0..n" --o "0..n" _Assigned: teams
-class _Assigned {
+User "0..n" --o "0..n" ProjectAssignees: users
+Team "0..n" --o "0..n" ProjectAssignees: teams
+class ProjectAssignees {
 	<<Object>>
 	+users: Set~User~
 	+teams: Set~Team~
