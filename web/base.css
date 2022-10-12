@@ -116,6 +116,10 @@ header.header {
   border: 1px solid var(--colour-text);
 }
 
+input[type="checkbox"]:checked + label {
+  text-decoration: line-through;
+}
+
 /* UTILITY */
 
 .bg-accent {

@@ -13,7 +13,7 @@ for (let i = 0; i < 8; i++) {
  * @returns {string} HTML for task list item
  */
 function createTaskListItem(task) {
-  return `<input type="checkbox" id="${task.id}" checked="${task.done}"/>
+  return `<input type="checkbox" id="${task.id}"/>
           <label for="${task.id}">${task.name}</label>
           <hr class="item-break" />  `;
 }
