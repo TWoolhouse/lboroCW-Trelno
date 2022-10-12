@@ -1,3 +1,4 @@
+import { Collection } from "./collection";
 import { Task, TaskSrc } from "./task";
 
 /** @typedef {import('./task.js').TaskRef} TaskRef */
@@ -11,7 +12,7 @@ export class User {
   rank;
   /** @property {String} name The users full name */
   name;
-  /** @property {Array<Task>} tasks*/
+  /** @property {Collection<Task>} tasks*/
   tasks;
 
   /**
@@ -26,7 +27,7 @@ export class User {
     this.email = email;
     this.rank = rank;
     this.name = name;
-    this.tasks = tasks;
+    this.tasks = new Collection(...tasks);
   }
 
   /**

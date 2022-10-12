@@ -82,6 +82,7 @@ class Topic {
 class Collection~T~ {
 	+Collection(...items: T)
 	+onChange(callback: CollectionEvent~T~ => void) this
+	+[Symbol.iterator]() Generator~T~
 	+add(...items: T) void
 	+remove(...items: T) void
 	-snapshot: Array~T~
