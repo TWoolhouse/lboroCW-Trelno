@@ -51,6 +51,8 @@ header.header {
   font-size: 2rem;
 }
 
+/* CARDS */
+
 .title-card {
   font-size: 24px;
   margin: 1rem;
@@ -76,6 +78,11 @@ header.header {
   align-items: center;
 }
 
+.card-description {
+  font-size: 1.1em;
+  line-height: 1.25em;
+}
+
 .small-cards-wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -87,7 +94,7 @@ header.header {
   width: 100%;
   max-width: 30ch;
   margin: 0.5rem;
-  background-color: var(--colour-accent-trans);
+  background-color: var(--colour-white);
   padding: 1rem;
   border-radius: var(--card-small-radius);
   box-shadow: var(--card-shadow);
@@ -100,4 +107,14 @@ header.header {
 /* <hr> line break between todo items*/
 .item-break {
   border: 1px solid var(--colour-text);
+}
+
+/* UTILITY */
+
+.bg-accent {
+  background-color: var(--colour-accent-trans);
+}
+
+.text-center {
+  text-align: center;
 }
