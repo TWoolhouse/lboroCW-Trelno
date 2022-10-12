@@ -1,3 +1,15 @@
+export const TaskSrc = {
+  User: 0,
+  Project: 1,
+};
+
+/**
+ * @typedef TaskRef
+ * @type {Object}
+ * @property {Task} task
+ * @property {Number} source A TaskSrc
+ */
+
 export class Task {
   /** @property {Number} id Unique Task ID */
   id;
@@ -7,7 +19,6 @@ export class Task {
   name;
 
   /**
-   *
    * @param {Number} id The database ID of this task
    * @param {Boolean} done Has this task been completed
    * @param {String} name Display name for the task.
