@@ -52,7 +52,7 @@ header.header {
   font-size: 2rem;
 }
 
-@media screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .mobile-nav-toggle {
     display: none;
   }
