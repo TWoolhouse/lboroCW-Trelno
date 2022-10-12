@@ -16,6 +16,8 @@
 
     --colour-accent-trans: #2f7cee0d;
 
+    --colour-mid-grey: #d9d9d9;
+
     --colour-white: #fff;
     --card-shadow: 0 4px 4px rgb(0, 0, 0, 0.25);
     --card-radius: 40px;
@@ -63,6 +65,10 @@ header.header {
   padding: 1.2rem;
   margin: 1rem 0.5rem;
 }
+.card a {
+  color: var(--colour-text);
+  font-weight: 600;
+}
 
 .card-title-wrapper {
   display: flex;
@@ -70,12 +76,21 @@ header.header {
   align-items: center;
 }
 
+.small-cards-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
 /* smaller 'sub-cards' */
 .card-small {
+  width: 100%;
+  max-width: 30ch;
   margin: 0.5rem;
   background-color: var(--colour-accent-trans);
   padding: 1rem;
   border-radius: var(--card-small-radius);
+  box-shadow: var(--card-shadow);
 }
 
 .title-card-small {
