@@ -1,0 +1,12 @@
+.new-item {
+  background-color: var(--colour-accent);
+  border: none;
+  aspect-ratio: 1;
+  width: 3rem;
+  border-radius: 100vh;
+  font-size: 2.5rem;
+  padding: 0;
+  margin: 0 1rem;
+  box-shadow: var(--card-shadow);
+  color: var(--colour-white);
+}

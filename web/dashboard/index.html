@@ -8,6 +8,8 @@
     <meta name="theme-color" content="#1e1e1e" />
 
     <link rel="stylesheet" href="/base.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <script type="module" src="./script.js"></script>
 
     <title>Dashboard</title>
   </head>
@@ -20,7 +22,13 @@
     </header>
 
     <section class="card">
-      <h2 class="title-card">To-Do List</h2>
+      <div class="card-title-wrapper">
+        <h2 class="title-card">To-Do List</h2>
+        <button class="new-item">+</button>
+      </div>
+      <h3 class="title-card-small">Item</h3>
+      <hr class="item-break" />
+      <div id="task-list-overall"></div>
     </section>
 
     <section class="card">

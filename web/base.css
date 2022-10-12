@@ -51,7 +51,7 @@ header.header {
 
 .title-card {
   font-size: 24px;
-  margin: 1.5rem;
+  margin: 1rem;
 }
 
 /* utility class that (should) be able to be re used in a lot of pages) */
@@ -60,8 +60,14 @@ header.header {
   color: var(--colour-text);
   box-shadow: var(--card-shadow);
   border-radius: var(--card-radius);
-  padding: 0.2rem;
-  margin-block: 1rem;
+  padding: 1.2rem;
+  margin: 1rem 0.5rem;
+}
+
+.card-title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* smaller 'sub-cards' */
@@ -74,4 +80,9 @@ header.header {
 
 .title-card-small {
   margin: 0;
+}
+
+/* <hr> line break between todo items*/
+.item-break {
+  border: 1px solid var(--colour-text);
 }
