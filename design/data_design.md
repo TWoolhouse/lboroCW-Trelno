@@ -80,8 +80,8 @@ class Topic {
 }
 
 class Collection~T~ {
-	+Collection(onChange: CollectionEvent~T~ => void)
-	+onChange(callback: CollectionEvent~T~ => void)
+	+Collection(...items: T)
+	+onChange(callback: CollectionEvent~T~ => void) this
 	+add(...items: T) void
 	+remove(...items: T) void
 	-snapshot: Array~T~

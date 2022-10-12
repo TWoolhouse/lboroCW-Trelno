@@ -38,11 +38,15 @@ export class Collection {
   onChangeFunc;
 
   /**
-   * @param {Collection_OnChange<T>} onChange
+   * @param {...T} items
    */
-  constructor(onChange) {
-    this.snapshot = [];
-    this.onChangeFunc = onChange;
+  constructor(...items) {
+    this.snapshot = items;
+    this.onChangeFunc = (event) => {};
+  }
+
+  [Symbol.iterator]() {
+    return this.snapshot.values();
   }
 
   /**
@@ -51,6 +55,7 @@ export class Collection {
    */
   onChange(callback) {
     this.onChangeFunc = callback;
+    return this;
   }
 
   /**
