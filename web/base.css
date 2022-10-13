@@ -10,15 +10,14 @@
   --colour-accent-trans: #2f7cee0d;
   --colour-highlight: #00000080;
 
-  --colour-mid-grey: #A6ACBE;
+  --colour-mid-grey: #a6acbe;
 
   --card-shadow: 0 4px 4px rgb(0, 0, 0, 0.25);
   --card-radius: 40px;
   --card-small-radius: 14px;
 }
 
-@media print,
-(prefers-color-scheme: light) {
+@media print, (prefers-color-scheme: light) {
   :root {
     /* Light Mode Overrides*/
     --colour-text: #000;
@@ -27,8 +26,7 @@
     /* --colour-accent-trans: #2f7cee0d; */
     --colour-highlight: #fff;
 
-    --colour-mid-grey: #A6ACBE;
-
+    --colour-mid-grey: #a6acbe;
   }
 }
 
@@ -130,10 +128,42 @@ input[type="checkbox"]:checked + label {
 /* MODAL <dialog>s */
 .modal {
   border: none;
-  background-color: var(--colour-white);
+  background-color: var(--colour-highlight);
   color: var(--colour-text);
   box-shadow: var(--card-shadow);
   border-radius: var(--card-radius);
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 1rem;
+}
+
+.modal-form :not(label):not(div) {
+  border: 2px solid var(--colour-accent);
+  border-radius: 0.5rem;
+  background-color: var(--colour-block);
+  padding: 0.5rem;
+}
+
+.modal-form textarea {
+  width: 50ch;
+  min-height: 10rem;
+  padding: 0.6rem 1rem;
+  resize: vertical;
+}
+
+.input-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.end-button {
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* UTILITY */
@@ -144,4 +174,8 @@ input[type="checkbox"]:checked + label {
 
 .text-center {
   text-align: center;
+}
+
+.btn-accent {
+  background-color: var(--colour-accent) !important;
 }

@@ -3,6 +3,7 @@ import { Task } from "../api/task.js";
 populateTasksList();
 
 const newTaskDialog = document.querySelector("#dialog-new-task");
+newTaskDialog.showModal();
 
 const newItemButton = document.querySelector(".new-item");
 newItemButton.addEventListener("click", () => {
