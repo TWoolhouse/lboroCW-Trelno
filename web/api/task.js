@@ -1,3 +1,5 @@
+import { ProxyFactory } from "./proxy.js";
+
 export const TaskSrc = {
   User: 0,
   Project: 1,
@@ -27,5 +29,15 @@ export class Task {
     this.id = id;
     this.done = done;
     this.name = name;
+
+    return ProxyFactory({
+      get: {},
+      set: {
+        done(target, value) {
+          // Update the server
+          return true;
+        },
+      },
+    })(this);
   }
 }

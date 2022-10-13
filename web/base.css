@@ -1,30 +1,34 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 :root {
-  /* Dark Mode */
+  /* All root variables */
+  font-family: "Roboto", sans-serif;
+
   --colour-text: #dde;
-  --colour-block: #000;
+  --colour-block: #080808;
   --colour-accent: #2f7cee;
+  --colour-accent-trans: #2f7cee0d;
+  --colour-highlight: #00000080;
+
+  --colour-mid-grey: #A6ACBE;
+
+  --card-shadow: 0 4px 4px rgb(0, 0, 0, 0.25);
+  --card-radius: 40px;
+  --card-small-radius: 14px;
 }
 
-@media print, (prefers-color-scheme: light) {
+@media print,
+(prefers-color-scheme: light) {
   :root {
-    /* Light Mode */
+    /* Light Mode Overrides*/
     --colour-text: #000;
     --colour-block: #eee;
     --colour-accent: #2f7cee;
+    /* --colour-accent-trans: #2f7cee0d; */
+    --colour-highlight: #fff;
 
-    --colour-accent-trans: #2f7cee0d;
+    --colour-mid-grey: #A6ACBE;
 
-    --colour-mid-grey: #d9d9d9;
-
-    --colour-white: #fff;
-    --card-shadow: 0 4px 4px rgb(0, 0, 0, 0.25);
-    --card-radius: 40px;
-
-    --card-small-radius: 14px;
-
-    font-family: "Roboto", sans-serif;
   }
 }
 
@@ -35,7 +39,7 @@ body {
 }
 
 header.header {
-  background-color: var(--colour-white);
+  background-color: var(--colour-highlight);
   display: flex;
   justify-content: space-between;
 }
@@ -52,7 +56,7 @@ header.header {
   font-size: 2rem;
 }
 
-@media screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .mobile-nav-toggle {
     display: none;
   }
@@ -67,13 +71,14 @@ header.header {
 
 /* utility class that (should) be able to be re used in a lot of pages) */
 .card {
-  background-color: var(--colour-white);
+  background-color: var(--colour-highlight);
   color: var(--colour-text);
   box-shadow: var(--card-shadow);
   border-radius: var(--card-radius);
   padding: 1.2rem;
   margin: 1rem 0.5rem;
 }
+
 .card a {
   color: var(--colour-text);
   font-weight: 600;
@@ -96,12 +101,13 @@ header.header {
   gap: 0.5rem;
   justify-content: center;
 }
+
 /* smaller 'sub-cards' */
 .card-small {
   width: 100%;
   max-width: 30ch;
   margin: 0.5rem;
-  background-color: var(--colour-white);
+  background-color: var(--colour-highlight);
   padding: 1rem;
   border-radius: var(--card-small-radius);
   box-shadow: var(--card-shadow);

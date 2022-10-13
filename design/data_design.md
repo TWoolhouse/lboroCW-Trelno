@@ -11,7 +11,7 @@ class User {
 	+email: String
 	+rank: Int
 	+name: String
-	+tasks: Array~Task~
+	+tasks: Collection~Task~
 	+tasklist() Array~TaskRef~
 }
 
@@ -47,21 +47,22 @@ ProjectTask "0..n" --* "1" Project: tasks
 User "0..n" --o "0..n" ProjectTask: users
 class ProjectTask {
 	+task: Task
-	+users: Set~User~
+	+users: Collection~User~
 }
-Project "1" --* "1" _Assigned: assigned
+Project "1" --* "1" ProjectAssignees: assigned
 class Project {
 	+leader: User
 	+created: Datetime
 	+deadline: Datetime
+	+name: String
 	+tasks: Array~ProjectTask~
-	+assigned: _Assigned
+	+assigned: ProjectAssignees
 	+users() Set~User~
 	+progress() Float
 }
-User "0..n" --o "0..n" _Assigned: users
-Team "0..n" --o "0..n" _Assigned: teams
-class _Assigned {
+User "0..n" --o "0..n" ProjectAssignees: users
+Team "0..n" --o "0..n" ProjectAssignees: teams
+class ProjectAssignees {
 	<<Object>>
 	+users: Set~User~
 	+teams: Set~Team~
@@ -85,6 +86,8 @@ class Collection~T~ {
 	+[Symbol.iterator]() Generator~T~
 	+add(...items: T) void
 	+remove(...items: T) void
+	+replace(...items: T) void
+	-sync(func: void => void) void
 	-snapshot: Array~T~
 	-onChangeFunc: CollectionEvent~T~ => void
 }

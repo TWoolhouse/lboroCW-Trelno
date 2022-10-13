@@ -8,7 +8,7 @@
   padding: 0;
   margin: 0 1rem;
   box-shadow: var(--card-shadow);
-  color: var(--colour-white);
+  color: var(--colour-highlight);
   cursor: pointer;
   transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
 }
@@ -16,7 +16,7 @@
 .new-item:hover,
 .new-item:focus {
   outline-offset: 0.3rem;
-  background-color: var(--colour-white);
+  background-color: var(--colour-highlight);
   color: var(--colour-accent);
 }
 
@@ -56,10 +56,12 @@ main {
 .side-menu {
   display: none;
 }
-@media screen and (min-width: 768px) {
+
+@media (min-width: 768px) {
   :root {
     --side-menu-width: 3rem;
   }
+
   .side-menu {
     display: block;
     position: fixed;
@@ -73,6 +75,7 @@ main {
     margin: 0;
     padding: 0;
   }
+
   .side-menu li {
     width: 2.5rem;
     aspect-ratio: 1;
@@ -86,10 +89,12 @@ main {
     color: var(--colour-text);
     text-decoration: none;
   }
+
   .side-menu li[data-active] {
-    background-color: var(--colour-white);
+    background-color: var(--colour-highlight);
     border-radius: 0.4rem;
   }
+
   .side-menu li[data-active] a {
     color: var(--colour-accent);
   }
