@@ -133,7 +133,9 @@ input[type="checkbox"]:checked + label {
   box-shadow: var(--card-shadow);
   border-radius: var(--card-radius);
 }
-
+.modal::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
 .modal-form {
   display: flex;
   flex-direction: column;
