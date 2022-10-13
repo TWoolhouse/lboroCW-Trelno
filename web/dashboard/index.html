@@ -106,6 +106,22 @@
 
     <dialog class="modal" id="dialog-new-task">
       <h2 class="title-card">Add New Task</h2>
+      <form class="modal-form">
+        <textarea placeholder="Write Task description here..."></textarea>
+        <select>
+          <option value="">Select project to add Task to</option>
+          <option value="0x001">Project 1</option>
+          <option value="0x5a">Design Project</option>
+          <option value="0x27">Project 3</option>
+        </select>
+        <div class="input-label">
+          <label for="task-date">Enter Deadline for Task:</label>
+          <input type="date" id="task-date" />
+        </div>
+        <div class="end-button">
+          <button class="btn-accent">Submit Item</button>
+        </div>
+      </form>
     </dialog>
   </body>
 </html>
