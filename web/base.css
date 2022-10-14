@@ -232,9 +232,22 @@ input[type="checkbox"]:checked + label {
   height: 518px;
   left: calc(50% - 349px/2 + 3.5px);
   top: 189px;
+  align-items: center;
   
   background: var(--colour-white);
   border: 1px solid var(--colour-white);
   box-shadow: 0px 4px 4px var(--colour-black);
   border-radius: 42px;
+}
+
+
+
+/*ICON (screwdriver) with positioning which hopefully can be used across multipl pages*/
+
+.icon{
+  position: absolute;
+  width: 47px;
+  height: 47px;
+  left: 338px;
+  top: 32px;
 }
