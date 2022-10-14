@@ -7,8 +7,8 @@
   --colour-text: #dde;
   --colour-block: #080808;
   --colour-accent: #2f7cee;
-  --colour-accent-trans: #2f7cee0d;
-  --colour-highlight: #00000080;
+  --colour-accent-trans: #2f7bee69;
+  --colour-highlight: #1d1d1d;
 
   --colour-mid-grey: #a6acbe;
 
@@ -23,7 +23,7 @@
     --colour-text: #000;
     --colour-block: #eee;
     --colour-accent: #2f7cee;
-    /* --colour-accent-trans: #2f7cee0d; */
+    --colour-accent-trans: #2f7cee0d;
     --colour-highlight: #fff;
 
     --colour-mid-grey: #a6acbe;
