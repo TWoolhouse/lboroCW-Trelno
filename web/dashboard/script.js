@@ -39,7 +39,9 @@ function createTaskListItem(task) {
               <input type="checkbox" id="${task.id}"/>
               <label for="${task.id}">${task.name}</label>
             </div>
-            <p class="dimmed">Project ${Math.floor(Math.random() * 100)}</p>
+            <p class="dimmed mobile-hidden">
+              Project ${Math.floor(Math.random() * 100)}
+            </p>
             <p class="dimmed">08/11/22</p>
           </div>
           <hr class="item-break" />  `;

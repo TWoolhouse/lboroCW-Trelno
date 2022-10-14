@@ -119,7 +119,13 @@ header.header {
 
 .task-list-item {
   display: grid;
-  grid-template-columns: 1fr 20ch 10ch;
+  grid-template-columns: 1fr 10ch;
+}
+
+@media (min-width: 768px) {
+  .task-list-item {
+    grid-template-columns: 1fr 20ch 10ch;
+  }
 }
 
 .task-list-item p {
@@ -194,4 +200,15 @@ input[type="checkbox"]:checked + label {
 
 .dimmed {
   opacity: 0.5;
+}
+
+/* USE SPARINGLY */
+.mobile-hidden {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .mobile-hidden {
+    display: initial;
+  }
 }
