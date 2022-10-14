@@ -1,0 +1,102 @@
+:root {
+    /* All root variables */
+    font-family: "Roboto", sans-serif;  
+    --colour-black: #000000;
+    --colour-white: #FFFFFF;
+    --colour-blue: #2F7CEE;
+  }
+
+
+h1{
+  position: absolute;
+  width: 224px;
+  height: 44px;
+  left: 36px;
+  top: 33px;
+  
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 35px;
+  text-align: center;
+  
+  color: var(--colour-blue);
+}
+
+/*"Member Login" text CSS*/
+#member-login {
+    position: absolute;
+    width: 235px;
+    height: 45px;
+    left: calc(50% - 235px/2 + 5.5px);
+    top: 33px;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 42px;
+
+    color: var(--colour-black);
+}
+
+/*Welcome text CSS*/
+#welcome-text {
+    position: absolute;
+    width: 331px;
+    height: 43px;
+    left: calc(50% - 331px/2 + 3.5px);
+    top: 96px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+
+    color: var(--colour-black);
+}
+
+
+#email-box {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 258px;
+    height: 40px;
+    left: calc(50% - 258px/2 + 6px);
+    top: 201px;
+    padding-left: 10px;
+
+    background: var(--colour-white);
+    border: 1px solid var(--colour-blue);
+    border-radius: 8px;
+}
+
+#password-box {
+
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 258px;
+    height: 39px;
+    left: calc(50% - 258px/2 + 6px);
+    top: 259px;
+    padding-left: 10px;
+
+    background: var(--colour-white);
+    border: 1px solid var(--colour-blue);
+    border-radius: 8px;
+}
+
+#submit-button {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 258px;
+    height: 38px;
+    left: calc(50% - 258px/2 + 6px);
+    top: 327px;
+
+    background: var(--colour-blue);
+    border: 1px solid var(--colour-blue);
+    border-radius: 8px;
+}

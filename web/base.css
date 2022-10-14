@@ -12,6 +12,12 @@
 
   --colour-mid-grey: #a6acbe;
 
+
+  /* Colours initially used in the login page*/
+  --colour-box-background: #FFFFFF;
+  --colour-box-shadow: rgba(0, 0, 0, 0.25);
+
+
   --card-shadow: 0 4px 4px rgb(0, 0, 0, 0.25);
   --card-radius: 40px;
   --card-small-radius: 14px;
@@ -35,6 +41,7 @@ body {
   background-color: var(--colour-block);
   margin: 0;
 }
+
 
 header.header {
   background-color: var(--colour-highlight);
@@ -211,4 +218,23 @@ input[type="checkbox"]:checked + label {
   .mobile-hidden {
     display: initial;
   }
+}
+
+
+/* LOGIN */
+
+/*Login box in centre of page*/
+.box{
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 349px;
+  height: 518px;
+  left: calc(50% - 349px/2 + 3.5px);
+  top: 189px;
+  
+  background: var(--colour-white);
+  border: 1px solid var(--colour-white);
+  box-shadow: 0px 4px 4px var(--colour-black);
+  border-radius: 42px;
 }
