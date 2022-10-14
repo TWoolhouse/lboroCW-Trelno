@@ -19,8 +19,11 @@ newItemButton.addEventListener("click", () => {
 function populateTasksList(noItems = 10) {
   const listParent = document.querySelector("#task-list-overall");
   for (let i = 0; i < noItems; i++) {
-    let task = new Task(i, false, null);
-    task.name = `Task ${i}`;
+    let task = new Task(
+      i,
+      false,
+      `Task ${i} ${"p".repeat(Math.random() * 10)}`
+    );
     listParent.innerHTML += createTaskListItem(task);
   }
 }
@@ -31,7 +34,13 @@ function populateTasksList(noItems = 10) {
  * @returns {string} HTML for task list item
  */
 function createTaskListItem(task) {
-  return `<input type="checkbox" id="${task.id}"/>
-          <label for="${task.id}">${task.name}</label>
+  return `<div class="task-list-item">
+            <div>
+              <input type="checkbox" id="${task.id}"/>
+              <label for="${task.id}">${task.name}</label>
+            </div>
+            <p class="dimmed">Project ${Math.floor(Math.random() * 100)}</p>
+            <p class="dimmed">08/11/22</p>
+          </div>
           <hr class="item-break" />  `;
 }

@@ -116,6 +116,16 @@ header.header {
 }
 
 /* TASKS */
+
+.task-list-item {
+  display: grid;
+  grid-template-columns: 1fr 20ch 10ch;
+}
+
+.task-list-item p {
+  margin: 0;
+}
+
 /* <hr> line break between todo items*/
 .item-break {
   border: 1px solid var(--colour-text);
@@ -180,4 +190,8 @@ input[type="checkbox"]:checked + label {
 
 .btn-accent {
   background-color: var(--colour-accent) !important;
+}
+
+.dimmed {
+  opacity: 0.5;
 }
