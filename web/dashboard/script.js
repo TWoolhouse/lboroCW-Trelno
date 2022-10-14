@@ -34,15 +34,17 @@ function populateTasksList(noItems = 10) {
  * @returns {string} HTML for task list item
  */
 function createTaskListItem(task) {
-  return `<div class="task-list-item">
-            <div>
-              <input type="checkbox" id="${task.id}"/>
-              <label for="${task.id}">${task.name}</label>
-            </div>
-            <p class="dimmed mobile-hidden">
-              Project ${Math.floor(Math.random() * 100)}
-            </p>
-            <p class="dimmed">08/11/22</p>
-          </div>
-          <hr class="item-break" />  `;
+  return /*HTML*/ `
+    <div class="task-list-item">
+      <div>
+        <input type="checkbox" id="${task.id}"/>
+        <label for="${task.id}">${task.name}</label>
+      </div>
+      <p class="dimmed mobile-hidden">
+        Project ${Math.floor(Math.random() * 100)}
+      </p>
+      <p class="dimmed">08/11/22</p>
+    </div>
+    <hr class="item-break" />
+    `;
 }
