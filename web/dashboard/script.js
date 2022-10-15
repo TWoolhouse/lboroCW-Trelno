@@ -1,5 +1,7 @@
 import { Task } from "../api/task.js";
 
+const taskStates = ["todo", "progress", "done"];
+
 populateTasksList();
 
 const newTaskDialog = document.querySelector("#dialog-new-task");
@@ -17,14 +19,16 @@ newItemButton.addEventListener("click", () => {
  * @param {number} noItems Number of tasks to display
  */
 function populateTasksList(noItems = 10) {
-  const listParent = document.querySelector("#task-list-overall");
+  const kanbanSections = document.querySelectorAll(".kanban-section");
   for (let i = 0; i < noItems; i++) {
     let task = new Task(
       i,
       false,
       `Task ${i} ${"p".repeat(Math.random() * 10)}`
     );
-    listParent.innerHTML += createTaskListItem(task);
+    task.state = taskStates[Math.floor(Math.random() * 3)];
+    let stateIndex = taskStates.indexOf(task.state);
+    kanbanSections[stateIndex].innerHTML += createTaskListItem(task);
   }
 }
 
@@ -35,16 +39,13 @@ function populateTasksList(noItems = 10) {
  */
 function createTaskListItem(task) {
   return /*HTML*/ `
-    <div class="task-list-item">
-      <div>
-        <input type="checkbox" id="${task.id}"/>
-        <label for="${task.id}">${task.name}</label>
+    <div class="card-small bg-accent">
+      <h3 class="title-card-small">${task.name}</h3>
+      <div class="flex-row">
+        <a href="#" class="dimmed">View More Info</a>
+        <p class="dimmed">11/12/22</p>
+        <img src="https://via.placeholder.com/40" alt="Profile image" />
       </div>
-      <p class="dimmed mobile-hidden">
-        Project ${Math.floor(Math.random() * 100)}
-      </p>
-      <p class="dimmed">08/11/22</p>
     </div>
-    <hr class="item-break" />
     `;
 }
