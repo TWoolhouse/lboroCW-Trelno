@@ -12,11 +12,9 @@
 
   --colour-mid-grey: #a6acbe;
 
-
   /* Colours initially used in the login page*/
-  --colour-box-background: #FFFFFF;
+  --colour-box-background: #ffffff;
   --colour-box-shadow: rgba(0, 0, 0, 0.25);
-
 
   --card-shadow: 0 4px 4px rgb(0, 0, 0, 0.25);
   --card-radius: 40px;
@@ -41,7 +39,6 @@ body {
   background-color: var(--colour-block);
   margin: 0;
 }
-
 
 header.header {
   background-color: var(--colour-highlight);
@@ -74,7 +71,7 @@ header.header {
   margin: 1rem;
 }
 
-/* utility class that (should) be able to be re used in a lot of pages) */
+/* utility classes that (should) be able to be re used in a lot of pages) */
 .card {
   background-color: var(--colour-highlight);
   color: var(--colour-text);
@@ -120,6 +117,19 @@ header.header {
 
 .title-card-small {
   margin: 0;
+}
+
+/* KANBAN */
+.kanban-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.kanban-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 /* TASKS */
@@ -209,6 +219,13 @@ input[type="checkbox"]:checked + label {
   opacity: 0.5;
 }
 
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
 /* USE SPARINGLY */
 .mobile-hidden {
   display: none;
@@ -220,31 +237,28 @@ input[type="checkbox"]:checked + label {
   }
 }
 
-
 /* LOGIN */
 
 /*Login box in centre of page*/
-.box{
+.box {
   box-sizing: border-box;
 
   position: absolute;
   width: 349px;
   height: 518px;
-  left: calc(50% - 349px/2 + 3.5px);
+  left: calc(50% - 349px / 2 + 3.5px);
   top: 189px;
   align-items: center;
-  
+
   background: var(--colour-white);
   border: 1px solid var(--colour-white);
   box-shadow: 0px 4px 4px var(--colour-black);
   border-radius: 42px;
 }
 
-
-
 /*ICON (screwdriver) with positioning which hopefully can be used across multipl pages*/
 
-.icon{
+.icon {
   position: absolute;
   width: 47px;
   height: 47px;
