@@ -8,17 +8,40 @@
 	<meta name="color-scheme" content="dark light">
 	<meta name="theme-color" content="#1e1e1e">
 
-	<link rel="stylesheet" href="/base.css">
-
-	<title>Trelno</title>
+	<link rel="stylesheet" href="../base.css">
+	<link rel="stylesheet" href="./style.css">
+	
+	<title>Registration</title>
 </head>
 
 <body>
+	<header class="header">
+		<h1><u>Make-it-all</u> <span>Portal</span></h1>
+		<img src="/screwdriver-icon.png" alt="Make-it-all" class="icon">
+		<!--need to fix the position of the icon-->
+		
+	</header>	
+		
+	<div class="box">
+		<!--add the information for this when functionality is added-->
+		<form action="" method="post" onsubmit=""> 
+			<label id="title">Registration</label>
+			<label id="welcome-text">Enter your details below to register</label>
+			<input type="text" id="text-box1" placeholder="First Name"><br>
+			<input type="text" id="text-box2" placeholder="Surname"><br>
+			<input type="text" id="email-box" placeholder="Email"><br>
+			<input type="password" id="password-box" placeholder="Password"><br>
+			<input type="password" id="password-box2" placeholder="Confirm Password"><br>
+			<!--might not need the confirm password but there just in case i do-->
+			<input type="submit" id="submit-button" value="Confirm Details">
+			<label id="link-to-sign-in-text-text">Already Registered?</label>
+			<input type="button" id="link-to-sign-in-text" value="Sign-in">
+			<!--need to add form validation though js? And potientially some hover colour changes just to make it look cool idk-->
+		</form>
 
-	<h1>Trelno</h1>
+	</div>
 
-	<p>Hello world</p>
-    <p></p>Registration</p>
 </body>
+	
 
 </html>
