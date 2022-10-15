@@ -8,16 +8,32 @@
 	<meta name="color-scheme" content="dark light">
 	<meta name="theme-color" content="#1e1e1e">
 
-	<link rel="stylesheet" href="/base.css">
+	<link rel="stylesheet" href="../base.css">
+	<link rel="stylesheet" href="./style.css">
 
-	<title>Trelno</title>
+
+	<title>Login</title>
 </head>
 
 <body>
 
-	<h1>Trelno</h1>
+	<h1>Make-It-All <span>Portal</span></h1>
+	<img src="../screwdriver-icon.png" alt="Make-It-All-Icon" class="icon">
 
-	<p>Hello world</p>
+	<p></p>
+
+	<div class="box">
+
+		<form action="login_page.php" onsubmit="" method="get">
+			<label id="member-login">Member Login</label>
+			<label id="welcome-text">Welcome to Make-It-All, Enter your employee details below to sign in to your account</label>
+			<input type="text" id="email-box" placeholder="Enter email"><br>
+			<input type="password" id="password-box" placeholder="Password"><br>
+			<input type="submit" id="submit-button" value="Sign In">
+			<label id="no-account-text">Dont have an account?</label>
+			<input type="submit" id="register-button" value="Register now">
+		</form>
+	</div>
 
 </body>
 
