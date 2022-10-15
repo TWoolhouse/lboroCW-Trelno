@@ -35,6 +35,20 @@ function setupDragEvents() {
       currentTaskCard.remove();
       console.log(currentTaskCard);
       section.innerHTML += createTaskListItem(task);
+
+      setupCardDragEvents();
+    });
+  }
+}
+
+function setupCardDragEvents() {
+  const cards = document.querySelectorAll(`[data-task-id]`);
+  for (let card of cards) {
+    const taskId = card.getAttribute("data-task-id");
+    const task = taskList.filter((task) => task.id == taskId)[0];
+    card.addEventListener("dragstart", (event) => {
+      console.log(card, task);
+      onDrag(event, task);
     });
   }
 }
@@ -62,15 +76,7 @@ function populateTasksList(noItems = 10) {
     kanbanSections[stateIndex].innerHTML += createTaskListItem(task);
   }
 
-  const cards = document.querySelectorAll(`[data-task-id]`);
-  for (let card of cards) {
-    const taskId = card.getAttribute("data-task-id");
-    const task = taskList.filter((task) => task.id == taskId)[0];
-    card.addEventListener("dragstart", (event) => {
-      console.log(card, task);
-      onDrag(event, task);
-    });
-  }
+  setupCardDragEvents();
 }
 
 /**
