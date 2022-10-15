@@ -1,7 +1,8 @@
 import { Task } from "../api/task.js";
 
 const taskStates = ["todo", "progress", "done"];
-
+const kanbanSections = document.querySelectorAll(".kanban-section");
+setupDragEvents();
 populateTasksList();
 
 const newTaskDialog = document.querySelector("#dialog-new-task");
@@ -14,12 +15,32 @@ newItemButton.addEventListener("click", () => {
   newTaskDialog.showModal();
 });
 
+function setupDragEvents() {
+  for (let section of kanbanSections) {
+    section.addEventListener("dragover", (event) => {
+      event.preventDefault();
+    });
+
+    section.addEventListener("drop", (event) => {
+      console.log(event);
+      event.preventDefault();
+      let jsonData = event.dataTransfer.getData("json");
+      console.log(JSON.parse(jsonData));
+    });
+  }
+}
+
+function onDrag(event, task) {
+  event.dataTransfer.setData("json", JSON.stringify(task));
+  event.dataTransfer.dropEffect = "move";
+  console.log(event);
+}
+
 /**
  * Fill out the task list with tasks from the 'database'
  * @param {number} noItems Number of tasks to display
  */
 function populateTasksList(noItems = 10) {
-  const kanbanSections = document.querySelectorAll(".kanban-section");
   for (let i = 0; i < noItems; i++) {
     let task = new Task(
       i,
@@ -27,8 +48,16 @@ function populateTasksList(noItems = 10) {
       `Task ${i} ${"p".repeat(Math.random() * 10)}`
     );
     task.state = taskStates[Math.floor(Math.random() * 3)];
-    let stateIndex = taskStates.indexOf(task.state);
+    const stateIndex = taskStates.indexOf(task.state);
     kanbanSections[stateIndex].innerHTML += createTaskListItem(task);
+  }
+
+  const cards = document.querySelectorAll(`[id^="task-"]`);
+  for (let card of cards) {
+    card.addEventListener("dragstart", (event) => {
+      console.log(card);
+      onDrag(event, card);
+    });
   }
 }
 
@@ -39,7 +68,7 @@ function populateTasksList(noItems = 10) {
  */
 function createTaskListItem(task) {
   return /*HTML*/ `
-    <div class="card-small bg-accent">
+    <div class="card-small bg-accent" draggable="true" id="task-${task.id}">
       <h3 class="title-card-small">${task.name}</h3>
       <div class="flex-row">
         <a href="#" class="dimmed">View More Info</a>
