@@ -44,7 +44,7 @@ function createTaskListItem(task) {
       <div class="flex-row">
         <a href="#" class="dimmed">View More Info</a>
         <p class="dimmed">11/12/22</p>
-        <img src="https://via.placeholder.com/40" alt="Profile image" />
+        <img src="https://placekitten.com/39/39" alt="Profile image" style="border-radius:100vh" />
       </div>
     </div>
     `;

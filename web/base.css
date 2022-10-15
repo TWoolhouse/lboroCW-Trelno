@@ -126,6 +126,12 @@ header.header {
   justify-content: space-around;
 }
 
+.kanban-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 /* TASKS */
 
 .task-list-item {
