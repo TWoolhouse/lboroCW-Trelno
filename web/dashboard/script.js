@@ -1,5 +1,6 @@
 import { Task } from "../api/task.js";
 
+const taskList = [];
 const taskStates = ["todo", "progress", "done"];
 const kanbanSections = document.querySelectorAll(".kanban-section");
 setupDragEvents();
@@ -48,15 +49,18 @@ function populateTasksList(noItems = 10) {
       `Task ${i} ${"p".repeat(Math.random() * 10)}`
     );
     task.state = taskStates[Math.floor(Math.random() * 3)];
+    taskList.push(task);
     const stateIndex = taskStates.indexOf(task.state);
     kanbanSections[stateIndex].innerHTML += createTaskListItem(task);
   }
 
-  const cards = document.querySelectorAll(`[id^="task-"]`);
+  const cards = document.querySelectorAll(`[data-task-id]`);
   for (let card of cards) {
+    const taskId = card.getAttribute("data-task-id");
+    const task = taskList.filter((task) => task.id == taskId)[0];
     card.addEventListener("dragstart", (event) => {
-      console.log(card);
-      onDrag(event, card);
+      console.log(card, task);
+      onDrag(event, task);
     });
   }
 }
@@ -68,7 +72,7 @@ function populateTasksList(noItems = 10) {
  */
 function createTaskListItem(task) {
   return /*HTML*/ `
-    <div class="card-small bg-accent" draggable="true" id="task-${task.id}">
+    <div class="card-small bg-accent" draggable="true" id="task-${task.id}" data-task-id="${task.id}">
       <h3 class="title-card-small">${task.name}</h3>
       <div class="flex-row">
         <a href="#" class="dimmed">View More Info</a>
