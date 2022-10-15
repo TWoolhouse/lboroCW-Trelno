@@ -26,7 +26,15 @@ function setupDragEvents() {
       console.log(event);
       event.preventDefault();
       let jsonData = event.dataTransfer.getData("json");
-      console.log(JSON.parse(jsonData));
+      console.log(jsonData);
+      const task = JSON.parse(jsonData);
+      console.log(task);
+      const currentTaskCard = document.querySelector(
+        `[data-task-id="${task.id}"]`
+      );
+      currentTaskCard.remove();
+      console.log(currentTaskCard);
+      section.innerHTML += createTaskListItem(task);
     });
   }
 }
