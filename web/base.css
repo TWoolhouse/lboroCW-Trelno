@@ -82,7 +82,7 @@ header.header {
   box-shadow: var(--card-shadow);
   border-radius: var(--card-radius);
   padding: 1.2rem;
-  margin: 1rem 0.5rem;
+  margin: 3rem 0.5rem;
 }
 
 .card a {
@@ -104,8 +104,8 @@ header.header {
 .small-cards-wrapper {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: center;
+  gap: 1rem;
+  justify-content: start;
 }
 
 /* smaller 'sub-cards' */
@@ -141,6 +141,10 @@ header.header {
 .kanban-section .card-small {
   width: 80%;
   max-width: unset;
+}
+
+.kanban-section .card-small:hover {
+  cursor: pointer;
 }
 
 /* RAG colours */

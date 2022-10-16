@@ -23,7 +23,8 @@
 .myprojects-wrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  gap: 1.5rem;
+  justify-content: start;
 }
 
 .progress-bar {
