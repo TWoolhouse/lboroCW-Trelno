@@ -5,11 +5,29 @@ import { Task, TaskSrc } from "./task.js";
 
 /** @typedef {import("./task.js").TaskRef} TaskRef */
 
+const UserRank = {
+  Employee: 0,
+  TeamLeader: 1,
+  ProjectManager: 2,
+};
+
 export class User {
-  constructor(id, email) {
+  /** @property {Number} id Unique User ID */
+  id;
+  /** @property {String} email Email Address */
+  email;
+  /** @property {Number} rank UserRank in the company */
+  rank;
+  /** @property {String} name The users full name */
+  name;
+  /** @property {Collection<Task>} tasks*/
+  tasks;
+  constructor(id, email, rank, name) {
     if (cereal.cereal(this, id)) return this;
     this.id = id;
     this.email = email;
+    this.rank = rank;
+    this.name = name;
     this.tasks = new CollectionDB(this.id, User.name, Task.name);
   }
 
