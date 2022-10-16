@@ -1,6 +1,18 @@
 import * as cereal from "../interface/cereal.js";
 import { Memoize } from "../interface/memoize.js";
 
+export const TaskSrc = {
+  User: 0,
+  Project: 1,
+};
+
+/**
+ * @typedef TaskRef
+ * @type {Object}
+ * @property {Task} task
+ * @property {Number} source A TaskSrc
+ */
+
 export class Task {
   constructor(id, done, name) {
     if (cereal.cereal(this, id)) return this;
