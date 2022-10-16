@@ -1,5 +1,3 @@
-import * as cereal from "./cereal.js";
-
 /**
  * Event for a when the data of a collection sync has changed.
  * @template T

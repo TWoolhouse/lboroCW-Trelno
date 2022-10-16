@@ -1,6 +1,6 @@
 import * as cereal from "./cereal.js";
 import { Collection } from "./collection.js";
-import { memoized, pairname } from "../context.js";
+import { Memoize, pairname } from "./memoize.js";
 
 export class CollectionDB extends Collection {
   constructor(pid, ptype, type, ...items) {
@@ -12,13 +12,13 @@ export class CollectionDB extends Collection {
     };
     this.onChange((event) => {
       for (const item of event.add) {
-        memoized[pairname(this.typeinfo.parent, this.typeinfo.type)].add(
+        Memoize.Type(pairname(this.typeinfo.parent, this.typeinfo.type)).add(
           this.typeinfo.pid,
           item.id
         );
       }
       for (const item of event.sub) {
-        memoized[pairname(this.typeinfo.parent, this.typeinfo.type)].sub(
+        Memoize.Type(pairname(this.typeinfo.parent, this.typeinfo.type)).sub(
           this.typeinfo.pid,
           item.id
         );
@@ -31,7 +31,7 @@ export class CollectionDB extends Collection {
       return collection.typeinfo;
     },
     async deserialise(object) {
-      let data = await memoized[pairname(object.parent, object.type)].get(
+      let data = await Memoize.Type(pairname(object.parent, object.type)).get(
         object.pid
       );
       return new CollectionDB(object.pid, object.parent, object.type, ...data);

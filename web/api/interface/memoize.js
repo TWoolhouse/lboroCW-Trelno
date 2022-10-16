@@ -1,5 +1,10 @@
+export const memoized = [];
+
 import { serialise, deserialise } from "./cereal.js";
-import { memoized, pairname } from "../context.js";
+
+export function pairname(name_a, name_b) {
+  return `${name_a}-${name_b}`;
+}
 
 class DB {
   constructor(type) {
@@ -41,7 +46,16 @@ class Cache {
 }
 
 export class Memoize {
+  /**
+   * @param {String} name
+   * @returns {Memoize | MemoizePair}
+   */
+  static Type(name) {
+    return memoized[name];
+  }
+
   constructor(type) {
+    if (memoized[type.name]) return memoized[type.name];
     memoized[type.name] = this;
     this.store = {};
     this.cache = new Cache(type);
@@ -51,6 +65,7 @@ export class Memoize {
     let bucket = this.store[id];
     if (bucket !== undefined) return bucket.proxy;
     let cached = await this.cache.get(id);
+    if (cached == undefined) return undefined;
     let stored = (this.store[id] = {
       value: cached,
       proxy: new Proxy(cached, {}),
@@ -134,7 +149,9 @@ export class MemoizePair {
     return `${name_a}-${name_b}`;
   }
   constructor(type_a, type_b) {
-    memoized[pairname(type_a.name, type_b.name)] = this;
+    let name = pairname(type_a.name, type_b.name);
+    if (memoized[name]) return memoized[name];
+    memoized[name] = this;
     this.store = {};
     this.memoized = memoized[type_b.name];
     this.cache = new CachePair(type_a, type_b);
