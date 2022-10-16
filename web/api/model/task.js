@@ -6,6 +6,7 @@ export const TaskSrc = {
   Project: 1,
 };
 
+// TODO: When source == Project add extra fields (project, projectTask)
 /**
  * @typedef TaskRef
  * @type {Object}
