@@ -31,7 +31,7 @@ export class CollectionDB extends Collection {
       return collection.typeinfo;
     },
     async deserialise(object) {
-      let data = await Memoize.Type(pairname(object.parent, object.type)).get(
+      let data = await Memoize.Name(pairname(object.parent, object.type)).get(
         object.pid
       );
       return new CollectionDB(object.pid, object.parent, object.type, ...data);

@@ -77,7 +77,7 @@ export async function deserialise(object) {
 async function decereal_field(field, object) {
   const type = REGISTERED_TYPES[field.type];
   if (field.db) {
-    return await Memoize.Type(field.type).get(object);
+    return await Memoize.Name(field.type).get(object);
   }
   return await type.cereal.deserialise(object);
 }
