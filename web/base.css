@@ -259,6 +259,11 @@ input[type="checkbox"]:checked + label {
   justify-content: space-evenly;
 }
 
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
 /* USE SPARINGLY */
 .mobile-hidden {
   display: none;

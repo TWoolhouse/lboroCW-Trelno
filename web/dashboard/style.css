@@ -49,6 +49,37 @@
   color: var(--colour-accent);
 }
 
+/* Header bar */
+.header {
+  padding-block: 0.5rem;
+}
+
+.account-info {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .account-info {
+    display: flex;
+    gap: 1rem;
+    margin-inline: 4rem;
+  }
+  .account-info h6 {
+    font-size: 1.2em;
+  }
+  .account-info * {
+    margin: 0;
+  }
+  .account-info .flex-col {
+    align-items: flex-end;
+  }
+
+  .account-info img {
+    aspect-ratio: 1;
+    border-radius: 100vh;
+  }
+}
+
 /* SIDE MENU */
 main {
   margin: 0;
