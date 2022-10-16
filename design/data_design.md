@@ -31,7 +31,9 @@ class TaskSrc {
 }
 
 class Team {
+	+id: Int
 	+leader: User
+	+name: String
 	+users: Collection~User~
 }
 
@@ -46,11 +48,13 @@ Task "1" --o "1" ProjectTask: task
 ProjectTask "0..n" --* "1" Project: tasks
 User "0..n" --o "0..n" ProjectTask: users
 class ProjectTask {
+	+id: Int
 	+task: Task
 	+users: Collection~User~
 }
 Project "1" --* "1" ProjectAssignees: assigned
 class Project {
+	+id: Int
 	+leader: User
 	+created: Datetime
 	+deadline: Datetime
