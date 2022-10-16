@@ -12,7 +12,7 @@ import {} from "../api/faux.js";
  * @returns {User}
  */
 export async function user(id) {
-  return Memoize.Type(User.name).get(id);
+  return Memoize.Type(User).get(id);
 }
 
 /**
@@ -20,7 +20,7 @@ export async function user(id) {
  * @returns {Task}
  */
 export async function task(id) {
-  return Memoize.Type(Task.name).get(id);
+  return Memoize.Type(Task).get(id);
 }
 
 /**
@@ -28,7 +28,7 @@ export async function task(id) {
  * @returns {Team}
  */
 export async function team(id) {
-  return Memoize.Type(Team.name).get(id);
+  return Memoize.Type(Team).get(id);
 }
 
 // TYPE FACTORIES
@@ -41,7 +41,7 @@ export async function team(id) {
  */
 export async function task_create(done, name) {
   let t = new Task(id_gen(task), done, name);
-  return await Memoize.Type(Task.name).set(t);
+  return await Memoize.Type(Task).set(t);
 }
 
 /**

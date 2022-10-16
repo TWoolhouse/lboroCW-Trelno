@@ -55,7 +55,10 @@ export class Memoize {
    * @param {String} name
    * @returns {Memoize | MemoizePair}
    */
-  static Type(name) {
+  static Type(type) {
+    return memoized[type.name];
+  }
+  static Name(name) {
     return memoized[name];
   }
 

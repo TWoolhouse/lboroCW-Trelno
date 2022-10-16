@@ -12,13 +12,13 @@ export class CollectionDB extends Collection {
     };
     this.onChange((event) => {
       for (const item of event.add) {
-        Memoize.Type(pairname(this.typeinfo.parent, this.typeinfo.type)).add(
+        Memoize.Name(pairname(this.typeinfo.parent, this.typeinfo.type)).add(
           this.typeinfo.pid,
           item.id
         );
       }
       for (const item of event.sub) {
-        Memoize.Type(pairname(this.typeinfo.parent, this.typeinfo.type)).sub(
+        Memoize.Name(pairname(this.typeinfo.parent, this.typeinfo.type)).sub(
           this.typeinfo.pid,
           item.id
         );
