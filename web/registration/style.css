@@ -88,6 +88,19 @@ img {
     border: 1px solid var(--colour-accent);
     border-radius: 8px;
 }
+/*css for the background thingy*/
+svg {
+    position:absolute;
+    width: 1476px;
+    height: 628px;
+    left: 0px;
+    top:300px;
+
+    background: var(--colour-highlight); /*cannot find the background colour of the website, just need to change this to the same colour as the background*/
+    border: 1px solid var(--colour-highlight);
+    backdrop-filter: blur(2px);
+    z-index:-1;
+}
 
 /*Used the css from the login page to make them look similar as there is no registration page on the designs, have adjusted the names to suit however*/
 /*will happily change to make it unique depending on designs*/
