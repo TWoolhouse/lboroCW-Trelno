@@ -6,6 +6,11 @@ export function pairname(name_a, name_b) {
   return `${name_a}-${name_b}`;
 }
 
+// TODO: Use actual proxies that update the fields
+function NewProxy(object) {
+  return object;
+}
+
 class DB {
   constructor(type) {
     this._key = type.name;
@@ -68,7 +73,7 @@ export class Memoize {
     if (cached == undefined) return undefined;
     let stored = (this.store[id] = {
       value: cached,
-      proxy: new Proxy(cached, {}),
+      proxy: NewProxy(cached, {}),
       cached: Date.now(),
     });
     return stored.proxy;
@@ -77,7 +82,7 @@ export class Memoize {
   async set(object) {
     let bucket = {
       value: object,
-      proxy: new Proxy(object, {}),
+      proxy: NewProxy(object, {}),
       cached: Date.now(),
     };
     this.store[object.id] = bucket;
