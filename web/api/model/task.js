@@ -1,4 +1,5 @@
 import * as cereal from "../interface/cereal.js";
+import { Memoize } from "../interface/memoize.js";
 
 export class Task {
   constructor(id, done, name) {
@@ -9,3 +10,4 @@ export class Task {
   }
 }
 cereal.register(Task);
+new Memoize(Task);

@@ -1,4 +1,5 @@
 import * as cereal from "../interface/cereal.js";
+import { Memoize, MemoizePair } from "../interface/memoize.js";
 import { CollectionDB } from "../interface/collectionDB.js";
 import { User } from "./user.js";
 
@@ -12,3 +13,5 @@ export class Team {
   }
 }
 cereal.register(Team);
+new Memoize(Team);
+new MemoizePair(Team, User);
