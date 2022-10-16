@@ -12,6 +12,10 @@
 
   --colour-mid-grey: #a6acbe;
 
+  --colour-red: #e32020bf;
+  --colour-amber: #ff9d30db;
+  --colour-green: #43d34a91;
+
   /* Colours initially used in the login page*/
   --colour-box-background: #ffffff;
   --colour-box-shadow: rgba(0, 0, 0, 0.25);
@@ -130,6 +134,16 @@ header.header {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.kanban-section:nth-child(1) .card-small {
+  background-color: var(--colour-red);
+}
+.kanban-section:nth-child(2) .card-small {
+  background-color: var(--colour-amber);
+}
+.kanban-section:nth-child(3) .card-small {
+  background-color: var(--colour-green);
 }
 
 /* TASKS */
