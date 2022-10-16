@@ -5,6 +5,8 @@ import { Team } from "./model/team.js";
 
 import {} from "../api/faux.js";
 
+// TYPE GETTERS
+
 /**
  * @param {Number} id The UserID
  * @returns {User}
@@ -27,6 +29,23 @@ export async function task(id) {
  */
 export async function team(id) {
   return Memoize.Type(Team.name).get(id);
+}
+
+// TYPE FACTORIES
+
+/**
+ * Creates a new task
+ * @param {Boolean} done
+ * @param {String} name
+ * @returns {Task}
+ */
+export async function task_create(done, name) {
+  let id = 0;
+  do {
+    id = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+  } while ((await task(id)) != undefined);
+  let t = new Task(id, done, name);
+  return await Memoize.Type(Task.name).set(t);
 }
 
 import { memoized } from "./interface/memoize.js";
