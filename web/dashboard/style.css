@@ -99,8 +99,11 @@ main {
   .side-menu li[data-active] a {
     color: var(--colour-accent);
   }
-
+  header {
+    margin-left: var(--side-menu-width);
+  }
   main {
     margin-left: var(--side-menu-width);
+    padding: 0.5rem 4rem;
   }
 }
