@@ -7,6 +7,11 @@
   }
 
 
+
+body{
+    background-image: url(mobile-background.png);
+}
+
 h1{
   position: absolute;
   width: 224px;
