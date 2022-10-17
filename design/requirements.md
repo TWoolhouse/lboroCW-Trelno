@@ -45,15 +45,17 @@ This document will contain all of the necessary information about the requiremen
    5. A project manager **must** be able to manage multiple teams and their members that are assigned to the manager's project.
    6. A project manager **must** be able to assign teams and its members to projects.
 
-### 6. Productivity Management requirements
-   1. A user **must** have access to their own task list, which will contain tasks (both Personal and Project-related) they are assigned to.
-   2. A user **must** be able to add Personal tasks to their own to-do list.
+### 6. Productivity Management requirements (Kanban board)
+   1. A user **must** have access to their own Kanban board, which will contain tasks (both Personal and Project-related) they are assigned to.
+   2. A user **must** be able to add Personal tasks to their own Kanban Board.
+   3. The board **must** have at least 3 categories/columns for a task to be placed into: To Do, In Progress, Done.
+   4. A task **should** be placed into the To Do category after creation by default.
 
 ### 7. Task requirements
-   1. A task **must** have a name that will be displayed in the task list.
-   2. A task **must** have a maximum 100 word description of the task.
+   1. A task **must** have a name that will be displayed in the kanban board.
+   2. A task **must** have a maximum 100 word description.
    3. A task **should** have an estimated effort that is assigned by the user creating the task.
-   4. A task **must** be able to be categorized as either a Project (select which Project) or Personal task.
+   4. A task **should** be able to be categorized as either a Project (select which Project) or Personal task.
 
 ### 8. Project requirements
    1. A Project **must** only be created by a Project Manager.
@@ -75,7 +77,7 @@ This document will contain all of the necessary information about the requiremen
    2. The project manager dashboard **must** show the Projects the PM is working on.
    3. The project manager **should** be able to access and manage Project details from their dashboard by clicking on one of their assigned Projects.
    4. The project manager dashboard **should** allow the project manager to manage teams and users that are assigned to their Project.
-   5. The project manager dashboard **must** show a full list of Project tasks.
+   5. The project manager dashboard **must** show all of the Project tasks (project they are associated with) on the Kanban Board.
 
 ### 11.  General PM/TL dashboard requirements (overlapping for both)
    1.  A team leader or project manager **must** be able to see how many tasks a user currently has assigned.
