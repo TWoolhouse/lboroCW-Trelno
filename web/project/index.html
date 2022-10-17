@@ -7,21 +7,18 @@
     <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#1e1e1e" />
 
-    <link rel="icon" type="image/svg" href="/tools.svg" />
+    <link rel="icon" type="image/svg" href="/screwdriver-icon.png" />
     <link rel="stylesheet" href="/base.css" />
     <link rel="stylesheet" href="./style.css" />
 	<link rel="stylesheet" href="./css-circular-prog-bar.css" />
     <script type="module" src="./script.js"></script>
-
-
-
     <title>Project details</title>
   </head>
 
   <body>
 
     <aside class="side-menu">
-      <img src="/tools.svg" alt="Make-it-all" width="100%" />
+      <img src="/screwdriver-icon.png" alt="Make-it-all" width="100%" />
       <nav>
         <ul>
           <li data-active><a href="#">P</a></li>
@@ -37,6 +34,14 @@
       <header class="header">
         <h1>Project X</h1>
         <button class="mobile-nav-toggle">=</button>
+        <div class="account-info flex-row">
+          <div class="flex-col">
+            <h6>King Firat</h6>
+            <p class="dimmed">Manager</p>
+          </div>
+          <img src="https://placekitten.com/50/50" alt="" />
+          <p>^</p>
+        </div>        
       </header>
 
       <section class="card">
@@ -50,39 +55,62 @@
 		  </p>
       </section>
 
+      <section class="topcards-wrapper">
+
+        <div class="card-small">
+          <h3 class="title-card-small text-center"> Project progress </h3> 
+          <div class="progress-circle p23 div-center">
+            <span>10%</span>
+            <div class="left-half-clipper">
+              <div class="first50-bar"></div>
+              <div class="value-bar"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-small">
+          <h3 class="title-card-small text-center"> Project deadline </h3>
+          <div class="flex-col-center"> 
+            <p class="deadline-date-day"> 30th </p>
+            <p class="deadline-date-monthyear"> October, 2022 </p>
+        </div>
+        </div>
+
+        <div class="card-small">
+          <h3 class="title-card-small text-center"> Project manager </h3>
+          <div class="flex-col-center"> 
+            <p class="PM-name"> Firat Batmaz </p>
+            <img src="https://placekitten.com/50/50" alt="" class="PM-image" />
+        </div>
+
+        </section>
+
       <section class="card">
         <div class="card-title-wrapper">
-          <h2 class="title-card">Task List</h2>
+          <h2 class="title-card">Tasks</h2>
           <button class="new-item">+</button>
         </div>
-        <div class="task-list-item">
-          <h3 class="title-card-small">Task</h3>
-          <h3 class="title-card-small mobile-hidden">Details</h3>
-          <h3 class="title-card-small">Deadline</h3>
+        <div class="kanban-wrapper">
+          <div class="kanban-section">
+            <h3 class="title-card">To-Do</h3>
+          </div>
+          <hr />
+          <div class="kanban-section">
+            <h3 class="title-card">In Progress</h3>
+          </div>
+          <hr />
+          <div class="kanban-section">
+            <h3 class="title-card">Completed</h3>
+          </div>
         </div>
-        <hr class="item-break" />
-        <div id="task-list-overall"></div>
       </section>
-
-	  <section class="topcards-wrapper">
-		<div class="card-small">
-			<h3 class="title-card-small text-center"> Project progress </h3> 
-			<div class="progress-circle p23 div-center">
-				<span>10%</span>
-				<div class="left-half-clipper">
-				  <div class="first50-bar"></div>
-				  <div class="value-bar"></div>
-				</div>
-			  </div>
-		</div>
-	  </section>
 
       <section class="card">
 		<div class="card-title-wrapper">
 			<h2 class="title-card">Teams on this project</h2>
 		</div>
 
-		<div class="small-cards-wrapper">
+		<div class="small-cards-wrapper-center">
 			<div class="card-small bg-accent">
 				<div>
 					<img src="Members.png" alt="Team members" width="100%">

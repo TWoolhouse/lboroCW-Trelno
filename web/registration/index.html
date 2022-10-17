@@ -24,14 +24,14 @@
 		
 	<div class="box">
 		<!--add the information for this when functionality is added-->
-		<form action="" method="post" onsubmit=""> 
+		<form name="registrationForm" action="" method="post" onsubmit="return validateForm()"> 
 			<label id="title">Registration</label>
 			<label id="welcome-text">Enter your details below to register</label>
-			<input type="text" id="text-box1" placeholder="First Name"><br>
-			<input type="text" id="text-box2" placeholder="Surname"><br>
-			<input type="text" id="email-box" placeholder="Email"><br>
-			<input type="password" id="password-box" placeholder="Password"><br>
-			<input type="password" id="password-box2" placeholder="Confirm Password"><br>
+			<input type="text" id="text-box1" placeholder="First Name" required><br>
+			<input type="text" id="text-box2" placeholder="Surname" required><br>
+			<input name="email" type="text" id="email-box" placeholder="Email" required><br>
+			<input type="password" id="password-box" placeholder="Password" required><br>
+			<input type="password" id="password-box2" placeholder="Confirm Password" required><br>
 			<!--might not need the confirm password but there just in case i do-->
 			<input type="submit" id="submit-button" value="Confirm Details">
 			<label id="link-to-sign-in-text-text">Already Registered?</label>
@@ -40,7 +40,10 @@
 		</form>
 
 	</div>
-
+	<!--code for the background thingy, can use for the login as well as others that use this thing.-->
+	<svg>
+		<path d="M 1 1 L 1 901 L 1651 901 C 2120 81 371 396 1 1" stroke="var(--colour-accent)" fill="var(--colour-accent)"/>
+	</svg>
 </body>
 	
 

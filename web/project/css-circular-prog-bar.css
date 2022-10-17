@@ -26,13 +26,13 @@
 /* Text inside the control */
 .progress-circle span {
     position: absolute;
-    line-height: 8em; /* 5 */
-    width: 8em; /* 5 */
+    line-height: 4em; /* 5 */
+    width: 4.4em; /* 5 */
     text-align: center;
     display: block;
     color: #53777A;
     z-index: 2;
-    font-size: 1em;
+    font-size: 2em;
 }
 .left-half-clipper { 
    /* a round circle */

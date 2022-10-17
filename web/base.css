@@ -298,7 +298,7 @@ input[type="checkbox"]:checked + label {
   border-radius: 42px;
 }
 
-/*ICON (screwdriver) with positioning which hopefully can be used across multipl pages*/
+/*ICON (screwdriver) with positioning which hopefully can be used across multiple pages*/
 
 .icon {
   position: absolute;
