@@ -5,11 +5,13 @@ import { Team } from "./model/team.js";
 
 import {} from "../api/faux.js";
 
+/** @typedef {import("./model/user.js").UserRank} UserRank */
+
 // TYPE GETTERS
 
 /**
  * @param {Number} id The UserID
- * @returns {User}
+ * @returns {Promise<User>}
  */
 export async function user(id) {
   return Memoize.Type(User).get(id);
@@ -17,7 +19,7 @@ export async function user(id) {
 
 /**
  * @param {Number} id The TaskID
- * @returns {Task}
+ * @returns {Promise<Task>}
  */
 export async function task(id) {
   return Memoize.Type(Task).get(id);
@@ -25,7 +27,7 @@ export async function task(id) {
 
 /**
  * @param {Number} id The TeamID
- * @returns {Team}
+ * @returns {Promise<Team>}
  */
 export async function team(id) {
   return Memoize.Type(Team).get(id);
@@ -35,21 +37,22 @@ export async function team(id) {
 
 /**
  * Creates a new task
- * @param {Boolean} done
- * @param {String} name
- * @returns {Task}
+ * @param {Boolean} done Task done state
+ * @param {String} name The display name of the task
+ * @param {String} [description] An optional description of the task
+ * @returns {Promise<Task>}
  */
-export async function task_create(done, name) {
-  let t = new Task(id_gen(task), done, name);
+export async function task_create(done, name, description) {
+  let t = new Task(id_gen(task), done, name, description);
   return await Memoize.Type(Task).set(t);
 }
 
 /**
  * Creates a new user
- * @param {String} email
- * @param {UserType} rank
- * @param {String} name
- * @returns {User}
+ * @param {String} email Email Address
+ * @param {Number} rank A UserRank
+ * @param {String} name Users full name
+ * @returns {Promise<User>}
  */
 export async function create_user(email, rank, name) {
   let obj = new User(id_gen(user), email);

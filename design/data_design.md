@@ -9,10 +9,18 @@ User "1" --o "1" Team: leader
 class User {
 	+id: Int
 	+email: String
-	+rank: Int
+	+rank: UserRank
 	+name: String
 	+tasks: Collection~Task~
 	+tasklist() Array~TaskRef~
+}
+
+User "1" *-- "1" UserRank: rank
+class UserRank {
+	<<enum>>
+	Employee = 0
+	TeamLeader = 1
+	ProjectManager = 2
 }
 
 User "1" *-- "0..n" TaskRef: tasklist()
@@ -46,31 +54,31 @@ class Task {
 
 Task "1" --o "1" ProjectTask: task
 ProjectTask "0..n" --* "1" Project: tasks
-User "0..n" --o "0..n" ProjectTask: users
+ProjectTask "1" *-- "1" Assignees: assignees
 class ProjectTask {
 	+id: Int
 	+task: Task
-	+users: Collection~User~
+	+users: Assignees
 }
-Project "1" --* "1" ProjectAssignees: assigned
+Project "1" *-- "1" Assignees: assignees
 class Project {
 	+id: Int
 	+leader: User
 	+created: Datetime
 	+deadline: Datetime
 	+name: String
-	+tasks: Array~ProjectTask~
-	+assigned: ProjectAssignees
-	+users() Set~User~
+	+tasks: Collection~ProjectTask~
+	+assignees: Assignees
+	+users() Collection~User~
 	+progress() Float
 }
-User "0..n" --o "0..n" ProjectAssignees: users
-Team "0..n" --o "0..n" ProjectAssignees: teams
-class ProjectAssignees {
-	<<Object>>
-	+users: Set~User~
-	+teams: Set~Team~
-	+all() Set~User~
+User "0..n" --o "0..n" Assignees: users
+Team "0..n" --o "0..n" Assignees: teams
+class Assignees {
+	+id: Int
+	+users: Collection~User~
+	+teams: Collection~Team~
+	+all() Collection~User~
 }
 
 Post "0..n" --* "1..n" Topic
