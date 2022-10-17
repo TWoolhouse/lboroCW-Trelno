@@ -20,8 +20,16 @@ export class User {
   rank;
   /** @property {String} name The users full name */
   name;
-  /** @property {Collection<Task>} tasks*/
+  /** @property {CollectionDB<Task>} tasks A collection of personal user tasks */
   tasks;
+
+  /**
+   * @param {Number} id Unique User ID
+   * @param {String} email Email Address
+   * @param {Number} rank UserRank in the company
+   * @param {String} name The users full name
+   * @returns {User}
+   */
   constructor(id, email, rank, name) {
     if (cereal.cereal(this, id)) return this;
     this.id = id;
@@ -33,7 +41,7 @@ export class User {
 
   /**
    * Returns a list fo all tasks that this user has been assigned too, and the location they were assigned from.
-   * @returns {Array<TaskRef>} TaskRef objects contain a task, and the source that the task came from.
+   * @returns {Promise<Array<TaskRef>>} TaskRef objects contain a task, and the source that the task came from.
    */
   async tasklist() {
     return [
