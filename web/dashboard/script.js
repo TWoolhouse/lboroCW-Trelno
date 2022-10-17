@@ -1,6 +1,7 @@
 import { Project } from "../api/project.js";
 import { Task } from "../api/task.js";
 import { Collection } from "../api/collection.js";
+import { Team } from "../api/teams.js";
 
 const taskList = [];
 const taskStates = ["todo", "progress", "done"];
@@ -13,12 +14,51 @@ const projectOverviewWrapper = document.querySelector(
 );
 addProjectOverviewCards();
 
+const teamCardsWrapper = document.querySelector("#teams-wrapper");
+addTeamCards();
+
 const newItemButton = document.querySelector(".new-item");
 newItemButton.addEventListener("click", () => {
   const newTaskDialog = document.querySelector("#dialog-new-task");
 
   newTaskDialog.showModal();
 });
+
+/* MY TEAMS card */
+
+function addTeamCards() {
+  const teams = [];
+  teams[0] = new Team(null, null);
+  teams[0].name = "Design Team";
+  teams[0].description =
+    "The design team is responsible for the design of the project.";
+
+  teams[1] = new Team(null, null);
+  teams[1].name = "Development Team";
+  teams[1].description =
+    "The development team is responsible for the development of the project.";
+
+  for (let team of teams) {
+    teamCardsWrapper.innerHTML += createTeamCard(team);
+  }
+}
+
+/**
+ * Creates HTml card for a team
+ * @param {Team} team
+ * @returns HTML string for team card
+ */
+function createTeamCard(team) {
+  return /*HTML*/ `
+    <div class="card-small accent-outline flex-col text-center">
+      <h3 class="title-card-small">${team.name}</h3>
+      <p class="description">
+        ${team.description}
+      </p>
+      <a class="fg-accent" href="#">View My Team</a>
+    </div>
+`;
+}
 
 /* PROJECTS overview card */
 

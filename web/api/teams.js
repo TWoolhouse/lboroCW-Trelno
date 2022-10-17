@@ -1,4 +1,4 @@
-import { Collection } from "./collection";
+import { Collection } from "./collection.js";
 
 /** @typedef {import('./user.js').User} User */
 
