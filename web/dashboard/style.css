@@ -45,8 +45,9 @@
   font-weight: 600;
 }
 
-.link-list a {
-  color: var(--colour-accent);
+.link-list a,
+.fg-accent {
+  color: var(--colour-accent) !important;
 }
 
 /* Header bar */
