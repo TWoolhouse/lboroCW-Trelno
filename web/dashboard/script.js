@@ -1,4 +1,6 @@
+import { Project } from "../api/project.js";
 import { Task } from "../api/task.js";
+import { Collection } from "../api/collection.js";
 
 const taskList = [];
 const taskStates = ["todo", "progress", "done"];
@@ -6,8 +8,10 @@ const kanbanSections = document.querySelectorAll(".kanban-section");
 setupDragEvents();
 populateTasksList();
 
-const newTaskDialog = document.querySelector("#dialog-new-task");
-// newTaskDialog.showModal();
+const projectOverviewWrapper = document.querySelector(
+  "#project-overview-wrapper"
+);
+addProjectOverviewCards();
 
 const newItemButton = document.querySelector(".new-item");
 newItemButton.addEventListener("click", () => {
@@ -15,6 +19,61 @@ newItemButton.addEventListener("click", () => {
 
   newTaskDialog.showModal();
 });
+
+/* PROJECTS overview card */
+
+function addProjectOverviewCards() {
+  const projects = [];
+  for (let i = 0; i < 7; i++) {
+    let project = new Project(
+      i,
+      "King Firat",
+      Date.now(),
+      new Date().setDate(new Date().getDate() + 7),
+      `Project ${i}`,
+      new Collection(taskList),
+      null
+    );
+    projects.push(project);
+  }
+  for (let project of projects) {
+    projectOverviewWrapper.innerHTML += createProjectOverviewCard(project);
+  }
+}
+
+/**
+ * Create a project overview progress card for managers
+ * @param {Project} project
+ * @returns {string} HTML for task list item
+ */
+function createProjectOverviewCard(project) {
+  const colours = ["colour-red", "colour-amber", "colour-green"];
+  const progress = project.tasks.snapshot[0].filter(
+    (task) => task.state == "done"
+  ).length;
+  const projectTasks = project.tasks.snapshot[0];
+
+  return /*HTML*/ `
+    <div class="card-small bg-accent">
+      <h3 class="title-card-small">${project.name}</h3>
+      <p class="card-description">Progress:</p>
+      <div class="progress-bar">
+        <div
+          class="progress-bar-fill"
+          style="width: ${
+            (progress / projectTasks.length) * 100
+          }%; --bar-fill: var(--${colours[project.id % 3]});"
+        ></div>
+      </div>
+      <p class="card-description">${progress}/${projectTasks.length} 
+      Tasks Completed</p>
+
+      <a href="#">View Team Members</a>
+    </div>
+    `;
+}
+
+/* TASKS card*/
 
 function setupDragEvents() {
   for (let section of kanbanSections) {
