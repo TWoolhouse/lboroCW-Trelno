@@ -14,11 +14,10 @@ h1 {
     line-height: 35px;
     text-align: center;
     color: var(--colour-accent)
-
 }
 
 h1 span {
-    
+
     width: 224px;
     height: 44px;
     left: 36px;
@@ -36,7 +35,7 @@ h1 span {
 
 img {
     /*not being useds as i changed the css to match the login page*/
-    position :absolute;
+    position: absolute;
     width: 47px;
     height: 47px;
     left: 358px;
@@ -87,19 +86,6 @@ img {
     background: var(--colour-highlight);
     border: 1px solid var(--colour-accent);
     border-radius: 8px;
-}
-/*css for the background thingy*/
-svg {
-    position:absolute;
-    width: 1476px;
-    height: 628px;
-    left: 0px;
-    top:300px;
-
-    background: var(--colour-highlight); /*cannot find the background colour of the website, just need to change this to the same colour as the background*/
-    border: 1px solid var(--colour-highlight);
-    backdrop-filter: blur(2px);
-    z-index:-1;
 }
 
 /*Used the css from the login page to make them look similar as there is no registration page on the designs, have adjusted the names to suit however*/
@@ -222,18 +208,18 @@ svg {
 }
 
 /*taken the box and changed the colour variables to match the base.css, did not want to change base.css without confirming with others so ill just leave it here for now*/
-.box{
+.box {
     box-sizing: border-box;
-  
+
     position: absolute;
     width: 349px;
     height: 518px;
     left: calc(50% - 349px/2 + 3.5px);
     top: 189px;
     align-items: center;
-    
+
     background: var(--colour-highlight);
     border: 1px solid var(--colour-highlight);
     box-shadow: 0px 4px 4px var(--colour-text);
     border-radius: 42px;
-  }
+}

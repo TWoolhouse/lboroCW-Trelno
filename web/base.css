@@ -25,7 +25,8 @@
   --card-small-radius: 14px;
 }
 
-@media print, (prefers-color-scheme: light) {
+@media print,
+(prefers-color-scheme: light) {
   :root {
     /* Light Mode Overrides*/
     --colour-text: #000;
@@ -155,16 +156,20 @@ header.header {
 .kanban-section .card-small {
   border-top: 0.25rem solid var(--colour-card-highlight, var(--colour-accent));
 }
+
 /* RAG colours */
 .kanban-section:nth-of-type(1) .card-small {
   --colour-card-highlight: var(--colour-red);
 }
+
 .kanban-section:nth-of-type(2) .card-small {
   --colour-card-highlight: var(--colour-amber);
 }
+
 .kanban-section:nth-of-type(3) .card-small {
   --colour-card-highlight: var(--colour-green);
 }
+
 .kanban-wrapper hr {
   border: 2px solid var(--colour-text);
 }
@@ -195,7 +200,7 @@ header.header {
   border: 1px solid var(--colour-text);
 }
 
-input[type="checkbox"]:checked + label {
+input[type="checkbox"]:checked+label {
   text-decoration: line-through;
 }
 
@@ -207,9 +212,11 @@ input[type="checkbox"]:checked + label {
   box-shadow: var(--card-shadow);
   border-radius: var(--card-radius);
 }
+
 .modal::backdrop {
   background: rgba(0, 0, 0, 0.5);
 }
+
 .modal-form {
   display: flex;
   flex-direction: column;
@@ -281,6 +288,19 @@ input[type="checkbox"]:checked + label {
   .mobile-hidden {
     display: initial;
   }
+}
+
+#waves {
+  position: absolute;
+  width: 99.7%;
+  height: 99.7%;
+  left: 0px;
+  top: 0px;
+  background: var(--colour-block);
+  /*cannot find the background colour of the website, just need to change this to the same colour as the background*/
+  border: 1px solid var(--colour-highlight);
+  backdrop-filter: blur(2px);
+  z-index: -1;
 }
 
 /* LOGIN */
