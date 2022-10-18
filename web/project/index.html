@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#1e1e1e" />
+
+    <link rel="icon" type="image/svg" href="/screwdriver-icon.png" />
+    <link rel="stylesheet" href="/base.css" />
+    <link rel="stylesheet" href="./style.css" />
+	<link rel="stylesheet" href="./css-circular-prog-bar.css" />
+    <script type="module" src="./script.js"></script>
+    <title>Project details</title>
+  </head>
+
+  <body>
+
+    <aside class="side-menu">
+      <img src="/screwdriver-icon.png" alt="Make-it-all" width="100%" />
+      <nav>
+        <ul>
+          <li data-active><a href="#">P</a></li>
+          <li><a href="#">Q</a></li>
+          <li><a href="#">R</a></li>
+          <li><a href="#">S</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main>
+		
+      <header class="header">
+        <h1>Project X</h1>
+        <button class="mobile-nav-toggle">=</button>
+        <div class="account-info flex-row">
+          <div class="flex-col">
+            <h6>King Firat</h6>
+            <p class="dimmed">Manager</p>
+          </div>
+          <img src="https://placekitten.com/50/50" alt="" />
+          <p>^</p>
+        </div>        
+      </header>
+
+      <section class="card">
+        <div class="card-title-wrapper">
+          <h2 class="title-card">About project</h2>
+        </div>
+        <hr class="item-break" />
+		<div class="card-content">
+		  <p>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+		  </p>
+      </section>
+
+      <section class="topcards-wrapper">
+
+        <div class="card-small">
+          <h3 class="title-card-small text-center"> Project progress </h3> 
+          <div class="progress-circle p23 div-center">
+            <span>10%</span>
+            <div class="left-half-clipper">
+              <div class="first50-bar"></div>
+              <div class="value-bar"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-small">
+          <h3 class="title-card-small text-center"> Project deadline </h3>
+          <div class="flex-col-center"> 
+            <p class="deadline-date-day"> 30th </p>
+            <p class="deadline-date-monthyear"> October, 2022 </p>
+        </div>
+        </div>
+
+        <div class="card-small">
+          <h3 class="title-card-small text-center"> Project manager </h3>
+          <div class="flex-col-center"> 
+            <p class="PM-name"> Firat Batmaz </p>
+            <img src="https://placekitten.com/50/50" alt="" class="PM-image" />
+        </div>
+
+        </section>
+
+      <section class="card">
+        <div class="card-title-wrapper">
+          <h2 class="title-card">Tasks</h2>
+          <button class="new-item">+</button>
+        </div>
+        <div class="kanban-wrapper">
+          <div class="kanban-section">
+            <h3 class="title-card">To-Do</h3>
+          </div>
+          <hr />
+          <div class="kanban-section">
+            <h3 class="title-card">In Progress</h3>
+          </div>
+          <hr />
+          <div class="kanban-section">
+            <h3 class="title-card">Completed</h3>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+		<div class="card-title-wrapper">
+			<h2 class="title-card">Teams on this project</h2>
+		</div>
+
+		<div class="small-cards-wrapper-center">
+			<div class="card-small bg-accent">
+				<div>
+					<img src="Members.png" alt="Team members" width="100%">
+				</div>
+				<div class="link-list text-center">
+					<a href="#">View Team Members</a>
+				</div>
+			</div>
+
+			<div class="card-small bg-accent">
+				<div>
+					<img src="Members.png" alt="Team members" width="100%">
+				</div>
+				<div class="link-list text-center">
+					<a href="#">View Team Members</a>
+				</div>
+			</div>
+
+			<div class="card-small bg-accent">
+				<div>
+					<img src="Members.png" alt="Team members" width="100%">
+				</div>
+				<div class="link-list text-center">
+					<a href="#">View Team Members</a>
+				</div>
+			</div>
+		</div>
+      </section>
+
+    </main>
+
+    <dialog class="modal" id="dialog-new-task">
+      <h2 class="title-card">Add New Task</h2>
+      <form class="modal-form">
+        <textarea placeholder="Write Task description here..."></textarea>
+        <select>
+          <option value="">Select project to add Task to</option>
+          <option value="0x001">Project 1</option>
+          <option value="0x5a">Design Project</option>
+          <option value="0x27">Project 3</option>
+        </select>
+        <div class="input-label">
+          <label for="task-date">Enter Deadline for Task:</label>
+          <input type="date" id="task-date" />
+        </div>
+        <div class="end-button">
+          <button class="btn-accent">Submit Item</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>

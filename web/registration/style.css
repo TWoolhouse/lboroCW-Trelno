@@ -1,0 +1,225 @@
+h1 {
+    /* i have adjusted the sizes etc. to match the login page, might want to make a shared css document?*/
+    /* the sizes do not match the ones on figma*/
+    position: absolute;
+    width: 224px;
+    height: 44px;
+    left: 36px;
+    top: 33px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 35px;
+    text-align: center;
+    color: var(--colour-accent)
+}
+
+h1 span {
+
+    width: 224px;
+    height: 44px;
+    left: 36px;
+    top: 33px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18.75px;
+    line-height: 22px;
+    text-align: center;
+    color: var(--colour-text)
+}
+
+
+img {
+    /*not being useds as i changed the css to match the login page*/
+    position: absolute;
+    width: 47px;
+    height: 47px;
+    left: 358px;
+    top: 48px;
+}
+
+#text-box1 {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 258px;
+    height: 40px;
+    left: calc(50% - 258px/2 + 6px);
+    top: 150px;
+    padding-left: 10px;
+
+    background: var(--colour-highlight);
+    border: 1px solid var(--colour-accent);
+    border-radius: 8px;
+}
+
+#text-box2 {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 258px;
+    height: 40px;
+    left: calc(50% - 258px/2 + 6px);
+    top: 200px;
+    padding-left: 10px;
+
+    background: var(--colour-highlight);
+    border: 1px solid var(--colour-accent);
+    border-radius: 8px;
+}
+
+#password-box2 {
+
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 258px;
+    height: 39px;
+    left: calc(50% - 258px/2 + 6px);
+    top: 350px;
+    padding-left: 10px;
+
+    background: var(--colour-highlight);
+    border: 1px solid var(--colour-accent);
+    border-radius: 8px;
+}
+
+/*Used the css from the login page to make them look similar as there is no registration page on the designs, have adjusted the names to suit however*/
+/*will happily change to make it unique depending on designs*/
+/*also adjusted the names of the colours to the varaibles in base.css*/
+#title {
+    position: absolute;
+    width: 235px;
+    height: 45px;
+    left: calc(50% - 235px/2 + 5.5px);
+    top: 33px;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 42px;
+
+    color: var(--colour-text);
+}
+
+/*Welcome text CSS*/
+#welcome-text {
+    position: absolute;
+    width: 331px;
+    height: 43px;
+    left: calc(50% - 331px/2 + 3.5px);
+    top: 96px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+
+    color: var(--colour-text);
+}
+
+
+#email-box {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 258px;
+    height: 40px;
+    left: calc(50% - 258px/2 + 6px);
+    top: 250px;
+    padding-left: 10px;
+
+    background: var(--colour-highlight);
+    border: 1px solid var(--colour-accent);
+    border-radius: 8px;
+}
+
+#password-box {
+
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 258px;
+    height: 39px;
+    left: calc(50% - 258px/2 + 6px);
+    top: 300px;
+    padding-left: 10px;
+
+    background: var(--colour-highlight);
+    border: 1px solid var(--colour-accent);
+    border-radius: 8px;
+}
+
+#submit-button {
+    box-sizing: border-box;
+
+    font-weight: bold;
+
+    position: absolute;
+    width: 258px;
+    height: 38px;
+    left: calc(50% - 258px/2 + 6px);
+    top: 400px;
+
+    background: var(--colour-accent);
+    border: 1px solid var(--colour-accent);
+    border-radius: 8px;
+}
+
+#link-to-sign-in-text-text {
+    position: absolute;
+    width: 225px;
+    height: 30px;
+    left: calc(50% - 225px/2 + 5.5px);
+    top: 450px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 23px;
+    text-align: center;
+
+    color: var(--colour-text);
+}
+
+
+#link-to-sign-in-text {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 258px;
+    height: 30px;
+    left: calc(50% - 258px/2 + 6px);
+    top: 470px;
+
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12.25px;
+    line-height: 23px;
+    text-align: center;
+
+    background: var(--colour-highlight);
+    border: 1px solid var(--colour-highlight);
+    border-radius: 8px;
+}
+
+/*taken the box and changed the colour variables to match the base.css, did not want to change base.css without confirming with others so ill just leave it here for now*/
+.box {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 349px;
+    height: 518px;
+    left: calc(50% - 349px/2 + 3.5px);
+    top: 189px;
+    align-items: center;
+
+    background: var(--colour-highlight);
+    border: 1px solid var(--colour-highlight);
+    box-shadow: 0px 4px 4px var(--colour-text);
+    border-radius: 42px;
+}

@@ -12,18 +12,21 @@
 
   --colour-mid-grey: #a6acbe;
 
+  --colour-red: #e32020bf;
+  --colour-amber: #ff9d30db;
+  --colour-green: #43d34a91;
 
   /* Colours initially used in the login page*/
-  --colour-box-background: #FFFFFF;
+  --colour-box-background: #ffffff;
   --colour-box-shadow: rgba(0, 0, 0, 0.25);
-
 
   --card-shadow: 0 4px 4px rgb(0, 0, 0, 0.25);
   --card-radius: 40px;
   --card-small-radius: 14px;
 }
 
-@media print, (prefers-color-scheme: light) {
+@media print,
+(prefers-color-scheme: light) {
   :root {
     /* Light Mode Overrides*/
     --colour-text: #000;
@@ -41,7 +44,6 @@ body {
   background-color: var(--colour-block);
   margin: 0;
 }
-
 
 header.header {
   background-color: var(--colour-highlight);
@@ -74,14 +76,14 @@ header.header {
   margin: 1rem;
 }
 
-/* utility class that (should) be able to be re used in a lot of pages) */
+/* utility classes that (should) be able to be re used in a lot of pages) */
 .card {
   background-color: var(--colour-highlight);
   color: var(--colour-text);
   box-shadow: var(--card-shadow);
   border-radius: var(--card-radius);
   padding: 1.2rem;
-  margin: 1rem 0.5rem;
+  margin: 3rem 0.5rem;
 }
 
 .card a {
@@ -103,8 +105,8 @@ header.header {
 .small-cards-wrapper {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: center;
+  gap: 1rem;
+  justify-content: start;
 }
 
 /* smaller 'sub-cards' */
@@ -118,9 +120,63 @@ header.header {
   box-shadow: var(--card-shadow);
 }
 
+.accent-outline {
+  border: 0.3rem solid var(--colour-accent);
+}
+
 .title-card-small {
   margin: 0;
 }
+
+/* KANBAN */
+.kanban-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.kanban-section {
+  flex-grow: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.kanban-section .card-small {
+  width: 80%;
+  max-width: unset;
+}
+
+.kanban-section .card-small:hover {
+  cursor: pointer;
+}
+
+/* kanban card top border colour (if not overwritten, defaults to colour-accent) */
+.kanban-section .card-small {
+  border-top: 0.25rem solid var(--colour-card-highlight, var(--colour-accent));
+}
+
+/* RAG colours */
+.kanban-section:nth-of-type(1) .card-small {
+  --colour-card-highlight: var(--colour-red);
+}
+
+.kanban-section:nth-of-type(2) .card-small {
+  --colour-card-highlight: var(--colour-amber);
+}
+
+.kanban-section:nth-of-type(3) .card-small {
+  --colour-card-highlight: var(--colour-green);
+}
+
+.kanban-wrapper hr {
+  border: 2px solid var(--colour-text);
+}
+
+/* .kanban-section + .kanban-section {
+  border-left: 0.2rem solid var(--colour-text);
+} */
 
 /* TASKS */
 
@@ -144,7 +200,7 @@ header.header {
   border: 1px solid var(--colour-text);
 }
 
-input[type="checkbox"]:checked + label {
+input[type="checkbox"]:checked+label {
   text-decoration: line-through;
 }
 
@@ -156,9 +212,11 @@ input[type="checkbox"]:checked + label {
   box-shadow: var(--card-shadow);
   border-radius: var(--card-radius);
 }
+
 .modal::backdrop {
   background: rgba(0, 0, 0, 0.5);
 }
+
 .modal-form {
   display: flex;
   flex-direction: column;
@@ -209,6 +267,18 @@ input[type="checkbox"]:checked + label {
   opacity: 0.5;
 }
 
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
 /* USE SPARINGLY */
 .mobile-hidden {
   display: none;
@@ -220,31 +290,41 @@ input[type="checkbox"]:checked + label {
   }
 }
 
+#waves {
+  position: absolute;
+  width: 99.7%;
+  height: 99.7%;
+  left: 0px;
+  top: 0px;
+  background: var(--colour-block);
+  /*cannot find the background colour of the website, just need to change this to the same colour as the background*/
+  border: 1px solid var(--colour-highlight);
+  backdrop-filter: blur(2px);
+  z-index: -1;
+}
 
 /* LOGIN */
 
 /*Login box in centre of page*/
-.box{
+.box {
   box-sizing: border-box;
 
   position: absolute;
   width: 349px;
   height: 518px;
-  left: calc(50% - 349px/2 + 3.5px);
+  left: calc(50% - 349px / 2 + 3.5px);
   top: 189px;
   align-items: center;
-  
+
   background: var(--colour-white);
   border: 1px solid var(--colour-white);
   box-shadow: 0px 4px 4px var(--colour-black);
   border-radius: 42px;
 }
 
+/*ICON (screwdriver) with positioning which hopefully can be used across multiple pages*/
 
-
-/*ICON (screwdriver) with positioning which hopefully can be used across multipl pages*/
-
-.icon{
+.icon {
   position: absolute;
   width: 47px;
   height: 47px;

@@ -8,17 +8,42 @@
 	<meta name="color-scheme" content="dark light">
 	<meta name="theme-color" content="#1e1e1e">
 
-	<link rel="stylesheet" href="/base.css">
+	<link rel="stylesheet" href="../base.css">
+	<link rel="stylesheet" href="./style.css">
 
-	<title>Trelno</title>
+	<title>Registration</title>
 </head>
 
 <body>
+	<header class="header">
+		<h1><u>Make-it-all</u> <span>Portal</span></h1>
+		<img src="/screwdriver-icon.png" alt="Make-it-all" class="icon">
+		<!--need to fix the position of the icon-->
 
-	<h1>Trelno</h1>
+	</header>
 
-	<p>Hello world</p>
-    <p></p>Registration</p>
+	<div class="box">
+		<!--add the information for this when functionality is added-->
+		<form name="registrationForm" action="" method="post" onsubmit="return validateForm()">
+			<label id="title">Registration</label>
+			<label id="welcome-text">Enter your details below to register</label>
+			<input type="text" id="text-box1" placeholder="First Name" required><br>
+			<input type="text" id="text-box2" placeholder="Surname" required><br>
+			<input name="email" type="text" id="email-box" placeholder="Email" required><br>
+			<input type="password" id="password-box" placeholder="Password" required><br>
+			<input type="password" id="password-box2" placeholder="Confirm Password" required><br>
+			<!--might not need the confirm password but there just in case i do-->
+			<input type="submit" id="submit-button" value="Confirm Details">
+			<label id="link-to-sign-in-text-text">Already Registered?</label>
+			<input type="button" id="link-to-sign-in-text" value="Sign-in">
+			<!--need to add form validation though js? And potientially some hover colour changes just to make it look cool idk-->
+		</form>
+
+	</div>
+	<!--code for the background thingy, can use for the login as well as others that use this thing.-->
+	<svg id="waves">
+		<path d="M 1 1 L 1 901 L 1651 901 C 2120 81 371 396 1 1" stroke="var(--colour-accent)" fill="var(--colour-accent)"/>
+	</svg>
 </body>
 
 </html>
