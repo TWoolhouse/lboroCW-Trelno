@@ -55,7 +55,7 @@ export class Project {
     this.created = created;
     this.deadline = deadline;
     this.name = name;
-    this.tasks = new CollectionDB(this.id, Project.name, Task.name);
+    this.tasks = new CollectionDB(this.id, Project.name, ProjectTask.name);
     this.assignees = assignees;
   }
 

@@ -19,11 +19,22 @@ export const TaskSrc = {
  * @property {Number} source A TaskSrc of where this task has come from
  */
 
+/**
+ * Enum for the Task State
+ * @readonly
+ * @enum {Number}
+ */
+export const TaskState = {
+  Ready: 0,
+  Active: 1,
+  Done: 2,
+};
+
 export class Task {
   /** @property {Number} id Unique TaskID */
   id;
-  /** @property {Boolean} done A flag indicating if the task is complete */
-  done;
+  /** @property {Number} state A TaskState */
+  state;
   /** @property {String} name Display name of the task */
   name;
   /** @property {String | null} desc An optional description of the task */
@@ -31,15 +42,15 @@ export class Task {
 
   /**
    * @param {Number} id Unique TaskID
-   * @param {Boolean} done A flag indicating if the task is complete
+   * @param {Number} state A TaskState
    * @param {String} name Display name of the task
    * @param {String} desc An optional description of the task
    * @returns {Task}
    */
-  constructor(id, done, name, desc) {
+  constructor(id, state, name, desc) {
     if (cereal.cereal(this, id)) return this;
     this.id = id;
-    this.done = done;
+    this.state = state;
     this.name = name;
     this.desc = desc;
   }
