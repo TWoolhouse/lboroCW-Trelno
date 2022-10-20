@@ -16,7 +16,7 @@ class DB {
     this._key = type.name;
   }
   key(id) {
-    return `db-${this._key}-${id}`;
+    return `db-${this._key}#${id}`;
   }
   async get(id) {
     return sessionStorage.getItem(this.key(id));
@@ -32,7 +32,7 @@ class Cache {
     this.db = new DB(type);
   }
   key(id) {
-    return `${this._key}-${id}`;
+    return `${this._key}#${id}`;
   }
   async get(id) {
     let storage = localStorage.getItem(this.key(id));
@@ -99,7 +99,7 @@ class DBPair {
     this._key = pairname(type_a.name, type_b.name);
   }
   key(id) {
-    return `db-${this._key}-${id}`;
+    return `db-${this._key}#${id}`;
   }
   async get(id) {
     return sessionStorage.getItem(this.key(id));
@@ -107,8 +107,10 @@ class DBPair {
   async add(id, object) {
     let key = this.key(id);
     let arr = JSON.parse(sessionStorage.getItem(key) ?? "[]");
-    arr.push(object);
-    sessionStorage.setItem(key, JSON.stringify(arr));
+    if (!arr.includes(object)) {
+      arr.push(object);
+      sessionStorage.setItem(key, JSON.stringify(arr));
+    }
   }
   async sub(id, object) {
     let key = this.key(id);
@@ -124,7 +126,7 @@ class CachePair {
     this.db = new DBPair(type_a, type_b);
   }
   key(id) {
-    return `${this._key}-${id}`;
+    return `${this._key}#${id}`;
   }
   async get(id) {
     let storage = localStorage.getItem(this.key(id));
@@ -137,9 +139,11 @@ class CachePair {
   async add(id, object) {
     let key = this.key(id);
     let arr = JSON.parse(localStorage.getItem(key) ?? "[]");
-    arr.push(object);
-    let serial = JSON.stringify(arr);
-    localStorage.setItem(key, serial);
+    if (!arr.includes(object)) {
+      arr.push(object);
+      let serial = JSON.stringify(arr);
+      localStorage.setItem(key, serial);
+    }
     await this.db.add(id, object);
   }
   async sub(id, object) {
@@ -179,9 +183,10 @@ export class MemoizePair {
 
   async add(id, object) {
     let bucket = this.store[id] ?? {
-      values: [object],
-      cached: Date.now(),
+      values: [],
     };
+    if (!bucket.values.includes(object)) bucket.values.push(object);
+    bucket.cached = Date.now();
     this.store[id] = bucket;
     await this.cache.add(id, object);
     return object;
