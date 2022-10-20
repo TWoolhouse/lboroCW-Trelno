@@ -23,7 +23,7 @@ export class CollectionDB extends Collection {
           item.id
         );
       }
-    });
+    }, false);
   }
 
   static cereal = {

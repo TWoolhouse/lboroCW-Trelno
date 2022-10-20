@@ -56,9 +56,11 @@ export class Collection {
   /**
    * Set the callback function for when the data of the Collection changes
    * @param {Collection_OnChange<T>} callback
+   * @param {Boolean} [run] Run the callback immediately upon adding it.
    */
-  onChange(callback) {
+  onChange(callback, run = true) {
     this.onChangeFuncs.push(callback);
+    if (run) callback(new CollectionEvent([], [...this.snapshot]));
     return this;
   }
 
