@@ -59,6 +59,17 @@ export async function create_user(email, rank, name) {
   return await Memoize.Type(User).set(obj);
 }
 
+/**
+ * Creates a new team
+ * @param {User} leader Team Leader Uesr
+ * @param {String} name Users full name
+ * @returns {Promise<Team>}
+ */
+export async function create_team(leader, name) {
+  let obj = new Team(id_gen(team), leader, name);
+  return await Memoize.Type(Team).set(obj);
+}
+
 // HELPER FAUX GENERATOR
 // //TODO: Move this to faux / memoize
 
@@ -69,14 +80,6 @@ async function id_gen(func) {
   } while ((await func(id)) != undefined);
   return id;
 }
-
-// Set the USERID Cookie and local storage // Get it when loaded
-// let userid =
-//   localStorage.getItem("userid") ??
-//   document.cookie
-//     .split("; ")
-//     .find((row) => row.startsWith("userid="))
-//     ?.split("=")[1];
 
 import { memoized } from "./interface/memoize.js";
 console.log(memoized);
