@@ -48,10 +48,12 @@ function cerealise_registered(object, key, cereal) {
 }
 function cerealise_object(object, okey, cereal) {
   return Object.fromEntries(
-    Object.entries(object).map(([key, value]) => [
-      key,
-      cerealise_layer(value, `${okey}.${key}`, cereal),
-    ])
+    Object.entries(object)
+      .filter(([key, _]) => !cereal.ignore.includes(key))
+      .map(([key, value]) => [
+        key,
+        cerealise_layer(value, `${okey}.${key}`, cereal),
+      ])
   );
 }
 
@@ -60,9 +62,14 @@ export function serialise(object) {
     cereal: {
       type: protoName(object),
       fields: {},
+      ignore:
+        (object.cereal ?? object.__proto__.constructor.cereal ?? {}).ignore ??
+        [],
     },
   };
-  return Object.assign(cereal, cerealise(object, cereal.cereal));
+  Object.assign(cereal, cerealise(object, cereal.cereal));
+  delete cereal.cereal.ignore;
+  return cereal;
 }
 
 export async function deserialise(object) {
