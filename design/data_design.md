@@ -12,7 +12,9 @@ class User {
 	+rank: UserRank
 	+name: String
 	+tasks: Collection~Task~
-	+tasklist() Array~TaskRef~
+	+tasklist() Collection~TaskRef~
+	+teamlist() Collection~TeamRef~
+	+projectlist() Collection~ProjectRef~
 }
 
 User "1" *-- "1" UserRank: rank
@@ -63,7 +65,7 @@ class ProjectTask {
 Project "1" *-- "1" Assignees: assignees
 class Project {
 	+id: Int
-	+leader: User
+	+manager: User
 	+created: Datetime
 	+deadline: Datetime
 	+name: String
