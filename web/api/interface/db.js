@@ -1,7 +1,7 @@
 import { TaskSrc } from "../model/task.js";
 import * as cereal from "./cereal.js";
 
-const db = sessionStorage;
+const dbStorage = sessionStorage;
 
 function table(...names) {
   return `db-${names.join("-")}#`;
@@ -9,7 +9,7 @@ function table(...names) {
 
 export function all(...names) {
   const name = table(...names);
-  return Object.entries(db).filter(([key, _]) => key.startsWith(name));
+  return Object.entries(dbStorage).filter(([key, _]) => key.startsWith(name));
 }
 
 async function allAs(mapping, ...names) {
