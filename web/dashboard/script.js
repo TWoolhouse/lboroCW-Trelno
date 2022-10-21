@@ -22,27 +22,42 @@ newItemButton.addEventListener("click", () => {
   newTaskDialog.showModal();
 });
 
+const _wrapper = document.createElement("div");
+/**
+ * Converts the HTML into a DOM Node
+ * @param {String} html The HTML String
+ * @returns {Node} A Node
+ */
+function HTMLasDOM(html) {
+  _wrapper.innerHTML = html.trim();
+  const element = _wrapper.firstChild;
+  element.remove();
+  return element;
+}
+
 currentUser.teamlist().onChange((event) => {
   for (const ref of event.add) {
     const team = ref.team;
-    teamCardsWrapper.innerHTML += createTeamCard(team);
+    teamCardsWrapper.appendChild(HTMLasDOM(createTeamCard(team)));
   }
 });
 
 currentUser.projectlist().onChange((event) => {
   for (const ref of event.add) {
     const project = ref.project;
-    projectOverviewWrapper.innerHTML += createProjectOverviewCard(project);
+    projectOverviewWrapper.appendChild(
+      HTMLasDOM(createProjectOverviewCard(project))
+    );
   }
 });
 
 currentUser.tasklist().onChange((event) => {
   for (const ref of event.add) {
     const task = ref.task;
-    kanbanSections[task.state].innerHTML += createTaskListItem(task);
+    const card = HTMLasDOM(createTaskListItem(task));
+    kanbanSections[task.state].appendChild(card);
 
     // Kanban Drag Event Handler
-    const card = kanbanSections[task.state].querySelector(`#task-${task.id}`);
     card.addEventListener("dragstart", (event) => {
       event.dataTransfer.setData("task", task.id);
       event.dataTransfer.dropEffect = "move";
@@ -103,7 +118,7 @@ function createTeamCard(team) {
     <div class="card-small accent-outline flex-col text-center">
       <h3 class="title-card-small">${team.name}</h3>
       <p class="description">
-        ${team.description}
+        ${team.desc}
       </p>
       <a class="fg-accent" href="#">View My Team</a>
     </div>
@@ -119,6 +134,7 @@ function createProjectOverviewCard(project) {
   const colours = ["colour-red", "colour-amber", "colour-green"];
   const tasks = project.tasks.snapshot;
   const progress = tasks.filter((task) => task.state == TaskState.Done).length;
+  const percentage = (progress / (tasks.length == 0 ? 1 : tasks.length)) * 100;
 
   return /*HTML*/ `
     <div class="card-small bg-accent">
@@ -127,9 +143,9 @@ function createProjectOverviewCard(project) {
       <div class="progress-bar">
         <div
           class="progress-bar-fill"
-          style="width: ${
-            (progress / tasks.length) * 100
-          }%; --bar-fill: var(--${colours[project.id % 3]});"
+          style="width: ${percentage}%; --bar-fill: var(--${
+    colours[project.id % 3]
+  });"
         ></div>
       </div>
       <p class="card-description">${progress}/${tasks.length}
