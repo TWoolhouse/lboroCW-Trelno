@@ -10,6 +10,14 @@
   color: var(--colour-highlight);
   cursor: pointer;
   transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-action :not(span) {
+  display: none;
 }
 
 .btn-action[data-secondary] {
@@ -22,6 +30,22 @@
   outline-offset: 0.3rem;
   background-color: var(--colour-highlight);
   color: var(--colour-accent);
+}
+
+@media (min-width: 768px) {
+  .btn-action {
+    aspect-ratio: unset;
+    font-size: 1.5em;
+    border-radius: 0.5rem;
+    width: unset;
+    padding: 0.2rem 0.8rem;
+  }
+  .btn-action p {
+    display: block;
+    margin: 0 0.2rem;
+    font-size: 0.7em;
+    font-weight: 600;
+  }
 }
 
 .myprojects-wrapper {
