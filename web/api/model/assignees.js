@@ -39,7 +39,7 @@ export class Assignees {
 
   /**
    * Amalgamation of all users from all locations.
-   * @returns {Array<User>}
+   * @returns {Collection<User>}
    */
   all() {
     return this._all;

@@ -2,7 +2,7 @@ import { Memoize } from "./interface/memoize.js";
 import { User, UserRank } from "./model/user.js";
 import { Task, TaskState } from "./model/task.js";
 import { Team } from "./model/team.js";
-import { Project } from "./model/project.js";
+import { Project, ProjectTask } from "./model/project.js";
 import { Assignees } from "./model/assignees.js";
 
 await (async () => {
@@ -46,9 +46,11 @@ await (async () => {
       .map((task) => Memoize.Type(Task).create(task))
   );
 
+  let assignees_count = 1;
   const assignees = await Promise.all(
     range(6)
       .map((id) => {
+        id = assignees_count++;
         return new Assignees(id);
       })
       .map((assignees) => Memoize.Type(Assignees).create(assignees))
@@ -105,10 +107,11 @@ await (async () => {
       .map(async (team) => await Memoize.Type(Team).create(await team))
   );
 
+  let project_task_count = 1;
   const projects = await Promise.all(
     range(2)
-      .map((id) => {
-        return new Project(
+      .map(async (id) => {
+        let project = new Project(
           id,
           users[0],
           new Date(2022, 9, random(31, 1)),
@@ -116,15 +119,37 @@ await (async () => {
           `Project ${id}`,
           assignees[id - 1]
         );
+        project.tasks.add(
+          ...(await Promise.all(
+            range(random(13, 6)).map((id) => {
+              const pid = project_task_count++;
+              const tid = task_count++;
+              let t = new Task(
+                tid,
+                random(3, 0),
+                `Task ${tid}`,
+                `Task Desc ${tid} Project`
+              );
+              let assign = new Assignees(assignees_count++);
+              for (const user of project.assignees.all())
+                if (Math.random() > 0.5) assign.users.add(user);
+
+              return Memoize.Type(Task)
+                .create(t)
+                .then(() => {
+                  return Memoize.Type(Assignees)
+                    .create(assign)
+                    .then(() => {
+                      return Memoize.Type(ProjectTask).create(
+                        new ProjectTask(pid, t, assign)
+                      );
+                    });
+                });
+            })
+          ))
+        );
+        return project;
       })
-      .map((project) => Memoize.Type(Project).create(project))
+      .map(async (project) => await Memoize.Type(Project).create(await project))
   );
-
-  // await Memoize.Type(Team).create(new Team(1, u1, "My Cool Team"));
-
-  // let a1 = await Memoize.Type(Assignees).create(new Assignees(1));
-
-  // await Memoize.Type(Project).create(
-  //   new Project(1, u1, new Date(2022, 9, 3), Date.now(), "Best Project", a1)
-  // );
 })();
