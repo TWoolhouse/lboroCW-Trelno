@@ -85,8 +85,8 @@ function createTaskListItem(task) {
     <div class="card-small bg-accent" draggable="true" id="task-${task.id}" data-task-id="${task.id}">
       <h3 class="title-card-small">${task.name}</h3>
       <div class="flex-row">
-        <a href="#" class="dimmed">View More Info</a>
-        <p class="dimmed">11/12/22</p>
+        <p class="flex-row dimmed"><span class="material-symbols-outlined">analytics</span><a href="#">View More Info</a></p>
+        <p class="dimmed flex-row"><span class="material-symbols-outlined">schedule</span>11/12/22</p>
         <img src="https://placekitten.com/39/39" alt="Profile image" style="border-radius:100vh" />
       </div>
     </div>
