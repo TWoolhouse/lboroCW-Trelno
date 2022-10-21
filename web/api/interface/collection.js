@@ -38,15 +38,15 @@ export class CollectionEvent {
 export class Collection {
   /** @property {Array<T>} snapshot */
   snapshot;
-  /** @property {Collection_OnChange<T>} onChangeFunc */
-  onChangeFunc;
+  /** @property {Array<Collection_OnChange<T>>} onChangeFuncs */
+  onChangeFuncs;
 
   /**
    * @param {...T} items
    */
   constructor(...items) {
     this.snapshot = items;
-    this.onChangeFunc = (event) => {};
+    this.onChangeFuncs = [];
   }
 
   [Symbol.iterator]() {
@@ -56,9 +56,11 @@ export class Collection {
   /**
    * Set the callback function for when the data of the Collection changes
    * @param {Collection_OnChange<T>} callback
+   * @param {Boolean} [run] Run the callback immediately upon adding it.
    */
-  onChange(callback) {
-    this.onChangeFunc = callback;
+  onChange(callback, run = true) {
+    this.onChangeFuncs.push(callback);
+    if (run) callback(new CollectionEvent([], [...this.snapshot]));
     return this;
   }
 
@@ -68,7 +70,8 @@ export class Collection {
    */
   add(...items) {
     this.sync(() => {
-      for (const item of items) this.snapshot.push(item);
+      for (const item of items)
+        if (this.snapshot.indexOf(item) == -1) this.snapshot.push(item);
     });
   }
   /**
@@ -102,6 +105,7 @@ export class Collection {
   sync(func) {
     let old = [...this.snapshot];
     func();
-    this.onChangeFunc(new CollectionEvent(old, [...this.snapshot]));
+    let event = new CollectionEvent(old, [...this.snapshot]);
+    for (const cb of this.onChangeFuncs) cb(event);
   }
 }
