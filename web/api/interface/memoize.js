@@ -1,14 +1,27 @@
 export const memoized = [];
 
-import { serialise, deserialise } from "./cereal.js";
+import { serialise, deserialise, protoName } from "./cereal.js";
 
 export function pairname(name_a, name_b) {
   return `${name_a}-${name_b}`;
 }
 
+const ProxyIdentity = Symbol("ProxyIdentity");
+const ProxyIdentityCheck = Symbol("ProxyIdentityCheck");
 // TODO: Use actual proxies that update the fields
 function NewProxy(object) {
-  return object;
+  return new Proxy(object, {
+    // get(target, property, proxy) {
+    //   if (target === ProxyIdentity) return proxy;
+    //   if (target === ProxyIdentityCheck) return true;
+    //   return Reflect.get(...arguments);
+    // },
+    set(target, property, value, proxy) {
+      const res = Reflect.set(...arguments);
+      Memoize.Name(protoName(target)).update(target, property, value);
+      return res;
+    },
+  });
 }
 
 class DB {
@@ -21,7 +34,7 @@ class DB {
   async get(id) {
     return sessionStorage.getItem(this.key(id));
   }
-  async set(id, value) {
+  async create(id, value) {
     sessionStorage.setItem(this.key(id), value);
   }
 }
@@ -43,10 +56,15 @@ class Cache {
     return await deserialise(JSON.parse(res));
   }
 
-  async set(id, value) {
+  async update(id, object, property, value) {
+    // FIXME: Currently works as to save an object the whole thing must be serialised again
+    await this.create(id, object);
+  }
+
+  async create(id, value) {
     let serial = JSON.stringify(serialise(value));
     localStorage.setItem(this.key(id), serial);
-    await this.db.set(id, serial);
+    await this.db.create(id, serial);
   }
 }
 
@@ -82,14 +100,21 @@ export class Memoize {
     return stored.proxy;
   }
 
-  async set(object) {
+  async update(object, property, value) {
+    let bucket = this.store[object.id];
+    if (bucket === undefined) return this.create(object);
+    await this.cache.update(object.id, object, property, value);
+    return bucket.proxy;
+  }
+
+  async create(object) {
     let bucket = {
       value: object,
       proxy: NewProxy(object, {}),
       cached: Date.now(),
     };
     this.store[object.id] = bucket;
-    await this.cache.set(object.id, object);
+    await this.cache.create(object.id, object);
     return bucket.proxy;
   }
 }
