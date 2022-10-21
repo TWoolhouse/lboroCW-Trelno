@@ -7,6 +7,28 @@
   margin: auto;
 }
 
+.new-item {
+  background-color: var(--colour-accent);
+  border: none;
+  aspect-ratio: 1;
+  width: 3rem;
+  border-radius: 100vh;
+  font-size: 2.5rem;
+  padding: 0;
+  margin: 0 1rem;
+  box-shadow: var(--card-shadow);
+  color: var(--colour-highlight);
+  cursor: pointer;
+  transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+}
+
+.new-item:hover,
+.new-item:focus {
+  outline-offset: 0.3rem;
+  background-color: var(--colour-highlight);
+  color: var(--colour-accent);
+}
+
 .small-cards-wrapper-center {
   display: flex;
   flex-wrap: wrap;
@@ -20,25 +42,21 @@
   align-items: center;
 }
 
-.deadline-date-day {
+.deadline-date {
   font-size: 3em;
-  font-weight: 800;
-  margin-top: 3rem;
-  margin-bottom: 1rem;
-}
-
-.deadline-date-monthyear {
-  font-size: 1.5em;
-  font-weight: 600;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  font-weight: 500;
+  margin: 1rem 2rem 0rem 2rem;
+  text-align: center;
+  /* margin-top: 3rem;
+  margin-bottom: 1rem; */
 }
 
 .PM-name {
   font-size: 1.5em;
   font-weight: 600;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  margin: 1rem 0 1rem 0; /* top right bottom left */
+  /* margin-top: 2rem;
+  margin-bottom: 1rem; */
 }
 
 .PM-image {
