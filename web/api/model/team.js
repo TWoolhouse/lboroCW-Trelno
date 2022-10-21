@@ -28,7 +28,7 @@ export class Team {
     this.leader = leader;
     this.name = name;
     this.desc = desc;
-    this.users = new CollectionDB(this.id, Team.name, User.name);
+    this.users = new CollectionDB(this.id, Team, User);
   }
 }
 cereal.register(Team);

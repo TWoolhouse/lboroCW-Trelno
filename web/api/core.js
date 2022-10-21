@@ -73,6 +73,11 @@ export async function createTeam(leader, name) {
 // HELPER FAUX GENERATOR
 // //TODO: Move this to faux / memoize
 
+/**
+ * Creates a new ID for the type
+ * @param {*} func Type Getter
+ * @returns {Number} Random Unique ID
+ */
 async function id_gen(func) {
   let id = 0;
   do {

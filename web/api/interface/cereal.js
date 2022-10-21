@@ -1,5 +1,11 @@
 import { Memoize } from "./memoize.js";
 
+/**
+ * Constructs the Object from serialised fields if available
+ * @param {Object} self
+ * @param {Object} object
+ * @returns {Boolean} True if loaded from serialisation
+ */
 export function cereal(self, object) {
   if (object.cereal) {
     delete object.cereal;
@@ -9,11 +15,20 @@ export function cereal(self, object) {
   return false;
 }
 
+/**
+ * Gets the Type name of an instance
+ * @param {*} object
+ * @returns {String} Name of the Instance's Type
+ */
 export function protoName(object) {
   if (object === undefined) return undefined;
   return object.__proto__.constructor.name;
 }
 
+/**
+ * Registers a type to have a custom serialisation method
+ * @param {Type} type The Type to register to cereal
+ */
 export function register(type) {
   REGISTERED_TYPES[type.name] = type;
 }
@@ -57,6 +72,11 @@ function cerealise_object(object, okey, cereal) {
   );
 }
 
+/**
+ * Converts object to a cereal form.
+ * @param {Object} object Object to serialise
+ * @returns {Object}
+ */
 export function serialise(object) {
   let cereal = {
     cereal: {
@@ -72,6 +92,11 @@ export function serialise(object) {
   return cereal;
 }
 
+/**
+ * Converts a cereal object back into its original Type.
+ * @param {Object} object
+ * @returns {*}
+ */
 export async function deserialise(object) {
   // TODO: Child fields. Use dot split char
   for (const [name, field] of Object.entries(object.cereal.fields)) {

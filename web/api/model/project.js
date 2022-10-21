@@ -8,11 +8,17 @@ import { Assignees } from "./assignees.js";
 export class ProjectTask {
   /** @property {Number} id ProjectTaskID */
   id;
-  /** @property {Task} id ProjectTaskID */
+  /** @property {Task} id TaskID */
   task;
   /** @property {Assignees} assignees Users assigned to this project task */
   assignees;
 
+  /**
+   * @param {Number} id ProjectTaskID
+   * @param {Task} task TaskID
+   * @param {Assignees} assignees Users assigned to this project task
+   * @returns {ProjectTask}
+   */
   constructor(id, task, assignees) {
     if (cereal.cereal(this, id)) return this;
     this.id = id;
@@ -55,7 +61,7 @@ export class Project {
     this.created = created;
     this.deadline = deadline;
     this.name = name;
-    this.tasks = new CollectionDB(this.id, Project.name, ProjectTask.name);
+    this.tasks = new CollectionDB(this.id, Project, ProjectTask);
     this.assignees = assignees;
   }
 

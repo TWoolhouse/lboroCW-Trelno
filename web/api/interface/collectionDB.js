@@ -3,12 +3,21 @@ import { Collection } from "./collection.js";
 import { Memoize, pairname } from "./memoize.js";
 
 export class CollectionDB extends Collection {
+  /**
+   *
+   * @param {Number} pid
+   * @param {Object} ptype
+   * @param {String} ptype.name
+   * @param {Object} type
+   * @param {String} type.name
+   * @param  {...any} items
+   */
   constructor(pid, ptype, type, ...items) {
     super(...items);
     this.typeinfo = {
-      type: type,
+      type: type.name,
       pid: pid,
-      parent: ptype,
+      parent: ptype.name,
     };
     this.onChange((event) => {
       for (const item of event.add) {
@@ -34,7 +43,12 @@ export class CollectionDB extends Collection {
       let data = await Memoize.Name(pairname(object.parent, object.type)).get(
         object.pid
       );
-      return new CollectionDB(object.pid, object.parent, object.type, ...data);
+      return new CollectionDB(
+        object.pid,
+        { name: object.parent },
+        { name: object.type },
+        ...data
+      );
     },
   };
 }

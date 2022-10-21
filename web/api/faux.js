@@ -31,80 +31,73 @@ await (async () => {
   ];
 
   await Promise.all(
-    range(random(11, 5))
-      .map((id) => {
-        id = task_count++;
-        const t = new Task(
-          id,
-          random(3, 0),
-          `Task ${id}`,
-          `Task Desc ${id} User`
-        );
-        users[0].tasks.add(t);
-        return t;
-      })
-      .map((task) => Memoize.Type(Task).create(task))
+    range(random(11, 5)).map(async (id) => {
+      id = task_count++;
+      const t = await Memoize.Type(Task).create(
+        new Task(id, random(3, 0), `Task ${id}`, `Task Desc ${id} User`)
+      );
+      users[0].tasks.add(t);
+      return t;
+    })
   );
 
   let assignees_count = 1;
   const assignees = await Promise.all(
-    range(6)
-      .map((id) => {
-        id = assignees_count++;
-        return new Assignees(id);
-      })
-      .map((assignees) => Memoize.Type(Assignees).create(assignees))
+    range(6).map((id) => {
+      id = assignees_count++;
+      return Memoize.Type(Assignees).create(new Assignees(id));
+    })
   );
 
   const team_leaders = [];
   const teams = await Promise.all(
-    range(3)
-      .map(async (id) => {
-        const us = await Promise.all(
-          range(random(25, 15))
-            .map((id) => {
-              id = user_count++;
-              return new User(
-                id,
-                `u${id}@makeitall.co.uk`,
-                random(3, 0),
-                `UserName ${id}`
-              );
-            })
-            .map(async (user) => {
-              const u = await Memoize.Type(User).create(user);
-              const tasks = await Promise.all(
-                range(random(7, 2))
-                  .map((id) => {
-                    id = task_count++;
-                    return new Task(
-                      id,
-                      random(3, 0),
-                      `Task ${id}`,
-                      `Description: User Task}`
-                    );
-                  })
-                  .map((task) => Memoize.Type(Task).create(task))
-              );
-              u.tasks.add(...tasks);
-              return u;
-            })
-        );
-        users.push(...us);
-        const t = new Team(
+    range(3).map(async (id) => {
+      const us = await Promise.all(
+        range(random(25, 15))
+          .map((id) => {
+            id = user_count++;
+            return new User(
+              id,
+              `u${id}@makeitall.co.uk`,
+              random(3, 0),
+              `UserName ${id}`
+            );
+          })
+          .map(async (user) => {
+            const u = await Memoize.Type(User).create(user);
+            const tasks = await Promise.all(
+              range(random(7, 2)).map((id) => {
+                id = task_count++;
+                return Memoize.Type(Task).create(
+                  new Task(
+                    id,
+                    random(3, 0),
+                    `Task ${id}`,
+                    `Description: User Task}`
+                  )
+                );
+              })
+            );
+            u.tasks.add(...tasks);
+            return u;
+          })
+      );
+      users.push(...us);
+      const t = await Memoize.Type(Team).create(
+        new Team(
           id,
           users[random(users.length, 1)],
           `Team ${id}`,
           `Team Description ${id}`
-        );
-        team_leaders.push(t.leader);
-        t.users.add(
-          ...us.filter((user) => (user.id != 1) & !team_leaders.includes(user))
-        );
-        assignees[random(assignees.length)].teams.add(t);
-        return t;
-      })
-      .map(async (team) => await Memoize.Type(Team).create(await team))
+        )
+      );
+      team_leaders.push(t.leader);
+      t.users.add(
+        ...us.filter((user) => (user.id != 1) & !team_leaders.includes(user))
+      );
+      assignees[random(assignees.length)].teams.add(t);
+      return t;
+    })
   );
 
   let project_task_count = 1;
@@ -136,10 +129,10 @@ await (async () => {
 
               return Memoize.Type(Task)
                 .create(t)
-                .then(() => {
+                .then((t) => {
                   return Memoize.Type(Assignees)
                     .create(assign)
-                    .then(() => {
+                    .then((assign) => {
                       return Memoize.Type(ProjectTask).create(
                         new ProjectTask(pid, t, assign)
                       );
