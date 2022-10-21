@@ -65,6 +65,14 @@ export class Collection {
   }
 
   /**
+   * Removes and active callback from the collection.
+   * @param {Collection_OnChange<T>} callback The callback to remove
+   */
+  onChangeRemove(callback) {
+    this.onChangeFuncs.splice(this.onChangeFuncs.indexOf(callback), 1);
+  }
+
+  /**
    * Add items to the collection
    * @param  {...T} items
    */
@@ -107,5 +115,13 @@ export class Collection {
     func();
     let event = new CollectionEvent(old, [...this.snapshot]);
     for (const cb of this.onChangeFuncs) cb(event);
+  }
+
+  chain(func) {
+    if (func === undefined) func = (i) => i;
+    return (event) => {
+      this.remove(...event.sub.map(func));
+      this.add(...event.add.map(func));
+    };
   }
 }
