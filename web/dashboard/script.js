@@ -1,6 +1,8 @@
 import * as api from "../api/core.js";
-import { currentUser } from "../api/active.js";
+import { currentUser, redirectLogin } from "../api/active.js";
 import { TaskState } from "../api/model/task.js";
+
+redirectLogin();
 
 const kanbanSections = document.querySelectorAll(".kanban-section");
 if (kanbanSections.length != Object.entries(TaskState).length)

@@ -19,9 +19,9 @@ function getUser() {
 
 /**
  * Sets the currently logged in UserID from localStorage, sessionStorage and cookieStorage
- * @param {Number} userid The currently logged in UserID
+ * @param {Number} userId The currently logged in UserID
  */
-function setUser(userid) {
+function setUser(userId) {
   for (const storage of [localStorage, sessionStorage])
     storage.setItem(KEY, userId);
   document.cookie = `${KEY}=${userId}; Max-Age=${60 * 60 * 24 * 7}; path=/`;
@@ -33,3 +33,10 @@ if (userId != undefined) setUser(userId);
 
 export const currentUser = await user(userId);
 console.log("Current", currentUser);
+
+export function redirectLogin() {
+  // FIXME: Currently just sets a user as the logged in user and reloads the page
+  if (currentUser != undefined) return;
+  setUser(1);
+  window.location.reload();
+}
