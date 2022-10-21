@@ -14,7 +14,7 @@ const projectOverviewWrapper = document.querySelector(
 );
 const teamCardsWrapper = document.querySelector("#teams-wrapper");
 
-const newItemButton = document.querySelector(".new-item");
+const newItemButton = document.querySelector(`[data-action="new-task"]`);
 newItemButton.addEventListener("click", () => {
   const newTaskDialog = document.querySelector("#dialog-new-task");
   const selectProject = newTaskDialog.querySelector("#options-project");

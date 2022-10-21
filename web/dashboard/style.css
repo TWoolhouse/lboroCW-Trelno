@@ -1,11 +1,10 @@
-.new-item {
+.btn-action {
   background-color: var(--colour-accent);
   border: none;
   aspect-ratio: 1;
   width: 3rem;
   border-radius: 100vh;
-  font-size: 2.5rem;
-  padding: 0;
+  font-size: 2rem;
   margin: 0 1rem;
   box-shadow: var(--card-shadow);
   color: var(--colour-highlight);
@@ -13,8 +12,13 @@
   transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
 }
 
-.new-item:hover,
-.new-item:focus {
+.btn-action[data-secondary] {
+  background-color: var(--colour-block);
+  color: var(--colour-text);
+}
+
+.btn-action:hover,
+.btn-action:focus {
   outline-offset: 0.3rem;
   background-color: var(--colour-highlight);
   color: var(--colour-accent);
