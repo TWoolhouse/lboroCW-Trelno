@@ -20,8 +20,8 @@ export class Assignees {
   constructor(id) {
     if (!cereal.cereal(this, id)) {
       this.id = id;
-      this.users = new CollectionDB(this.id, Assignees.name, User.name);
-      this.teams = new CollectionDB(this.id, Assignees.name, Team.name);
+      this.users = new CollectionDB(this.id, Assignees, User);
+      this.teams = new CollectionDB(this.id, Assignees, Team);
     }
     this._event_handlers = {};
     this._all = new Collection();
@@ -39,7 +39,7 @@ export class Assignees {
 
   /**
    * Amalgamation of all users from all locations.
-   * @returns {Collection<User>}
+   * @returns {Collection<User>} All users.
    */
   all() {
     return this._all;

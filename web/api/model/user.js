@@ -40,24 +40,20 @@ export class User {
       this.email = email;
       this.rank = rank;
       this.name = name;
-      this.tasks = new CollectionDB(this.id, User.name, Task.name);
+      this.tasks = new CollectionDB(this.id, User, Task);
     }
     this._tasklist = new Collection();
     this._teamlist = new Collection();
     this._projectlist = new Collection();
 
-    this.tasks.onChange((event) => {
-      this._tasklist.remove(
-        ...event.sub.map((task) =>
-          this._tasklist.snapshot.find((value) => value.task == task)
-        )
-      );
-      this._tasklist.add(
-        ...event.add.map((task) => {
+    this.tasks.onChange(
+      this._tasklist.chain(
+        (task) => {
           return { task: task, source: TaskSrc.User };
-        })
-      );
-    });
+        },
+        (task) => this._tasklist.snapshot.find((ref) => ref.task == task)
+      )
+    );
   }
 
   /**

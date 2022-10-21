@@ -1,5 +1,5 @@
+import { Memoize } from "./memoize.js";
 import { TaskSrc } from "../model/task.js";
-import * as cereal from "./cereal.js";
 
 const dbStorage = sessionStorage;
 
@@ -9,13 +9,15 @@ function table(...names) {
 
 export function all(...names) {
   const name = table(...names);
-  return Object.entries(dbStorage).filter(([key, _]) => key.startsWith(name));
+  return Object.entries(dbStorage)
+    .filter(([key, _]) => key.startsWith(name))
+    .map(([key, _]) => key.substring(name.length));
 }
 
-async function allAs(mapping, ...names) {
+async function allAs(mapping, name, ...names) {
   return await Promise.all(
-    all(...names).map(async ([_, str]) => {
-      return mapping(await cereal.deserialise(JSON.parse(str)));
+    all(name, ...names).map(async (id) => {
+      return mapping(await Memoize.Name(name).get(id));
     })
   );
 }
