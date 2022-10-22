@@ -26,9 +26,11 @@ This document will contain all of the necessary information about the requiremen
 
 ### 3. User requirements
    1. A user **must** be one of the following types: a normal user (employee), team leader or project manager.
-   2. A user **must** be assigned to a team.
-   3. A user **must** be able to create a Personal task.
-   4. A registered user **must** be able to invite another member of staff to join the system using their work email address.
+   2. A user **must** be able to be assigned to a team.
+   3. A user **should** be able to be part of multiple teams. 
+   4. A user **should** be able to be part of no teams, but they will not have access to any projects.
+   5. A user **must** be able to create a task and add it to their to-do list. This task will only be accesible to the user itself and not viewable in the Productivity Management subsystem.
+   6. A registered user **must** be able to invite another member of staff to join the system using their work email address.
    <!-- A user **should** be able to be part of multiple teams. -->
    
 ### 4. Team leader requirements
@@ -47,25 +49,31 @@ This document will contain all of the necessary information about the requiremen
 
 ### 6. Productivity Management requirements (Kanban board)
    1. A user **must** have access to their own Kanban board, which will contain tasks (both Personal and Project-related) they are assigned to.
-   2. A user **must** be able to add Personal tasks to their own Kanban Board.
-   3. The board **must** have at least 3 categories/columns for a task to be placed into: To Do, In Progress, Done.
-   4. A task **should** be placed into the To Do category after creation by default.
+   2. The board **must** have at least 3 categories/columns for a task to be placed into: To Do, In Progress, Done.
+   3. A task **should** be placed into the To Do category after creation by default.
+   4. User **should** have a private 'to-do' list that is only viewable by them and does not show in the productivity management system.
 
 ### 7. Task requirements
    1. A task **must** have a name that will be displayed in the kanban board.
    2. A task **must** have a maximum 100 word description.
-   3. A task **should** have an estimated effort that is assigned by the user creating the task.
-   4. A task **should** be able to be categorized as either a Project (select which Project) or Personal task.
+   3. A task **must** have a deadline that is displayed in date form.
+   4. A task **should** have the option of being divided into smaller sub-tasks.
+   5. A task **should** have an estimated effort that is assigned by the user creating the task (determined by man hours needed to finish). 
+   6. If a task is divided into smaller sub-tasks, then its effort **should** be calculated as a sum of the effort for the smaller tasks.
+   7. A task **should** be able to be categorized as either a Project-specific (select which Project) or private task.
 
 ### 8. Project requirements
-   1. A Project **must** only be created by a Project Manager.
+   1. A Project **must** only be created by a Team Lead.
    2. A Project **must** have one or multiple tasks, people and teams assigned to it during creation to be valid.
    3. A Project **must** have a title.
-   4. A Project **must** have a maximum 200 word description.
-   5. A Project **should** have a date deadline assigned to it.
-   6. A Project **must** display the teams assigned to it, with the list of members in each team displayed upon clicking on the team name.
-   7. A Project **could** have a complexity level assigned to it during creation (can be edited later on).
-   8. A complexity level **could** be a minimum necessary amount of users/teams assigned to it.
+   4. A Project **should** have a maximum 200 word description.
+   5. A Project **should** have a deadline assigned to it in date form.
+   6. A Project **must** have a progress displayed, which is measured by the percentage of tasks completed.
+   7. A Project **should** have some client data displayed.
+   8. A Project **must** display the teams assigned to it, with the list of members in each team displayed upon clicking on the team name.
+   9. A Project **should** have a resourcing level assigned to it during creation (can be edited later on).
+   10. A resourcing level **could** be defined as enough users/teams assigned to it.
+   <!-- Project resourcing is defined as enough employees allocated to finish project (estimated man hours to complete) within a deadline. -->
 
 ### 9. Team leader dashboard
    1. A team leader **must** have access to the team leader dashboard via the general employee dashboard (either a button or replacing the default employee dashboard).
@@ -82,13 +90,20 @@ This document will contain all of the necessary information about the requiremen
 ### 11.  General PM/TL dashboard requirements (overlapping for both)
    1.  A team leader or project manager **must** be able to see how many tasks a user currently has assigned.
    2.  The Project tasks **should** be able to be filtered based on Project or team member assigned to it.
-   3.  The manager dashboard **should** allow managers/team leaders to add tasks to a Project and assign users to it.
+   3.  The manager dashboard **must** allow managers/team leaders to add tasks to a Project and assign users to it.
    4.  The manager dashboard **should** show an approximate time of completion of the project based on the cumulative effort value of tasks assigned to the project.
    5.  The manager dashboard **could** display a warning to a project PM/team leader if the estimated effort is longer than the project's deadline.
    6.  The manager dashboard **should** display a warning to PM/team leader if a user has tasks that add up to more than the predetermined maximum effort value for each user.
    7.  The manager dashboard **should** show the progress of the project in graphical and numerical form based on tasks completed.
    8.  The manager dashboard **should** display a warning to manager/team leader if a project has less than the recommended number of employees and teams working on it.
+   9.  A manager/team leader **should** be warned that a employee needs training if they are behind a deadline or having trouble working on a specific task. (Need clarification).
    <!-- The manager dashboard **could** show whether there are Topics with multiple unsolved issues. -->
+
+ ### 12.  Knowledge Management requirements
+   1. Posts **must** be in the form of guides created by Users.
+   2. The knowledge management subsystem **must** have a search functionality where a User can search Posts by specific Topics.
+   3. Posts **must** be viewable by all users by default. This option can be changed by a user to be accesible only by certain levels (Manager, Team lead, User).
+   4. Posts **must** only be able to be edited by a Manager or the User who has created it. 
 
 ### 12. Data protection requirements
    1. The system **must** follow the GDPR regulations.
@@ -101,30 +116,3 @@ This document will contain all of the necessary information about the requiremen
    5. The system **must** be accessed via a dedicated web address.
 
 <!-- Non-functional requirements must be added later, they will be necessary for Part 2.-->
-
-<!-- 
-We're not working on the Knowledge Management system for the moment so I'm just leaving it commented for the moment.
-
-### 9.  Knowledge Management requirements
-   6. A user **must** be able to assign a Post to one Topics.
-   7. A user **could** assign a Post to multiple Topics.
-   8.  A user **must** be able to create one or multiple new Posts.
-   9.  A user **could** be able to add a comment to an existing Post.
-   10. A user **could** be able to reply or add a reaction to an existing comment on a Post.
-   11. A user **must** be able to search for a Post based on one or multiple Topics.
-   12. A user **must** be able to search for a Post based on keywords from title or body.
-   13. A Topic **should** be either categorized as "Technical" or "Non-technical".
-   14. A Topic **could** be categorized as a "Solution" or "Issue".
-   15. A Topic **should** be created for subjects areas such as "Software Development”, “Software Issues”, and “Printing”, etc.
-   16. A Post **could** have one or multiple Topics.
-   17. A Post **must** have a subject title and a body.
-   18. A Post **should** have its author visible.
-   19. A Post **could** be set as "Solved" by the author or a manager/team leader.
-   20. The knowledge management system **must** be available to be shared to all users in the company.
-   21. A user **could** get a suggestion for an existing Post when creating a new one based on the Topic chosen and subject title. -->
-
-
-<!-- ## Requirements details
-***
-
-Will contain all the above requirements in a more detailed form.
