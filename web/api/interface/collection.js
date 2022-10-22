@@ -22,10 +22,6 @@ export class CollectionEvent {
 }
 
 /**
- * @callback Collection_SyncCallback
- */
-
-/**
  * @template T
  * @callback Collection_OnChange
  * @param {CollectionEvent<T>} event
@@ -65,10 +61,19 @@ export class Collection {
   }
 
   /**
+   * Removes and active callback from the collection.
+   * @param {Collection_OnChange<T>} callback The callback to remove
+   */
+  onChangeRemove(callback) {
+    this.onChangeFuncs.splice(this.onChangeFuncs.indexOf(callback), 1);
+  }
+
+  /**
    * Add items to the collection
    * @param  {...T} items
    */
   add(...items) {
+    if (!items.length) return;
     this.sync(() => {
       for (const item of items)
         if (this.snapshot.indexOf(item) == -1) this.snapshot.push(item);
@@ -79,6 +84,7 @@ export class Collection {
    * @param  {...T} items
    */
   remove(...items) {
+    if (!items.length) return;
     this.sync(() => {
       for (const item of items) {
         let idx = this.snapshot.indexOf(item);
@@ -107,5 +113,27 @@ export class Collection {
     func();
     let event = new CollectionEvent(old, [...this.snapshot]);
     for (const cb of this.onChangeFuncs) cb(event);
+  }
+
+  /**
+   * @template T
+   * @callback ChainFunc
+   * @param {T} object
+   * @returns {*}
+   */
+
+  /**
+   * @param {ChainFunc<T>} add Function to convert when adding an element
+   * @param {ChainFunc<T>} sub Function to convert when removing an element.
+   * @returns {Collection_OnChange<T>}
+   */
+  chain(add, sub) {
+    if (add === undefined) add = (i) => i;
+    if (sub === undefined) sub = (i) => i;
+
+    return (event) => {
+      this.remove(...event.sub.map(sub));
+      this.add(...event.add.map(add));
+    };
   }
 }

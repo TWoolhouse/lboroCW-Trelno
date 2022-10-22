@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#1e1e1e" />
-
-    <link rel="icon" type="image/svg" href="/screwdriver-icon.png" />
+    <link rel="icon" type="image/svg" href="/tools.svg" />
     <link rel="stylesheet" href="/base.css" />
     <link rel="stylesheet" href="./style.css" />
 	<link rel="stylesheet" href="./css-circular-prog-bar.css" />
@@ -18,19 +17,20 @@
   <body>
 
     <aside class="side-menu">
-      <img src="/screwdriver-icon.png" alt="Make-it-all" width="100%" />
+      <img src="/tools.svg" alt="Make-it-all" width="100%" />
       <nav>
         <ul>
-          <li data-active><a href="#">P</a></li>
-          <li><a href="#">Q</a></li>
-          <li><a href="#">R</a></li>
-          <li><a href="#">S</a></li>
+          <li data-active>
+            <a href="#" class="material-symbols-outlined">leaderboard</a>
+          </li>
+          <li><a href="#" class="material-symbols-outlined">menu_book</a></li>
+          <li><a href="#" class="material-symbols-outlined">mail</a></li>
         </ul>
       </nav>
     </aside>
 
     <main>
-		
+	
       <header class="header">
         <h1>Project X</h1>
         <button class="mobile-nav-toggle">=</button>
@@ -40,7 +40,9 @@
             <p class="dimmed">Manager</p>
           </div>
           <img src="https://placekitten.com/50/50" alt="" />
-          <p>^</p>
+          <p class="material-symbols-outlined dimmed">expand_more</p>
+          <p class="material-symbols-outlined dimmed">logout</p>
+
         </div>        
       </header>
 
@@ -71,8 +73,7 @@
         <div class="card-small">
           <h3 class="title-card-small text-center"> Project deadline </h3>
           <div class="flex-col-center"> 
-            <p class="deadline-date-day"> 30th </p>
-            <p class="deadline-date-monthyear"> October, 2022 </p>
+            <p class="deadline-date"> 30th <br> October 2022 </p>
         </div>
         </div>
 
@@ -88,7 +89,7 @@
       <section class="card">
         <div class="card-title-wrapper">
           <h2 class="title-card">Tasks</h2>
-          <button class="new-item">+</button>
+          <button class="new-item material-symbols-outlined">add</button>
         </div>
         <div class="kanban-wrapper">
           <div class="kanban-section">
@@ -112,6 +113,7 @@
 
 		<div class="small-cards-wrapper-center">
 			<div class="card-small bg-accent">
+        <h3 class="title-card-small text-center"> Team 1 </h3>
 				<div>
 					<img src="Members.png" alt="Team members" width="100%">
 				</div>
@@ -121,7 +123,8 @@
 			</div>
 
 			<div class="card-small bg-accent">
-				<div>
+        <h3 class="title-card-small text-center"> Team 2 </h3>
+        <div>
 					<img src="Members.png" alt="Team members" width="100%">
 				</div>
 				<div class="link-list text-center">
@@ -130,7 +133,8 @@
 			</div>
 
 			<div class="card-small bg-accent">
-				<div>
+				<h3 class="title-card-small text-center"> Team 3 </h3>
+        <div>
 					<img src="Members.png" alt="Team members" width="100%">
 				</div>
 				<div class="link-list text-center">

@@ -10,7 +10,7 @@ export class Team {
   leader;
   /** @property {String} name Display name of the Team */
   name;
-  /** @property {String} description Extra information about the team */
+  /** @property {String} desc Extra information about the team */
   desc;
   /** @property {CollectionDB<User>} users A collection of Users that are within the team */
   users;
@@ -19,7 +19,7 @@ export class Team {
    * @param {Number} id TeamID
    * @param {User} leader The Team Leader (should have rank to respect that)
    * @param {String} name Display name of the Team
-   * @param {String} [description] Extra information about the team
+   * @param {String} [desc] Extra information about the team
    * @returns {Team}
    */
   constructor(id, leader, name, desc) {
@@ -28,7 +28,7 @@ export class Team {
     this.leader = leader;
     this.name = name;
     this.desc = desc;
-    this.users = new CollectionDB(this.id, Team.name, User.name);
+    this.users = new CollectionDB(this.id, Team, User);
   }
 }
 cereal.register(Team);

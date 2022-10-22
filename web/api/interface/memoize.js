@@ -2,6 +2,9 @@ export const memoized = [];
 
 import { serialise, deserialise, protoName } from "./cereal.js";
 
+const dbStorage = sessionStorage;
+const cacheStorage = sessionStorage;
+
 export function pairname(name_a, name_b) {
   return `${name_a}-${name_b}`;
 }
@@ -32,10 +35,10 @@ class DB {
     return `db-${this._key}#${id}`;
   }
   async get(id) {
-    return sessionStorage.getItem(this.key(id));
+    return dbStorage.getItem(this.key(id));
   }
   async create(id, value) {
-    sessionStorage.setItem(this.key(id), value);
+    dbStorage.setItem(this.key(id), value);
   }
 }
 
@@ -48,11 +51,11 @@ class Cache {
     return `${this._key}#${id}`;
   }
   async get(id) {
-    let storage = localStorage.getItem(this.key(id));
+    let storage = cacheStorage.getItem(this.key(id));
     if (storage != undefined) return await deserialise(JSON.parse(storage));
     let res = await this.db.get(id);
     if (res == undefined) return undefined;
-    localStorage.setItem(this.key(id), res);
+    cacheStorage.setItem(this.key(id), res);
     return await deserialise(JSON.parse(res));
   }
 
@@ -63,7 +66,7 @@ class Cache {
 
   async create(id, value) {
     let serial = JSON.stringify(serialise(value));
-    localStorage.setItem(this.key(id), serial);
+    cacheStorage.setItem(this.key(id), serial);
     await this.db.create(id, serial);
   }
 }
@@ -127,21 +130,21 @@ class DBPair {
     return `db-${this._key}#${id}`;
   }
   async get(id) {
-    return sessionStorage.getItem(this.key(id));
+    return dbStorage.getItem(this.key(id));
   }
   async add(id, object) {
     let key = this.key(id);
-    let arr = JSON.parse(sessionStorage.getItem(key) ?? "[]");
+    let arr = JSON.parse(dbStorage.getItem(key) ?? "[]");
     if (!arr.includes(object)) {
       arr.push(object);
-      sessionStorage.setItem(key, JSON.stringify(arr));
+      dbStorage.setItem(key, JSON.stringify(arr));
     }
   }
   async sub(id, object) {
     let key = this.key(id);
-    let arr = JSON.parse(sessionStorage.getItem(key) ?? "[]");
+    let arr = JSON.parse(dbStorage.getItem(key) ?? "[]");
     arr.splice(arr.indexOf(object), 1);
-    sessionStorage.setItem(key, JSON.stringify(arr));
+    dbStorage.setItem(key, JSON.stringify(arr));
   }
 }
 
@@ -154,29 +157,29 @@ class CachePair {
     return `${this._key}#${id}`;
   }
   async get(id) {
-    let storage = localStorage.getItem(this.key(id));
+    let storage = cacheStorage.getItem(this.key(id));
     if (storage != undefined) return JSON.parse(storage);
     let res = await this.db.get(id);
     if (res == undefined) return [];
-    localStorage.setItem(this.key(id), res);
+    cacheStorage.setItem(this.key(id), res);
     return JSON.parse(res);
   }
   async add(id, object) {
     let key = this.key(id);
-    let arr = JSON.parse(localStorage.getItem(key) ?? "[]");
+    let arr = JSON.parse(cacheStorage.getItem(key) ?? "[]");
     if (!arr.includes(object)) {
       arr.push(object);
       let serial = JSON.stringify(arr);
-      localStorage.setItem(key, serial);
+      cacheStorage.setItem(key, serial);
     }
     await this.db.add(id, object);
   }
   async sub(id, object) {
     let key = this.key(id);
-    let arr = JSON.parse(localStorage.getItem(key) ?? "[]");
+    let arr = JSON.parse(cacheStorage.getItem(key) ?? "[]");
     arr.splice(arr.indexOf(object), 1);
     let serial = JSON.stringify(arr);
-    localStorage.setItem(key, serial);
+    cacheStorage.setItem(key, serial);
     await this.db.sub(id, object);
   }
 }

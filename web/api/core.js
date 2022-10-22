@@ -37,12 +37,12 @@ export async function team(id) {
 
 /**
  * Creates a new task
- * @param {Boolean} done Task done state
+ * @param {Number} state TaskState
  * @param {String} name The display name of the task
  * @param {String} [description] An optional description of the task
  * @returns {Promise<Task>}
  */
-export async function task_create(done, name, description) {
+export async function createTask(done, name, description) {
   let t = new Task(id_gen(task), done, name, description);
   return await Memoize.Type(Task).set(t);
 }
@@ -54,7 +54,7 @@ export async function task_create(done, name, description) {
  * @param {String} name Users full name
  * @returns {Promise<User>}
  */
-export async function create_user(email, rank, name) {
+export async function createUser(email, rank, name) {
   let obj = new User(id_gen(user), email);
   return await Memoize.Type(User).set(obj);
 }
@@ -65,7 +65,7 @@ export async function create_user(email, rank, name) {
  * @param {String} name Users full name
  * @returns {Promise<Team>}
  */
-export async function create_team(leader, name) {
+export async function createTeam(leader, name) {
   let obj = new Team(id_gen(team), leader, name);
   return await Memoize.Type(Team).set(obj);
 }
@@ -73,6 +73,11 @@ export async function create_team(leader, name) {
 // HELPER FAUX GENERATOR
 // //TODO: Move this to faux / memoize
 
+/**
+ * Creates a new ID for the type
+ * @param {*} func Type Getter
+ * @returns {Number} Random Unique ID
+ */
 async function id_gen(func) {
   let id = 0;
   do {
