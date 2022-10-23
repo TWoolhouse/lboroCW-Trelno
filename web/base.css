@@ -295,6 +295,7 @@ input[type="checkbox"]:checked + label {
   justify-content: flex-end;
 }
 
+  position: absolute;
 /* UTILITY */
 
 .bg-accent {

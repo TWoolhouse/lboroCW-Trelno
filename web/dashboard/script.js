@@ -15,12 +15,15 @@ const projectOverviewWrapper = document.querySelector(
 const teamCardsWrapper = document.querySelector("#teams-wrapper");
 
 const newItemButton = document.querySelector(`[data-action="new-task"]`);
+const newTaskDialog = document.querySelector("#dialog-new-task");
 newItemButton.addEventListener("click", () => {
-  const newTaskDialog = document.querySelector("#dialog-new-task");
   const selectProject = newTaskDialog.querySelector("#options-project");
   // selectProject.children = [];
   newTaskDialog.showModal();
 });
+newTaskDialog.querySelector(".dialog-close").onclick = () => {
+  newTaskDialog.close();
+};
 
 const _wrapper = document.createElement("div");
 /**
@@ -124,7 +127,7 @@ function createTaskListItem(task) {
         <p class="dimmed flex-row"><span class="material-symbols-outlined">schedule</span>11/12/22</p>
         <img src="https://placekitten.com/39/39" alt="Profile image" style="border-radius:100vh" />
       </div>
-      
+
     </div>
     `;
 }
@@ -159,7 +162,9 @@ function createProjectOverviewCard(project) {
 
   return /*HTML*/ `
     <div class="card-small bg-accent">
-      <h3 class="title-card-small">${project.name}</h3>
+    <a href="/project/?id=${project.id}">
+    <h3 class="title-card-small">${project.name}</h3>
+    </a>
       <p class="card-description">Progress:</p>
       <div class="progress-bar">
         <div
