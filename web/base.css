@@ -182,12 +182,42 @@ header.header {
 
 .kanban-title {
   justify-content: space-between !important;
+  position: relative;
 }
 
 .kanban-mobile-options {
   background: transparent;
   color: var(--colour-text);
   border: none;
+}
+
+.kanban-dropdown {
+  display: none;
+}
+
+.kanban-dropdown[data-show] {
+  display: block;
+  position: absolute;
+  width: fit-content;
+  right: 0;
+  top: 100%;
+
+  background: var(--colour-block);
+  z-index: 10;
+}
+.kanban-dropdown ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+}
+.kanban-dropdown li {
+  padding: 0.5rem;
+}
+.kanban-dropdown li:active {
+  background-color: var(--colour-accent);
 }
 
 /* .kanban-section + .kanban-section {

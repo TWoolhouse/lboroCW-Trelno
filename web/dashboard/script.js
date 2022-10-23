@@ -62,6 +62,16 @@ currentUser.tasklist().onChange((event) => {
       event.dataTransfer.setData("task", task.id);
       event.dataTransfer.dropEffect = "move";
     });
+
+    // mobile task button event handler
+    const mobileBtn = card.querySelector(".kanban-mobile-options");
+    if (mobileBtn) {
+      mobileBtn.addEventListener("click", (event) => {
+        console.log(task.name);
+        const dropdownMenu = card.querySelector(".kanban-dropdown");
+        dropdownMenu.toggleAttribute("data-show");
+      });
+    }
   }
 });
 
@@ -101,12 +111,20 @@ function createTaskListItem(task) {
       <div class="flex-row kanban-title">
         <h3 class="title-card-small">${task.name}</h3>
         <button class="kanban-mobile-options material-symbols-outlined">more_horiz</button>
+        <div class="kanban-dropdown" >
+          <ul>
+            <li>Mark as To Do </li>
+            <li>Mark as In Progress </li>
+            <li>Mark as Completed </li>
+          </ul>
+        </div>
       </div>
       <div class="flex-row">
         <p class="flex-row dimmed"><span class="material-symbols-outlined">analytics</span><a href="#">View More Info</a></p>
         <p class="dimmed flex-row"><span class="material-symbols-outlined">schedule</span>11/12/22</p>
         <img src="https://placekitten.com/39/39" alt="Profile image" style="border-radius:100vh" />
       </div>
+      
     </div>
     `;
 }
