@@ -129,10 +129,16 @@ header.header {
 }
 
 /* KANBAN */
-.kanban-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+@media (min-width: 950px) {
+  .kanban-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .kanban-mobile-options {
+    display: none;
+  }
 }
 
 .kanban-section {
@@ -172,6 +178,16 @@ header.header {
 
 .kanban-wrapper hr {
   border: 2px solid var(--colour-text);
+}
+
+.kanban-title {
+  justify-content: space-between !important;
+}
+
+.kanban-mobile-options {
+  background: transparent;
+  color: var(--colour-text);
+  border: none;
 }
 
 /* .kanban-section + .kanban-section {

@@ -98,7 +98,10 @@ currentUser.tasklist().onChange((event) => {
 function createTaskListItem(task) {
   return /*HTML*/ `
     <div class="card-small bg-accent" draggable="true" id="task-${task.id}" data-task-id="${task.id}">
-      <h3 class="title-card-small">${task.name}</h3>
+      <div class="flex-row kanban-title">
+        <h3 class="title-card-small">${task.name}</h3>
+        <button class="kanban-mobile-options material-symbols-outlined">more_horiz</button>
+      </div>
       <div class="flex-row">
         <p class="flex-row dimmed"><span class="material-symbols-outlined">analytics</span><a href="#">View More Info</a></p>
         <p class="dimmed flex-row"><span class="material-symbols-outlined">schedule</span>11/12/22</p>
