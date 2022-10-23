@@ -10,31 +10,33 @@
 
 	<link rel="stylesheet" href="../base.css">
 	<link rel="stylesheet" href="./style.css">
-
-
 	<title>Login</title>
 </head>
 
 <body>
+	<header>
+		<h1><u>Make-it-all</u> Portal</h1>
+		<img src="/tools.svg" alt="Make-it-all" class="icon">
+	</header>
 
-	<h1>Make-It-All <span>Portal</span></h1>
-	<img src="../tools.svg" alt="Make-It-All-Icon" class="icon">
+	<!--add the information for this when functionality is added-->
 
-	<p></p>
-
-	<div class="box">
-
-		<form action="login_page.php" onsubmit="" method="get">
-			<label id="member-login">Member Login</label>
-			<label id="welcome-text">Welcome to Make-It-All, Enter your employee details below to sign in to your account</label>
-			<input type="text" id="email-box" placeholder="Enter email"><br>
-			<input type="password" id="password-box" placeholder="Password"><br>
-			<input type="submit" id="submit-button" value="Sign In">
-			<label id="no-account-text">Dont have an account?</label>
-			<input type="submit" id="register-button" value="Register now">
+	<div class="wrapper">
+		<form class="login-form" name="loginForm" action="" method="post" onsubmit="return validateForm()">
+			<label id="title">Member Login</label>
+			<label id="subtitle">Welcome to Make-It-All, enter your employee details below to login to the system</label>
+			<input name="email" type="text" placeholder="Email" required>
+			<input type="password" placeholder="Password" required>
+			<input type="submit" id="submit-button" value="Login">
+			<!--need to add form validation though js? And potientially some hover colour changes just to make it look cool idk-->
 		</form>
 	</div>
 
+	<!--code for the background thingy, can use for the login as well as others that use this thing.-->
+	<svg id="waves">
+		<path d="M 1 1 L 1 1000 L 2000 1000 C 2000 500 400 800 1 250" stroke="var(--colour-accent)"
+			fill="var(--colour-accent)" />
+	</svg>
 </body>
 
 </html>

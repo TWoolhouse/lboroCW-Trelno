@@ -1,161 +1,88 @@
-:root {
-    /* All root variables */
-    font-family: "Roboto", sans-serif;  
-    --colour-black: #000000;
-    --colour-white: #FFFFFF;
-    --colour-blue: #2F7CEE;
-  }
-
-
-
-body{
-    background-image: url(mobile-background.png);
+body {
+    overflow: hidden;
 }
 
-h1{
-  position: absolute;
-  width: 224px;
-  height: 44px;
-  left: 36px;
-  top: 33px;
-  
-  font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 35px;
-  text-align: center;
-  
-  color: var(--colour-blue);
-}
-h1 span {
-    width: 224px;
-    height: 44px;
-    left: 36px;
-    top: 33px;
-
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18.75px;
-    line-height: 22px;
-    text-align: center;
-
-    color: var(--colour-black);
+header {
+    display: flex;
+    align-content: flex-start;
+    padding-left: 2rem;
+    padding-top: 2rem;
 }
 
-/*"Member Login" text CSS*/
-#member-login {
-    position: absolute;
-    width: 235px;
-    height: 45px;
-    left: calc(50% - 235px/2 + 5.5px);
-    top: 33px;
-
-    font-style: normal;
-    font-weight: 700;
-    font-size: 36px;
-    line-height: 42px;
-
-    color: var(--colour-black);
+h1 {
+    font-size: 1rem;
 }
 
-/*Welcome text CSS*/
-#welcome-text {
-    position: absolute;
-    width: 331px;
-    height: 43px;
-    left: calc(50% - 331px/2 + 3.5px);
-    top: 96px;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 20px;
-    line-height: 23px;
-    text-align: center;
-
-    color: var(--colour-black);
+h1 u {
+    font-size: 1.75rem;
+    color: var(--colour-accent)
 }
 
+img {
+    margin-left: 1rem ;
+    width: 3rem;
+    height: 3rem;
+}
 
-#email-box {
+@media (max-width: 768px) {
+    .login-form {
+        width: 90%;
+    }
+}
+
+.login-form {
+    display: flex;
     box-sizing: border-box;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
 
     position: absolute;
-    width: 258px;
-    height: 40px;
-    left: calc(50% - 258px/2 + 6px);
-    top: 201px;
-    padding-left: 10px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 
-    background: var(--colour-white);
-    border: 1px solid var(--colour-blue);
+    padding: 1rem;
+
+    background: var(--colour-highlight);
+    border: 1px solid var(--colour-highlight);
+    box-shadow: 0px 4px 4px var(--colour-text);
+    border-radius: 42px;
+}
+
+.login-form input {
+    background: var(--colour-highlight);
+    border: 1px solid var(--colour-accent);
     border-radius: 8px;
+    width: 75%;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    margin: 0.6rem;
 }
 
-#password-box {
-
-    box-sizing: border-box;
-
-    position: absolute;
-    width: 258px;
-    height: 39px;
-    left: calc(50% - 258px/2 + 6px);
-    top: 259px;
-    padding-left: 10px;
-
-    background: var(--colour-white);
-    border: 1px solid var(--colour-blue);
-    border-radius: 8px;
+.login-form input[type="submit"] {
+    margin-top: 1.2rem;
+    width: 60%;
+    background: var(--colour-accent);
 }
 
-#submit-button {
-    box-sizing: border-box;
+.login-form input[type="button"] {
+    width: 50%;
+}
 
+.login-form #title {
+    text-align: center;
+    font-size: 2.5rem;
     font-weight: bold;
-
-    position: absolute;
-    width: 258px;
-    height: 38px;
-    left: calc(50% - 258px/2 + 6px);
-    top: 327px;
-
-    background: var(--colour-blue);
-    border: 1px solid var(--colour-blue);
-    border-radius: 8px;
 }
 
-#no-account-text {
-    position: absolute;
-    width: 225px;
-    height: 30px;
-    left: calc(50% - 225px/2 + 5.5px);
-    top: 403px;
-
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 23px;
+.login-form #subtitle {
+    width: 80%;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    word-wrap: break-word;
     text-align: center;
-
-    color: var(--colour-black);
-}
-
-
-#register-button {
-    box-sizing: border-box;
-
-    position: absolute;
-    width: 258px;
-    height: 38px;
-    left: calc(50% - 258px/2 + 6px);
-    top: 427px;
-
-    font-style: normal;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 23px;
-    text-align: center;
-
-    background: var(--colour-white);
-    border: 1px solid var(--colour-white);
-    border-radius: 8px;
 }
