@@ -158,13 +158,15 @@ function createTaskListItem(task) {
         </div>
       </div>
       <div class="flex-row">
-        <p class="flex-row dimmed"><span class="material-symbols-outlined">analytics</span><a href="#">View More Info</a></p>
+        <button class="flex-row dimmed btn-icon click-expander"><span class="material-symbols-outlined">analytics</span>View More Info</button>
         <p class="dimmed flex-row"><span class="material-symbols-outlined">schedule</span>${new Date(
           task.deadline
         ).toLocaleDateString()}</p>
         <img src="https://placekitten.com/39/39" alt="Profile image" style="border-radius:100vh" />
       </div>
-
+      <div class="expand-content">
+        <p>${task.desc}</p>
+      </div>
     </div>
     `;
 }
