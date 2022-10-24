@@ -69,6 +69,7 @@
 /* Header bar */
 .header {
   padding-block: 0.5rem;
+  margin-left: var(--side-menu-width);
 }
 
 .account-info {
@@ -176,5 +177,6 @@ main {
 
   main {
     margin-left: var(--side-menu-width);
+    padding: 0.5rem 4rem;
   }
 }
