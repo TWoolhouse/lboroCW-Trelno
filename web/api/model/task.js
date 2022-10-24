@@ -39,19 +39,23 @@ export class Task {
   name;
   /** @property {String | null} desc An optional description of the task */
   desc;
+  /** @property {Number} deadline The deadline of the project in unix epoch */
+  deadline;
 
   /**
    * @param {Number} id Unique TaskID
    * @param {Number} state A TaskState
    * @param {String} name Display name of the task
-   * @param {String} desc An optional description of the task
+   * @property {Number} deadline The deadline of the project in unix epoch
+   * @param {String} [desc] An optional description of the task
    * @returns {Task}
    */
-  constructor(id, state, name, desc) {
+  constructor(id, state, name, deadline, desc) {
     if (cereal.cereal(this, id)) return this;
     this.id = id;
     this.state = state;
     this.name = name;
+    this.deadline = deadline;
     this.desc = desc;
   }
 }

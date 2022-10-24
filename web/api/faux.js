@@ -34,7 +34,13 @@ await (async () => {
     range(random(11, 5)).map(async (id) => {
       id = task_count++;
       const t = await Memoize.Type(Task).create(
-        new Task(id, random(3, 0), `Task ${id}`, `Task Desc ${id} User`)
+        new Task(
+          id,
+          random(3, 0),
+          `Task ${id}`,
+          Date.parse(`2022-${random(13, 11)}-${random(31, 1)}`),
+          `Task Desc ${id} User`
+        )
       );
       users[0].tasks.add(t);
       return t;
@@ -73,6 +79,7 @@ await (async () => {
                     id,
                     random(3, 0),
                     `Task ${id}`,
+                    Date.parse(`2022-${random(13, 11)}-${random(31, 1)}`),
                     `Description: User Task}`
                   )
                 );
@@ -121,6 +128,7 @@ await (async () => {
                 tid,
                 random(3, 0),
                 `Task ${tid}`,
+                Date.parse(`2022-${random(13, 11)}-${random(31, 1)}`),
                 `Task Desc ${tid} Project`
               );
               let assign = new Assignees(assignees_count++);

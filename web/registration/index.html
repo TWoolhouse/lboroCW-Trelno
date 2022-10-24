@@ -1,49 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#1e1e1e" />
 
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="color-scheme" content="dark light">
-	<meta name="theme-color" content="#1e1e1e">
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="stylesheet" href="../login/style.css" />
+    <title>Registration</title>
+  </head>
 
-	<link rel="stylesheet" href="../base.css">
-	<link rel="stylesheet" href="../login/style.css">
-	<title>Registration</title>
-</head>
+  <body>
+    <header>
+      <h1><u>Make-it-all</u> Portal</h1>
+      <img src="/tools.svg" alt="Make-it-all" class="icon" />
+    </header>
 
-<body>
-	<header>
-		<h1><u>Make-it-all</u> Portal</h1>
-		<img src="/tools.svg" alt="Make-it-all" class="icon">
-	</header>
+    <!--add the information for this when functionality is added-->
 
-	<!--add the information for this when functionality is added-->
+    <div class="wrapper">
+      <form
+        class="login-form"
+        name="registrationForm"
+        action=""
+        method="post"
+        onsubmit="return validateForm()"
+      >
+        <label id="title">Member Registration</label>
+        <label id="subtitle"
+          >Welcome to Make-It-All, enter your employee details below to register
+          to the system</label
+        >
+        <input type="text" placeholder="First Name" required />
+        <input type="text" placeholder="Surname" required />
+        <input name="email" type="text" placeholder="Email" required />
+        <input type="password" placeholder="Password" required />
+        <input type="password" placeholder="Confirm Password" required />
+        <!--might not need the confirm password but there just in case i do-->
+        <input type="submit" id="submit-button" value="Register" />
+        <label id="register">Already Registered?</label>
+        <input type="button" id="link-to-sign-in-text" value="Sign-in" />
+        <!--need to add form validation though js? And potientially some hover colour changes just to make it look cool idk-->
+      </form>
+    </div>
 
-	<div class="wrapper">
-		<form class="login-form" name="registrationForm" action="" method="post" onsubmit="return validateForm()">
-			<label id="title">Member Registration</label>
-			<label id="subtitle">Welcome to Make-It-All, enter your employee details below to register to the system</label>
-			<input type="text" placeholder="First Name" required>
-			<input type="text" placeholder="Surname" required>
-			<input name="email" type="text" placeholder="Email" required>
-			<input type="password" placeholder="Password" required>
-			<input type="password" placeholder="Confirm Password" required>
-			<!--might not need the confirm password but there just in case i do-->
-			<input type="submit" id="submit-button" value="Register">
-			<label id="register">Already Registered?</label>
-			<input type="button" id="link-to-sign-in-text" value="Sign-in">
-			<!--need to add form validation though js? And potientially some hover colour changes just to make it look cool idk-->
-		</form>
-	</div>
+    <!--code for the background thingy, can use for the login as well as others that use this thing.-->
+    <!-- <img src="/coolbackground.svg" alt="Make-it-all" id="waves" /> -->
 
-	<!--code for the background thingy, can use for the login as well as others that use this thing.-->
-	<!-- <img src="/coolbackground.svg" alt="Make-it-all" id="waves" /> -->
-	
-	<svg id="waves">
-		<path d="M 1 1 L 1 1000 L 2000 1000 C 2000 500 400 800 1 250" stroke="var(--colour-accent)" fill="var(--colour-accent)"/>
-	</svg>
-</body>
-
+    <svg id="waves">
+      <path
+        d="M 1 1 L 1 1000 L 2000 1000 C 2000 500 400 800 1 250"
+        stroke="var(--colour-accent)"
+        fill="var(--colour-accent)"
+      />
+    </svg>
+  </body>
 </html>

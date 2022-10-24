@@ -43,6 +43,7 @@ newTaskDialog.querySelector("form").onsubmit = async (event) => {
   const taskPromise = api.createTask(
     TaskState.Ready,
     form.querySelector(`[name="title"]`).value,
+    Date.parse(form.querySelector(`[name="deadline"]`).value),
     form.querySelector(`[name="desc"]`).value
     // TODO: Add deadline
   );
@@ -142,7 +143,9 @@ currentUser.tasklist().onChange((event) => {
  */
 function createTaskListItem(task) {
   return /*HTML*/ `
-    <div class="card-small bg-accent" draggable="true" id="task-${task.id}" data-task-id="${task.id}">
+    <div class="card-small bg-accent" draggable="true" id="task-${
+      task.id
+    }" data-task-id="${task.id}">
       <div class="flex-row kanban-title">
         <h3 class="title-card-small">${task.name}</h3>
         <button class="kanban-mobile-options material-symbols-outlined">more_horiz</button>
@@ -156,7 +159,9 @@ function createTaskListItem(task) {
       </div>
       <div class="flex-row">
         <p class="flex-row dimmed"><span class="material-symbols-outlined">analytics</span><a href="#">View More Info</a></p>
-        <p class="dimmed flex-row"><span class="material-symbols-outlined">schedule</span>11/12/22</p>
+        <p class="dimmed flex-row"><span class="material-symbols-outlined">schedule</span>${new Date(
+          task.deadline
+        ).toLocaleDateString()}</p>
         <img src="https://placekitten.com/39/39" alt="Profile image" style="border-radius:100vh" />
       </div>
 

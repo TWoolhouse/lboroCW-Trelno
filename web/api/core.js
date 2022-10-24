@@ -65,11 +65,12 @@ export async function assignees(id) {
  * Creates a new task
  * @param {Number} state TaskState
  * @param {String} name The display name of the task
+ * @param {Number} deadline The deadline of the project in unix epoch time
  * @param {String} [description] An optional description of the task
  * @returns {Promise<Task>}
  */
-export async function createTask(state, name, description) {
-  let t = new Task(await id_gen(task), state, name, description);
+export async function createTask(state, name, deadline, description) {
+  let t = new Task(await id_gen(task), state, name, deadline, description);
   return await Memoize.Type(Task).create(t);
 }
 
