@@ -1,9 +1,5 @@
 
 
-
-
-
-
 /* Header bar */
 .header {
   padding-block: 0.5rem;
@@ -114,6 +110,9 @@ main {
   
     .side-menu li[data-active] a {
       color: var(--colour-accent);
+    }
+    header {
+      margin-left: var(--side-menu-width);
     }
   
     main {
