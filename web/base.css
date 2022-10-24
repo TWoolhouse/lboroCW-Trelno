@@ -295,7 +295,6 @@ input[type="checkbox"]:checked + label {
   justify-content: flex-end;
 }
 
-  position: absolute;
 /* UTILITY */
 
 .bg-accent {
@@ -308,6 +307,17 @@ input[type="checkbox"]:checked + label {
 
 .btn-accent {
   background-color: var(--colour-accent) !important;
+}
+
+.btn-icon {
+  background: transparent;
+  color: var(--colour-text);
+  opacity: 0.5;
+  border: none;
+}
+
+.btn-icon:hover {
+  cursor: pointer;
 }
 
 .dimmed {
@@ -349,4 +359,3 @@ input[type="checkbox"]:checked + label {
   backdrop-filter: blur(2px);
   z-index: -1;
 }
-
