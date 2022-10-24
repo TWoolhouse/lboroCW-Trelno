@@ -9,6 +9,9 @@ import { TaskState } from "../api/model/task.js";
 
 redirectLogin();
 
+const mobileNavMenu = document.querySelector(".nav-mobile");
+mobileNavMenu.showModal();
+
 const kanbanSections = document.querySelectorAll(".kanban-section");
 if (kanbanSections.length != Object.entries(TaskState).length)
   console.warn(

@@ -69,6 +69,47 @@ header.header {
   }
 }
 
+.nav-mobile {
+  background: var(--colour-accent);
+  border: none;
+  margin-top: 0;
+  width: 100%;
+
+  font-size: 1.5em;
+  --rad: 0.7rem;
+  border-radius: 0 0 var(--rad) var(--rad);
+}
+
+.nav-mobile::backdrop {
+  background-color: hsl(0, 0%, 0%, 0.5);
+}
+
+.nav-mobile ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.nav-mobile hr {
+  border: 1px solid var(--colour-text);
+  width: 100%;
+}
+
+.nav-mobile a {
+  margin-inline: 2rem;
+  color: var(--colour-text);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.nav-mobile a[data-active] {
+  color: var(--colour-block);
+  opacity: 0.8;
+}
+
 /* CARDS */
 
 .title-card {
