@@ -63,6 +63,10 @@ const mobileNavToggle = document.querySelector(".mobile-nav-toggle");
 mobileNavToggle.addEventListener("click", () => {
   const navDialog = document.querySelector(".nav-mobile");
   navDialog.showModal();
+  const closeBtn = navDialog.querySelector(".dialog-close");
+  closeBtn.addEventListener("click", () => {
+    navDialog.close();
+  });
 });
 
 const _wrapper = document.createElement("div");
