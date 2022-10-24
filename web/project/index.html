@@ -15,21 +15,61 @@
   </head>
 
   <body>
+
+    <dialog class="nav-mobile">
+      <div class="flex-row kanban-title">
+        <h2>Menu</h2>
+        <button class="btn-icon material-symbols-outlined dialog-close">
+          close
+        </button>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <a href="" data-active>
+              <span class="material-symbols-outlined">leaderboard</span>
+              Dashboard
+            </a>
+          </li>
+          <hr />
+          <li>
+            <a href="">
+              <span class="material-symbols-outlined">menu_book</span>
+              Knowledge
+            </a>
+          </li>
+          <hr />
+          <li>
+            <a href="">
+              <span class="material-symbols-outlined">manage_accounts</span>
+              My Profile
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </dialog>
+
     <aside class="side-menu">
       <img src="/tools.svg" alt="Make-it-all" width="100%" />
       <nav>
         <ul>
           <li data-active>
-            <a href="#" class="material-symbols-outlined">leaderboard</a>
+            <a href="/dashboard/" class="material-symbols-outlined"
+              >leaderboard</a
+            >
           </li>
-          <li><a href="#" class="material-symbols-outlined">menu_book</a></li>
-          <li><a href="#" class="material-symbols-outlined">mail</a></li>
+          <li>
+            <a href="/knowledge/" class="material-symbols-outlined"
+              >menu_book</a
+            >
+          </li>
+          <!-- <li><a href="#" class="material-symbols-outlined">mail</a></li> -->
         </ul>
       </nav>
     </aside>
 
     <header class="header">
-      <h1>Project X</h1>
+      <h1 id="project-id">Project X</h1>
       <button class="mobile-nav-toggle material-symbols-outlined">menu</button>
       <div class="account-info flex-row">
         <div class="flex-col">
@@ -56,7 +96,7 @@
       <section class="topcards-wrapper">
         <div class="card-small">
           <h3 class="title-card-small text-center">Project progress</h3>
-          <div class="progress-circle p23 div-center">
+          <div class="progress-circle p23">
             <span>10%</span>
             <div class="left-half-clipper">
               <div class="first50-bar"></div>
@@ -78,8 +118,27 @@
         <div class="card-small">
           <h3 class="title-card-small text-center">Project manager</h3>
           <div class="flex-col-center">
-            <p class="PM-name">Firat Batmaz</p>
-            <img src="https://placekitten.com/50/50" alt="" class="PM-image" />
+            <p class="card-small-text">Firat Batmaz</p>
+            <img
+              src="https://placekitten.com/50/50"
+              alt=""
+              class="card-small-image"
+            />
+          </div>
+        </div>
+
+        <div class="card-small">
+          <h3 class="title-card-small text-center">Client details</h3>
+          <div class="flex-col-center">
+            <img
+              src="https://placekitten.com/50/50"
+              alt=""
+              class="card-small-image"
+            />
+            <p class="card-small-text">Client company name</p>
+            <div class="link-list text-center">
+              <a href="#">View Client details</a>
+            </div>
           </div>
         </div>
       </section>
@@ -87,7 +146,22 @@
       <section class="card">
         <div class="card-title-wrapper">
           <h2 class="title-card">Tasks</h2>
-          <button class="new-item material-symbols-outlined">add</button>
+          <div class="flex-row">
+            <button
+              class="btn-action"
+              data-secondary
+              data-action="filter-tasks"
+            >
+              <p>Filter By</p>
+              <span class="material-symbols-outlined">filter_list</span>
+            </button>
+            <button class="btn-action" data-action="new-task">
+              <p>New Task</p>
+              <span class="material-symbols-outlined">add</span>
+            </button>
+          </div>
+        </div>
+
         </div>
         <div class="kanban-wrapper">
           <div class="kanban-section">
@@ -143,24 +217,32 @@
       </section>
     </main>
 
-    <dialog class="modal" id="dialog-new-task">
-      <h2 class="title-card">Add New Task</h2>
+<dialog class="modal" id="dialog-new-task">
+      <div class="flex-row kanban-title">
+        <h2 class="title-card">Add New Task</h2>
+        <button class="material-symbols-outlined btn-icon dialog-close">
+          close
+        </button>
+      </div>
       <form class="modal-form">
-        <textarea placeholder="Write Task description here..."></textarea>
-        <select>
+        <input name="title" type="text" placeholder="Task Title..." required />
+        <textarea
+          name="desc"
+          placeholder="Write Task description here..."
+        ></textarea>
+        <select name="project" id="options-project">
           <option value="">Select project to add Task to</option>
-          <option value="0x001">Project 1</option>
-          <option value="0x5a">Design Project</option>
-          <option value="0x27">Project 3</option>
+          <option value="user">Personal TODO</option>
         </select>
         <div class="input-label">
           <label for="task-date">Enter Deadline for Task:</label>
-          <input type="date" id="task-date" />
+          <input name="deadline" type="date" id="task-date" required />
         </div>
         <div class="end-button">
           <button class="btn-accent">Submit Item</button>
         </div>
       </form>
-    </dialog>
+</dialog>
+
   </body>
 </html>

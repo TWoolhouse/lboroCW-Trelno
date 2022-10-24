@@ -1,6 +1,7 @@
 .topcards-wrapper {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .div-center {
@@ -51,7 +52,7 @@
   margin-bottom: 1rem; */
 }
 
-.PM-name {
+.card-small-text {
   font-size: 1.5em;
   font-weight: 600;
   margin: 1rem 0 1rem 0; /* top right bottom left */
@@ -59,11 +60,12 @@
   margin-bottom: 1rem; */
 }
 
-.PM-image {
+.card-small-image {
   aspect-ratio: 1;
   border-radius: 100vh;
   width: 8rem;
   height: 8rem;
+  margin: 1rem 0 0 0;
 }
 
 /* Header bar */
@@ -178,5 +180,55 @@ main {
   main {
     margin-left: var(--side-menu-width);
     padding: 0.5rem 4rem;
+  }
+}
+
+.btn-action {
+  background-color: var(--colour-accent);
+  border: none;
+  aspect-ratio: 1;
+  width: 3rem;
+  border-radius: 100vh;
+  font-size: 2rem;
+  margin: 0 1rem;
+  box-shadow: var(--card-shadow);
+  color: var(--colour-highlight);
+  cursor: pointer;
+  transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-action :not(span) {
+  display: none;
+}
+
+.btn-action[data-secondary] {
+  background-color: var(--colour-block);
+  color: var(--colour-text);
+}
+
+.btn-action:hover,
+.btn-action:focus {
+  outline-offset: 0.3rem;
+  background-color: var(--colour-highlight);
+  color: var(--colour-accent);
+}
+
+@media (min-width: 768px) {
+  .btn-action {
+    aspect-ratio: unset;
+    font-size: 1.5em;
+    border-radius: 0.5rem;
+    width: unset;
+    padding: 0.2rem 0.8rem;
+  }
+  .btn-action p {
+    display: block;
+    margin: 0 0.2rem;
+    font-size: 0.7em;
+    font-weight: 600;
   }
 }
