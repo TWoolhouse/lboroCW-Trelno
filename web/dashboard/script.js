@@ -9,9 +9,6 @@ import { TaskState } from "../api/model/task.js";
 
 redirectLogin();
 
-const mobileNavMenu = document.querySelector(".nav-mobile");
-mobileNavMenu.showModal();
-
 const kanbanSections = document.querySelectorAll(".kanban-section");
 if (kanbanSections.length != Object.entries(TaskState).length)
   console.warn(
@@ -60,6 +57,13 @@ newTaskDialog.querySelector("form").onsubmit = async (event) => {
     project.tasks.add(await api.createProjectTask(await taskPromise));
   }
 };
+
+// Mobile nav
+const mobileNavToggle = document.querySelector(".mobile-nav-toggle");
+mobileNavToggle.addEventListener("click", () => {
+  const navDialog = document.querySelector(".nav-mobile");
+  navDialog.showModal();
+});
 
 const _wrapper = document.createElement("div");
 /**
