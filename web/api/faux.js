@@ -43,7 +43,7 @@ await (async () => {
 
   let assignees_count = 1;
   const assignees = await Promise.all(
-    range(6).map((id) => {
+    range(2).map((id) => {
       id = assignees_count++;
       return Memoize.Type(Assignees).create(new Assignees(id));
     })
@@ -51,9 +51,9 @@ await (async () => {
 
   const team_leaders = [];
   const teams = await Promise.all(
-    range(3).map(async (id) => {
+    range(1).map(async (id) => {
       const us = await Promise.all(
-        range(random(25, 15))
+        range(random(2, 1))
           .map((id) => {
             id = user_count++;
             return new User(
@@ -114,7 +114,7 @@ await (async () => {
         );
         project.tasks.add(
           ...(await Promise.all(
-            range(random(13, 6)).map((id) => {
+            range(random(4, 2)).map((id) => {
               const pid = project_task_count++;
               const tid = task_count++;
               let t = new Task(

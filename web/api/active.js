@@ -31,13 +31,14 @@ const userId = getUser();
 
 if (userId != undefined) setUser(userId);
 
-export const currentUser = await user(userId);
+export const currentUser = await user(1);
 console.log("Current", currentUser);
 
 /**
  * Redirects to the log-in page if there is no currently signed-in user.
  */
 export function redirectLogin() {
+  return;
   // FIXME: Currently just sets a user as the logged in user and reloads the page
   if (currentUser != undefined) return;
   setUser(1);

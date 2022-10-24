@@ -95,6 +95,23 @@ export class Collection {
   }
 
   /**
+   * Add items to the collection
+   * @param {*} key A function to convert each item to a compareable key, checking if the element is in the collection already
+   * @param  {...T} items
+   */
+  addIf(key, ...items) {
+    if (!items.length) return;
+    this.sync(() => {
+      for (const item of items)
+        if (
+          this.snapshot.find((element) => key(element) == key(item)) ===
+          undefined
+        )
+          this.snapshot.push(item);
+    });
+  }
+
+  /**
    * Replaces the entire collection with a new array
    * @param {...T} items Array to replace the current collection with
    */

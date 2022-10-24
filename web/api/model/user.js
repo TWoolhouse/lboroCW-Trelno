@@ -80,7 +80,7 @@ export class User {
    */
   teamlist() {
     userTeams(this.id).then((values) => {
-      this._teamlist.add(...values);
+      this._teamlist.addIf((ref) => ref.team.id, ...values);
     });
     return this._teamlist;
   }
@@ -98,7 +98,7 @@ export class User {
    */
   projectlist() {
     userProjects(this.id).then((values) => {
-      this._projectlist.add(...values);
+      this._projectlist.addIf((ref) => ref.project.id, ...values);
     });
     return this._projectlist;
   }

@@ -2,6 +2,11 @@ import * as api from "../api/core.js";
 import { currentUser, redirectLogin } from "../api/active.js";
 import { TaskState } from "../api/model/task.js";
 
+/** @typedef {import("../api/model/user.js").User} User */
+/** @typedef {import("../api/model/task.js").Task} Task */
+/** @typedef {import("../api/model/team.js").Team} Team */
+/** @typedef {import("../api/model/project.js").Project} Project */
+
 redirectLogin();
 
 const kanbanSections = document.querySelectorAll(".kanban-section");
@@ -16,9 +21,16 @@ const teamCardsWrapper = document.querySelector("#teams-wrapper");
 
 const newItemButton = document.querySelector(`[data-action="new-task"]`);
 const newTaskDialog = document.querySelector("#dialog-new-task");
-newItemButton.addEventListener("click", () => {
+newItemButton.addEventListener("click", async () => {
   const selectProject = newTaskDialog.querySelector("#options-project");
-  // selectProject.children = [];
+  selectProject.innerHTML = createDialogProjectOption({
+    id: "user",
+    name: "Personal TODO List",
+  });
+  for (const ref of await currentUser.projectlist()) {
+    if (!ref.leader) continue;
+    selectProject.innerHTML += createDialogProjectOption(ref.project);
+  }
   newTaskDialog.showModal();
 });
 newTaskDialog.querySelector(".dialog-close").onclick = () => {
@@ -200,4 +212,15 @@ function createProjectOverviewCard(project) {
       <a href="#">View Team Members</a>
     </div>
     `;
+}
+
+/**
+ * Create a Project option for the new task dialog
+ * @param {Project} project
+ * @returns {String} HTML from project option.
+ */
+function createDialogProjectOption(project) {
+  return /*HTML*/ `
+    <option value="${project.id}">${project.name}</option>
+  `;
 }
