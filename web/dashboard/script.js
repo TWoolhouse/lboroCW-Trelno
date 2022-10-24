@@ -28,7 +28,7 @@ newItemButton.addEventListener("click", async () => {
     name: "Personal TODO List",
   });
   for (const ref of await currentUser.projectlist()) {
-    if (!ref.leader) continue;
+    if (!ref.manager) continue;
     selectProject.innerHTML += createDialogProjectOption(ref.project);
   }
   newTaskDialog.showModal();
