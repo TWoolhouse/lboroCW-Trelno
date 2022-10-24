@@ -124,7 +124,7 @@ header.header {
   box-shadow: var(--card-shadow);
   border-radius: var(--card-radius);
   padding: 1.2rem;
-  margin: 3rem 0.5rem;
+  margin: 1.5rem 0;
 }
 
 .card a {
