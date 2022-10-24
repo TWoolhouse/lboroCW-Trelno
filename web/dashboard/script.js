@@ -24,6 +24,26 @@ newItemButton.addEventListener("click", () => {
 newTaskDialog.querySelector(".dialog-close").onclick = () => {
   newTaskDialog.close();
 };
+newTaskDialog.querySelector("form").onsubmit = async (event) => {
+  event.preventDefault();
+  newTaskDialog.close();
+  const form = event.target;
+  const taskPromise = api.createTask(
+    TaskState.Ready,
+    form.querySelector(`[name="title"]`).value,
+    form.querySelector(`[name="desc"]`).value
+    // TODO: Add deadline
+  );
+  const projectId = form.querySelector(`[name="project"]`).value;
+  // TODO: Clear the form
+
+  if (projectId == "user") {
+    currentUser.tasks.add(await taskPromise);
+  } else {
+    const project = await api.project(projectId);
+    project.tasks.add(await api.createProjectTask(await taskPromise));
+  }
+};
 
 const _wrapper = document.createElement("div");
 /**
