@@ -1,9 +1,9 @@
-.title-card{
+.title-card {
   text-decoration: underline;
   text-decoration-color: var(--colour-accent);
 }
 
-.card-image-wrapper{
+.card-image-wrapper {
   text-align: center;
   font-style: normal;
   font-weight: 800;
@@ -12,10 +12,10 @@
   /* or 69% */
   letter-spacing: 0.01em;
 
-  color: var(--colour-darker-grey)
+  color: var(--colour-darker-grey);
 }
 
-.card-profile-picture {   
+.card-profile-picture {
   box-sizing: border-box;
 
   width: 122px;
@@ -23,46 +23,6 @@
 
   border: 1px solid var(--colour-accent);
   border-radius: 239.5px;
-}
-
-
-
-/* Header bar */
-.header {
-  padding-block: 0.5rem;
-}
-
-.account-info {
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .card{
-    position: absolute;
-    width: 826px;
-    height: 634px;
-    left: 195px;
-    top: 100px;
-  }
-  .account-info {
-    display: flex;
-    gap: 1rem;
-    margin-inline: 4rem;
-  }
-  .account-info h6 {
-    font-size: 1.2em;
-  }
-  .account-info * {
-    margin: 0;
-  }
-  .account-info .flex-col {
-    align-items: flex-end;
-  }
-
-  .account-info img {
-    aspect-ratio: 1;
-    border-radius: 100vh;
-  }
 }
 
 .new-item {
@@ -90,66 +50,3 @@
 .link-list a {
   color: var(--colour-accent);
 }
-
-
-
-
-
-/* SIDE MENU */
-main {
-    margin: 0;
-  }
-  
-  .side-menu {
-    display: none;
-  }
-  
-  @media (min-width: 768px) {
-    :root {
-      --side-menu-width: 3rem;
-    }
-  
-    .side-menu {
-      display: block;
-      position: fixed;
-      height: 100%;
-      width: var(--side-menu-width);
-      background-color: var(--colour-accent);
-    }
-  
-    .side-menu ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-  
-    .side-menu li {
-      width: 2.5rem;
-      aspect-ratio: 1;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  
-    .side-menu li a {
-      color: var(--colour-text);
-      text-decoration: none;
-    }
-  
-    .side-menu li[data-active] {
-      background-color: var(--colour-highlight);
-      border-radius: 0.4rem;
-    }
-  
-    .side-menu li[data-active] a {
-      color: var(--colour-accent);
-    }
-    header {
-      margin-left: var(--side-menu-width);
-    }
-  
-    main {
-      margin-left: var(--side-menu-width);
-    }
-  }
