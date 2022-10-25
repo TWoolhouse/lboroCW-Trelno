@@ -6,13 +6,55 @@ import { TaskState } from "../api/model/task.js";
 const urlParams = new URLSearchParams(window.location.search);
 const projectId = urlParams.get("id");
 const projectHead = document.querySelector("#project-id");
-projectHead.innerHTML = projectId
+projectId
   ? (projectHead.innerHTML = "Project " + projectId)
   : (projectHead.innerHTML = "Project X");
 
 // for (const [key, value] of urlParams) {
 //   console.log(`${key}:${value}`);
 // }
+
+// Set project deadline date
+const projectDeadline = document.querySelector("#deadline-date");
+const today = new Date();
+const projectDeadlineDate = new Date();
+projectDeadlineDate.setDate(projectDeadlineDate.getDate() + 7);
+let monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+let formattedDate =
+  monthNames[projectDeadlineDate.getMonth()] +
+  " " +
+  projectDeadlineDate.getDate() +
+  ", " +
+  projectDeadlineDate.getFullYear();
+
+projectDeadline.innerHTML = formattedDate;
+
+// Display days left until project deadline
+function dateDiffInDays(a, b) {
+  const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+  // Discard the time and time-zone information.
+  const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+  const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+  return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+}
+
+const deadlineRemainingDays = document.querySelector("#days-remaining");
+const differenceDays = dateDiffInDays(today, projectDeadlineDate);
+deadlineRemainingDays.innerHTML = differenceDays + " days remaining";
 
 // Mobile nav
 const mobileNavToggle = document.querySelector(".mobile-nav-toggle");
