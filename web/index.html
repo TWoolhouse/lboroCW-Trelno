@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#1e1e1e" />
 
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="color-scheme" content="dark light">
-	<meta name="theme-color" content="#1e1e1e">
+    <link rel="stylesheet" href="/base.css" />
+    <script type="module">
+      import { redirectLogin } from "./api/active.js";
+      redirectLogin();
+      window.location.href = "/dashboard/";
+    </script>
 
-	<link rel="stylesheet" href="/base.css">
+    <title>Trelno</title>
+  </head>
 
-	<title>Trelno</title>
-</head>
-
-<body>
-
-	<h1>Trelno</h1>
-
-	<p>Hello world</p>
-
-</body>
-
+  <body
+    style="
+      background-image: url(/tools.svg);
+      background-size: 100vh;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+    "
+  ></body>
 </html>
