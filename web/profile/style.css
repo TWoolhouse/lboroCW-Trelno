@@ -1,3 +1,30 @@
+.title-card{
+  text-decoration: underline;
+  text-decoration-color: var(--colour-accent);
+}
+
+.card-image-wrapper{
+  text-align: center;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 15px;
+  /* or 69% */
+  letter-spacing: 0.01em;
+
+  color: var(--colour-darker-grey)
+}
+
+.card-profile-picture {   
+  box-sizing: border-box;
+
+  width: 122px;
+  height: 122px;
+
+  border: 1px solid var(--colour-accent);
+  border-radius: 239.5px;
+}
+
 
 
 /* Header bar */
@@ -10,6 +37,13 @@
 }
 
 @media (min-width: 768px) {
+  .card{
+    position: absolute;
+    width: 826px;
+    height: 634px;
+    left: 195px;
+    top: 100px;
+  }
   .account-info {
     display: flex;
     gap: 1rem;

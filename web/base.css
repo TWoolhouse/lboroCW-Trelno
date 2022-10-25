@@ -17,6 +17,9 @@
   --colour-amber: #ff9d30db;
   --colour-green: #43d34a91;
 
+  /* Colour used for profile page*/
+  --colour-darker-grey: #808080;
+
   /* Colours initially used in the login page*/
   --colour-box-background: #ffffff;
   --colour-box-shadow: rgba(0, 0, 0, 0.25);
