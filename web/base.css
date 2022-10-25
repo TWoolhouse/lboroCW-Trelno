@@ -58,6 +58,100 @@ header.header {
   margin: 0.5rem;
 }
 
+/* DESKTOP NAV */
+
+/* Header bar */
+.header {
+  padding-block: 0.5rem;
+}
+
+.account-info {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .account-info {
+    display: flex;
+    gap: 1rem;
+    margin-inline: 4rem;
+  }
+  .account-info h6 {
+    font-size: 1.2em;
+  }
+  .account-info * {
+    margin: 0;
+  }
+  .account-info .flex-col {
+    align-items: flex-end;
+  }
+
+  .account-info img {
+    aspect-ratio: 1;
+    border-radius: 100vh;
+  }
+}
+
+/* SIDE MENU */
+main {
+  margin: 0;
+}
+
+.side-menu {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --side-menu-width: 3rem;
+  }
+
+  .side-menu {
+    display: block;
+    position: fixed;
+    height: 100%;
+    width: var(--side-menu-width);
+    background-color: var(--colour-accent);
+  }
+
+  .side-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .side-menu li {
+    width: 2.5rem;
+    aspect-ratio: 1;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .side-menu li a {
+    color: var(--colour-text);
+    text-decoration: none;
+  }
+
+  .side-menu li[data-active] {
+    background-color: var(--colour-highlight);
+    border-radius: 0.4rem;
+  }
+
+  .side-menu li[data-active] a {
+    color: var(--colour-accent);
+  }
+  header {
+    margin-left: var(--side-menu-width);
+  }
+  main {
+    margin-left: var(--side-menu-width);
+    padding: 0.5rem 4rem;
+  }
+}
+
+/* MOBILE NAV */
+
 .mobile-nav-toggle {
   display: inline-block;
   background-color: transparent;
@@ -347,6 +441,58 @@ input[type="checkbox"]:checked + label {
 .end-button {
   display: flex;
   justify-content: flex-end;
+}
+
+/* BUTTONS */
+
+.btn-action {
+  background-color: var(--colour-accent);
+  border: none;
+  aspect-ratio: 1;
+  width: 3rem;
+  border-radius: 100vh;
+  font-size: 2rem;
+  margin: 0 1rem;
+  box-shadow: var(--card-shadow);
+  color: var(--colour-highlight);
+  cursor: pointer;
+  transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-action :not(span) {
+  display: none;
+}
+
+.btn-action[data-secondary] {
+  background-color: var(--colour-block);
+  color: var(--colour-text);
+}
+
+.btn-action:hover,
+.btn-action:focus {
+  outline-offset: 0.3rem;
+  background-color: var(--colour-highlight);
+  color: var(--colour-accent);
+}
+
+@media (min-width: 768px) {
+  .btn-action {
+    aspect-ratio: unset;
+    font-size: 1.5em;
+    border-radius: 0.5rem;
+    width: unset;
+    padding: 0.2rem 0.8rem;
+  }
+  .btn-action p {
+    display: block;
+    margin: 0 0.2rem;
+    font-size: 0.7em;
+    font-weight: 600;
+  }
 }
 
 /* UTILITY */
