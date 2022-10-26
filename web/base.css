@@ -418,7 +418,8 @@ input[type="checkbox"]:checked + label {
   padding: 1rem;
 }
 
-.modal-form :not(label):not(div) {
+.modal-form :not(label):not(div),
+.input {
   border: 2px solid var(--colour-accent);
   border-radius: 0.5rem;
   background-color: var(--colour-block);

@@ -1,0 +1,31 @@
+.post {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.post :not(:first-child) {
+  gap: 1rem;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.post [name="post"] {
+  /* The height of the placeholder text */
+  min-height: 10rem;
+  /* Worry about this later 😀 */
+  resize: vertical;
+  height: auto;
+}
+
+.submit form {
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.submit form :not(.btn-action) {
+  flex-grow: 1;
+}

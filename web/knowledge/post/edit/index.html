@@ -9,11 +9,111 @@
 
     <link rel="icon" type="image/svg" href="/tools.svg" />
     <link rel="stylesheet" href="/base.css" />
+    <link rel="stylesheet" href="style.css" />
 
     <title>Edit A Post</title>
   </head>
 
   <body>
-    <h1>Post Edit Page</h1>
+    <dialog class="nav-mobile">
+      <div class="flex-row kanban-title">
+        <h2>Menu</h2>
+        <button class="btn-icon material-symbols-outlined dialog-close">
+          close
+        </button>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <a href="" data-active>
+              <span class="material-symbols-outlined">leaderboard</span>
+              Dashboard
+            </a>
+          </li>
+          <hr />
+          <li>
+            <a href="">
+              <span class="material-symbols-outlined">menu_book</span>
+              Knowledge
+            </a>
+          </li>
+          <hr />
+          <li>
+            <a href="">
+              <span class="material-symbols-outlined">manage_accounts</span>
+              My Profile
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </dialog>
+    <aside class="side-menu">
+      <img src="/tools.svg" alt="Make-it-all" width="100%" />
+      <nav>
+        <ul>
+          <li data-active>
+            <a href="/dashboard/" class="material-symbols-outlined"
+              >leaderboard</a
+            >
+          </li>
+          <li>
+            <a href="/knowledge/" class="material-symbols-outlined"
+              >menu_book</a
+            >
+          </li>
+          <!-- <li><a href="#" class="material-symbols-outlined">mail</a></li> -->
+        </ul>
+      </nav>
+    </aside>
+    <header class="header">
+      <h1>New Knowledge Post</h1>
+      <button class="mobile-nav-toggle material-symbols-outlined">menu</button>
+      <div class="account-info flex-row">
+        <div class="flex-col">
+          <h6 id="user-name">King Firat</h6>
+          <p id="user-rank" class="dimmed">Manager</p>
+        </div>
+        <img
+          src="https://placekitten.com/50/50"
+          alt="User Profile Picture"
+          width="50"
+          height="50"
+        />
+        <p class="material-symbols-outlined dimmed">expand_more</p>
+        <p class="material-symbols-outlined dimmed">logout</p>
+      </div>
+    </header>
+    <main>
+      <section class="card post">
+        <h2 class="title-card">Post</h2>
+        <form action="no" class="modal-form">
+          <input
+            class="input"
+            type="text"
+            name="title"
+            placeholder="Post Title..."
+          />
+          <textarea
+            class="input"
+            name="post"
+            placeholder="# Title&#10;&#10;## Subtitle&#10;&#10;Interesting content&#10;- Bullet Point 1&#10;- Bullet Point 2&#10;- Bullet Point 3&#10;"
+          ></textarea>
+        </form>
+      </section>
+      <section class="card submit">
+        <h2 class="title-card">Submit</h2>
+        <form action="/knowledge/post/" class="flex-row">
+          <select class="input dropdown" name="topic">
+            <option value="1">Topic 1</option>
+            <option value="2">Topic 2</option>
+            <option value="3">Topic 3</option>
+          </select>
+          <button class="btn-action" type="submit">
+            <p>Submit</p>
+            <span class="material-symbols-outlined">send</span>
+          </button>
+        </form>
+      </section>
+    </main>
   </body>
 </html>
