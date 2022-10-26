@@ -5,11 +5,11 @@
   /* All root variables */
   font-family: "Roboto", sans-serif;
 
-  --colour-text: #dde;
-  --colour-block: #080808;
+  --colour-text: #000;
+  --colour-block: #eee;
   --colour-accent: #ffb53c;
-  --colour-accent-trans: #f8d9a82a;
-  --colour-highlight: #1d1d1d;
+  --colour-accent-trans: #fff9bf62;
+  --colour-highlight: #fff;
 
   --colour-mid-grey: #a6acbe;
 
@@ -29,15 +29,13 @@
   --card-small-radius: 14px;
 }
 
-@media print, (prefers-color-scheme: light) {
+@media only screen and (prefers-color-scheme: dark) {
   :root {
-    /* Light Mode Overrides*/
-    --colour-text: #000;
-    --colour-block: #eee;
-    /* --colour-accent: #2f7cee; */
-    --colour-accent-trans: #fff9bf62;
-    --colour-highlight: #fff;
-
+    /* Dark Mode Overrides*/
+    --colour-text: #dde;
+    --colour-block: #080808;
+    --colour-accent-trans: #f8d9a82a;
+    --colour-highlight: #1d1d1d;
     --colour-mid-grey: #a6acbe;
   }
 }
