@@ -14,10 +14,11 @@ if (kanbanSections.length != Object.entries(TaskState).length)
   console.warn(
     "There are not enough Kanban sections for the number of task states"
   );
-const projectOverviewWrapper = document.querySelector(
+
+/* const projectOverviewWrapper = document.querySelector(
   "#project-overview-wrapper"
-);
-const teamCardsWrapper = document.querySelector("#teams-wrapper");
+); */
+// const teamCardsWrapper = document.querySelector("#teams-wrapper");
 
 const newItemButton = document.querySelector(`[data-action="new-task"]`);
 const newTaskDialog = document.querySelector("#dialog-new-task");
@@ -82,21 +83,21 @@ function HTMLasDOM(html) {
   return element;
 }
 
-currentUser.teamlist().onChange((event) => {
+/* currentUser.teamlist().onChange((event) => {
   for (const ref of event.add) {
     const team = ref.team;
     teamCardsWrapper.appendChild(HTMLasDOM(createTeamCard(team)));
   }
-});
+}); */
 
-currentUser.projectlist().onChange((event) => {
+/* currentUser.projectlist().onChange((event) => {
   for (const ref of event.add) {
     const project = ref.project;
     projectOverviewWrapper.appendChild(
       HTMLasDOM(createProjectOverviewCard(project))
     );
   }
-});
+}); */
 
 currentUser.tasklist().onChange((event) => {
   for (const ref of event.add) {
