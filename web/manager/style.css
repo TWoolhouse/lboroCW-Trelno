@@ -8,3 +8,24 @@
   height: 100%;
   background-color: var(--bar-fill, var(--colour-accent));
 }
+
+.wrap-grid {
+  display: grid;
+  justify-items: center;
+  --card-width: 20ch;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-width), 1fr));
+  gap: 2rem;
+}
+
+.wrap-grid .card-small {
+  text-align: center;
+  max-width: var(--card-width, 20ch);
+}
+
+.wrap-grid a {
+  text-decoration: none;
+}
+
+a h3 {
+  text-decoration: underline;
+}
