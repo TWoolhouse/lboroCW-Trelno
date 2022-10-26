@@ -66,12 +66,12 @@ header.header {
 }
 
 .account-info {
-  display: none;
+  display: none !important;
 }
 
 @media (min-width: 768px) {
   .account-info {
-    display: flex;
+    display: flex !important;
     gap: 1rem;
     margin-inline: 4rem;
   }
