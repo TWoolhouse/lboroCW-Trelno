@@ -10,10 +10,92 @@
     <link rel="icon" type="image/svg" href="/tools.svg" />
     <link rel="stylesheet" href="/base.css" />
 
-    <title>Manger Dashboard</title>
+    <title>Manager Dashboard</title>
   </head>
 
   <body>
-    <h1>Manager Dashboard</h1>
+    <dialog class="nav-mobile">
+      <div class="flex-row kanban-title">
+        <h2>Menu</h2>
+        <button class="btn-icon material-symbols-outlined dialog-close">
+          close
+        </button>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <a href="" data-active>
+              <span class="material-symbols-outlined">leaderboard</span>
+              Dashboard
+            </a>
+          </li>
+          <hr />
+          <li>
+            <a href="">
+              <span class="material-symbols-outlined">menu_book</span>
+              Knowledge
+            </a>
+          </li>
+          <hr />
+          <li>
+            <a href="">
+              <span class="material-symbols-outlined">manage_accounts</span>
+              My Profile
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </dialog>
+    <aside class="side-menu">
+      <img src="/tools.svg" alt="Make-it-all" width="100%" />
+      <nav>
+        <ul>
+          <li data-active>
+            <a href="/dashboard/" class="material-symbols-outlined"
+              >leaderboard</a
+            >
+          </li>
+          <li>
+            <a href="/knowledge/" class="material-symbols-outlined"
+              >menu_book</a
+            >
+          </li>
+          <!-- <li><a href="#" class="material-symbols-outlined">mail</a></li> -->
+        </ul>
+      </nav>
+    </aside>
+    <header class="header">
+      <h1>Manager's Dashboard</h1>
+      <button class="mobile-nav-toggle material-symbols-outlined">menu</button>
+      <div class="account-info flex-row">
+        <div class="flex-col">
+          <h6 id="username">King Firat</h6>
+          <p class="dimmed">Manager</p>
+        </div>
+        <img
+          src="https://placekitten.com/50/50"
+          alt="User Profile Picture"
+          width="50"
+          height="50"
+        />
+        <p class="material-symbols-outlined dimmed">expand_more</p>
+        <p class="material-symbols-outlined dimmed">logout</p>
+      </div>
+    </header>
+    <main>
+     
+
+      <section class="card">
+        <h2 class="title-card">Project Overview</h2>
+        <div class="small-cards-wrapper" id="project-overview-wrapper"></div>
+      </section>
+
+      <section class="card">
+        <h2 class="title-card">My Underlings</h2>
+        <div class="myprojects-wrapper" id="teams-wrapper"></div>
+      </section>
+
+      
+    
   </body>
 </html>
