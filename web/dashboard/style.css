@@ -9,3 +9,13 @@
 .fg-accent {
   color: var(--colour-accent) !important;
 }
+.myprojects-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: start;
+}
+
+.myprojects-wrapper .card-small {
+  margin-inline: auto;
+}
