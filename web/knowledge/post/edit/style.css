@@ -21,11 +21,37 @@
   height: auto;
 }
 
-.submit form {
+form .submit {
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  padding: 1rem;
+}
+form .submit :not(.btn-action) {
+  flex-grow: 1;
+}
+form .submit .btn-action {
+  width: auto;
 }
 
-.submit form :not(.btn-action) {
-  flex-grow: 1;
+.sandwich {
+  --sandwich-radius: var(--card-radius);
+  padding: 0;
+}
+.sandwich > :first-child,
+.sandwich > :last-child {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: var(--sandwich-radius);
+  padding-right: var(--sandwich-radius);
+  min-height: 2rem;
+
+  background-color: var(--colour-accent-soft);
+}
+.sandwich > :first-child {
+  margin-top: 0;
+  border-radius: var(--sandwich-radius) var(--sandwich-radius) 0 0;
+}
+.sandwich > :last-child {
+  margin-bottom: 0;
+  border-radius: 0 0 var(--sandwich-radius) var(--sandwich-radius);
 }

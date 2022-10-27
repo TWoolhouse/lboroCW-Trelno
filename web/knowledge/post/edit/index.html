@@ -72,7 +72,7 @@
       </nav>
     </aside>
     <header class="header">
-      <h1>New Knowledge Post</h1>
+      <h1>Knowledge Management</h1>
       <button class="mobile-nav-toggle material-symbols-outlined">menu</button>
       <div class="account-info flex-row">
         <div class="flex-col">
@@ -90,7 +90,7 @@
       </div>
     </header>
     <main>
-      <section class="card post">
+      <section class="card post sandwich">
         <h2 class="title-card">Post</h2>
         <form action="no" class="modal-form">
           <input
@@ -104,21 +104,19 @@
             name="post"
             placeholder="# Title&#10;&#10;## Subtitle&#10;&#10;Interesting content&#10;- Bullet Point 1&#10;- Bullet Point 2&#10;- Bullet Point 3&#10;"
           ></textarea>
+          <div class="submit">
+            <select class="input dropdown" name="topic">
+              <option value="1">Topic 1</option>
+              <option value="2">Topic 2</option>
+              <option value="3">Topic 3</option>
+            </select>
+            <button class="btn-action" type="submit">
+              <p>Submit</p>
+              <span class="material-symbols-outlined">send</span>
+            </button>
+          </div>
         </form>
-      </section>
-      <section class="card submit">
-        <h2 class="title-card">Submit</h2>
-        <form action="/knowledge/post/" class="flex-row">
-          <select class="input dropdown" name="topic">
-            <option value="1">Topic 1</option>
-            <option value="2">Topic 2</option>
-            <option value="3">Topic 3</option>
-          </select>
-          <button class="btn-action" type="submit">
-            <p>Submit</p>
-            <span class="material-symbols-outlined">send</span>
-          </button>
-        </form>
+        <div></div>
       </section>
       <section id="test" class="card"></section>
     </main>
