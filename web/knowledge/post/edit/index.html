@@ -9,13 +9,14 @@
 
     <link rel="icon" type="image/svg" href="/tools.svg" />
     <link rel="stylesheet" href="/base.css" />
+    <link rel="stylesheet" href="/knowledge/post/base.css" />
     <link rel="stylesheet" href="style.css" />
 
     <script
       defer
       src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"
     ></script>
-    <script type="module" src="script.js"></script>
+    <script defer type="module" src="script.js"></script>
 
     <title>Edit A Post</title>
   </head>
@@ -31,17 +32,23 @@
       <nav>
         <ul>
           <li>
-            <a href="" data-active>
+            <a href="">
               <span class="material-symbols-outlined">leaderboard</span>
               Dashboard
             </a>
           </li>
           <hr />
           <li>
-            <a href="">
+            <a href="" data-active>
               <span class="material-symbols-outlined">menu_book</span>
               Knowledge
             </a>
+          </li>
+          <hr />
+          <li class="hidden">
+            <a href="/manager/"
+              ><span class="material-symbols-outlined">surfing</span></a
+            >
           </li>
           <hr />
           <li>
@@ -57,17 +64,24 @@
       <img src="/tools.svg" alt="Make-it-all" width="100%" />
       <nav>
         <ul>
-          <li data-active>
+          <li>
             <a href="/dashboard/" class="material-symbols-outlined"
               >leaderboard</a
             >
           </li>
-          <li>
+          <li data-active>
             <a href="/knowledge/" class="material-symbols-outlined"
               >menu_book</a
             >
           </li>
-          <!-- <li><a href="#" class="material-symbols-outlined">mail</a></li> -->
+          <li class="hidden">
+            <a href="/manager/" class="material-symbols-outlined">surfing</a>
+          </li>
+          <li>
+            <a href="/profile/" class="material-symbols-outlined"
+              >manage_accounts</a
+            >
+          </li>
         </ul>
       </nav>
     </aside>
@@ -90,35 +104,50 @@
       </div>
     </header>
     <main>
-      <section class="card post sandwich">
-        <h2 class="title-card">Post</h2>
-        <form action="no" class="modal-form">
-          <input
-            class="input"
-            type="text"
-            name="title"
-            placeholder="Post Title..."
-          />
-          <textarea
-            class="input"
-            name="post"
-            placeholder="# Title&#10;&#10;## Subtitle&#10;&#10;Interesting content&#10;- Bullet Point 1&#10;- Bullet Point 2&#10;- Bullet Point 3&#10;"
-          ></textarea>
-          <div class="submit">
-            <select class="input dropdown" name="topic">
-              <option value="1">Topic 1</option>
-              <option value="2">Topic 2</option>
-              <option value="3">Topic 3</option>
-            </select>
-            <button class="btn-action" type="submit">
-              <p>Submit</p>
-              <span class="material-symbols-outlined">send</span>
+      <section id="post-edit" class="card sandwich">
+        <div class="col-container">
+          <h2 class="title-card col-centre">Edit Post</h2>
+          <div class="flex-row col-end">
+            <button type="button" class="btn-action preview-switch">
+              <p>Preview</p>
+              <span class="material-symbols-outlined">visibility</span>
+            </button>
+            <button type="submit" class="btn-action save">
+              <p>Save</p>
+              <span class="material-symbols-outlined">save</span>
             </button>
           </div>
+        </div>
+        <form action="/knowledge/post/" class="modal-form">
+          <textarea
+            name="post"
+            placeholder="# Title&#10;&#10;## Subtitle&#10;&#10;Interesting content&#10;- Bullet Point 1&#10;- Bullet Point 2&#10;- Bullet Point 3&#10;"
+            required
+          ></textarea>
         </form>
-        <div></div>
+        <div class="col-container">
+          <span class="col-centre">07/05/2022</span>
+        </div>
       </section>
-      <section id="test" class="card"></section>
+      <section id="post-preview" class="card sandwich hidden">
+        <div class="col-container">
+          <h2 class="title-card col-centre">Preview</h2>
+          <div class="flex-row col-end">
+            <button type="button" class="btn-action preview-switch">
+              <p>Edit</p>
+              <span class="material-symbols-outlined">edit</span>
+            </button>
+            <button type="submit" class="btn-action save">
+              <p>Save</p>
+              <span class="material-symbols-outlined">save</span>
+            </button>
+          </div>
+        </div>
+        <div id="preview">Content</div>
+        <div class="col-container">
+          <span class="col-centre">07/05/2022</span>
+        </div>
+      </section>
     </main>
   </body>
 </html>
