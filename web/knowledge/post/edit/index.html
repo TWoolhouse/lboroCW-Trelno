@@ -104,13 +104,18 @@
       </div>
     </header>
     <main>
-      <section id="post-edit" class="card sandwich">
+      <section id="post" class="card sandwich">
         <div class="col-container">
           <h2 class="title-card col-centre">Edit Post</h2>
+          <h2 class="title-card col-centre hidden">Preview</h2>
           <div class="flex-row col-end">
-            <button type="button" class="btn-action preview-switch">
+            <button type="button" class="btn-action preview-switch-into">
               <p>Preview</p>
               <span class="material-symbols-outlined">visibility</span>
+            </button>
+            <button type="button" class="btn-action preview-switch-from hidden">
+              <p>Edit</p>
+              <span class="material-symbols-outlined">edit</span>
             </button>
             <button type="submit" class="btn-action save">
               <p>Save</p>
@@ -125,25 +130,7 @@
             required
           ></textarea>
         </form>
-        <div class="col-container">
-          <span class="col-centre">07/05/2022</span>
-        </div>
-      </section>
-      <section id="post-preview" class="card sandwich hidden">
-        <div class="col-container">
-          <h2 class="title-card col-centre">Preview</h2>
-          <div class="flex-row col-end">
-            <button type="button" class="btn-action preview-switch">
-              <p>Edit</p>
-              <span class="material-symbols-outlined">edit</span>
-            </button>
-            <button type="submit" class="btn-action save">
-              <p>Save</p>
-              <span class="material-symbols-outlined">save</span>
-            </button>
-          </div>
-        </div>
-        <div id="preview">Content</div>
+        <div id="preview"></div>
         <div class="col-container">
           <span class="col-centre">07/05/2022</span>
         </div>
