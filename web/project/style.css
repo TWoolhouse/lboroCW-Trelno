@@ -24,7 +24,7 @@
 .deadline-date {
   font-size: 3em;
   font-weight: 500;
-  margin: 3rem auto; /* top right bottom left */
+  margin: 2rem auto; /* top right bottom left */
   margin-bottom: 0;
   text-align: center;
   /* margin-top: 3rem;
@@ -44,7 +44,7 @@
 .card-small-text {
   font-size: 1.5em;
   font-weight: 600;
-  margin: 1rem 0 1rem 0; /* top right bottom left */
+  margin: 0 0 1rem 0; /* top right bottom left */
   /* margin-top: 2rem;
   margin-bottom: 1rem; */
 }
@@ -54,7 +54,7 @@
   border-radius: 100vh;
   width: 8rem;
   height: 8rem;
-  margin: 1rem 0 0 0;
+  margin: 1rem 0 1rem 0;
 }
 
 .link-list {
@@ -66,4 +66,124 @@
 
 .link-list a {
   color: var(--colour-accent);
+}
+
+.move-right {
+  margin-left: 1rem;
+}
+
+.card-smaller {
+  max-width: 20ch;
+}
+
+.project-members-wrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20ch, 1fr));
+  gap: 1rem 2rem;
+  justify-items: center;
+  margin: 1rem 1rem; /* top right bottom left */
+}
+
+/* CIRCULAR PROGRESS BAR */
+
+.spinner-parent {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 15rem;
+  aspect-ratio: 1;
+  background: transparent;
+  border-radius: 100vh;
+  isolation: isolate;
+  --width: calc(25% / 2);
+}
+
+@property --prog {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 30%;
+}
+
+@keyframes initialise-prog {
+  0% {
+    --prog: 0%;
+  }
+  100% {
+    --prog: var(--progress, 60%);
+  }
+}
+
+@keyframes initialise-end-rot {
+  0% {
+    rotate: 0turn;
+  }
+  100% {
+    rotate: var(--progress-angle, 0.6turn);
+  }
+}
+
+.spinner-parent::before {
+  position: absolute;
+  top: 0;
+  content: "";
+  width: var(--width);
+  aspect-ratio: 1;
+  background: var(--colour-accent);
+  border-radius: 100vmax;
+  z-index: 1;
+}
+
+.spinner {
+  position: absolute;
+  border-radius: 100vmax;
+  inset: 0;
+  transition: --prog 0.2s ease-in;
+  animation: initialise-prog 1s ease-in-out forwards;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    var(--colour-accent) var(--prog),
+    var(--colour-mid-grey) var(--prog)
+  );
+}
+
+.spinner-parent .center {
+  width: 75%;
+  z-index: 1;
+  background-color: var(--colour-highlight);
+  aspect-ratio: 1;
+  border-radius: 100vmax;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  /*box-shadow: 0 0 5px 5px rgb(0, 0, 0, 0.2);*/
+}
+
+.spinner-end-wrapper {
+  position: absolute;
+  width: 100%;
+  aspect-ratio: 1;
+  background: transparent;
+  animation: initialise-end-rot 1s ease-in-out forwards;
+}
+
+.spinner-end-wrapper::after {
+  content: "";
+  position: absolute;
+  width: var(--width);
+  left: calc(50% - var(--width) / 2);
+
+  aspect-ratio: 1;
+  background: var(--colour-accent);
+  border-radius: 100vmax;
+  z-index: 3;
+}
+
+.center h3 {
+  font-size: 2em;
+  margin: 0;
+}
+.center p {
+  margin: 0;
 }
