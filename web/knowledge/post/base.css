@@ -1,3 +1,11 @@
+.post-edit [name="post"] {
+  /* The height of the placeholder text */
+  min-height: 10rem;
+  resize: vertical;
+  /* Worry about this later 😀 */
+  height: auto;
+}
+
 #preview {
   margin: 0.5rem 0;
   padding: 0 1rem;
