@@ -1,11 +1,44 @@
-.h1-appearance{
-  /*padding:0;*/
+.h1-email{
+  line-height: 0.1rem;
 }
 
-.h2-appearance{
+
+
+/*The CSS below is for the password section of the user profile page*/
+.h1-password {
+  line-height: 0.1rem;
+}
+
+.change-password-btn {
+  width: 130px;
+  height: 19.85px;
+
+  text-align: center;
+  display: flex;
+  align-items: center;
+
+  float:right;
+
+
+  background: var(--colour-accent);
+  box-shadow: 0px 4px 4px var(--card-shadow);
+  border-radius: 7px;
+}
+
+/*The CSS below is for the apppearance section of the user profile page*/
+.theme {
+  border:none;
+  float:right;
+}
+
+.h1-appearance{
+  line-height: 0.1rem;
+}
+
+.label-subtext{
   color: var(--colour-mid-grey);
   font-size: 10px;
-  /*line-height: 10px;*/
+  line-height: 0.1rem;
 }
 
 
