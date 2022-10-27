@@ -30,17 +30,23 @@
               <span class="material-symbols-outlined">leaderboard</span>
               Dashboard
             </a>
+            <hr />
           </li>
-          <hr />
           <li>
             <a href="">
               <span class="material-symbols-outlined">menu_book</span>
               Knowledge
             </a>
+            <hr />
           </li>
-          <hr />
+          <li class="hidden">
+            <a href="/manager/"
+              ><span class="material-symbols-outlined">surfing</span></a
+            >
+            <hr />
+          </li>
           <li>
-            <a href="">
+            <a href="profile">
               <span class="material-symbols-outlined">manage_accounts</span>
               My Profile
             </a>
@@ -62,7 +68,11 @@
               >menu_book</a
             >
           </li>
-          <!-- <li><a href="#" class="material-symbols-outlined">mail</a></li> -->
+          <li>
+            <a href="/profile/" class="material-symbols-outlined"
+              >manage_accounts</a
+            >
+          </li>
         </ul>
       </nav>
     </aside>
@@ -188,7 +198,10 @@
           <input name="deadline" type="date" id="task-date" required />
         </div>
         <div class="end-button">
-          <button class="btn-accent">Submit Item</button>
+          <button class="btn-action">
+            <p>Submit Item</p>
+            <span class="material-symbols-outlined">send</span>
+          </button>
         </div>
       </form>
     </dialog>

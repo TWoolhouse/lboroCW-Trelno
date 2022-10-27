@@ -10,6 +10,7 @@
   --colour-accent: #ffb53c;
   --colour-accent-trans: #fff9bf62;
   --colour-accent-soft: #ffe5bb;
+  --colour-accent-text: #a46600;
   --colour-highlight: #fff;
 
   --colour-mid-grey: #a6acbe;
@@ -401,6 +402,8 @@ input[type="checkbox"]:checked + label {
 
 /* MODAL <dialog>s */
 .modal {
+  width: 80%;
+  max-width: 50ch;
   border: none;
   background-color: var(--colour-highlight);
   color: var(--colour-text);
@@ -415,7 +418,7 @@ input[type="checkbox"]:checked + label {
 .modal-form {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 1.5rem;
   padding: 1rem;
 }
 
@@ -430,7 +433,6 @@ input[type="checkbox"]:checked + label {
 }
 
 .modal-form textarea {
-  width: 50ch;
   min-height: 10rem;
   padding: 0.6rem 1rem;
   resize: vertical;
@@ -453,10 +455,10 @@ input[type="checkbox"]:checked + label {
   background-color: var(--colour-accent);
   border: none;
   aspect-ratio: 1;
-  width: 3rem;
+  width: fit-content;
   border-radius: 100vh;
   font-size: 2rem;
-  margin: 0 1rem;
+  margin: 0 0.5rem;
   box-shadow: var(--card-shadow);
   color: var(--colour-highlight);
   cursor: pointer;
@@ -497,6 +499,54 @@ input[type="checkbox"]:checked + label {
     font-size: 0.7em;
     font-weight: 600;
   }
+}
+
+/* SANDWICH */
+.sandwich {
+  --sandwich-radius: var(--card-radius);
+  --sandwich-colour-text: var(--colour-accent-text);
+  --sandwich-colour-background: var(--colour-accent-soft);
+  padding: 0;
+}
+.sandwich > :first-child,
+.sandwich > :last-child {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: var(--sandwich-radius);
+  padding-right: var(--sandwich-radius);
+  min-height: 2rem;
+
+  color: var(--sandwich-colour-text);
+  background-color: var(--sandwich-colour-background);
+}
+.sandwich > :first-child {
+  margin-top: 0;
+  border-radius: var(--sandwich-radius) var(--sandwich-radius) 0 0;
+}
+.sandwich > :last-child {
+  margin-bottom: 0;
+  border-radius: 0 0 var(--sandwich-radius) var(--sandwich-radius);
+}
+
+/* Centre Title w/ Columns */
+.col-container {
+  display: grid;
+  grid-template: "start center end" / 1fr auto 1fr;
+  flex-direction: row;
+  justify-items: center;
+  align-items: center;
+}
+.col-centre {
+  grid-area: center;
+  justify-self: center;
+}
+.col-start {
+  grid-area: start;
+  justify-self: start;
+}
+.col-end {
+  grid-area: end;
+  justify-self: end;
 }
 
 /* UTILITY */
@@ -549,6 +599,10 @@ input[type="checkbox"]:checked + label {
   .mobile-hidden {
     display: initial;
   }
+}
+
+.hidden {
+  display: none !important;
 }
 
 #waves {
