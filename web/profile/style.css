@@ -1,3 +1,31 @@
+.h1-appearance{
+  /*padding:0;*/
+}
+
+.h2-appearance{
+  color: var(--colour-mid-grey);
+  font-size: 10px;
+  /*line-height: 10px;*/
+}
+
+
+.card-upload-button {
+  width: 116px;
+  height: 26px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:auto;
+
+
+  background: var(--colour-accent);
+  box-shadow: 0px 4px 4px var(--card-shadow);
+  border-radius: 7px;
+}
+
+
+
 .title-card {
   text-decoration: underline;
   text-decoration-color: var(--colour-accent);
@@ -18,7 +46,7 @@
 .card-profile-picture {
   box-sizing: border-box;
 
-  width: 122px;
+  width: 70;
   height: 122px;
 
   border: 1px solid var(--colour-accent);
