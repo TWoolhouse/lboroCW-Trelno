@@ -7,14 +7,119 @@
     <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#1e1e1e" />
     <link rel="stylesheet" href="/base.css" />
-    <link rel="stylesheet" href="/index.css" />
-    <script type="module" src="/index.js"></script>
-    <title>Trelno</title>
+    <link rel="stylesheet" href="./style.css" />
+    <title>Client details</title>
+    <link rel="icon" type="image/svg" href="/tools.svg" />
   </head>
 
   <body>
-    <h1>Trelno</h1>
+    <dialog class="nav-mobile">
+      <div class="flex-row kanban-title">
+        <h2>Menu</h2>
+        <button class="btn-icon material-symbols-outlined dialog-close">
+          close
+        </button>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <a href="" data-active>
+              <span class="material-symbols-outlined">leaderboard</span>
+              Dashboard
+            </a>
+          </li>
+          <hr />
+          <li>
+            <a href="">
+              <span class="material-symbols-outlined">menu_book</span>
+              Knowledge
+            </a>
+          </li>
+          <hr />
+          <li>
+            <a href="">
+              <span class="material-symbols-outlined">manage_accounts</span>
+              My Profile
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </dialog>
 
-    <p>Hello world</p>
+    <aside class="side-menu">
+      <img src="/tools.svg" alt="Make-it-all" width="100%" />
+      <nav>
+        <ul>
+          <li data-active>
+            <a href="/dashboard/" class="material-symbols-outlined"
+              >leaderboard</a
+            >
+          </li>
+          <li>
+            <a href="/knowledge/" class="material-symbols-outlined"
+              >menu_book</a
+            >
+          </li>
+          <!-- <li><a href="#" class="material-symbols-outlined">mail</a></li> -->
+        </ul>
+      </nav>
+    </aside>
+
+    <header class="header">
+      <h1 id="project-id">Client company name</h1>
+      <button class="mobile-nav-toggle material-symbols-outlined">menu</button>
+      <div class="account-info flex-row">
+        <div class="flex-col">
+          <h6>King Firat</h6>
+          <p class="dimmed">Manager</p>
+        </div>
+        <img src="https://placekitten.com/50/50" alt="" />
+        <p class="material-symbols-outlined dimmed">expand_more</p>
+        <p class="material-symbols-outlined dimmed">logout</p>
+      </div>
+    </header>
+
+    <main>
+      <section class="topcards-wrapper">
+        <div class="card-small">
+          <h3 class="title-card-small text-center">Client representative</h3>
+          <div class="flex-col-center">
+            <img
+              src="https://placekitten.com/50/50"
+              alt=""
+              class="card-small-image"
+            />
+            <p class="card-small-text">Firat Batmaz</p>
+          </div>
+        </div>
+
+        <div class="card-small">
+          <h3 class="title-card-small text-center">Contact information</h3>
+          <div class="flex-col-center">
+            <p class="card-small-text card-small-location">
+              Email: email@gmail.com <br />
+              Mobile 1: +4478696969 <br />
+              Mobile 2: +4479420420 <br />
+            </p>
+          </div>
+        </div>
+
+        <div class="card-small">
+          <h3 class="title-card-small text-center">Office location</h3>
+          <div class="flex-col-center">
+            <p class="card-small-text card-small-location">
+              Flat 69, block S <br />
+              The Holt <br />
+              Holt Drive <br />
+              Loughborough <br />
+              LE113JB
+            </p>
+            <div class="link-list text-center">
+              <a href="#">View on Google Maps</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
   </body>
 </html>
