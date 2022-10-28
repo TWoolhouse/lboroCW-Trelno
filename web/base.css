@@ -13,8 +13,7 @@
   --colour-accent-text: #a46600;
   --colour-highlight: #fff;
 
-
-  --colour-light-grey:#C7C7C7;
+  --colour-light-grey: #c7c7c7;
   --colour-mid-grey: #a6acbe;
 
   --colour-red: #e32020bf;
@@ -97,7 +96,7 @@ header.header {
 }
 
 /* SIDE MENU */
-main {
+body > main {
   margin: 0;
 }
 
@@ -149,7 +148,7 @@ main {
   header {
     margin-left: var(--side-menu-width);
   }
-  main {
+  body > main {
     margin-left: var(--side-menu-width);
     padding: 0.5rem 4rem;
   }

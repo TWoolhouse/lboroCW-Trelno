@@ -1,0 +1,50 @@
+.post {
+  --post-radius: var(--card-radius);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  padding: 0;
+}
+
+.post aside {
+  text-align: center;
+  display: grid;
+  grid-template-rows: auto auto auto;
+  align-items: stretch;
+  justify-items: stretch;
+}
+
+.post aside > * {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post aside > :first-child {
+  border-radius: var(--post-radius) 0 0 0;
+}
+.post aside > :last-child {
+  border-radius: 0 0 0 var(--post-radius);
+}
+.post aside > :nth-child(2n - 1) {
+  background-color: var(--colour-accent-soft);
+}
+
+.post aside > :nth-child(2n) {
+  background-color: var(--colour-accent-trans);
+}
+
+.post aside .account {
+}
+
+.post main {
+  margin: 1rem;
+}
+
+.post main > :first-child {
+  margin: 0;
+}
+
+.post main .btn-action {
+  margin-top: 0.5rem;
+  margin-left: auto;
+}
