@@ -7,9 +7,13 @@
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#1e1e1e" />
 
+    <link rel="icon" type="image/svg" href="/tools.svg" />
     <link rel="stylesheet" href="/base.css" />
+    <!-- <link rel="stylesheet" href="style.css" /> -->
 
-    <title>Knowledge</title>
+    <!-- <script defer type="module" src="script.js"></script> -->
+
+    <title>Post</title>
   </head>
 
   <body>
@@ -38,9 +42,81 @@
         </ul>
       </nav>
     </aside>
+    <dialog class="nav-mobile">
+      <div class="flex-row kanban-title">
+        <h2>Menu</h2>
+        <button class="btn-icon material-symbols-outlined dialog-close">
+          close
+        </button>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <a href="/dashboard/">
+              <span class="material-symbols-outlined">leaderboard</span>
+              Dashboard
+            </a>
+          </li>
+          <hr />
+          <li>
+            <a href="/knowledge/" data-active>
+              <span class="material-symbols-outlined">menu_book</span>
+              Knowledge
+            </a>
+          </li>
+          <hr />
+          <li class="hidden">
+            <a href="/manager/"
+              ><span class="material-symbols-outlined">surfing</span></a
+            >
+          </li>
+          <hr />
+          <li>
+            <a href="/profile/">
+              <span class="material-symbols-outlined">manage_accounts</span>
+              My Profile
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </dialog>
+    <header class="header">
+      <h1>Knowledge Management</h1>
+      <button class="mobile-nav-toggle material-symbols-outlined">menu</button>
+      <div class="account-info flex-row">
+        <div class="flex-col">
+          <h6 id="user-name">King Firat</h6>
+          <p id="user-rank" class="dimmed">Manager</p>
+        </div>
+        <img
+          src="https://placekitten.com/50/50"
+          alt="User Profile Picture"
+          width="50"
+          height="50"
+        />
+        <p class="material-symbols-outlined dimmed">expand_more</p>
+        <p class="material-symbols-outlined dimmed">logout</p>
+      </div>
+    </header>
     <main>
-      <h1>Google Search Page</h1>
-      <p>Search Box Here</p>
+      <h4>Search</h4>
+      <h3>Make-It-All</h3>
+      <form action="search/">
+        <input name="q" type="text" />
+        <select name="topic">
+          <option value="">Topic</option>
+          <option value="1">Technical</option>
+          <option value="2">Non-Technical</option>
+        </select>
+        <button type="submit">
+          <p>Search</p>
+          <span class="material-symbols-outlined">search</span>
+        </button>
+        <button type="submit">
+          <p>Create Post</p>
+          <span class="material-symbols-outlined">add</span>
+        </button>
+      </form>
     </main>
   </body>
 </html>
