@@ -1,0 +1,34 @@
+h3 {
+  color: var(--colour-accent);
+  font-size: 1.5rem;
+}
+
+.dropdown-topic {
+  background-color: var(--colour-highlight);
+
+  width: fit-content;
+  font-size: 1rem;
+  border: 0.2rem solid;
+
+  margin: 0.5rem;
+  box-shadow: var(--card-shadow);
+  border-color: var(--colour-accent);
+  border-radius: 0.5rem;
+  color: var(--colour-text);
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.search-box {
+  background-color: var(--colour-highlight);
+  border: none;
+  font-size: 1rem;
+  padding: 0.25rem;
+
+  box-shadow: var(--card-shadow);
+  border-radius: 0.5rem;
+}

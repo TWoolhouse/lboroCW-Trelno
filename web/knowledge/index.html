@@ -9,6 +9,7 @@
 
     <link rel="icon" type="image/svg" href="/tools.svg" />
     <link rel="stylesheet" href="/base.css" />
+    <link rel="stylesheet" href="style.css" />
     <!-- <link rel="stylesheet" href="style.css" /> -->
 
     <!-- <script defer type="module" src="script.js"></script> -->
@@ -102,17 +103,22 @@
       <h4>Search</h4>
       <h3>Make-It-All</h3>
       <form action="search/">
-        <input name="q" type="text" />
-        <select name="topic">
+        <input
+          name="q"
+          type="text"
+          placeholder="Search..."
+          class="search-box"
+        />
+        <select name="topic" class="dropdown-topic">
           <option value="">Topic</option>
           <option value="1">Technical</option>
           <option value="2">Non-Technical</option>
         </select>
-        <button type="submit">
+        <button type="submit" class="btn-action">
           <p>Search</p>
           <span class="material-symbols-outlined">search</span>
         </button>
-        <button type="submit">
+        <button type="submit" class="btn-action">
           <p>Create Post</p>
           <span class="material-symbols-outlined">add</span>
         </button>
