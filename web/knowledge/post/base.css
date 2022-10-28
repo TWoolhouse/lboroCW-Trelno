@@ -10,3 +10,48 @@
   margin: 0.5rem 0;
   padding: 0 1rem;
 }
+
+.account-post {
+  display: grid;
+  grid-template-areas:
+    "img title"
+    "img name"
+    "img rank";
+
+  column-gap: 1rem;
+  align-items: center;
+  color: var(--colour-text);
+}
+
+.account-post img {
+  grid-area: img;
+  border-radius: 50%;
+}
+
+/* Title */
+.account-post .title {
+  font-size: 0.8em;
+  opacity: var(--dimmed-opacity);
+}
+
+/* UserName */
+.account-post .user-name {
+  font-weight: bold;
+}
+
+/* UserRank */
+.account-post .user-rank {
+  font-size: 0.75em;
+  opacity: var(--dimmed-opacity);
+}
+
+@media (max-width: 768px) {
+  .account-post {
+    grid-template-areas:
+      "img"
+      "name";
+  }
+  .account-post span {
+    display: none;
+  }
+}
