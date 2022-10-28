@@ -331,19 +331,36 @@ main {
 }
 
 .kanban-dropdown {
+  position: absolute;
   display: none;
+  width: fit-content;
+  right: 0;
+  top: 100%;
+  background: var(--colour-block);
+  z-index: 10;
+
+  scale: 100% 0%;
+  transform-origin: top center;
+}
+
+@keyframes dropdown {
+  0% {
+    position: none;
+    scale: 100% 0%;
+  }
+  0.1% {
+    position: absolute;
+  }
+  100% {
+    position: absolute;
+    scale: 100% 100%;
+  }
 }
 
 .kanban-mobile-options:focus + .kanban-dropdown,
 .kanban-dropdown[data-show] {
   display: block;
-  position: absolute;
-  width: fit-content;
-  right: 0;
-  top: 100%;
-
-  background: var(--colour-block);
-  z-index: 10;
+  animation: dropdown 0.2s ease-in-out forwards;
 }
 .kanban-dropdown ul {
   list-style: none;
