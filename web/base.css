@@ -243,10 +243,9 @@ main {
 }
 
 .small-cards-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: start;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(40ch, 1fr));
+  justify-items: center;
 }
 
 /* smaller 'sub-cards' */
