@@ -110,16 +110,6 @@ currentUser.tasklist().onChange((event) => {
       event.dataTransfer.setData("task", task.id);
       event.dataTransfer.dropEffect = "move";
     });
-
-    // mobile task button event handler
-    const mobileBtn = card.querySelector(".kanban-mobile-options");
-    if (mobileBtn) {
-      mobileBtn.addEventListener("click", (event) => {
-        console.log(task.name);
-        const dropdownMenu = card.querySelector(".kanban-dropdown");
-        dropdownMenu.toggleAttribute("data-show");
-      });
-    }
   }
 });
 
@@ -199,8 +189,6 @@ function createTeamCard(team) {
     </div>
 `;
 }
-
-
 
 /**
  * Create a Project option for the new task dialog

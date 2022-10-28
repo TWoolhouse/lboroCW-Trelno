@@ -334,6 +334,7 @@ main {
   display: none;
 }
 
+.kanban-mobile-options:focus + .kanban-dropdown,
 .kanban-dropdown[data-show] {
   display: block;
   position: absolute;
