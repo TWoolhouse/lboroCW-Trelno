@@ -2,6 +2,11 @@
   line-height: 0.1rem;
 }
 
+.email-box{
+  background-color: var(--colour-light-grey);
+  font-size: 10px;
+  float:right;
+}
 
 
 /*The CSS below is for the password section of the user profile page*/
