@@ -29,6 +29,8 @@
   --card-shadow: 0 4px 4px rgb(0, 0, 0, 0.25);
   --card-radius: 40px;
   --card-small-radius: 14px;
+
+  --dimmed-opacity: 0.65;
 }
 
 @media only screen and (prefers-color-scheme: dark) {
@@ -566,7 +568,7 @@ input[type="checkbox"]:checked + label {
 .btn-icon {
   background: transparent;
   color: var(--colour-text);
-  opacity: 0.5;
+  opacity: var(--dimmed-opacity);
   border: none;
 }
 
@@ -575,7 +577,7 @@ input[type="checkbox"]:checked + label {
 }
 
 .dimmed {
-  opacity: 0.5;
+  opacity: var(--dimmed-opacity);
 }
 
 .flex-row {
