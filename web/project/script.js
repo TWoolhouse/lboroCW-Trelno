@@ -5,42 +5,34 @@ import { TaskState } from "../api/model/task.js";
 // Read query string parameters
 const urlParams = new URLSearchParams(window.location.search);
 const projectId = urlParams.get("id");
-const projectHead = document.querySelector("#project-id");
-projectId
-  ? (projectHead.innerHTML = "Project " + projectId)
-  : (projectHead.innerHTML = "Project X");
 
-// for (const [key, value] of urlParams) {
-//   console.log(`${key}:${value}`);
-// }
+// Get project details
+await api.project(projectId).then((Project) => {
+  document.querySelector("#project-name").innerHTML = Project.name;
+  document.querySelector("#project-manager").innerHTML = Project.manager;
+  setProjectDeadlineDate(Project.deadline);
+  // Not implemented yet
+  document.querySelector("#project-description").innerHTML = Project.desc;
+  document.querySelector("#project-client").innerHTML = Project.client;
+});
 
 // Set project deadline date
-const projectDeadline = document.querySelector("#deadline-date");
-const today = new Date();
-const projectDeadlineDate = new Date();
-projectDeadlineDate.setDate(projectDeadlineDate.getDate() + 7);
-let monthNames = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-let formattedDate =
-  monthNames[projectDeadlineDate.getMonth()] +
-  " " +
-  projectDeadlineDate.getDate() +
-  ", " +
-  projectDeadlineDate.getFullYear();
+function setProjectDeadlineDate(deadlineUnix) {
+  const projectDeadlineDate = new Date(deadlineUnix * 1000);
+  const projectDeadlineDateFormatted = projectDeadlineDate.toLocaleDateString(
+    "en-gb",
+    {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }
+  );
+  document.querySelector("#project-deadline").innerHTML =
+    projectDeadlineDateFormatted;
 
-projectDeadline.innerHTML = formattedDate;
+  document.querySelector("#days-remaining").innerHTML =
+    dateDiffInDays(new Date(), projectDeadlineDate) + " days remaining";
+}
 
 // Display days left until project deadline
 function dateDiffInDays(a, b) {
@@ -51,10 +43,6 @@ function dateDiffInDays(a, b) {
 
   return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 }
-
-const deadlineRemainingDays = document.querySelector("#days-remaining");
-const differenceDays = dateDiffInDays(today, projectDeadlineDate);
-deadlineRemainingDays.innerHTML = differenceDays + " days remaining";
 
 // Mobile nav
 const mobileNavToggle = document.querySelector(".mobile-nav-toggle");

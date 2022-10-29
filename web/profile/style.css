@@ -1,4 +1,42 @@
-.h1-email{
+:root{
+  --colour-red-logout:#DA0000;
+}
+
+.logout-btn{
+  width: 60px;
+  height: 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  margin:auto;
+  
+
+  background: var(--colour-red-logout);
+  box-shadow: 0px 4px 4px var(--card-shadow);
+  border-radius: 7px;
+}
+
+.invite-btn {
+  width: 54px;
+  height: 19.85px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+
+  float:right;
+
+  background: var(--colour-accent);
+  box-shadow: 0px 4px 4px var(--card-shadow);
+  border-radius: 7px;
+}
+
+
+.email-lock-img{
+  float:right;
+  padding-right: 10px;
+}
+
+.h1{
   line-height: 0.1rem;
 }
 
@@ -8,11 +46,7 @@
   float:right;
 }
 
-
 /*The CSS below is for the password section of the user profile page*/
-.h1-password {
-  line-height: 0.1rem;
-}
 
 .change-password-btn {
   width: 130px;
@@ -34,10 +68,6 @@
 .theme {
   border:none;
   float:right;
-}
-
-.h1-appearance{
-  line-height: 0.1rem;
 }
 
 .label-subtext{
