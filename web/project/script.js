@@ -23,11 +23,30 @@ await api.project(id).then((projectResponse) => {
   document.querySelector("#project-manager").innerHTML =
     projectResponse.manager.name;
   setProjectDeadlineDate(projectResponse.deadline);
+  updateProgressBar(projectResponse.tasks.snapshot);
   // Not implemented yet
   // document.querySelector("#project-description").innerHTML =
   //   projectResponse.desc;
   // document.querySelector("#project-client").innerHTML = projectResponse.client;
 });
+
+// Update circular progress bar
+function updateProgressBar(tasks) {
+  const totalTasks = tasks.length;
+  const tasksDone = tasks.filter((task) => task.state == TaskState.Done).length;
+  const percentageDone = (tasksDone / (totalTasks == 0 ? 1 : totalTasks)) * 100;
+
+  document.querySelector("#percentageDone").innerHTML = percentageDone + "%";
+  document.querySelector("#tasksDone").innerHTML =
+    tasksDone + "/" + totalTasks + " tasks done";
+
+  document
+    .querySelector("#progress-bar")
+    .style.setProperty("--progress", percentageDone + "%");
+  document
+    .querySelector("#progress-bar")
+    .style.setProperty("--progress-angle", percentageDone / 10 + "turn");
+}
 
 // Set project deadline date
 function setProjectDeadlineDate(deadlineUnix) {
