@@ -1,19 +1,32 @@
 import * as api from "../api/core.js";
 import { currentUser, redirectLogin } from "../api/active.js";
 import { TaskState } from "../api/model/task.js";
+import { Project } from "../api/model/project.js";
+
+// Create new Project
+const id = (
+  await api.createProject(
+    await api.user(1),
+    1667059483,
+    1668959318,
+    "New Project"
+  )
+).id;
 
 // Read query string parameters
 const urlParams = new URLSearchParams(window.location.search);
 const projectId = urlParams.get("id");
 
 // Get project details
-await api.project(projectId).then((Project) => {
-  document.querySelector("#project-name").innerHTML = Project.name;
-  document.querySelector("#project-manager").innerHTML = Project.manager;
-  setProjectDeadlineDate(Project.deadline);
+await api.project(id).then((projectResponse) => {
+  document.querySelector("#project-name").innerHTML = projectResponse.name;
+  document.querySelector("#project-manager").innerHTML =
+    projectResponse.manager.name;
+  setProjectDeadlineDate(projectResponse.deadline);
   // Not implemented yet
-  document.querySelector("#project-description").innerHTML = Project.desc;
-  document.querySelector("#project-client").innerHTML = Project.client;
+  // document.querySelector("#project-description").innerHTML =
+  //   projectResponse.desc;
+  // document.querySelector("#project-client").innerHTML = projectResponse.client;
 });
 
 // Set project deadline date
