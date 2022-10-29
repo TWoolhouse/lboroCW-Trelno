@@ -112,6 +112,25 @@ export async function createTeam(leader, name) {
 }
 
 /**
+ * @param {User} manager The project manager
+ * @param {Number} created Datetime the project was created
+ * @param {Number} deadline Datetime the project should be completed by
+ * @param {String} name Display name of the project
+ * @returns {Promise<Project>}
+ */
+export async function createProject(manager, created, deadline, name) {
+  let obj = new Project(
+    await id_gen(project),
+    manager,
+    created,
+    deadline,
+    name,
+    createAssignees()
+  );
+  return await Memoize.Type(Project).create(obj);
+}
+
+/**
  * Creates a new set of assignees
  * @returns {Promise<Assignees>}
  */
