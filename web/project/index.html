@@ -77,7 +77,7 @@
     </aside>
 
     <header class="header">
-      <h1 id="project-id">Project X</h1>
+      <h1 id="project-name">Project X</h1>
       <button class="mobile-nav-toggle material-symbols-outlined">menu</button>
       <div class="account-info flex-row">
         <div class="flex-col">
@@ -92,10 +92,10 @@
 
     <main>
 
-      <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+      <p id="project-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
         Vestibulum lorem sed risus ultricies tristique nulla aliquet enim tortor. 
-        Sed egestas egestas fringilla phasellus faucibus scelerisque.</h2>
+        Sed egestas egestas fringilla phasellus faucibus scelerisque.</p>
 
       <section class="topcards-wrapper">
         <div class="card-small">
@@ -113,7 +113,7 @@
         <div class="card-small">
           <h3 class="title-card-small text-center">Project deadline</h3>
           <div class="flex-col-center">
-            <p class="deadline-date" id="deadline-date">
+            <p class="deadline-date" id="project-deadline">
             </p>
             <p class="deadline-days-left" id="days-remaining">
             </p>
@@ -128,7 +128,7 @@
               alt=""
               class="card-small-image"
             />
-            <p class="card-small-text">Firat Batmaz</p>
+            <p class="card-small-text" id="project-manager">Firat Batmaz</p>
           </div>
         </div>
 
@@ -142,7 +142,7 @@
             />
             <p class="card-small-text">Client company name</p>
             <div class="link-list text-center">
-              <a href="#">View Client details</a>
+              <a href="../client/?id=1">View Client details</a>
             </div>
           </div>
         </div>
@@ -187,10 +187,12 @@
         
         <div class="card-title-wrapper">
           <h2 class="title-card">Members on this project</h2>
+          <h2> Team 1 </h2>
         </div>
-        <div class="link-list move-right">
+
+        <!-- <div class="link-list move-right">
           <a href="#">Team 1</a>
-        </div>
+        </div> -->
 
         <div class="project-members-wrap">
 
