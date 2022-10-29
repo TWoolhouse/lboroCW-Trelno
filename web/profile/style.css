@@ -1,4 +1,7 @@
-.h1-email{
+
+
+
+.h1{
   line-height: 0.1rem;
 }
 
@@ -8,11 +11,7 @@
   float:right;
 }
 
-
 /*The CSS below is for the password section of the user profile page*/
-.h1-password {
-  line-height: 0.1rem;
-}
 
 .change-password-btn {
   width: 130px;
@@ -34,10 +33,6 @@
 .theme {
   border:none;
   float:right;
-}
-
-.h1-appearance{
-  line-height: 0.1rem;
 }
 
 .label-subtext{
