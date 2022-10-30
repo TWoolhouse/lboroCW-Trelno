@@ -23,7 +23,10 @@ await api.project(id).then((projectResponse) => {
   document.querySelector("#project-manager").innerHTML =
     projectResponse.manager.name;
   setProjectDeadlineDate(projectResponse.deadline);
-  updateProgressBar(projectResponse.tasks.snapshot);
+  projectResponse.tasks.onChange((event) =>
+    updateProgressBar(event.all.map((pt) => pt.task))
+  ); // no idea how this works
+
   // Not implemented yet
   // document.querySelector("#project-description").innerHTML =
   //   projectResponse.desc;
@@ -45,7 +48,7 @@ function updateProgressBar(tasks) {
     .style.setProperty("--progress", percentageDone + "%");
   document
     .querySelector("#progress-bar")
-    .style.setProperty("--progress-angle", percentageDone / 10 + "turn");
+    .style.setProperty("--progress-angle", percentageDone / 100 + "turn");
 }
 
 // Set project deadline date
