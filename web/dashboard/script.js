@@ -62,12 +62,15 @@ newTaskDialog.querySelector("form").onsubmit = async (event) => {
 // Mobile nav
 const mobileNavToggle = document.querySelector(".mobile-nav-toggle");
 mobileNavToggle.addEventListener("click", () => {
-  const navDialog = document.querySelector(".nav-mobile");
+  /* const navDialog = document.querySelector(".nav-mobile");
   navDialog.showModal();
   const closeBtn = navDialog.querySelector(".dialog-close");
   closeBtn.addEventListener("click", () => {
     navDialog.close();
-  });
+  }); */
+  const nav = document.querySelector(".side-menu");
+  console.log(nav);
+  nav.toggleAttribute("data-open");
 });
 
 const _wrapper = document.createElement("div");
