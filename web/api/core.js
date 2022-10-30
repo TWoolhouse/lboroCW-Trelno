@@ -125,7 +125,7 @@ export async function createProject(manager, created, deadline, name) {
     created,
     deadline,
     name,
-    createAssignees()
+    await createAssignees()
   );
   return await Memoize.Type(Project).create(obj);
 }
