@@ -184,8 +184,13 @@ body > main {
 /* MOBILE NAV */
 
 .mobile-nav-toggle {
+  position: fixed;
+  top: 0.8rem;
+  right: 0.5rem;
+  background: var(--colour-highlight);
+  box-shadow: var(--card-shadow);
+  border-radius: 100vmax;
   display: inline-block;
-  background-color: transparent;
   color: var(--colour-accent);
   border: none;
   font-size: 2rem;
@@ -194,7 +199,7 @@ body > main {
 }
 
 .mobile-nav-toggle[data-open] {
-  color: var(--colour-block);
+  color: var(--colour-text);
 }
 
 @media (min-width: 768px) {
