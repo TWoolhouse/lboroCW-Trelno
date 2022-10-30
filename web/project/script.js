@@ -26,12 +26,46 @@ await api.project(id).then((projectResponse) => {
   projectResponse.tasks.onChange((event) =>
     updateProgressBar(event.all.map((pt) => pt.task))
   ); // no idea how this works
-
+  projectResponse.assignees.users.onChange((event) => updateMembers(event.add));
+  // updateMembers(projectResponse.users());
   // Not implemented yet
   // document.querySelector("#project-description").innerHTML =
   //   projectResponse.desc;
   // document.querySelector("#project-client").innerHTML = projectResponse.client;
 });
+
+/**
+ * Converts the HTML into a DOM Node
+ * @param {String} html The HTML String
+ * @returns {Node} A Node
+ */
+function HTMLasDOM(html) {
+  const temp = document.createElement("div");
+  temp.innerHTML = html.trim();
+  const element = temp.firstChild;
+  element.remove();
+  return element;
+}
+
+function createProjectMemberCard(user) {
+  return `
+    <div class="card-small bg-accent">
+      <h3 class="title-card-small">${user.name}</h3>
+      <div class="link-list text-center">
+              <a href="#">View Employee details</a>
+      </div>
+    </div>
+  `;
+}
+
+// Update assignee list
+function updateMembers(users) {
+  const projectMembersWrap = document.querySelector("#project-members-wrap");
+  for (const user of users) {
+    const userName = user.name;
+    projectMembersWrap.appendChild(HTMLasDOM(createProjectMemberCard(user)));
+  }
+}
 
 // Update circular progress bar
 function updateProgressBar(tasks) {
