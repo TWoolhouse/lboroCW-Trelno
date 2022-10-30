@@ -71,6 +71,14 @@ mobileNavToggle.addEventListener("click", () => {
   const nav = document.querySelector(".side-menu");
   console.log(nav);
   nav.toggleAttribute("data-open");
+
+  console.log(mobileNavToggle.getAttribute("data-open") === null);
+  if (mobileNavToggle.getAttribute("data-open") === null) {
+    mobileNavToggle.innerHTML = "close";
+  } else {
+    mobileNavToggle.innerHTML = "menu";
+  }
+  mobileNavToggle.toggleAttribute("data-open");
 });
 
 const _wrapper = document.createElement("div");

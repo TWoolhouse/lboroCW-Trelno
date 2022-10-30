@@ -32,6 +32,8 @@
   --card-small-radius: 14px;
 
   --dimmed-opacity: 0.65;
+
+  --nav-animation: 0.2s ease-in-out;
 }
 
 @media only screen and (prefers-color-scheme: dark) {
@@ -103,10 +105,10 @@ body > main {
 .side-menu {
   position: fixed;
   inset: 0;
-  background-color: var(--colour-accent) !important;
+  background-color: var(--colour-accent);
   z-index: 1;
   scale: 0% 100%;
-  transition: scale 0.2s ease-in-out;
+  transition: scale var(--nav-animation);
   transform-origin: left;
 }
 
@@ -187,6 +189,12 @@ body > main {
   color: var(--colour-accent);
   border: none;
   font-size: 2rem;
+  z-index: 3;
+  transition: color var(--nav-animation);
+}
+
+.mobile-nav-toggle[data-open] {
+  color: var(--colour-block);
 }
 
 @media (min-width: 768px) {
