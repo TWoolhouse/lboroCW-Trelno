@@ -27,12 +27,31 @@ await api.project(id).then((projectResponse) => {
     updateProgressBar(event.all.map((pt) => pt.task))
   ); // no idea how this works
   projectResponse.assignees.users.onChange((event) => updateMembers(event.add));
+  projectResponse.assignees.teams.onChange((event) =>
+    setProjectTeam(event.add)
+  );
   // updateMembers(projectResponse.users());
   // Not implemented yet
   // document.querySelector("#project-description").innerHTML =
   //   projectResponse.desc;
   // document.querySelector("#project-client").innerHTML = projectResponse.client;
 });
+
+// Set project team
+function setProjectTeam(teams) {
+  let teamNameHTML = document.querySelector("#team-name");
+  for (const team of teams) {
+    teamNameHTML.innerHTML = team.name;
+  }
+}
+
+// Update assignee list
+function updateMembers(users) {
+  const projectMembersWrap = document.querySelector("#project-members-wrap");
+  for (const user of users) {
+    projectMembersWrap.appendChild(HTMLasDOM(createProjectMemberCard(user)));
+  }
+}
 
 /**
  * Converts the HTML into a DOM Node
@@ -49,22 +68,13 @@ function HTMLasDOM(html) {
 
 function createProjectMemberCard(user) {
   return `
-    <div class="card-small bg-accent">
+    <div class="card-small bg-accent flex-col-center card-smaller">
       <h3 class="title-card-small">${user.name}</h3>
       <div class="link-list text-center">
               <a href="#">View Employee details</a>
       </div>
     </div>
   `;
-}
-
-// Update assignee list
-function updateMembers(users) {
-  const projectMembersWrap = document.querySelector("#project-members-wrap");
-  for (const user of users) {
-    const userName = user.name;
-    projectMembersWrap.appendChild(HTMLasDOM(createProjectMemberCard(user)));
-  }
 }
 
 // Update circular progress bar
