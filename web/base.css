@@ -161,6 +161,7 @@ body > main {
     position: fixed;
     height: 100%;
     width: var(--side-menu-width);
+    scale: 100% 100%;
   }
 
   .side-menu li {
