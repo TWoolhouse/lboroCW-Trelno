@@ -1,6 +1,18 @@
 h3 {
   color: var(--colour-accent);
   font-size: 1.5rem;
+  position: absolute;
+  left: 50%;
+  top: 38%;
+  transform: translate(-50%, -50%);
+}
+
+h4 {
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
 }
 
 .dropdown-topic {
@@ -8,6 +20,7 @@ h3 {
 
   width: fit-content;
   font-size: 1rem;
+
   border: 0.2rem solid;
 
   margin: 0.5rem;
@@ -28,7 +41,18 @@ h3 {
   border: none;
   font-size: 1rem;
   padding: 0.25rem;
-
+  width: 60%;
   box-shadow: var(--card-shadow);
   border-radius: 0.5rem;
+}
+
+.search-form {
+  display: flex;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
