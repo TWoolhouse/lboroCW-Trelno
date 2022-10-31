@@ -160,6 +160,7 @@ newTaskDialog.querySelector("form").onsubmit = async (event) => {
     TaskState.Ready,
     form.querySelector(`[name="title"]`).value,
     Date.parse(form.querySelector(`[name="deadline"]`).value),
+    12, // TODO add man hours input box
     form.querySelector(`[name="desc"]`).value
     // TODO: Add deadline
   );

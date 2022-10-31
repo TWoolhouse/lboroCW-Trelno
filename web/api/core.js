@@ -75,11 +75,19 @@ export async function assignees(id) {
  * @param {Number} state TaskState
  * @param {String} name The display name of the task
  * @param {Number} deadline The deadline of the project in unix epoch time
+ * @param {Number} manhours The estimated man hours to complete the task.
  * @param {String} [description] An optional description of the task
  * @returns {Promise<Task>}
  */
-export async function createTask(state, name, deadline, description) {
-  let t = new Task(await id_gen(task), state, name, deadline, description);
+export async function createTask(state, name, deadline, manhours, description) {
+  let t = new Task(
+    await id_gen(task),
+    state,
+    name,
+    deadline,
+    manhours,
+    description
+  );
   return await Memoize.Type(Task).create(t);
 }
 

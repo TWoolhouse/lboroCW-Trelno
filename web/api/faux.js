@@ -40,6 +40,7 @@ await (async () => {
           random(3, 0),
           `Task ${id}`,
           Date.parse(`2022-${random(13, 11)}-${random(31, 1)}`),
+          random(7, 1), // Manhours
           `Task Desc ${id} User`
         )
       );
@@ -81,6 +82,7 @@ await (async () => {
                     random(3, 0),
                     `Task ${id}`,
                     Date.parse(`2022-${random(13, 11)}-${random(31, 1)}`),
+                    random(7, 1), // Manhours
                     `Description: User Task}`
                   )
                 );
@@ -143,6 +145,7 @@ await (async () => {
                 random(3, 0),
                 `Task ${tid}`,
                 Date.parse(`2022-${random(13, 11)}-${random(31, 1)}`),
+                random(7, 1), // Manhours
                 `Task Desc ${tid} Project`
               );
               let assign = new Assignees(assignees_count++);
