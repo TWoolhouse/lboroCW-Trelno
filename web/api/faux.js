@@ -4,6 +4,7 @@ import { Task, TaskState } from "./model/task.js";
 import { Team } from "./model/team.js";
 import { Project, ProjectTask } from "./model/project.js";
 import { Assignees } from "./model/assignees.js";
+import { Client } from "./model/client.js";
 
 await (async () => {
   // TODO: Temporary Faux database saved in session storage
@@ -107,6 +108,18 @@ await (async () => {
     })
   );
 
+  let client = await Memoize.Type(Client).add(
+    new Client(
+      1,
+      "Client Company",
+      "Company Rep",
+      "Lboro Uni LE113UQ",
+      "lboro.ac.uk",
+      "G.Storey@lboro.ac.uk",
+      "020 7935 0341"
+    )
+  );
+
   let project_task_count = 1;
   const projects = await Promise.all(
     range(2)
@@ -114,6 +127,7 @@ await (async () => {
         let project = new Project(
           id,
           users[0],
+          client,
           new Date(2022, 9, random(31, 1)),
           new Date(2022, 11, random(31, 1)),
           `Project ${id}`,
