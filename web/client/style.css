@@ -12,7 +12,7 @@
     margin-bottom: 1rem; */
 }
 
-.card-small-location {
+.text-center-positioning {
   margin: 1rem 0 1rem 0;
 }
 
@@ -50,4 +50,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  height: 90%;
+}
+
+.client-details-wrap {
+  display: grid;
+  /* grid-template-columns: 1fr 1fr; */
+  grid-template-columns: repeat(auto-fit, minmax(35ch, 1fr));
+  gap: 1rem;
+  justify-items: center;
+  margin: 1rem 1rem; /* top right bottom left */
+  /* grid-auto-rows: 50%;
+  height: 100vh; */
+}
+
+.card-bigger {
+  min-width: 35ch;
 }
