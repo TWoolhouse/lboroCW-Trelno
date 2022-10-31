@@ -3,6 +3,7 @@ import { User } from "./model/user.js";
 import { Task } from "./model/task.js";
 import { Team } from "./model/team.js";
 import { Project, ProjectTask } from "./model/project.js";
+import { Client } from "./model/client.js";
 
 import {} from "../api/faux.js";
 import { Assignees } from "./model/assignees.js";
@@ -49,6 +50,14 @@ export async function project(id) {
  */
 export async function projectTask(id) {
   return Memoize.Type(ProjectTask).get(id);
+}
+
+/**
+ * @param {Number} id The ClientID
+ * @returns {Promise<Client>}
+ */
+export async function client(id) {
+  return Memoize.Type(Client).get(id);
 }
 
 /**
@@ -112,16 +121,49 @@ export async function createTeam(leader, name) {
 }
 
 /**
+ * Creates a new client
+ * @param {Number} id TeamID
+ * @param {String} name Name of the client company
+ * @param {String} representative Name of the client's representative
+ * @param {String} address Postal address
+ * @param {String} website Website for the company
+ * @param {String} [email] Email address
+ * @param {String} [phone] Phone number
+ * @returns {Promise<Client>}
+ */
+export async function createClient(
+  name,
+  representative,
+  address,
+  website,
+  email,
+  phone
+) {
+  let obj = new Client(
+    await id_gen(client),
+    name,
+    representative,
+    address,
+    website,
+    email,
+    phone
+  );
+  return await Memoize.Type(Client).create(obj);
+}
+
+/**
  * @param {User} manager The project manager
+ * @param {Client} client The client the project is for.
  * @param {Number} created Datetime the project was created
  * @param {Number} deadline Datetime the project should be completed by
  * @param {String} name Display name of the project
  * @returns {Promise<Project>}
  */
-export async function createProject(manager, created, deadline, name) {
+export async function createProject(manager, client, created, deadline, name) {
   let obj = new Project(
     await id_gen(project),
     manager,
+    client,
     created,
     deadline,
     name,

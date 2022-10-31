@@ -17,6 +17,16 @@ export class Client {
   /** @property {String} [phone] Phone number */
   phone;
 
+  /**
+   * @param {Number} id TeamID
+   * @param {String} name Name of the client company
+   * @param {String} representative Name of the client's representative
+   * @param {String} address Postal address
+   * @param {String} website Website for the company
+   * @param {String} [email] Email address
+   * @param {String} [phone] Phone number
+   * @returns {Client}
+   */
   constructor(id, name, representative, address, website, email, phone) {
     if (cereal.cereal(this, id)) return this;
     this.id = id;

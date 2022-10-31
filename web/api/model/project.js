@@ -4,6 +4,7 @@ import { CollectionDB } from "../interface/collectionDB.js";
 import { User } from "./user.js";
 import { Task } from "./task.js";
 import { Assignees } from "./assignees.js";
+import { Client } from "./client.js";
 
 export class ProjectTask {
   /** @property {Number} id ProjectTaskID */
@@ -34,6 +35,8 @@ export class Project {
   id;
   /** @property {User} manager The project manager */
   manager;
+  /** @property {Client} client The client the project is for */
+  client;
   /** @property {Date} created Datetime the project was created */
   created;
   /** @property {Date} deadline Datetime the project should be completed by */
@@ -48,16 +51,18 @@ export class Project {
   /**
    * @param {Number} id ProjectID
    * @param {User} manager The project manager
+   * @param {Client} client The client the project is for
    * @param {Date} created Datetime the project was created
    * @param {Date} deadline Datetime the project should be completed by
    * @param {String} name Display name of the project
    * @param {Assignees} assignees Users and Teams that have been assigned to the project
    * @returns
    */
-  constructor(id, manager, created, deadline, name, assignees) {
+  constructor(id, manager, client, created, deadline, name, assignees) {
     if (cereal.cereal(this, id)) return this;
     this.id = id;
     this.manager = manager;
+    this.client = client;
     this.created = created;
     this.deadline = deadline;
     this.name = name;
