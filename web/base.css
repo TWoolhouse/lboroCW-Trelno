@@ -132,14 +132,17 @@ body > main {
 .side-menu li {
   width: 100%;
   margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
 }
 
 .side-menu li a {
   color: var(--colour-text);
   text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  font-size: 1.2em;
 }
 
 .side-menu li[data-active] {
@@ -154,6 +157,10 @@ body > main {
 @media (min-width: 768px) {
   :root {
     --side-menu-width: 3rem;
+  }
+
+  .nav-description {
+    display: none;
   }
 
   .side-menu {
@@ -171,6 +178,10 @@ body > main {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .side-menu li a {
+    padding: 0;
   }
 
   header {
@@ -209,7 +220,7 @@ body > main {
   }
 }
 
-.nav-mobile {
+/* .nav-mobile {
   background: var(--colour-accent);
   border: none;
   margin-top: 0;
@@ -248,7 +259,7 @@ body > main {
 .nav-mobile a[data-active] {
   color: var(--colour-block);
   opacity: 0.8;
-}
+} */
 
 /* CARDS */
 
