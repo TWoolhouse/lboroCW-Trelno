@@ -1,6 +1,3 @@
-import * as api from "./api/core.js";
-import { logout } from "./api/active.js";
-
 /** @typedef {import("./api/model/user.js").User} User */
 
 const _wrapper = document.createElement("div");
