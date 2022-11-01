@@ -55,5 +55,3 @@ export function setActiveUser(user) {
   setUser(user);
   return user;
 }
-
- */
