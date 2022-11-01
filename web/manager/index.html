@@ -287,5 +287,42 @@
         </div>
       </section>
     </main>
+
+    <dialog class="modal" id="dialog-new-project">
+      <div class="flex-row kanban-title">
+        <h2 class="title-card">Add New Project</h2>
+        <button class="material-symbols-outlined btn-icon dialog-close">
+          close
+        </button>
+      </div>
+      <form class="modal-form">
+        <input
+          name="title"
+          type="text"
+          placeholder="Project Title..."
+          required
+        />
+        <textarea
+          name="desc"
+          placeholder="Write Project description here..."
+        ></textarea>
+        <select name="project" id="options-project">
+          <option value="">Select Client</option>
+          <option value="0x1">Client 1</option>
+          <option value="0x2">Client 2</option>
+          <option value="0x3">Client 3</option>
+        </select>
+        <div class="input-label">
+          <label for="project-date">Enter Deadline for Project:</label>
+          <input name="deadline" type="date" id="project-date" required />
+        </div>
+        <div class="end-button">
+          <button class="btn-action">
+            <p>Create Project</p>
+            <span class="material-symbols-outlined">send</span>
+          </button>
+        </div>
+      </form>
+    </dialog>
   </body>
 </html>

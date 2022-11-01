@@ -1,6 +1,16 @@
 import { currentUser } from "../api/active.js";
 import { TaskState } from "../api/model/task.js";
 
+const newProject = document.querySelector("button[data-action='new-project']");
+newProject.addEventListener("click", () => {
+  const newProjectDialog = document.querySelector("#dialog-new-project");
+  newProjectDialog.showModal();
+  const closeBtn = newProjectDialog.querySelector(".dialog-close");
+  closeBtn.addEventListener("click", () => {
+    newProjectDialog.close();
+  });
+});
+
 const projectOverviewWrapper = document.querySelector(
   "#project-overview-wrapper"
 );
