@@ -8,7 +8,10 @@ import { User } from "../api/user.js";
  */
 export async function login(email, password) {
   let response = (() => {
-    if (email == "king@make-it-all.co.uk" && password == "password") {
+    if (
+      email == "king@make-it-all.co.uk" &&
+      password == "pleasegiveusgoodmarks"
+    ) {
       return 1;
     } else if (email == "serf@make-it-all.co.uk" && password == "pswd") {
       return 1;
