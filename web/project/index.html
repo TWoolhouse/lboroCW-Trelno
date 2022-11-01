@@ -6,16 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#1e1e1e" />
+
     <link rel="icon" type="image/svg" href="/tools.svg" />
     <link rel="stylesheet" href="/base.css" />
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./css-circular-prog-bar.css" />
     <script type="module" src="./script.js"></script>
+
     <title>Project details</title>
   </head>
 
   <body>
-
     <dialog class="nav-mobile">
       <div class="flex-row kanban-title">
         <h2>Menu</h2>
@@ -30,17 +31,24 @@
               <span class="material-symbols-outlined">leaderboard</span>
               Dashboard
             </a>
+            <hr />
           </li>
-          <hr />
+          <li>
+            <a href="/manager/">
+              <span class="material-symbols-outlined">surfing</span>
+              Managers
+            </a>
+            <hr />
+          </li>
           <li>
             <a href="">
               <span class="material-symbols-outlined">menu_book</span>
               Knowledge
             </a>
+            <hr />
           </li>
-          <hr />
           <li>
-            <a href="">
+            <a href="profile">
               <span class="material-symbols-outlined">manage_accounts</span>
               My Profile
             </a>
@@ -58,7 +66,7 @@
               >leaderboard</a
             >
           </li>
-          <li >
+          <li>
             <a href="/manager/" class="material-symbols-outlined">surfing</a>
           </li>
           <li>
@@ -66,12 +74,11 @@
               >menu_book</a
             >
           </li>
-          <li  >
+          <li>
             <a href="/profile/" class="material-symbols-outlined"
               >manage_accounts</a
             >
           </li>
-          <!-- <li><a href="#" class="material-symbols-outlined">mail</a></li> -->
         </ul>
       </nav>
     </aside>
@@ -91,21 +98,21 @@
     </header>
 
     <main>
-
-      <p id="project-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        Vestibulum lorem sed risus ultricies tristique nulla aliquet enim tortor.
-        Sed egestas egestas fringilla phasellus faucibus scelerisque.</p>
+      <p id="project-description"></p>
 
       <section class="topcards-wrapper">
         <div class="card-small">
           <h3 class="title-card-small text-center">Project progress</h3>
-          <div class="spinner-parent" id="progress-bar" style="--progress:60%; --progress-angle:0.6turn">
+          <div
+            class="spinner-parent"
+            id="progress-bar"
+            style="--progress: 60%; --progress-angle: 0.6turn"
+          >
             <div class="spinner"></div>
             <div class="spinner-end-wrapper"></div>
             <div class="center">
-              <h3 id="percentageDone">60%</h3>
-              <p id="tasksDone">9/15 Tasks complete</p>
+              <h3 id="percentageDone"></h3>
+              <p id="tasksDone"></p>
             </div>
           </div>
         </div>
@@ -113,10 +120,8 @@
         <div class="card-small">
           <h3 class="title-card-small text-center">Project deadline</h3>
           <div class="flex-col-center">
-            <p class="deadline-date" id="project-deadline">
-            </p>
-            <p class="deadline-days-left" id="days-remaining">
-            </p>
+            <p class="deadline-date" id="project-deadline"></p>
+            <p class="deadline-days-left" id="days-remaining"></p>
           </div>
         </div>
 
@@ -140,9 +145,9 @@
               alt=""
               class="card-small-image"
             />
-            <p class="card-small-text">Client company name</p>
+            <p class="card-small-text" id="client-name"></p>
             <div class="link-list text-center">
-              <a href="../client/?id=1">View Client details</a>
+              <a href="../client/?id=1" id="client-link">View Client details</a>
             </div>
           </div>
         </div>
@@ -166,8 +171,6 @@
             </button>
           </div>
         </div>
-
-        </div>
         <div class="kanban-wrapper">
           <div class="kanban-section">
             <h3 class="title-card">To-Do</h3>
@@ -184,7 +187,6 @@
       </section>
 
       <section class="card">
-
         <div class="card-title-wrapper">
           <h2 class="title-card">Members on this project</h2>
         </div>
@@ -193,98 +195,11 @@
           <a href="#">Team 1</a>
         </div> -->
 
-        <div class="project-members-wrap" id="project-members-wrap" >
-
-          <!-- <div class="card-small bg-accent flex-col-center card-smaller">
-            <h3 class="title-card-small">Corcimaru Calin</h3>
-            <img
-              src="https://placekitten.com/50/50"
-              alt=""
-              class="card-small-image align-image"
-            />
-            <div class="link-list text-center">
-              <a href="#">View Employee details</a>
-            </div>
-          </div>
-
-          <div class="card-small bg-accent flex-col-center card-smaller">
-            <h3 class="title-card-small">Corcimaru Calin</h3>
-            <img
-              src="https://placekitten.com/50/50"
-              alt=""
-              class="card-small-image align-image"
-            />
-            <div class="link-list text-center">
-              <a href="#">View Employee details</a>
-            </div>
-          </div>
-
-          <div class="card-small bg-accent flex-col-center card-smaller">
-            <h3 class="title-card-small">Corcimaru Calin</h3>
-            <img
-              src="https://placekitten.com/50/50"
-              alt=""
-              class="card-small-image align-image"
-            />
-            <div class="link-list text-center">
-              <a href="#">View Employee details</a>
-            </div>
-          </div>
-
-          <div class="card-small bg-accent flex-col-center card-smaller">
-            <h3 class="title-card-small">Corcimaru Calin</h3>
-            <img
-              src="https://placekitten.com/50/50"
-              alt=""
-              class="card-small-image align-image"
-            />
-            <div class="link-list text-center">
-              <a href="#">View Employee details</a>
-            </div>
-          </div>
-
-          <div class="card-small bg-accent flex-col-center card-smaller">
-            <h3 class="title-card-small">Corcimaru Calin</h3>
-            <img
-              src="https://placekitten.com/50/50"
-              alt=""
-              class="card-small-image align-image"
-            />
-            <div class="link-list text-center">
-              <a href="#">View Employee details</a>
-            </div>
-          </div>
-
-          <div class="card-small bg-accent flex-col-center card-smaller">
-            <h3 class="title-card-small">Corcimaru Calin</h3>
-            <img
-              src="https://placekitten.com/50/50"
-              alt=""
-              class="card-small-image align-image"
-            />
-            <div class="link-list text-center">
-              <a href="#">View Employee details</a>
-            </div>
-          </div>
-
-          <div class="card-small bg-accent flex-col-center card-smaller">
-            <h3 class="title-card-small">Corcimaru Calin</h3>
-            <img
-              src="https://placekitten.com/50/50"
-              alt=""
-              class="card-small-image align-image"
-            />
-            <div class="link-list text-center">
-              <a href="#">View Employee details</a>
-            </div>
-          </div> -->
-
-        </div>
-
+        <div class="project-members-wrap" id="project-members-wrap"></div>
       </section>
     </main>
 
-<dialog class="modal" id="dialog-new-task">
+    <dialog class="modal" id="dialog-new-task">
       <div class="flex-row kanban-title">
         <h2 class="title-card">Add New Task</h2>
         <button class="material-symbols-outlined btn-icon dialog-close">
@@ -306,10 +221,12 @@
           <input name="deadline" type="date" id="task-date" required />
         </div>
         <div class="end-button">
-          <button class="btn-accent">Submit Item</button>
+          <button class="btn-action">
+            <p>Submit Item</p>
+            <span class="material-symbols-outlined">send</span>
+          </button>
         </div>
       </form>
-</dialog>
-
+    </dialog>
   </body>
 </html>
