@@ -6,10 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#1e1e1e" />
+
     <link rel="stylesheet" href="/base.css" />
     <link rel="stylesheet" href="./style.css" />
-    <title>Client details</title>
+    <script type="module" src="./script.js"></script>
     <link rel="icon" type="image/svg" href="/tools.svg" />
+
+    <title>Client details</title>
   </head>
 
   <body>
@@ -27,17 +30,24 @@
               <span class="material-symbols-outlined">leaderboard</span>
               Dashboard
             </a>
+            <hr />
           </li>
-          <hr />
+          <li>
+            <a href="/manager/">
+              <span class="material-symbols-outlined">surfing</span>
+              Managers
+            </a>
+            <hr />
+          </li>
           <li>
             <a href="">
               <span class="material-symbols-outlined">menu_book</span>
               Knowledge
             </a>
+            <hr />
           </li>
-          <hr />
           <li>
-            <a href="">
+            <a href="profile">
               <span class="material-symbols-outlined">manage_accounts</span>
               My Profile
             </a>
@@ -56,11 +66,18 @@
             >
           </li>
           <li>
+            <a href="/manager/" class="material-symbols-outlined">surfing</a>
+          </li>
+          <li>
             <a href="/knowledge/" class="material-symbols-outlined"
               >menu_book</a
             >
           </li>
-          <!-- <li><a href="#" class="material-symbols-outlined">mail</a></li> -->
+          <li>
+            <a href="/profile/" class="material-symbols-outlined"
+              >manage_accounts</a
+            >
+          </li>
         </ul>
       </nav>
     </aside>
@@ -73,7 +90,7 @@
           <h6>King Firat</h6>
           <p class="dimmed">Manager</p>
         </div>
-        <img src="https://placekitten.com/50/50" alt="" />
+        <img src="https://placekitten.com/50/50" alt="current user" />
         <p class="material-symbols-outlined dimmed">expand_more</p>
         <p class="material-symbols-outlined dimmed">logout</p>
       </div>
@@ -88,13 +105,12 @@
             <h3 class="title-card-small text-center">Client representative</h3>
             <div class="flex-col-center">
               <img
-                src="https://placekitten.com/50/50"
-                alt=""
+                src=""
+                alt="profile"
                 class="card-small-image"
+                id="client-image"
               />
-              <p class="card-small-text" id="client-representative">
-                Firat Batmaz
-              </p>
+              <p class="card-small-text" id="client-representative"></p>
             </div>
           </div>
 
@@ -104,12 +120,12 @@
               <p
                 class="card-small-text text-center-positioning"
                 id="client-info"
-              >
-                Mobile 1: +4478696969
-              </p>
+              ></p>
               <div class="link-list text-center">
-                <a href="" id="client-email"> Contact via email</a>
-                <a href="" id="client-web">Access website</a>
+                <a href="" id="client-email" target="_blank">
+                  Contact via email</a
+                >
+                <a href="" id="client-web" target="_blank">Access website</a>
               </div>
             </div>
           </div>
@@ -120,13 +136,7 @@
               <p
                 class="card-small-text text-center-positioning"
                 id="client-address"
-              >
-                Flat 69, block S <br />
-                The Holt <br />
-                Holt Drive <br />
-                Loughborough <br />
-                LE113JB
-              </p>
+              ></p>
               <div class="link-list text-center">
                 <a href="#">View on Google Maps</a>
               </div>
