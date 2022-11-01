@@ -1,6 +1,7 @@
 import * as api from "../api/core.js";
 import { currentUser, redirectLogin } from "../api/active.js";
 import { TaskState } from "../api/model/task.js";
+import { accountInfo } from "../navbar.js";
 
 /** @typedef {import("../api/model/user.js").User} User */
 /** @typedef {import("../api/model/task.js").Task} Task */
@@ -8,6 +9,8 @@ import { TaskState } from "../api/model/task.js";
 /** @typedef {import("../api/model/project.js").Project} Project */
 
 redirectLogin();
+
+accountInfo(currentUser);
 
 const kanbanSections = document.querySelectorAll(".kanban-section");
 if (kanbanSections.length != Object.entries(TaskState).length)

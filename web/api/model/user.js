@@ -62,6 +62,32 @@ export class User {
   }
 
   /**
+   * Obtains the url of this users profile picture.
+   * @param {Number} size The size (in pixels) of the image
+   * @returns {String} The URL to the profile picture
+   */
+  profilePicture(size = 50) {
+    return `https://ui-avatars.com/api/?name=${encodeURI(
+      this.name
+    )}&background=random&size=${size}&format=svg`;
+  }
+
+  /**
+   * @returns {String} Returns the title of the users rank
+   */
+  rankTitle() {
+    switch (this.rank) {
+      case UserRank.ProjectManager:
+        return "Manager";
+      case UserRank.TeamLeader:
+        return "Team Leader";
+      case UserRank.Employee: // Fallthrough
+      default:
+        return "Employee";
+    }
+  }
+
+  /**
    * Returns a collection of all tasks that this user has been assigned too, and the location they were assigned from.
    * @returns {Collection<TaskRef>} TaskRef objects contain a task, and the source that the task came from.
    */

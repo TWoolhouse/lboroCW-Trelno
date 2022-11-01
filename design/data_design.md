@@ -15,6 +15,8 @@ class User {
 	+tasklist() Collection~TaskRef~
 	+teamlist() Collection~TeamRef~
 	+projectlist() Collection~Project~
+	+profilePicture(size: Number?) String
+	+rankTitle() String
 }
 
 User "1" *-- "1" UserRank: rank

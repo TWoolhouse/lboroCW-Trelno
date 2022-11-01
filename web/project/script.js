@@ -2,6 +2,7 @@ import * as api from "../api/core.js";
 import { currentUser, redirectLogin } from "../api/active.js";
 import { TaskState } from "../api/model/task.js";
 import { Project } from "../api/model/project.js";
+import { accountInfo } from "../navbar.js";
 
 // // Create new Project
 // const id = (
@@ -18,6 +19,8 @@ const urlParams = new URLSearchParams(window.location.search);
 const project = await api.project(urlParams.get("id"));
 if (project == null); // Do something if the project can't be found and it was a broken link
 console.log("Project", project);
+
+accountInfo(currentUser);
 
 function setup() {
   document.querySelector("#project-name").innerHTML = project.name;
@@ -58,6 +61,7 @@ function createProjectMemberCard(user) {
   return /*HTML*/ `
     <div class="card-small bg-accent flex-col-center card-smaller">
       <h3 class="title-card-small">${user.name}</h3>
+      <img src=${user.profilePicture()}>
       <div class="link-list text-center">
               <a href="#">View Employee details</a>
       </div>
