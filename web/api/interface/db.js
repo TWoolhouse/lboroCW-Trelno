@@ -22,6 +22,10 @@ async function allAs(mapping, name, ...names) {
   );
 }
 
+export async function allProjects() {
+  return await allAs((project) => project, "Project");
+}
+
 export async function userTeams(userId) {
   return (
     await allAs((team) => {
@@ -46,30 +50,17 @@ export async function userProjectTasks(userId) {
         task: projectTask.task,
         source: TaskSrc.Project,
         projectTask: projectTask,
+        // project:
       };
     }, "ProjectTask")
   ).filter((ref) => {
-    return ref.projectTask.assignees
-      .all()
-      .snapshot.find((user) => user.id == userId);
+    return ref.projectTask.assignees.snapshot.find((user) => user.id == userId);
   });
 }
 
 export async function userProjects(userId) {
-  return (
-    await allAs((project) => {
-      return {
-        project: project,
-        manager: false,
-      };
-    }, "Project")
-  ).filter((ref) => {
-    if (ref.project.manager.id == userId) {
-      ref.manager = true;
-      return true;
-    }
-    return ref.project.assignees
-      .all()
-      .snapshot.filter((user) => user.id == userId);
-  });
+  const teams = (await userTeams(userId)).map((ref) => ref.team);
+  return (await allAs((p) => p, "Project")).filter((project) =>
+    teams.includes(project.team)
+  );
 }

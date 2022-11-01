@@ -6,8 +6,7 @@ const projectOverviewWrapper = document.querySelector(
 );
 
 currentUser.projectlist().onChange((event) => {
-  for (const ref of event.add) {
-    const project = ref.project;
+  for (const project of event.add) {
     projectOverviewWrapper.appendChild(
       HTMLasDOM(createProjectOverviewCard(project))
     );

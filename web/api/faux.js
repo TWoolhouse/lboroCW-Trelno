@@ -1,12 +1,9 @@
+import * as api from "./core.js";
 import { Memoize } from "./interface/memoize.js";
+import { TaskState } from "./model/task.js";
 import { User, UserRank } from "./model/user.js";
-import { Task, TaskState } from "./model/task.js";
-import { Team } from "./model/team.js";
-import { Project, ProjectTask } from "./model/project.js";
-import { Assignees } from "./model/assignees.js";
-import { Client } from "./model/client.js";
 
-await (async () => {
+export async function faux() {
   // TODO: Temporary Faux database saved in session storage
   if (sessionStorage.getItem("FAUX") != null) return;
   sessionStorage.setItem("FAUX", "1");
@@ -23,151 +20,76 @@ await (async () => {
     return arr;
   };
 
-  let task_count = 1;
-  let user_count = 2;
-  const users = [
-    await Memoize.Type(User).create(
-      new User(1, "king@makeitall.co.uk", UserRank.ProjectManager, "King Firat")
+  // Needed cause I need to ensure that user ID 1 always exists as it's the fallback.
+  const firat = await Memoize.Type(User).create(
+    new User(1, "king@makeitall.co.uk", UserRank.ProjectManager, "King Firat")
+  );
+  const leaders = [
+    await api.createUser("gary@makeitall.co.uk", UserRank.TeamLeader, "Gary"),
+    await api.createUser(
+      "mohammed@makeitall.co.uk",
+      UserRank.TeamLeader,
+      "Mohammed"
     ),
   ];
 
-  await Promise.all(
-    range(random(11, 5)).map(async (id) => {
-      id = task_count++;
-      const t = await Memoize.Type(Task).create(
-        new Task(
-          id,
-          random(3, 0),
-          `Task ${id}`,
-          Date.parse(`2022-${random(13, 11)}-${random(31, 1)}`),
-          random(7, 1), // Manhours
-          `Task Desc ${id} User`
-        )
-      );
-      users[0].tasks.add(t);
-      return t;
-    })
-  );
+  /** @const {Array<User>} users */
+  const users = [firat, ...leaders];
 
-  let assignees_count = 1;
-  const assignees = await Promise.all(
-    range(2).map((id) => {
-      id = assignees_count++;
-      return Memoize.Type(Assignees).create(new Assignees(id));
-    })
-  );
+  for (const it of range(random(8, 5))) {
+    firat.tasks.add(
+      await api.createTask(
+        random(TaskState.Done + 1, TaskState.Ready),
+        `Task #${it}`,
+        Date.parse(`2022-${random(13, 11)}-${random(31, 1)}`),
+        random(10, 1),
+        "User Task Description"
+      )
+    );
+  }
 
-  const team_leaders = [];
-  const teams = await Promise.all(
-    range(1).map(async (id) => {
-      const us = await Promise.all(
-        range(random(2, 1))
-          .map((id) => {
-            id = user_count++;
-            return new User(
-              id,
-              `u${id}@makeitall.co.uk`,
-              random(3, 0),
-              `UserName ${id}`
-            );
-          })
-          .map(async (user) => {
-            const u = await Memoize.Type(User).create(user);
-            const tasks = await Promise.all(
-              range(random(7, 2)).map((id) => {
-                id = task_count++;
-                return Memoize.Type(Task).create(
-                  new Task(
-                    id,
-                    random(3, 0),
-                    `Task ${id}`,
-                    Date.parse(`2022-${random(13, 11)}-${random(31, 1)}`),
-                    random(7, 1), // Manhours
-                    `Description: User Task}`
-                  )
-                );
-              })
-            );
-            u.tasks.add(...tasks);
-            return u;
-          })
-      );
-      users.push(...us);
-      const t = await Memoize.Type(Team).create(
-        new Team(
-          id,
-          users[random(users.length, 1)],
-          `Team ${id}`,
-          `Team Description ${id}`
-        )
-      );
-      team_leaders.push(t.leader);
-      t.users.add(
-        ...us.filter((user) => (user.id != 1) & !team_leaders.includes(user))
-      );
-      assignees[random(assignees.length)].teams.add(t);
-      return t;
-    })
-  );
-
-  let client = await Memoize.Type(Client).add(
-    new Client(
-      1,
-      "Client Company",
-      "Company Rep",
-      "Lboro Uni LE113UQ",
+  const clients = [
+    await api.createClient(
+      "Lboro",
+      "VC Nick",
+      "LE113UQ",
       "lboro.ac.uk",
-      "G.Storey@lboro.ac.uk",
+      "cotrw@lunet.lboro.ac.uk",
       "020 7935 0341"
-    )
+    ),
+  ];
+
+  const projects = [
+    await api.createProject(
+      leaders[0],
+      clients[0],
+      Date.now(),
+      Date.parse(`2022-${random(13, 11)}-${random(31, 1)}`),
+      "Really Cool Idea",
+      "This is a really cool idea for a project ngl."
+    ),
+  ];
+
+  projects[0].team.users.add(
+    await api.createUser("coah@makeitall.co.uk", UserRank.Employee, "Adam"),
+    await api.createUser("coa?@makeitall.co.uk", UserRank.Employee, "Arshad"),
+    await api.createUser("cocc@makeitall.co.uk", UserRank.Employee, "Calin"),
+    await api.createUser("coj?@makeitall.co.uk", UserRank.Employee, "Jack"),
+    await api.createUser("cor?@makeitall.co.uk", UserRank.Employee, "Rowan"),
+    await api.createUser("cotrw@makeitall.co.uk", UserRank.Employee, "Tom")
   );
 
-  let project_task_count = 1;
-  const projects = await Promise.all(
-    range(2)
-      .map(async (id) => {
-        let project = new Project(
-          id,
-          users[0],
-          client,
-          new Date(2022, 9, random(31, 1)),
-          new Date(2022, 11, random(31, 1)),
-          `Project ${id}`,
-          assignees[id - 1]
-        );
-        project.tasks.add(
-          ...(await Promise.all(
-            range(random(4, 2)).map((id) => {
-              const pid = project_task_count++;
-              const tid = task_count++;
-              let t = new Task(
-                tid,
-                random(3, 0),
-                `Task ${tid}`,
-                Date.parse(`2022-${random(13, 11)}-${random(31, 1)}`),
-                random(7, 1), // Manhours
-                `Task Desc ${tid} Project`
-              );
-              let assign = new Assignees(assignees_count++);
-              for (const user of project.assignees.all())
-                if (Math.random() > 0.5) assign.users.add(user);
-
-              return Memoize.Type(Task)
-                .create(t)
-                .then((t) => {
-                  return Memoize.Type(Assignees)
-                    .create(assign)
-                    .then((assign) => {
-                      return Memoize.Type(ProjectTask).create(
-                        new ProjectTask(pid, t, assign)
-                      );
-                    });
-                });
-            })
-          ))
-        );
-        return project;
-      })
-      .map(async (project) => await Memoize.Type(Project).create(await project))
-  );
-})();
+  for (const it of range(random(8, 2))) {
+    projects[0].tasks.add(
+      await api.createProjectTask(
+        await api.createTask(
+          random(TaskState.Done + 1, TaskState.Ready),
+          "Task Project",
+          Date.parse(`2022-${random(13, 11)}-${random(31, 1)}`),
+          random(7, 1),
+          "Project Task Description"
+        )
+      )
+    );
+  }
+}

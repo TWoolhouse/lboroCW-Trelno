@@ -3,7 +3,12 @@ import { Memoize, MemoizePair } from "../interface/memoize.js";
 import { CollectionDB } from "../interface/collectionDB.js";
 import { Task, TaskSrc } from "./task.js";
 import { Collection } from "../interface/collection.js";
-import { userProjects, userProjectTasks, userTeams } from "../interface/db.js";
+import {
+  allProjects,
+  userProjects,
+  userProjectTasks,
+  userTeams,
+} from "../interface/db.js";
 
 /** @typedef {import("./team.js").Team} Team */
 /** @typedef {import("./project.js").Project} Project */
@@ -86,20 +91,20 @@ export class User {
   }
 
   /**
-   * @typedef ProjectRef
-   * @type {Object}
-   * @property {Project} project The project
-   * @property {Boolean} leader Is this user the leader of the project
-   */
-
-  /**
-   * Returns a collection of all the teams that this user is a part of.
-   * @returns {Collection<ProjectRef>}
+   * Returns a collection of all the projects that this user is a part of.
+   * If they are a manager, it returns all of the projects in the system.
+   * @returns {Collection<Project>}
    */
   projectlist() {
-    userProjects(this.id).then((values) => {
-      this._projectlist.addIf((ref) => ref.project.id, ...values);
-    });
+    if (this.rank >= UserRank.ProjectManager) {
+      allProjects().then((values) => {
+        this._projectlist.add(...values);
+      });
+    } else {
+      userProjects(this.id).then((values) => {
+        this._projectlist.add(...values);
+      });
+    }
     return this._projectlist;
   }
 

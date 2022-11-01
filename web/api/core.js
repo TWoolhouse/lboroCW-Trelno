@@ -5,8 +5,7 @@ import { Team } from "./model/team.js";
 import { Project, ProjectTask } from "./model/project.js";
 import { Client } from "./model/client.js";
 
-import {} from "../api/faux.js";
-import { Assignees } from "./model/assignees.js";
+import { faux } from "../api/faux.js";
 
 /** @typedef {import("./model/user.js").UserRank} UserRank */
 
@@ -27,6 +26,13 @@ export async function user(id) {
 export async function task(id) {
   return Memoize.Type(Task).get(id);
 }
+/**
+ * @param {Number} id The ProjectTaskID
+ * @returns {Promise<ProjectTask>}
+ */
+export async function projectTask(id) {
+  return Memoize.Type(ProjectTask).get(id);
+}
 
 /**
  * @param {Number} id The TeamID
@@ -45,27 +51,11 @@ export async function project(id) {
 }
 
 /**
- * @param {Number} id The ProjectTaskID
- * @returns {Promise<ProjectTask>}
- */
-export async function projectTask(id) {
-  return Memoize.Type(ProjectTask).get(id);
-}
-
-/**
  * @param {Number} id The ClientID
  * @returns {Promise<Client>}
  */
 export async function client(id) {
   return Memoize.Type(Client).get(id);
-}
-
-/**
- * @param {Number} id The AssigneesID
- * @returns {Promise<Assignees>}
- */
-export async function assignees(id) {
-  return Memoize.Type(Assignees).get(id);
 }
 
 // TYPE FACTORIES
@@ -92,16 +82,12 @@ export async function createTask(state, name, deadline, manhours, description) {
 }
 
 /**
- * Creates a new project task
- * @param {Task} task The task to become a project task.
+ * Creates a new ProjectTask
+ * @param {Task} task
  * @returns {Promise<ProjectTask>}
  */
 export async function createProjectTask(task) {
-  const t = new ProjectTask(
-    await id_gen(projectTask),
-    task,
-    await createAssignees()
-  );
+  let t = new ProjectTask(await id_gen(projectTask), task);
   return await Memoize.Type(ProjectTask).create(t);
 }
 
@@ -113,18 +99,17 @@ export async function createProjectTask(task) {
  * @returns {Promise<User>}
  */
 export async function createUser(email, rank, name) {
-  let obj = new User(await id_gen(user), email);
+  let obj = new User(await id_gen(user), email, rank, name);
   return await Memoize.Type(User).create(obj);
 }
 
 /**
  * Creates a new team
  * @param {User} leader Team Leader Uesr
- * @param {String} name Users full name
  * @returns {Promise<Team>}
  */
-export async function createTeam(leader, name) {
-  let obj = new Team(await id_gen(team), leader, name);
+export async function createTeam(leader) {
+  let obj = new Team(await id_gen(team), leader);
   return await Memoize.Type(Team).create(obj);
 }
 
@@ -160,34 +145,32 @@ export async function createClient(
 }
 
 /**
- * @param {User} manager The project manager
+ * @param {User} teamLeader The project manager
  * @param {Client} client The client the project is for.
  * @param {Number} created Datetime the project was created
  * @param {Number} deadline Datetime the project should be completed by
  * @param {String} name Display name of the project
+ * @param {String} [desc] Project description
  * @returns {Promise<Project>}
  */
-export async function createProject(manager, client, created, deadline, name) {
+export async function createProject(
+  teamLeader,
+  client,
+  created,
+  deadline,
+  name,
+  desc
+) {
   let obj = new Project(
     await id_gen(project),
-    manager,
+    await createTeam(teamLeader),
     client,
     created,
     deadline,
     name,
-    await createAssignees()
+    desc
   );
   return await Memoize.Type(Project).create(obj);
-}
-
-/**
- * Creates a new set of assignees
- * @returns {Promise<Assignees>}
- */
-export async function createAssignees() {
-  return await Memoize.Type(Assignees).create(
-    new Assignees(await id_gen(assignees))
-  );
 }
 
 // HELPER FAUX GENERATOR
@@ -207,4 +190,5 @@ async function id_gen(func) {
 }
 
 // import { memoized } from "./interface/memoize.js";
+await faux();
 // console.log(memoized);

@@ -14,7 +14,7 @@ class User {
 	+tasks: Collection~Task~
 	+tasklist() Collection~TaskRef~
 	+teamlist() Collection~TeamRef~
-	+projectlist() Collection~ProjectRef~
+	+projectlist() Collection~Project~
 }
 
 User "1" *-- "1" UserRank: rank
@@ -25,8 +25,25 @@ class UserRank {
 	ProjectManager = 2
 }
 
+User "1" o-- "0..n" Task: tasks
+class Task {
+	+id: Int
+	+state: TaskState
+	+deadline: Number
+	+manhours: Number
+	+name: String
+	+desc: String?
+}
+TaskState "0..n" --o "1" Task: state
+class TaskState {
+	<<enum>>
+	Ready = 0
+	Active = 1
+	Done = 2
+}
+
 User "1" *-- "0..n" TaskRef: tasklist()
-Task "1" --o "1" TaskRef: task
+TaskRef "1" o-- "1" Task: task
 class TaskRef {
 	<<Object>>
 	+task: Task
@@ -43,56 +60,61 @@ class TaskSrc {
 class Team {
 	+id: Int
 	+leader: User
-	+name: String
 	+users: Collection~User~
 }
 
-User "1" o-- "1" Task: tasks
-class Task {
-	+id: Int
-	+done: Boolean
-	+name: String
-}
-
-Task "1" --o "1" ProjectTask: task
-ProjectTask "0..n" --* "1" Project: tasks
-ProjectTask "1" *-- "1" Assignees: assignees
+User "0.n" --o "0..n" ProjectTask: users
+Task "0..n" --o "1" ProjectTask: task
 class ProjectTask {
 	+id: Int
 	+task: Task
-	+users: Assignees
+	+assignees: Collection~User~
 }
-Project "1" *-- "1" Assignees: assignees
+Team "1" --o "1" Project: team
+ProjectTask "0..n" --o "1" Project: tasks
 class Project {
 	+id: Int
-	+manager: User
-	+created: Datetime
-	+deadline: Datetime
+	+team: Team
+	+client: Client
+	+created: Number
+	+deadline: Number
 	+name: String
-	+tasks: Collection~ProjectTask~
-	+assignees: Assignees
-	+users() Collection~User~
+	+desc: String
+	+tasks: Collection~Task~
 	+progress() Float
 }
-User "0..n" --o "0..n" Assignees: users
-Team "0..n" --o "0..n" Assignees: teams
-class Assignees {
-	+id: Int
-	+users: Collection~User~
-	+teams: Collection~Team~
-	+all() Collection~User~
+
+Client "0..n" --* "1" Project: client
+class Client {
+  +id: Number
+  +name: String
+  +representative: String
+  +address: String
+  +website: String
+  +email: String
+  +phone: String
 }
 
-Post "0..n" --* "1..n" Topic
-class Post {
-	+id: Int
-	+?Data: String
-}
+Topic "1" *-- "0..n" Post: topic
 class Topic {
 	+id: Int
 	+name: String
-	+posts() Set~Post~
+	+posts() Array~Post~
 }
+User "0..n" --o "1" Post: owner
+class Post {
+	+id: Int
+	+topic: Topic
+	+owner: User
+	+title: String
+	+markdown: String
+	+created: Number
+}
+
+```
+
+```mermaid
+classDiagram
 
 class Collection~T~ {
 	+Collection(...items: T)

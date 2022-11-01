@@ -3,54 +3,42 @@ import { currentUser, redirectLogin } from "../api/active.js";
 import { TaskState } from "../api/model/task.js";
 import { Project } from "../api/model/project.js";
 
-// Create new Project
-const id = (
-  await api.createProject(
-    await api.user(1),
-    1667059483,
-    1668959318,
-    "New Project"
-  )
-).id;
+// // Create new Project
+// const id = (
+//   await api.createProject(
+//     await api.user(1),
+//     1667059483,
+//     1668959318,
+//     "New Project"
+//   )
+// ).id;
 
 // Read query string parameters
 const urlParams = new URLSearchParams(window.location.search);
-const projectId = urlParams.get("id");
+const project = await api.project(urlParams.get("id"));
+if (project == null); // Do something if the project can't be found and it was a broken link
+console.log("Project", project);
 
-// Get project details
-await api.project(id).then((projectResponse) => {
-  document.querySelector("#project-name").innerHTML = projectResponse.name;
-  document.querySelector("#project-manager").innerHTML =
-    projectResponse.manager.name;
-  setProjectDeadlineDate(projectResponse.deadline);
-  projectResponse.tasks.onChange((event) =>
+function setup() {
+  document.querySelector("#project-name").innerHTML = project.name;
+  document.querySelector("#project-description").innerHTML = project.desc;
+  document.querySelector("#project-leader").innerHTML =
+    project.team.leader.name;
+  setProjectDeadlineDate(project.deadline);
+
+  project.team.users.onChange((event) => event.add.map(addMember));
+
+  project.tasks.onChange((event) =>
     updateProgressBar(event.all.map((pt) => pt.task))
   ); // no idea how this works
-  projectResponse.assignees.users.onChange((event) => updateMembers(event.add));
-  projectResponse.assignees.teams.onChange((event) =>
-    setProjectTeam(event.add)
-  );
-  // updateMembers(projectResponse.users());
-  // Not implemented yet
-  // document.querySelector("#project-description").innerHTML =
-  //   projectResponse.desc;
-  // document.querySelector("#project-client").innerHTML = projectResponse.client;
-});
-
-// Set project team
-function setProjectTeam(teams) {
-  let teamNameHTML = document.querySelector("#team-name");
-  for (const team of teams) {
-    teamNameHTML.innerHTML = team.name;
-  }
 }
 
+setup();
+
 // Update assignee list
-function updateMembers(users) {
+function addMember(user) {
   const projectMembersWrap = document.querySelector("#project-members-wrap");
-  for (const user of users) {
-    projectMembersWrap.appendChild(HTMLasDOM(createProjectMemberCard(user)));
-  }
+  projectMembersWrap.appendChild(HTMLasDOM(createProjectMemberCard(user)));
 }
 
 /**
@@ -67,7 +55,7 @@ function HTMLasDOM(html) {
 }
 
 function createProjectMemberCard(user) {
-  return `
+  return /*HTML*/ `
     <div class="card-small bg-accent flex-col-center card-smaller">
       <h3 class="title-card-small">${user.name}</h3>
       <div class="link-list text-center">
@@ -83,7 +71,8 @@ function updateProgressBar(tasks) {
   const tasksDone = tasks.filter((task) => task.state == TaskState.Done).length;
   const percentageDone = (tasksDone / (totalTasks == 0 ? 1 : totalTasks)) * 100;
 
-  document.querySelector("#percentageDone").innerHTML = percentageDone + "%";
+  document.querySelector("#percentageDone").innerHTML =
+    percentageDone.toFixed(1) + "%";
   document.querySelector("#tasksDone").innerHTML =
     tasksDone + "/" + totalTasks + " tasks done";
 
@@ -97,7 +86,7 @@ function updateProgressBar(tasks) {
 
 // Set project deadline date
 function setProjectDeadlineDate(deadlineUnix) {
-  const projectDeadlineDate = new Date(deadlineUnix * 1000);
+  const projectDeadlineDate = new Date(deadlineUnix);
   const projectDeadlineDateFormatted = projectDeadlineDate.toLocaleDateString(
     "en-gb",
     {
