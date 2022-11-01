@@ -1,4 +1,5 @@
 import { user } from "./core.js";
+import { User } from "./model/user.js";
 
 const KEY = "userid";
 
@@ -43,4 +44,14 @@ export function redirectLogin() {
   if (currentUser != undefined) return;
   setUser(1);
   window.location.reload();
+}
+
+/**
+ * Sets the currently logged-in user
+ * @param {Number} user The UserID
+ * @returns {Number}
+ */
+export function setActiveUser(user) {
+  setUser(user);
+  return user;
 }

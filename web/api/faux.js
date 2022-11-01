@@ -20,24 +20,60 @@ export async function faux() {
     return arr;
   };
 
-  // Needed cause I need to ensure that user ID 1 always exists as it's the fallback.
-  const firat = await Memoize.Type(User).create(
-    new User(1, "king@makeitall.co.uk", UserRank.ProjectManager, "King Firat")
+  const userKing = await api.createUser(
+    "king@make-it-all.co.uk",
+    UserRank.ProjectManager,
+    "Neumann",
+    1
   );
+  const userQueen = await api.createUser(
+    "queen@make-it-all.co.uk",
+    UserRank.ProjectManager,
+    "Queen",
+    2
+  );
+
   const leaders = [
-    await api.createUser("gary@makeitall.co.uk", UserRank.TeamLeader, "Gary"),
     await api.createUser(
-      "mohammed@makeitall.co.uk",
+      "dilip@make-it-all.co.uk",
       UserRank.TeamLeader,
-      "Mohammed"
+      "Dilip",
+      3
+    ),
+    await api.createUser(
+      "Emma@make-it-all.co.uk",
+      UserRank.TeamLeader,
+      "Emma",
+      4
+    ),
+  ];
+
+  const employees = [
+    await api.createUser(
+      "alice@make-it-all.co.uk",
+      UserRank.Employee,
+      "Alice",
+      5
+    ),
+    await api.createUser(
+      "bert@make-it-all.co.uk",
+      UserRank.Employee,
+      "Bert",
+      6
+    ),
+    await api.createUser(
+      "clara@make-it-all.co.uk",
+      UserRank.Employee,
+      "Clara",
+      7
     ),
   ];
 
   /** @const {Array<User>} users */
-  const users = [firat, ...leaders];
+  const users = [userKing, userQueen, ...leaders];
 
   for (const it of range(random(8, 5))) {
-    firat.tasks.add(
+    userKing.tasks.add(
       await api.createTask(
         random(TaskState.Done + 1, TaskState.Ready),
         `Task #${it}`,
@@ -71,12 +107,12 @@ export async function faux() {
   ];
 
   projects[0].team.users.add(
-    await api.createUser("coah@makeitall.co.uk", UserRank.Employee, "Adam"),
-    await api.createUser("coa?@makeitall.co.uk", UserRank.Employee, "Arshad"),
-    await api.createUser("cocc@makeitall.co.uk", UserRank.Employee, "Calin"),
-    await api.createUser("coj?@makeitall.co.uk", UserRank.Employee, "Jack"),
-    await api.createUser("cor?@makeitall.co.uk", UserRank.Employee, "Rowan"),
-    await api.createUser("cotrw@makeitall.co.uk", UserRank.Employee, "Tom")
+    await api.createUser("coah@make-it-all.co.uk", UserRank.Employee, "Adam"),
+    await api.createUser("coa?@make-it-all.co.uk", UserRank.Employee, "Arshad"),
+    await api.createUser("cocc@make-it-all.co.uk", UserRank.Employee, "Calin"),
+    await api.createUser("coj?@make-it-all.co.uk", UserRank.Employee, "Jack"),
+    await api.createUser("cor?@make-it-all.co.uk", UserRank.Employee, "Rowan"),
+    await api.createUser("cotrw@make-it-all.co.uk", UserRank.Employee, "Tom")
   );
 
   for (const it of range(random(8, 2))) {

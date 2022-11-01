@@ -96,10 +96,11 @@ export async function createProjectTask(task) {
  * @param {String} email Email Address
  * @param {Number} rank A UserRank
  * @param {String} name Users full name
+ * @param {Number} [id] The ID to give this user
  * @returns {Promise<User>}
  */
-export async function createUser(email, rank, name) {
-  let obj = new User(await id_gen(user), email, rank, name);
+export async function createUser(email, rank, name, id) {
+  let obj = new User(await createID(id, user), email, rank, name);
   return await Memoize.Type(User).create(obj);
 }
 
@@ -175,6 +176,13 @@ export async function createProject(
 
 // HELPER FAUX GENERATOR
 // //TODO: Move this to faux / memoize
+
+async function createID(id, getter) {
+  if (id === undefined) {
+    return await id_gen(getter);
+  }
+  return id;
+}
 
 /**
  * Creates a new ID for the type
