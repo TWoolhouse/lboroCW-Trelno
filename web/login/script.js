@@ -4,6 +4,11 @@ if (currentUser) window.location.href = "/dashboard/";
 
 const users = [
   {
+    email: "test",
+    password: "pw",
+    id: 1,
+  },
+  {
     email: "king@make-it-all.co.uk",
     password: "pleasegiveusgoodmarks",
     id: 1,
@@ -46,12 +51,14 @@ const users = [
  * @param {string} password
  * @returns success and the UserID if valid credentials, else error
  */
-export async function login(email, password) {
-  if (!email.endsWith("@make-it-all.co.uk"))
-    return {
-      status: "error",
-      message: "Invalid Email",
-    };
+export function login(email, password) {
+  console.log(email, password);
+  // FIXME: Makes life easier when testing the program
+  // if (!email.endsWith("@make-it-all.co.uk"))
+  //   return {
+  //     status: "error",
+  //     message: "Invalid Email",
+  //   };
 
   const match = users.filter(
     (user) => user.email == email && user.password == password
@@ -70,3 +77,16 @@ export async function login(email, password) {
     };
   }
 }
+
+document
+  .querySelector("form.login-form")
+  .addEventListener("submit", (event) => {
+    const form = event.target;
+    const response = login(
+      form.querySelector(`[name="email"]`).value,
+      form.querySelector(`[name="password"]`).value
+    );
+    if (response.user) return;
+    event.preventDefault();
+    return false;
+  });

@@ -22,14 +22,24 @@
     <!--add the information for this when functionality is added-->
 
     <div class="wrapper">
-      <form class="login-form" name="loginForm" action="" method="post">
+      <form
+        class="login-form"
+        name="loginForm"
+        action="/dashboard/"
+        method="get"
+      >
         <label id="title">Member Login</label>
         <label id="subtitle"
           >Welcome to Make-It-All, enter your employee details below to login to
           the system</label
         >
         <input name="email" type="text" placeholder="Email" required />
-        <input type="password" placeholder="Password" required />
+        <input
+          name="password"
+          type="password"
+          placeholder="Password"
+          required
+        />
         <input type="submit" id="submit-button" value="Login" />
         <!--need to add form validation though js? And potientially some hover colour changes just to make it look cool idk-->
       </form>
