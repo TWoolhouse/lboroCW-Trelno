@@ -5,7 +5,7 @@ export async function topics() {
   const topics = await api.topics();
   const select = document.querySelector(".search .dropdown-topic");
   select.innerHTML = createTopicOptionHTML({ id: "", name: "Any Topic" });
-  for (const topic of topics)
+  for (const topic of topics.sort((a, b) => a.name.localeCompare(b.name)))
     select.appendChild(HTMLasDOM(createTopicOptionHTML(topic)));
   return select;
 }
