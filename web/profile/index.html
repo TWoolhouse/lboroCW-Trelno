@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#1e1e1e" />
+<<<<<<< Updated upstream
+=======
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <script type="module" src="./script.js"></script>
+
+>>>>>>> Stashed changes
 
     <link rel="stylesheet" href="/base.css" />
     <script type="module" src="script.js"></script>
@@ -96,8 +103,89 @@
       </div>
     </header>
     <main>
+<<<<<<< Updated upstream
       <h2>NEEDS DOING</h2>
       <a href="edit/">GO TO MY PROFILE EDIT PAGE</a>
+=======
+      <section class="card">
+        <div class="card-title-wrapper">
+          <h2 class="title-card">King Firat</h2>
+          <h2 class="title-card">Account</h2>
+        </div>
+        <div class="card-image-wrapper">
+          <hr class="solid">
+        <!--This part below will eventually only need to show if the user is actually a manager-->
+          <h1 class="heirarchy-card">Manager</h1>
+          <img class="card-profile-picture" src="https://placekitten.com/50/50" alt="" />
+        </div>
+        <div class="card-button-wrapper">
+          <button class="card-upload-button">
+            <p>Upload photo</p>
+          </button>
+        </div>
+        <div class="card-customisation-wrapper">
+          <div class="wrapper-appearance">
+            <hr class="solid">
+            <h1 class="h1">Appearance</h1>
+            <label for="theme" class="label-subtext">Customize how Make-It-All looks on your device</label>
+            <select name="theme" class="theme">
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </div>
+          <div class="wrapper-password">
+            <hr class="solid">
+            <h1 class="h1">Password</h1>
+            <label for="change-password-btn" class="label-subtext">Change your password to a more memorable one</label>
+            <button class="change-password-btn" data-action="change-password">
+              <p>Change Password</p>
+            </button>
+          </div>
+          <div class="wrapper-email">
+            <hr class="solid">
+            <h1 class="h1">My Email</h1>
+            <label for="email-box" class="label-subtext">This is your assigned company email</label>
+            <label class="email-box">f.batmaz@lboro.ac.uk</label>
+            <img class="email-lock-img" src="./lock.png" alt="" />
+          </div>
+          <div class="wrapper-invite">
+            <hr class="solid">
+            <h1 class="h1">Invite Others</h1>
+            <label for="invite-btn" class="label-subtext">Invite your co-workers who have not yet signed up</label>
+            <button class="invite-btn" data-action="invite-employee">
+              <p>Invite</p>
+            </button>
+            <hr class="solid">
+          </div>
+          <div class ="wrapper-logout">
+            <button class="logout-btn" onclick="location.href='/login/'">
+              <p>Logout</p>
+            </button>
+          </div>
+
+
+
+        </div>
+
+
+      </div>
+      </section>
+>>>>>>> Stashed changes
     </main>
+
+
+    <dialog class="modal" id="dialog-upload-photo">
+      <div class="flex-row kanban-title">
+        <h2 class="title-card">Upload photo</h2>
+        <button class="material-symbols-outlined btn-icon dialog-close">
+          close
+        </button>
+      </div>
+      <form class="modal-form">
+        <label for="img">Select image:</label>
+        <input type="file" id="img" name="img" accept="image/*">
+        <input type="submit">
+      </form>
+    </dialog>
   </body>
 </html>
