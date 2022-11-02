@@ -6,23 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#1e1e1e" />
-
-    <link rel="icon" type="image/svg" href="/tools.svg" />
     <link rel="stylesheet" href="/base.css" />
-    <link rel="stylesheet" href="/knowledge/post/base.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <script type="module" src="script.js"></script>
 
-    <script
-      defer
-      src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"
-    ></script>
-    <script defer type="module" src="script.js"></script>
-
-    <title>Edit A Post</title>
+    <title>Profile page</title>
   </head>
 
-  <body>
-    <dialog class="nav-mobile">
+  <body>    <dialog class="nav-mobile">
       <div class="flex-row kanban-title">
         <h2>Menu</h2>
         <button class="btn-icon material-symbols-outlined dialog-close">
@@ -46,14 +37,14 @@
             <hr />
           </li>
           <li>
-            <a href="/knowledge/" data-active>
+            <a href="/knowledge/">
               <span class="material-symbols-outlined">menu_book</span>
               Knowledge
             </a>
             <hr />
           </li>
           <li>
-            <a href="/profile/">
+            <a href="/profile/" data-active>
               <span class="material-symbols-outlined">manage_accounts</span>
               My Profile
             </a>
@@ -73,12 +64,12 @@
           <li>
             <a href="/manager/" class="material-symbols-outlined">surfing</a>
           </li>
-          <li data-active>
+          <li>
             <a href="/knowledge/" class="material-symbols-outlined"
               >menu_book</a
             >
           </li>
-          <li>
+          <li data-active>
             <a href="/profile/" class="material-symbols-outlined"
               >manage_accounts</a
             >
@@ -87,7 +78,7 @@
       </nav>
     </aside>
     <header class="header">
-      <h1>Knowledge Management</h1>
+      <h1>Profile Editing</h1>
       <button class="mobile-nav-toggle material-symbols-outlined">menu</button>
       <div class="account-info flex-row">
         <div class="flex-col">
@@ -104,45 +95,68 @@
       </div>
     </header>
     <main>
-      <section id="post" class="card sandwich">
-        <div class="col-container">
-          <div class="col-start account-post">
-            <img
-              src="https://placekitten.com/50/50"
-              alt="User Profile Picture"
-            />
-            <span class="title">Posted By</span>
-            <span class="user-name">KING FIRAT</span>
-            <span class="user-rank">Manager</span>
-          </div>
-          <h2 class="title-card col-centre">Edit Post</h2>
-          <h2 class="title-card col-centre hidden">Preview</h2>
-          <div class="flex-row col-end">
-            <button type="button" class="btn-action preview-switch-into">
-              <p>Preview</p>
-              <span class="material-symbols-outlined">visibility</span>
-            </button>
-            <button type="button" class="btn-action preview-switch-from hidden">
-              <p>Edit</p>
-              <span class="material-symbols-outlined">edit</span>
-            </button>
-            <button type="submit" class="btn-action save">
-              <p>Save</p>
-              <span class="material-symbols-outlined">save</span>
-            </button>
-          </div>
+      <section class="card">
+        <div class="card-title-wrapper">
+          <h2 class="title-card">King Firat</h2>
+          <h2 class="title-card">Account</h2>
         </div>
-        <form action="/knowledge/post/" class="modal-form">
-          <textarea
-            name="post"
-            placeholder="# Title&#10;&#10;## Subtitle&#10;&#10;Interesting content&#10;- Bullet Point 1&#10;- Bullet Point 2&#10;- Bullet Point 3&#10;"
-            required
-          ></textarea>
-        </form>
-        <div id="preview"></div>
-        <div class="col-container">
-          <span class="col-centre">07/05/2022</span>
+        <div class="card-image-wrapper">
+          <hr class="solid">
+        <!--This part below will eventually only need to show if the user is actually a manager-->
+          <h1 class="heirarchy-card">Manager</h1>
+          <img class="card-profile-picture" src="https://placekitten.com/50/50" alt="" />
         </div>
+        <div class="card-button-wrapper">
+          <button class="card-upload-button" data-action="upload-photo">
+            <p>Upload photo</p>
+          </button>
+        </div>
+        <div class="card-customisation-wrapper">
+          <div class="wrapper-appearance">
+            <hr class="solid">
+            <h1 class="h1">Appearance</h1>
+            <label for="theme" class="label-subtext">Customize how Make-It-All looks on your device</label>
+            <select name="theme" class="theme">
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </div>
+          <div class="wrapper-password">
+            <hr class="solid">
+            <h1 class="h1">Password</h1>
+            <label for="change-password-btn" class="label-subtext">Change your password to a more memorable one</label>
+            <button class="change-password-btn" data-action="change-password">
+              <p>Change Password</p>
+            </button>
+          </div>
+          <div class="wrapper-email">
+            <hr class="solid">
+            <h1 class="h1">My Email</h1>
+            <label for="email-box" class="label-subtext">This is your assigned company email</label>
+            <label class="email-box">f.batmaz@lboro.ac.uk</label>
+            <img class="email-lock-img" src="./lock.png" alt="" />
+          </div>
+          <div class="wrapper-invite">
+            <hr class="solid">
+            <h1 class="h1">Invite Others</h1>
+            <label for="invite-btn" class="label-subtext">Invite your co-workers who have not yet signed up</label>
+            <button class="invite-btn" data-action="invite-employee">
+              <p>Invite</p>
+            </button>
+            <hr class="solid">
+          </div>
+          <div class ="wrapper-logout">
+            <button class="logout-btn">
+              <p>Logout</p>
+            </button>
+          </div>
+
+
+
+        </div>
+
+
+      </div>
       </section>
     </main>
   </body>

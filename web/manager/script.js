@@ -1,8 +1,7 @@
-import { currentUser, redirectLogin } from "../api/active.js";
+import { currentUser } from "../api/active.js";
 import { TaskState } from "../api/model/task.js";
 import { navbar, HTMLasDOM } from "../nav.js";
 
-redirectLogin();
 navbar();
 
 const projectOverviewWrapper = document.querySelector(

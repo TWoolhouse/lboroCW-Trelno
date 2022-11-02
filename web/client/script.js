@@ -1,5 +1,9 @@
 import * as api from "../api/core.js";
-import { currentUser, redirectLogin } from "../api/active.js";
+import { navbar } from "../nav.js";
+import { redirectLogin } from "../api/active.js";
+
+redirectLogin();
+navbar();
 
 // Read query string parameters
 const urlParams = new URLSearchParams(window.location.search);

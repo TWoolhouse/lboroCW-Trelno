@@ -1,11 +1,7 @@
 import * as api from "../api/core.js";
-import { currentUser, redirectLogin } from "../api/active.js";
-import { TaskState } from "../api/model/task.js";
-import { Project } from "../api/model/project.js";
 import { HTMLasDOM, navbar } from "../nav.js";
 import { kanban } from "../kanban.js";
 
-redirectLogin();
 navbar();
 
 // Read query string parameters

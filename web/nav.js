@@ -1,4 +1,5 @@
-import { currentUser, logout } from "./api/active.js";
+import { currentUser, logout, redirectLogin } from "./api/active.js";
+import { UserRank } from "./api/model/user.js";
 
 const _wrapper = document.createElement("div");
 /**
@@ -39,8 +40,19 @@ function accountInfo() {
   info.querySelector("img").src = currentUser.profilePicture();
 }
 
+function managerView() {
+  if (currentUser.rank < UserRank.ProjectManager)
+    for (const selector of [
+      '.side-menu [href="/manager/"]',
+      '.nav-mobile [href="/manager/"]',
+    ])
+      document.querySelector(selector).parentElement.classList.add("hidden");
+}
+
 export function navbar() {
+  redirectLogin();
   mobileNavigation();
   loggingOut();
+  managerView();
   accountInfo();
 }
