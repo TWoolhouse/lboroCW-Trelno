@@ -1,0 +1,15 @@
+import * as api from "../../api/core.js";
+const urlParams = new URLSearchParams(window.location.search);
+export const post = await api.post(urlParams.get("id"));
+
+if (post == undefined) window.location.href = "/dashboard/";
+console.log("Post", post);
+
+const ownerDOM = document.querySelector(".account-post");
+ownerDOM.querySelector(".user-name").innerHTML = post.owner.name;
+ownerDOM.querySelector(".user-rank").innerHTML = post.owner.rankTitle();
+ownerDOM.querySelector("img").src = post.owner.profilePicture();
+
+document.querySelector("#post-date").innerHTML = new Date(
+  post.created
+).toLocaleDateString();

@@ -3,6 +3,8 @@ import { Collection } from "../interface/collection.js";
 import * as db from "../interface/db.js";
 import { Memoize } from "../interface/memoize.js";
 
+/** @typedef {import("./user").User} User */
+
 export class Topic {
   /** @property {Number} id The TopicID */
   id;

@@ -34,7 +34,7 @@ function createPostSearchResultHTML(post) {
       <div class="topic">
         <a href="./?topic=${post.topic.id}" class="btn-action">
           <p>${post.topic.name}</p>
-          <span class="material-symbols-outlined">Topic</span>
+          <span class="material-symbols-outlined">topic</span>
         </a>
       </div>
       <div class="account">
@@ -47,7 +47,7 @@ function createPostSearchResultHTML(post) {
   }</a>
         <span class="user-rank">${post.owner.rankTitle()}</span>
       </div>
-      <span>${post.created}</span>
+      <span>${new Date(post.created).toLocaleDateString()}</span>
     </aside>
     <main>
       <h2>${post.title}</h2>
