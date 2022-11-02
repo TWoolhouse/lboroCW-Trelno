@@ -12,8 +12,8 @@ export class Topic {
   name;
 
   /**
-   * @param {*} id The TopicID
-   * @param {*} name The name of the topic
+   * @param {Number} id The TopicID
+   * @param {String} name The name of the topic
    */
   constructor(id, name) {
     if (!cereal.cereal(this, id)) {
