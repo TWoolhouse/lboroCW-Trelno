@@ -3,6 +3,40 @@ import { TaskState } from "../api/model/task.js";
 import { navbar, HTMLasDOM } from "../nav.js";
 
 navbar();
+import * as api from "../api/core.js";
+
+const newProject = document.querySelector("button[data-action='new-project']");
+const newProjectDialog = document.querySelector("#dialog-new-project");
+
+newProject.addEventListener("click", () => {
+  newProjectDialog.showModal();
+  const closeBtn = newProjectDialog.querySelector(".dialog-close");
+  closeBtn.addEventListener("click", () => {
+    newProjectDialog.close();
+  });
+});
+
+newProjectDialog.querySelector("form").onsubmit = async (event) => {
+  event.preventDefault();
+  newProjectDialog.close();
+  const form = event.target;
+
+  const project = await api.createProject(
+    currentUser,
+    api.createClient(
+      "Client Name",
+      "Ada Lovelace",
+      "0 avenue road",
+      "asd",
+      "cum@bum.com",
+      "07123456"
+    ),
+    new Date(),
+    newProjectDialog.querySelector(`[name="deadline"]`).value,
+    newProjectDialog.querySelector(`[name="title"]`).value,
+    newProjectDialog.querySelector(`[name="desc"]`).value
+  );
+};
 
 const projectOverviewWrapper = document.querySelector(
   "#project-overview-wrapper"
@@ -22,13 +56,42 @@ currentUser.projectlist().onChange((event) => {
  * @returns {string} HTML for task list item
  */
 function createProjectOverviewCard(project) {
-  const colours = ["colour-red", "colour-amber", "colour-green"];
   const tasks = project.tasks.snapshot;
-  const progress = tasks.filter((task) => task.state == TaskState.Done).length;
-  const percentage = (progress / (tasks.length == 0 ? 1 : tasks.length)) * 100;
+  const completedTasks = tasks.filter((task) => task.state == TaskState.Done);
+  const percentage =
+    (completedTasks.length / (tasks.length == 0 ? 1 : tasks.length)) * 100;
+
+  // sum the 'manhours' of tasks that aren't done
+  const workerHoursRemaining = tasks.reduce((previous, current) => {
+    if (current.task.state != TaskState.Done) {
+      return previous + current.task.manhours;
+    }
+    return previous;
+  }, 0);
+
+  const today = new Date();
+  const deadline = new Date(project.deadline);
+
+  // Thanks, copilot!
+  const daysRemaining = Math.ceil(
+    (deadline.getTime() - today.getTime()) / (1000 * 3600 * 24)
+  );
+
+  const hoursWorkedDaily = 7.5;
+  const noWorkers = project.team.users.snapshot.length;
+  const workerHoursAvailable = noWorkers * hoursWorkedDaily * daysRemaining;
+
+  let colour;
+  if (workerHoursAvailable < workerHoursRemaining) {
+    colour = "red";
+  } else if (workerHoursAvailable < 0.75 * workerHoursRemaining) {
+    colour = "amber";
+  } else {
+    colour = "green";
+  }
 
   return /*HTML*/ `
-    <div class="card-small bg-accent">
+    <div class="card-small bg-accent rag-band" data-rag="${colour}">
     <a href="/project/?id=${project.id}">
     <h3 class="title-card-small">${project.name}</h3>
     </a>
@@ -36,15 +99,24 @@ function createProjectOverviewCard(project) {
       <div class="progress-bar">
         <div
           class="progress-bar-fill"
-          style="width: ${percentage}%; --bar-fill: var(--${
-    colours[project.id % 3]
-  });"
+          style="width: ${percentage}%; --bar-fill: var(--${colour});"
         ></div>
       </div>
-      <p class="card-description">${progress}/${tasks.length}
+      <p class="card-description">${completedTasks.length}/${tasks.length}
       Tasks Completed</p>
-
-      <a href="#">View Team Members</a>
+      <p class="card-description">
+        Deadline: ${deadline.toLocaleDateString()}
+      </p>
+      <p class="card-description project-detail">
+        Estimated hours remaining: <span class="detail-highlight">
+          ${workerHoursRemaining}
+        </span>
+      </p>
+      <p class="card-description project-detail">
+        Worker-hours available:  <span class="detail-highlight">
+          ${workerHoursAvailable}
+        </span>
+      </p>
     </div>
     `;
 }

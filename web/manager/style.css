@@ -29,3 +29,17 @@
 a h3 {
   text-decoration: underline;
 }
+
+.project-detail {
+  display: flex;
+  align-items: center;
+}
+
+.detail-highlight {
+  font-weight: 800;
+  background-color: var(--colour-card-highlight);
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  margin-left: auto;
+  display: inline-flex;
+}
