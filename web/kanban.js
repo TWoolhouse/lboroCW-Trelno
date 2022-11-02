@@ -66,7 +66,7 @@ export function kanban(
   function tasklistEvent(add, sub) {
     for (const ref of add) {
       const task = ref.task;
-      console.log(task);
+      // console.log(task);
       const card = HTMLasDOM(createTaskHTML(task));
       kanbanSections[task.state].appendChild(card);
 
