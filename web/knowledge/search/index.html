@@ -9,6 +9,7 @@
 
     <link rel="icon" type="image/svg" href="/tools.svg" />
     <link rel="stylesheet" href="/base.css" />
+    <link rel="stylesheet" href="base.css" />
     <link rel="stylesheet" href="style.css" />
 
     <script
@@ -110,15 +111,15 @@
           placeholder="Search..."
           class="search-box"
         />
-        <button type="submit" class="btn-action">
-          <p>Search</p>
-          <span class="material-symbols-outlined">search</span>
-        </button>
-        <select name="topic" class="dropdown-topic">
+        <select name="topic" class="dropdown-topic input">
           <option value="">Topic</option>
           <option value="1">Technical</option>
           <option value="2">Non-Technical</option>
         </select>
+        <button type="submit" class="btn-action">
+          <p>Search</p>
+          <span class="material-symbols-outlined">search</span>
+        </button>
       </form>
       <section class="posts"></section>
     </main>

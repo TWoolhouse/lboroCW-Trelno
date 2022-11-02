@@ -98,6 +98,7 @@ header.header {
 /* SIDE MENU */
 body > main {
   margin: 0;
+  padding: 0.2rem 0.5rem;
 }
 
 .side-menu {
