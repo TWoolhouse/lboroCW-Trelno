@@ -56,7 +56,6 @@ currentUser.projectlist().onChange((event) => {
  * @returns {string} HTML for task list item
  */
 function createProjectOverviewCard(project) {
-  const colours = ["colour-red", "colour-amber", "colour-green"];
   const tasks = project.tasks.snapshot;
   const completedTasks = tasks.filter((task) => task.state == TaskState.Done);
   const percentage =
@@ -82,8 +81,17 @@ function createProjectOverviewCard(project) {
   const noWorkers = project.team.users.snapshot.length;
   const workerHoursAvailable = noWorkers * hoursWorkedDaily * daysRemaining;
 
+  let colour;
+  if (workerHoursAvailable < workerHoursRemaining) {
+    colour = "red";
+  } else if (workerHoursAvailable < 0.75 * workerHoursRemaining) {
+    colour = "amber";
+  } else {
+    colour = "green";
+  }
+
   return /*HTML*/ `
-    <div class="card-small bg-accent">
+    <div class="card-small bg-accent rag-band" data-rag="${colour}">
     <a href="/project/?id=${project.id}">
     <h3 class="title-card-small">${project.name}</h3>
     </a>
@@ -91,9 +99,7 @@ function createProjectOverviewCard(project) {
       <div class="progress-bar">
         <div
           class="progress-bar-fill"
-          style="width: ${percentage}%; --bar-fill: var(--${
-    colours[project.id % 3]
-  });"
+          style="width: ${percentage}%; --bar-fill: var(--${colour});"
         ></div>
       </div>
       <p class="card-description">${completedTasks.length}/${tasks.length}
@@ -101,11 +107,15 @@ function createProjectOverviewCard(project) {
       <p class="card-description">
         Deadline: ${deadline.toLocaleDateString()}
       </p>
-      <p class="card-description">
-        Estimated hours remaining: ${workerHoursRemaining}
+      <p class="card-description project-detail">
+        Estimated hours remaining: <span class="detail-highlight">
+          ${workerHoursRemaining}
+        </span>
       </p>
-      <p class="card-description">
-        Worker-hours available: ${workerHoursAvailable}
+      <p class="card-description project-detail">
+        Worker-hours available:  <span class="detail-highlight">
+          ${workerHoursAvailable}
+        </span>
       </p>
     </div>
     `;
