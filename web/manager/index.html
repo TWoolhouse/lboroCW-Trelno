@@ -26,21 +26,28 @@
       <nav>
         <ul>
           <li>
-            <a href="" data-active>
+            <a href="/manager/">
               <span class="material-symbols-outlined">leaderboard</span>
               Dashboard
             </a>
+            <hr />
           </li>
-          <hr />
           <li>
-            <a href="">
+            <a href="/manager/" data-active>
+              <span class="material-symbols-outlined">surfing</span>
+              Managers
+            </a>
+            <hr />
+          </li>
+          <li>
+            <a href="/knowledge/">
               <span class="material-symbols-outlined">menu_book</span>
               Knowledge
             </a>
+            <hr />
           </li>
-          <hr />
           <li>
-            <a href="">
+            <a href="/profile/">
               <span class="material-symbols-outlined">manage_accounts</span>
               My Profile
             </a>
@@ -53,24 +60,23 @@
       <nav>
         <ul>
           <li>
-            <a href="/dashboard/" class="material-symbols-outlined">
-              leaderboard
-            </a>
+            <a href="/dashboard/" class="material-symbols-outlined"
+              >leaderboard</a
+            >
           </li>
           <li data-active>
-            <a href="/manager/" class="material-symbols-outlined"> surfing </a>
+            <a href="/manager/" class="material-symbols-outlined">surfing</a>
           </li>
           <li>
-            <a href="/knowledge/" class="material-symbols-outlined">
-              menu_book
-            </a>
+            <a href="/knowledge/" class="material-symbols-outlined"
+              >menu_book</a
+            >
           </li>
           <li>
             <a href="/profile/" class="material-symbols-outlined">
               manage_accounts
             </a>
           </li>
-          <!-- <li><a href="#" class="material-symbols-outlined">mail</a></li> -->
         </ul>
       </nav>
     </aside>
@@ -79,8 +85,8 @@
       <button class="mobile-nav-toggle material-symbols-outlined">menu</button>
       <div class="account-info flex-row">
         <div class="flex-col">
-          <h6 id="username">King Firat</h6>
-          <p class="dimmed">Manager</p>
+          <h6 id="user-name">UserName</h6>
+          <p id="user-rank" class="dimmed">UserRank</p>
         </div>
         <img
           src="https://placekitten.com/50/50"
@@ -88,8 +94,7 @@
           width="50"
           height="50"
         />
-        <p class="material-symbols-outlined dimmed">expand_more</p>
-        <p class="material-symbols-outlined dimmed">logout</p>
+        <p id="logout" class="material-symbols-outlined dimmed">logout</p>
       </div>
     </header>
     <main>

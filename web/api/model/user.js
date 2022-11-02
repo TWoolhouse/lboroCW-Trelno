@@ -48,7 +48,6 @@ export class User {
       this.tasks = new CollectionDB(this.id, User, Task);
     }
     this._tasklist = new Collection();
-    this._teamlist = new Collection();
     this._projectlist = new Collection();
 
     this.tasks.onChange(
@@ -99,24 +98,6 @@ export class User {
   }
 
   /**
-   * @typedef TeamRef
-   * @type {Object}
-   * @property {Team} team The team
-   * @property {Boolean} leader Is this user the leader of the team
-   */
-
-  /**
-   * Returns a collection of all the teams that this user is a part of.
-   * @returns {Collection<TeamRef>}
-   */
-  teamlist() {
-    userTeams(this.id).then((values) => {
-      this._teamlist.addIf((ref) => ref.team.id, ...values);
-    });
-    return this._teamlist;
-  }
-
-  /**
    * Returns a collection of all the projects that this user is a part of.
    * If they are a manager, it returns all of the projects in the system.
    * @returns {Collection<Project>}
@@ -135,7 +116,7 @@ export class User {
   }
 
   static cereal = {
-    ignore: ["_tasklist", "_teamlist", "_projectlist"],
+    ignore: ["_tasklist", "_projectlist"],
   };
 }
 cereal.register(User);

@@ -1,5 +1,7 @@
 import { Memoize } from "./memoize.js";
 import { TaskSrc } from "../model/task.js";
+import { user } from "../core.js";
+import { UserRank } from "../model/user.js";
 
 const dbStorage = sessionStorage;
 
@@ -45,17 +47,24 @@ export async function userTeams(userId) {
 
 export async function userProjectTasks(userId) {
   return (
-    await allAs((projectTask) => {
-      return {
-        task: projectTask.task,
-        source: TaskSrc.Project,
-        projectTask: projectTask,
-        // project:
-      };
-    }, "ProjectTask")
-  ).filter((ref) => {
-    return ref.projectTask.assignees.snapshot.find((user) => user.id == userId);
-  });
+    await allAs((project) => {
+      return project.tasks.snapshot.map((pt) => {
+        return {
+          task: pt.task,
+          source: TaskSrc.Project,
+          projectTask: pt,
+          project: project,
+        };
+      });
+    }, "Project")
+  )
+    .flat()
+    .filter((ref) => {
+      return (
+        ref.project.team.leader.id == userId ||
+        ref.projectTask.assignees.snapshot.find((user) => user.id == userId)
+      );
+    });
 }
 
 export async function userProjects(userId) {

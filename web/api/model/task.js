@@ -1,6 +1,9 @@
 import * as cereal from "../interface/cereal.js";
 import { Memoize } from "../interface/memoize.js";
 
+/** @typedef {import("./project.js").Project} Project */
+/** @typedef {import("./project.js").ProjectTask} ProjectTask */
+
 /**
  * Enum for TaskRef source location
  * @readonly
@@ -17,6 +20,8 @@ export const TaskSrc = {
  * @type {Object}
  * @property {Task} task The task
  * @property {Number} source A TaskSrc of where this task has come from
+ * @property {ProjectTask} [projectTask] The project task this task belongs to
+ * @property {Project} [project] The project this task belongs to
  */
 
 /**

@@ -1,3 +1,7 @@
+import { navbar } from "../../nav.js";
+
+navbar();
+
 export function createConverter(headerLevelStart = 3) {
   const converter = new showdown.Converter({
     noHeaderId: true,

@@ -1,26 +1,25 @@
 import * as api from "../api/core.js";
-import { currentUser, redirectLogin } from "../api/active.js";
-import { TaskState } from "../api/model/task.js";
-import { Project } from "../api/model/project.js";
-import { accountInfo } from "../navbar.js";
+import { HTMLasDOM, navbar } from "../nav.js";
+import { kanban } from "../kanban.js";
 
-// // Create new Project
-// const id = (
-//   await api.createProject(
-//     await api.user(1),
-//     1667059483,
-//     1668959318,
-//     "New Project"
-//   )
-// ).id;
+navbar();
 
 // Read query string parameters
 const urlParams = new URLSearchParams(window.location.search);
 const project = await api.project(urlParams.get("id"));
-if (project == null); // Do something if the project can't be found and it was a broken link
 console.log("Project", project);
+if (project == null) {
+  // Do something if the project can't be found and it was a broken link
+  window.location.href = "/dashboard/";
+}
 
-accountInfo(currentUser);
+setup();
+kanban(
+  document.querySelector("#kanban"),
+  document.querySelector("#dialog-new-task"),
+  project,
+  (ondrag = updateProgressBar)
+);
 
 function setup() {
   document.querySelector("#project-name").innerHTML = project.name;
@@ -31,30 +30,21 @@ function setup() {
 
   project.team.users.onChange((event) => event.add.map(addMember));
 
-  project.tasks.onChange((event) =>
-    updateProgressBar(event.all.map((pt) => pt.task))
-  ); // no idea how this works
-}
+  project.tasks.onChange(updateProgressBar);
 
-setup();
+  document
+    .querySelector("#client-link")
+    .setAttribute("href", "../client/?id=" + project.client.id);
+
+  console.log(project.client.id);
+
+  document.querySelector("#client-name").innerHTML = project.client.name;
+}
 
 // Update assignee list
 function addMember(user) {
   const projectMembersWrap = document.querySelector("#project-members-wrap");
   projectMembersWrap.appendChild(HTMLasDOM(createProjectMemberCard(user)));
-}
-
-/**
- * Converts the HTML into a DOM Node
- * @param {String} html The HTML String
- * @returns {Node} A Node
- */
-function HTMLasDOM(html) {
-  const temp = document.createElement("div");
-  temp.innerHTML = html.trim();
-  const element = temp.firstChild;
-  element.remove();
-  return element;
 }
 
 function createProjectMemberCard(user) {
@@ -70,22 +60,20 @@ function createProjectMemberCard(user) {
 }
 
 // Update circular progress bar
-function updateProgressBar(tasks) {
-  const totalTasks = tasks.length;
-  const tasksDone = tasks.filter((task) => task.state == TaskState.Done).length;
-  const percentageDone = (tasksDone / (totalTasks == 0 ? 1 : totalTasks)) * 100;
+function updateProgressBar() {
+  const progress = project.progress();
 
   document.querySelector("#percentageDone").innerHTML =
-    percentageDone.toFixed(1) + "%";
+    (progress.percentage * 100).toFixed(1) + "%";
   document.querySelector("#tasksDone").innerHTML =
-    tasksDone + "/" + totalTasks + " tasks done";
+    progress.done + "/" + progress.total + " tasks done";
 
   document
     .querySelector("#progress-bar")
-    .style.setProperty("--progress", percentageDone + "%");
+    .style.setProperty("--progress", progress.percentage * 100 + "%");
   document
     .querySelector("#progress-bar")
-    .style.setProperty("--progress-angle", percentageDone / 100 + "turn");
+    .style.setProperty("--progress-angle", progress.percentage + "turn");
 }
 
 // Set project deadline date
@@ -114,67 +102,4 @@ function dateDiffInDays(a, b) {
   const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
 
   return Math.floor((utc2 - utc1) / _MS_PER_DAY);
-}
-
-// Mobile nav
-const mobileNavToggle = document.querySelector(".mobile-nav-toggle");
-mobileNavToggle.addEventListener("click", () => {
-  const navDialog = document.querySelector(".nav-mobile");
-  navDialog.showModal();
-  const closeBtn = navDialog.querySelector(".dialog-close");
-  closeBtn.addEventListener("click", () => {
-    navDialog.close();
-  });
-});
-
-// Creating new task
-const newItemButton = document.querySelector(`[data-action="new-task"]`);
-const newTaskDialog = document.querySelector("#dialog-new-task");
-newItemButton.addEventListener("click", async () => {
-  const selectProject = newTaskDialog.querySelector("#options-project");
-  selectProject.innerHTML = createDialogProjectOption({
-    id: "user",
-    name: "Personal TODO List",
-  });
-  for (const ref of await currentUser.projectlist()) {
-    if (!ref.manager) continue;
-    selectProject.innerHTML += createDialogProjectOption(ref.project);
-  }
-  newTaskDialog.showModal();
-});
-newTaskDialog.querySelector(".dialog-close").onclick = () => {
-  newTaskDialog.close();
-};
-newTaskDialog.querySelector("form").onsubmit = async (event) => {
-  event.preventDefault();
-  newTaskDialog.close();
-  const form = event.target;
-  const taskPromise = api.createTask(
-    TaskState.Ready,
-    form.querySelector(`[name="title"]`).value,
-    Date.parse(form.querySelector(`[name="deadline"]`).value),
-    12, // TODO add man hours input box
-    form.querySelector(`[name="desc"]`).value
-    // TODO: Add deadline
-  );
-  const projectId = form.querySelector(`[name="project"]`).value;
-  // TODO: Clear the form
-
-  if (projectId == "user") {
-    currentUser.tasks.add(await taskPromise);
-  } else {
-    const project = await api.project(projectId);
-    project.tasks.add(await api.createProjectTask(await taskPromise));
-  }
-};
-
-/**
- * Create a Project option for the new task dialog
- * @param {Project} project
- * @returns {String} HTML from project option.
- */
-function createDialogProjectOption(project) {
-  return /*HTML*/ `
-      <option value="${project.id}">${project.name}</option>
-    `;
 }

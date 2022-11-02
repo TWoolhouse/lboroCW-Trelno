@@ -2,6 +2,7 @@
 	"recommendations": [
 		"ritwickdey.liveserver",
 		"bierner.markdown-mermaid",
-		"esbenp.prettier-vscode"
+		"esbenp.prettier-vscode",
+		"ecmel.vscode-html-css"
 	]
 }

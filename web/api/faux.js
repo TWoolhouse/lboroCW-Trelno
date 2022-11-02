@@ -86,12 +86,12 @@ export async function faux() {
 
   const clients = [
     await api.createClient(
-      "Lboro",
-      "VC Nick",
-      "LE113UQ",
+      "Loughborough University",
+      "Firat Batmaz",
+      "Haslegrave Building, University Rd, Loughborough LE11 3TP",
       "lboro.ac.uk",
-      "cotrw@lunet.lboro.ac.uk",
-      "020 7935 0341"
+      "F.Batmaz@lboro.ac.uk",
+      "+44 (0) 1509 222 699"
     ),
   ];
 

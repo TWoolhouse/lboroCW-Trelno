@@ -1,5 +1,8 @@
 import { currentUser } from "../api/active.js";
 import { TaskState } from "../api/model/task.js";
+import { navbar, HTMLasDOM } from "../nav.js";
+
+navbar();
 import * as api from "../api/core.js";
 
 const newProject = document.querySelector("button[data-action='new-project']");
@@ -46,19 +49,6 @@ currentUser.projectlist().onChange((event) => {
     );
   }
 });
-
-/**
- * Converts the HTML into a DOM Node
- * @param {String} html The HTML String
- * @returns {Node} A Node
- */
-function HTMLasDOM(html) {
-  const temp = document.createElement("div");
-  temp.innerHTML = html.trim();
-  const element = temp.firstChild;
-  element.remove();
-  return element;
-}
 
 /**
  * Create a project overview progress card for managers
