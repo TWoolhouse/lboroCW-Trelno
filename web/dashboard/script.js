@@ -4,6 +4,17 @@ import { kanban } from "../kanban.js";
 import { currentUser } from "../api/active.js";
 /** @typedef {import("../api/model/project.js").Project} Project */
 
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker
+      .register("/serviceWorker.js")
+      .then((res) => {
+        console.log("service worker registered");
+      })
+      .catch((err) => console.log("service worker not registered", err));
+  });
+}
+
 navbar();
 
 kanban(

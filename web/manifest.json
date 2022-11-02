@@ -1,0 +1,35 @@
+{
+  "name": "Make It All Portal",
+  "short_name": "M-I-A Portal",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#eee",
+  "theme_color": "#ffb53c",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "tools.svg",
+      "type": "image/svg",
+      "sizes": "any",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "icons/tools-144.png",
+      "type": "image/png",
+      "sizes": "144x144",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/tools-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/tools-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    }
+  ]
+}
