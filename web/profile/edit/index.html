@@ -8,7 +8,6 @@
     <meta name="theme-color" content="#1e1e1e" />
     <link rel="stylesheet" href="/base.css" />
     <link rel="stylesheet" href="../style.css" />
-    <script type="module" src="script.js"></script>
 
     <title>Profile page</title>
   </head>
@@ -85,7 +84,7 @@
           <h6 id="user-name">UserName</h6>
           <p id="user-rank" class="dimmed">UserRank</p>
         </div>
-        <img
+        <img id="profile-picture-img"
           src="https://placekitten.com/50/50"
           alt="User Profile Picture"
           width="50"
@@ -104,10 +103,10 @@
           <hr class="solid">
         <!--This part below will eventually only need to show if the user is actually a manager-->
           <h1 class="heirarchy-card">Manager</h1>
-          <img class="card-profile-picture" src="https://placekitten.com/50/50" alt="" />
+          <img id="card-profile-picture" src="https://placekitten.com/50/50" alt="" />
         </div>
         <div class="card-button-wrapper">
-          <button class="card-upload-button" data-action="upload-photo">
+          <button id="card-upload-button">
             <p>Upload photo</p>
           </button>
         </div>
@@ -150,14 +149,41 @@
               <p>Logout</p>
             </button>
           </div>
-
-
-
         </div>
-
-
       </div>
       </section>
     </main>
+
+
+
+
+
+
+    <!-- Simple modal dialog containing a form -->
+    <dialog id="favDialog">
+      <form method="dialog" id="photo-form">
+        <div>
+        <p class="p-upload-photo">Upload photo:
+          <label for="photo" class="upload-card-text">Choose file</label>
+            <input 
+              type="file"
+              id="photo" 
+              name="photo"
+              accept="image/*">
+        </p>
+        </div>
+        <div>
+          <button id="cancelBtn" value="cancel">Cancel</button>
+          <button id="confirmBtn" value="default">Confirm</button>
+        </div>
+      </form>
+    </dialog>
+    <output></output>
+
+
+
+
+
+  <script type="module" src="script.js"></script>
   </body>
 </html>

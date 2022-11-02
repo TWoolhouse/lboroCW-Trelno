@@ -2,6 +2,78 @@
   --colour-red-logout:#DA0000;
 }
 
+
+/* Hiding the old button and text(the defualt one with the input=file*/
+input[type="file"] {
+  display: none;
+}
+
+.p-upload-photo{
+  font-size: 2rem;
+  text-align: center;
+}
+
+#confirmBtn {
+  width: 54px;
+  height: 19.85px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+
+  float:right;
+
+  background: var(--colour-accent);
+  box-shadow: 0px 4px 4px var(--card-shadow);
+  border-radius: 7px;
+}
+
+#cancelBtn {
+  width: 54px;
+  height: 19.85px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+
+  float:left;
+
+  background: var(--colour-accent);
+  box-shadow: 0px 4px 4px var(--card-shadow);
+  border-radius: 7px;
+}
+
+.upload-card-text {
+  font-size: 1.5rem;
+
+  width: 100px;
+  height: 50px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  margin: auto;
+
+  background: var(--colour-accent);
+  box-shadow: 0px 4px 4px var(--card-shadow);
+  border-radius: 7px;
+
+}
+
+#favDialog {
+  width: 80%;
+  max-width: 50ch;
+  border: none;
+  background-color: var(--colour-highlight);
+  color: var(--colour-text);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--card-radius);
+
+}
+
+#favDialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  
+}
+
+
 .logout-btn{
   width: 60px;
   height: 20px;
@@ -77,7 +149,7 @@
 }
 
 
-.card-upload-button {
+#card-upload-button {
   width: 116px;
   height: 26px;
   text-align: center;
@@ -111,7 +183,7 @@
   color: var(--colour-darker-grey);
 }
 
-.card-profile-picture {
+#card-profile-picture {
   box-sizing: border-box;
 
   width: 70;
