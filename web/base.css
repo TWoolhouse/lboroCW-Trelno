@@ -489,6 +489,11 @@ input[type="checkbox"]:checked + label {
   justify-content: center;
 }
 
+a.btn-action {
+  color: var(--colour-highlight);
+  text-decoration: none;
+}
+
 .btn-action :not(span) {
   display: none;
 }

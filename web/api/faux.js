@@ -128,4 +128,17 @@ export async function faux() {
       )
     );
   }
+
+  const topics = [
+    await api.createTopic("Topic A"),
+    await api.createTopic("Topic B"),
+  ];
+  const posts = [
+    await api.createPost(
+      topics[0],
+      userKing,
+      "The Best Guide in the World",
+      "# Amazing markdown string"
+    ),
+  ];
 }

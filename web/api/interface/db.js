@@ -1,7 +1,5 @@
 import { Memoize } from "./memoize.js";
 import { TaskSrc } from "../model/task.js";
-import { user } from "../core.js";
-import { UserRank } from "../model/user.js";
 
 const dbStorage = sessionStorage;
 
@@ -72,4 +70,14 @@ export async function userProjects(userId) {
   return (await allAs((p) => p, "Project")).filter((project) =>
     teams.includes(project.team)
   );
+}
+
+export async function topicPosts(topicId) {
+  return (await allAs((post) => post, "Post")).filter(
+    (post) => post.topic.id == topicId
+  );
+}
+
+export async function posts() {
+  return await allAs((post) => post, "Post");
 }

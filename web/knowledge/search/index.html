@@ -11,10 +11,7 @@
     <link rel="stylesheet" href="/base.css" />
     <link rel="stylesheet" href="style.css" />
 
-    <script type="module">
-      import { navbar } from "/nav.js";
-      navbar();
-    </script>
+    <script type="module" src="script.js"></script>
 
     <title>Knowledge Search Results</title>
   </head>
@@ -119,44 +116,7 @@
           <option value="2">Non-Technical</option>
         </select>
       </section>
-      <section class="posts">
-        <article class="card post">
-          <aside>
-            <div class="topic">
-              <button type="button" class="btn-action">
-                <p>Topic</p>
-                <span class="material-symbols-outlined">Topic</span>
-              </button>
-            </div>
-            <div class="account">
-              <img
-                src="https://placekitten.com/50/50"
-                alt="User Profile Picture"
-              />
-              <a href="/profile/?id=1" class="user-name">KING FIRAT</a>
-              <span class="user-rank">Manager</span>
-            </div>
-            <span>28/10/2022</span>
-          </aside>
-          <main>
-            <h3>Post Title</h3>
-            <hr />
-            <div id="preview" class="preview-post">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil,
-              repellat doloribus molestias et voluptatum quaerat ea debitis id
-              earum ab, sunt reprehenderit, pariatur distinctio exercitationem.
-              Pariatur facilis earum impedit nam! Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Minus, minima. Nostrum cum, quo eius
-              obcaecati deleniti quia earum debitis placeat voluptas molestias
-              quibusdam impedit voluptate delectus nemo cupiditate ipsam ipsum.
-            </div>
-            <button type="button" class="btn-action">
-              <p>View Post</p>
-              <span class="material-symbols-outlined">visibility</span>
-            </button>
-          </main>
-        </article>
-      </section>
+      <section class="posts"></section>
     </main>
   </body>
 </html>

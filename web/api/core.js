@@ -4,6 +4,8 @@ import { Task } from "./model/task.js";
 import { Team } from "./model/team.js";
 import { Project, ProjectTask } from "./model/project.js";
 import { Client } from "./model/client.js";
+import { Topic, Post, search } from "./model/post.js";
+export { search };
 
 import { faux } from "../api/faux.js";
 
@@ -58,6 +60,21 @@ export async function client(id) {
   return Memoize.Type(Client).get(id);
 }
 
+/**
+ * @param {Number} id The TopicID
+ * @returns {Promise<Topic>}
+ */
+export async function topic(id) {
+  return Memoize.Type(Topic).get(id);
+}
+/**
+ * @param {Number} id The TopicID
+ * @returns {Promise<Post>}
+ */
+export async function post(id) {
+  return Memoize.Type(Post).get(id);
+}
+
 // TYPE FACTORIES
 
 /**
@@ -70,15 +87,7 @@ export async function client(id) {
  * @returns {Promise<Task>}
  */
 export async function createTask(state, name, deadline, manhours, description) {
-  let t = new Task(
-    await id_gen(task),
-    state,
-    name,
-    deadline,
-    manhours,
-    description
-  );
-  return await Memoize.Type(Task).create(t);
+  return await createMemoize(Task, task, ...arguments);
 }
 
 /**
@@ -87,8 +96,7 @@ export async function createTask(state, name, deadline, manhours, description) {
  * @returns {Promise<ProjectTask>}
  */
 export async function createProjectTask(task) {
-  let t = new ProjectTask(await id_gen(projectTask), task);
-  return await Memoize.Type(ProjectTask).create(t);
+  return await createMemoize(ProjectTask, projectTask, ...arguments);
 }
 
 /**
@@ -100,18 +108,17 @@ export async function createProjectTask(task) {
  * @returns {Promise<User>}
  */
 export async function createUser(email, rank, name, id) {
-  let obj = new User(await createID(id, user), email, rank, name);
+  let obj = new User(await createID(id, user), ...arguments);
   return await Memoize.Type(User).create(obj);
 }
 
 /**
  * Creates a new team
- * @param {User} leader Team Leader Uesr
+ * @param {User} leader Team Leader User
  * @returns {Promise<Team>}
  */
 export async function createTeam(leader) {
-  let obj = new Team(await id_gen(team), leader);
-  return await Memoize.Type(Team).create(obj);
+  return await createMemoize(Team, team, ...arguments);
 }
 
 /**
@@ -133,16 +140,7 @@ export async function createClient(
   email,
   phone
 ) {
-  let obj = new Client(
-    await id_gen(client),
-    name,
-    representative,
-    address,
-    website,
-    email,
-    phone
-  );
-  return await Memoize.Type(Client).create(obj);
+  return await createMemoize(Client, client, ...arguments);
 }
 
 /**
@@ -162,8 +160,9 @@ export async function createProject(
   name,
   desc
 ) {
-  let obj = new Project(
-    await id_gen(project),
+  return await createMemoize(
+    Project,
+    project,
     await createTeam(teamLeader),
     client,
     created,
@@ -171,11 +170,38 @@ export async function createProject(
     name,
     desc
   );
-  return await Memoize.Type(Project).create(obj);
+}
+
+/**
+ * Creates a new topic
+ * @param {String} name The name of the topic
+ * @returns {Promise<Topic>}
+ */
+export async function createTopic(name) {
+  return await createMemoize(Topic, topic, ...arguments);
+}
+
+/**
+ * Creates a new post
+ * @param {Topic} topic The Topic this post is part of
+ * @param {User} owner The User that created this post
+ * @param {String} title The title of the post
+ * @param {String} markdown The markdown contents of the post
+ * @returns {Promise<Post>}
+ */
+export async function createPost(topic, owner, title, markdown) {
+  const p = await createMemoize(Post, post, ...arguments, Date.now());
+  topic._posts.add(p);
+  return p;
 }
 
 // HELPER FAUX GENERATOR
 // //TODO: Move this to faux / memoize
+
+async function createMemoize(type, getter, ...args) {
+  const obj = new type(await id_gen(getter), ...args);
+  return await Memoize.Type(type).create(obj);
+}
 
 async function createID(id, getter) {
   if (id === undefined) {

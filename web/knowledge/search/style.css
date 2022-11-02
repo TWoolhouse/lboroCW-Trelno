@@ -47,6 +47,7 @@
 .post main .btn-action {
   margin-top: 0.5rem;
   margin-left: auto;
+  width: fit-content;
 }
 
 /*i know these are in the other style.css but i cannot be bothered to link them as it's easier to just stick them here :) */
