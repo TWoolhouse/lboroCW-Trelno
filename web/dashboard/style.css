@@ -13,3 +13,8 @@
 .myprojects-wrapper .card-small {
   margin-inline: auto;
 }
+
+.icon-link {
+  text-decoration: none;
+  justify-content: center !important;
+}

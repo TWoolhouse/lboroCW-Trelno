@@ -27,10 +27,25 @@ currentUser.projectlist().onChange((e) => {
  * @returns {string} HTML for project info card
  */
 function createProjectCard(project) {
-  return /* HTML */ `
+  let icon = "";
+  if (project.team.leader.id == currentUser.id) {
+    console.log("I am the captain now");
+    icon = /*HTML*/ `<span class="material-symbols-outlined">supervisor_account</span>`;
+  }
+  return (
+    // prettier-ignore
+    /* HTML */ `
     <div class="card-small bg-accent">
-      <h3 class="title-card-small text-center">${project.name}</h3>
+      <a class="icon-link" href="/project/?id=${project.id}">
+        <h3 class="title-card-small text-center flex-row icon-link">${project.name}` 
+        +
+        icon
+        +
+        /* HTML */ `
+        </h3>
+      </a>
       <p class="card-description text-center">${project.desc}</p>
     </div>
-  `;
+  `
+  );
 }
