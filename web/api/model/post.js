@@ -75,7 +75,8 @@ new Memoize(Post);
  * @returns {Boolean}
  */
 function matchSearch(post, queries) {
-  for (const query of queries) if (post.title.includes(query)) return true;
+  const title = post.title.toLowerCase();
+  for (const query of queries) if (title.includes(query)) return true;
   return false;
 }
 
@@ -86,7 +87,7 @@ function matchSearch(post, queries) {
  */
 export async function search(query, topicId) {
   if (!query) return await db.posts();
-  const queries = query.split();
+  const queries = query.toLowerCase().split();
   const posts = await (topicId ? db.topicPosts(topicId) : db.posts());
   return posts.filter((post) => matchSearch(post, queries));
 }
