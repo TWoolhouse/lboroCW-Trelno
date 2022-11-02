@@ -1,15 +1,39 @@
 import { currentUser } from "../api/active.js";
 import { TaskState } from "../api/model/task.js";
+import * as api from "../api/core.js";
 
 const newProject = document.querySelector("button[data-action='new-project']");
+const newProjectDialog = document.querySelector("#dialog-new-project");
+
 newProject.addEventListener("click", () => {
-  const newProjectDialog = document.querySelector("#dialog-new-project");
   newProjectDialog.showModal();
   const closeBtn = newProjectDialog.querySelector(".dialog-close");
   closeBtn.addEventListener("click", () => {
     newProjectDialog.close();
   });
 });
+
+newProjectDialog.querySelector("form").onsubmit = async (event) => {
+  event.preventDefault();
+  newProjectDialog.close();
+  const form = event.target;
+
+  const project = await api.createProject(
+    currentUser,
+    api.createClient(
+      "Client Name",
+      "Ada Lovelace",
+      "0 avenue road",
+      "asd",
+      "cum@bum.com",
+      "07123456"
+    ),
+    new Date(),
+    newProjectDialog.querySelector(`[name="deadline"]`).value,
+    newProjectDialog.querySelector(`[name="title"]`).value,
+    newProjectDialog.querySelector(`[name="desc"]`).value
+  );
+};
 
 const projectOverviewWrapper = document.querySelector(
   "#project-overview-wrapper"
