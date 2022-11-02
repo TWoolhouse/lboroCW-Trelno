@@ -4,8 +4,8 @@ import { Task } from "./model/task.js";
 import { Team } from "./model/team.js";
 import { Project, ProjectTask } from "./model/project.js";
 import { Client } from "./model/client.js";
-import { Topic, Post, search } from "./model/post.js";
-export { search };
+import { Topic, Post, search, topics } from "./model/post.js";
+export { search, topics };
 
 import { faux } from "../api/faux.js";
 

@@ -1,8 +1,13 @@
 import * as md from "../editor.js";
+import { post } from "../post.js";
+
+const textArea = document.querySelector(`textarea[name="post"]`);
+
+textArea.value = post.markdown;
 
 const converter = md.createConverter();
 const updatePreview = converter.transferDOM(
-  document.querySelector(`textarea[name="post"]`),
+  textArea,
   document.querySelector("#preview")
 );
 
@@ -20,6 +25,7 @@ const switches = [
     document.querySelector(".title-card.hidden")
   ),
 ];
+for (const switcher of switches) switcher.backward();
 
 document.querySelector(".preview-switch-into").addEventListener("click", () => {
   updatePreview();
@@ -34,4 +40,7 @@ document.querySelector("button.save").addEventListener("click", () => {
   window.location.href = "/knowledge/post/";
 });
 
-for (const switcher of switches) switcher.backward();
+document.querySelector(".btn-action.save").addEventListener("click", () => {
+  post.markdown = textArea.value;
+  window.location.href = `../?id=${post.id}`;
+});

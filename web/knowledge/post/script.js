@@ -1,12 +1,18 @@
+import { post } from "./post.js";
 import * as md from "./base.js";
+import { currentUser } from "../../api/active.js";
 
 const converter = md.createConverter();
+document.querySelector("#preview").innerHTML = converter.convert(post.markdown);
 
-document.querySelector("#preview").innerHTML = converter.convert("# Title");
+const editDOM = document.querySelector("#post-edit");
+if (currentUser.id != post.owner.id) editDOM.classList.add("hidden");
+else
+  editDOM.addEventListener("click", () => {
+    window.location.href = `edit/?id=${post.id}`;
+  });
+document.querySelector("#post-title").innerHTML = post.title;
 
-document.querySelector("#post-edit").addEventListener("click", () => {
-  window.location.href = "edit/?id=1";
-});
-document.querySelector("#post-topic").addEventListener("click", () => {
-  window.location.href = `../search/?topic=idfk`;
-});
+const topicDOM = document.querySelector("#post-topic");
+topicDOM.href = `../search/?topic=${post.topic.id}`;
+topicDOM.querySelector("p").innerHTML = post.topic.name;

@@ -3,6 +3,8 @@ import { Collection } from "../interface/collection.js";
 import * as db from "../interface/db.js";
 import { Memoize } from "../interface/memoize.js";
 
+/** @typedef {import("./user").User} User */
+
 export class Topic {
   /** @property {Number} id The TopicID */
   id;
@@ -10,8 +12,8 @@ export class Topic {
   name;
 
   /**
-   * @param {*} id The TopicID
-   * @param {*} name The name of the topic
+   * @param {Number} id The TopicID
+   * @param {String} name The name of the topic
    */
   constructor(id, name) {
     if (!cereal.cereal(this, id)) {
@@ -86,8 +88,15 @@ function matchSearch(post, queries) {
  * @returns {Promise<Array<Post>>} Every post in the system
  */
 export async function search(query, topicId) {
-  if (!query) return await db.posts();
-  const queries = query.toLowerCase().split();
+  const queries = query ?? "".toLowerCase().split();
   const posts = await (topicId ? db.topicPosts(topicId) : db.posts());
+  if (!query) return posts;
   return posts.filter((post) => matchSearch(post, queries));
+}
+
+/**
+ * @returns {Promise<Array<Topic>>} Every topic in the system
+ */
+export async function topics() {
+  return await db.topics();
 }
