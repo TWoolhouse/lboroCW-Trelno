@@ -10,5 +10,5 @@
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.words": ["Kanban"]
+  "cSpell.words": ["Kanban"],
 }

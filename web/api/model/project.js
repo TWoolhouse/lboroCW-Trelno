@@ -2,7 +2,7 @@ import * as cereal from "../interface/cereal.js";
 import { Memoize, MemoizePair } from "../interface/memoize.js";
 import { CollectionDB } from "../interface/collectionDB.js";
 import { User } from "./user.js";
-import { Task } from "./task.js";
+import { Task, TaskState } from "./task.js";
 import { Team } from "./team.js";
 import { Client } from "./client.js";
 
@@ -67,6 +67,31 @@ export class Project {
     this.name = name;
     this.desc = desc;
     this.tasks = new CollectionDB(this.id, Project, ProjectTask);
+  }
+
+  /**
+   * @typedef Progress
+   * @property {Number} done The number of tasks that are completed
+   * @property {Number} total Total number of tasks in the project
+   * @property {Number} percentage Percentage of tasks done [0-1]
+   */
+
+  /**
+   * Returns the current progress of the project
+   * @returns {Progress}
+   */
+  progress() {
+    this.tasks.snapshot.length;
+    const done = this.tasks.snapshot.filter(
+      (pt) => pt.task.state >= TaskState.Done
+    ).length;
+
+    return {
+      done: done,
+      total: this.tasks.snapshot.length,
+      percentage:
+        this.tasks.snapshot.length > 0 ? done / this.tasks.snapshot.length : 0,
+    };
   }
 }
 cereal.register(Project);

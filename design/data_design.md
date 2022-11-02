@@ -13,7 +13,6 @@ class User {
 	+name: String
 	+tasks: Collection~Task~
 	+tasklist() Collection~TaskRef~
-	+teamlist() Collection~TeamRef~
 	+projectlist() Collection~Project~
 	+profilePicture(size: Number?) String
 	+rankTitle() String
