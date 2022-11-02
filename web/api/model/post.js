@@ -88,7 +88,7 @@ function matchSearch(post, queries) {
  * @returns {Promise<Array<Post>>} Every post in the system
  */
 export async function search(query, topicId) {
-  const queries = query.toLowerCase().split();
+  const queries = query ?? "".toLowerCase().split();
   const posts = await (topicId ? db.topicPosts(topicId) : db.posts());
   if (!query) return posts;
   return posts.filter((post) => matchSearch(post, queries));
