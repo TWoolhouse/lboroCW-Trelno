@@ -1,25 +1,27 @@
 import * as api from "../../api/core.js";
 import { Collection } from "../../api/interface/collection.js";
-import { navbar, HTMLasDOM } from "/nav.js";
+import { HTMLasDOM } from "/nav.js";
+import { createConverter } from "../post/base.js";
 
-navbar();
+const md = createConverter(3);
 
 const searchesDOM = document.querySelector(".posts");
-
+const searchFormDOM = document.querySelector("form.search");
 const searchResults = new Collection();
-api.search().then((posts) => searchResults.replace(...posts));
+
+const urlParams = new URLSearchParams(window.location.search);
+api
+  .search(urlParams.get("q"), urlParams.get("topic"))
+  .then((posts) => searchResults.replace(...posts));
+
 searchResults.onChange((event) => {
-  for (const post of event.add) {
-    const element = HTMLasDOM(createPostSearchResultHTML(post));
-    searchesDOM.appendChild(element);
-    element.querySelector("main button").addEventListener("click", () => {
-      window.location.href = `../post/?id=${post.id}`;
-    });
-  }
-  for (const post of event.sub) {
+  for (const post of event.add)
+    searchesDOM.appendChild(HTMLasDOM(createPostSearchResultHTML(post)));
+  for (const post of event.sub)
     searchesDOM.querySelector(`#post-${post.id}.post`).remove();
-  }
 });
+
+searchFormDOM.querySelector("input").value = urlParams.get("q");
 
 /**
  * Creates a search result from a post
@@ -48,10 +50,10 @@ function createPostSearchResultHTML(post) {
       <span>${post.created}</span>
     </aside>
     <main>
-      <h3>${post.title}</h3>
+      <h2>${post.title}</h2>
       <hr />
       <div id="preview" class="preview-post">
-        ${post.markdown}
+        ${md.convert(post.markdown)}
       </div>
       <a href="../post/?id=${post.id}" class="btn-action">
         <p>View Post</p>

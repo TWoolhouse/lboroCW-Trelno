@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="/base.css" />
     <link rel="stylesheet" href="style.css" />
 
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"
+    ></script>
     <script type="module" src="script.js"></script>
 
     <title>Knowledge Search Results</title>
@@ -99,7 +103,7 @@
       </div>
     </header>
     <main>
-      <section class="search">
+      <form class="search">
         <input
           type="text"
           name="q"
@@ -115,7 +119,7 @@
           <option value="1">Technical</option>
           <option value="2">Non-Technical</option>
         </select>
-      </section>
+      </form>
       <section class="posts"></section>
     </main>
   </body>
