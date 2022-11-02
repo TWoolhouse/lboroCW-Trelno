@@ -1,9 +1,13 @@
 import * as md from "../editor.js";
 import { post } from "../post.js";
 
+const textArea = document.querySelector(`textarea[name="post"]`);
+
+textArea.value = post.markdown;
+
 const converter = md.createConverter();
 const updatePreview = converter.transferDOM(
-  document.querySelector(`textarea[name="post"]`),
+  textArea,
   document.querySelector("#preview")
 );
 
@@ -37,5 +41,6 @@ document.querySelector("button.save").addEventListener("click", () => {
 });
 
 document.querySelector(".btn-action.save").addEventListener("click", () => {
+  post.markdown = textArea.value;
   window.location.href = `../?id=${post.id}`;
 });
