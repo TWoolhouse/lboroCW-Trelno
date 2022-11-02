@@ -2,6 +2,7 @@ import * as api from "../../api/core.js";
 import { Collection } from "../../api/interface/collection.js";
 import { HTMLasDOM } from "/nav.js";
 import { createConverter } from "../post/base.js";
+import { topics } from "./topic.js";
 
 const md = createConverter(3);
 
@@ -22,6 +23,9 @@ searchResults.onChange((event) => {
 });
 
 searchFormDOM.querySelector("input").value = urlParams.get("q");
+topics().then((select) => {
+  select.value = urlParams.get("topic") ?? "";
+});
 
 /**
  * Creates a search result from a post

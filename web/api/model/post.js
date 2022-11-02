@@ -93,3 +93,10 @@ export async function search(query, topicId) {
   const posts = await (topicId ? db.topicPosts(topicId) : db.posts());
   return posts.filter((post) => matchSearch(post, queries));
 }
+
+/**
+ * @returns {Promise<Array<Topic>>} Every topic in the system
+ */
+export async function topics() {
+  return await db.topics();
+}

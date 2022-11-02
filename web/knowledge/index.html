@@ -15,7 +15,9 @@
     <!-- Because it doesn't have a script -->
     <script type="module">
       import { navbar } from "/nav.js";
+      import { topics } from "./search/topic.js";
       navbar();
+      topics();
     </script>
 
     <title>Knowledge Search</title>
@@ -115,8 +117,6 @@
         />
         <select name="topic" class="dropdown-topic input">
           <option value="">Any Topic</option>
-          <option value="1">Technical</option>
-          <option value="2">Non-Technical</option>
         </select>
         <button type="submit" class="btn-action">
           <p>Search</p>
