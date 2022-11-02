@@ -103,6 +103,7 @@ export function kanban(
   newTaskButtonDOM.addEventListener("click", async () => {
     // If it has the select projects options list. Ensure its up to date
     const selectProject = newTaskDialogDOM.querySelector("#options-project");
+    const selectUser = newTaskDialogDOM.querySelector("#assign-user");
     if (selectProject) {
       selectProject.innerHTML = createNewTaskDialogProjectOptionHTML({
         id: "user",
@@ -116,6 +117,12 @@ export function kanban(
         );
       }
     }
+    // Calin's code - adding user options to the new task dialog in project page
+    if (selectUser) {
+      for (let user of project.team.users.snapshot)
+        selectUser.innerHTML += createNewTaskDialogUserOptionHTML(user);
+    }
+
     newTaskDialogDOM.showModal();
   });
   // Close the dialog
@@ -197,5 +204,16 @@ function createTaskHTML(task) {
 function createNewTaskDialogProjectOptionHTML(project) {
   return /*HTML*/ `
     <option value="${project.id}">${project.name}</option>
+  `;
+}
+
+/**
+ * Create a User option for the new task dialog
+ * @param {Project} project
+ * @returns {String} HTML from project option.
+ */
+function createNewTaskDialogUserOptionHTML(user) {
+  return /*HTML*/ `
+    <option value="${user.id}">${user.name}</option>
   `;
 }
