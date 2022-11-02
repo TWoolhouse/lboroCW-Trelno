@@ -73,11 +73,13 @@ export async function userProjects(userId) {
 }
 
 export async function topicPosts(topicId) {
-  return (await allAs((post) => post, "Post")).filter(
-    (post) => post.topic.id == topicId
-  );
+  return (await posts()).filter((post) => post.topic.id == topicId);
 }
 
 export async function posts() {
   return await allAs((post) => post, "Post");
+}
+
+export async function topics() {
+  return await allAs((topic) => topic, "Topic");
 }

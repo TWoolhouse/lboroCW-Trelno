@@ -9,12 +9,15 @@
 
     <link rel="icon" type="image/svg" href="/tools.svg" />
     <link rel="stylesheet" href="/base.css" />
+    <link rel="stylesheet" href="./search/base.css" />
     <link rel="stylesheet" href="style.css" />
 
     <!-- Because it doesn't have a script -->
     <script type="module">
       import { navbar } from "/nav.js";
+      import { topics } from "./search/topic.js";
       navbar();
+      topics();
     </script>
 
     <title>Knowledge Search</title>
@@ -105,7 +108,7 @@
     <main>
       <h4>Search</h4>
       <h3>Make-It-All</h3>
-      <form action="search/" class="search-form">
+      <form action="search/" class="search">
         <input
           name="q"
           type="text"
@@ -114,8 +117,6 @@
         />
         <select name="topic" class="dropdown-topic input">
           <option value="">Any Topic</option>
-          <option value="1">Technical</option>
-          <option value="2">Non-Technical</option>
         </select>
         <button type="submit" class="btn-action">
           <p>Search</p>

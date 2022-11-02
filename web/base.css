@@ -98,6 +98,7 @@ header.header {
 /* SIDE MENU */
 body > main {
   margin: 0;
+  padding: 0.2rem 0.5rem;
 }
 
 .side-menu {
@@ -635,11 +636,12 @@ a.btn-action {
 }
 
 #waves {
+  margin: 0;
   position: absolute;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  left: 0px;
+  left: -1px;
   top: 0px;
   background: var(--colour-block);
   border: 1px solid var(--colour-block);

@@ -2,6 +2,7 @@ import * as api from "../../api/core.js";
 import { Collection } from "../../api/interface/collection.js";
 import { HTMLasDOM } from "/nav.js";
 import { createConverter } from "../post/base.js";
+import { topics } from "./topic.js";
 
 const md = createConverter(3);
 
@@ -22,6 +23,9 @@ searchResults.onChange((event) => {
 });
 
 searchFormDOM.querySelector("input").value = urlParams.get("q");
+topics().then((select) => {
+  select.value = urlParams.get("topic") ?? "";
+});
 
 /**
  * Creates a search result from a post
@@ -34,7 +38,7 @@ function createPostSearchResultHTML(post) {
       <div class="topic">
         <a href="./?topic=${post.topic.id}" class="btn-action">
           <p>${post.topic.name}</p>
-          <span class="material-symbols-outlined">Topic</span>
+          <span class="material-symbols-outlined">topic</span>
         </a>
       </div>
       <div class="account">
@@ -47,7 +51,7 @@ function createPostSearchResultHTML(post) {
   }</a>
         <span class="user-rank">${post.owner.rankTitle()}</span>
       </div>
-      <span>${post.created}</span>
+      <span>${new Date(post.created).toLocaleDateString()}</span>
     </aside>
     <main>
       <h2>${post.title}</h2>

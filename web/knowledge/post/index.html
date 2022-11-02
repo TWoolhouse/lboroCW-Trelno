@@ -115,13 +115,12 @@
             <span class="user-name">KING FIRAT</span>
             <span class="user-rank">Manager</span>
           </div>
-          <h2 class="title-card col-centre">Post Title</h2>
+          <h2 id="post-title" class="title-card col-centre">Post Title</h2>
           <div class="flex-row col-end">
-            <button id="post-topic" type="button" class="btn-action">
+            <a id="post-topic" class="btn-action" href="../search/">
               <p>Topic</p>
-              <!--TOPIC & Icon need to change depending on the topic name :)-->
-              <span class="material-symbols-outlined">build_circle</span>
-            </button>
+              <span class="material-symbols-outlined">topic</span>
+            </a>
             <button id="post-edit" type="button" class="btn-action">
               <p>Edit</p>
               <span class="material-symbols-outlined">edit</span>
@@ -130,7 +129,7 @@
         </div>
         <div id="preview"></div>
         <div class="col-container">
-          <span class="col-centre">07/05/2022</span>
+          <span id="post-date" class="col-centre">07/05/2022</span>
         </div>
       </section>
     </main>

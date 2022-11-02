@@ -1,0 +1,23 @@
+.search {
+  width: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-box {
+  background-color: var(--colour-highlight);
+  border: none;
+  padding: 0.75rem;
+  width: 75%;
+  box-shadow: var(--card-shadow);
+  border-radius: 0.5rem;
+}
+
+.dropdown-topic {
+  background-color: var(--colour-highlight);
+  width: fit-content;
+  margin: 0.5rem;
+  cursor: pointer;
+}

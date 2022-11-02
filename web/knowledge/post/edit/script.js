@@ -1,4 +1,5 @@
 import * as md from "../editor.js";
+import { post } from "../post.js";
 
 const converter = md.createConverter();
 const updatePreview = converter.transferDOM(
@@ -20,6 +21,7 @@ const switches = [
     document.querySelector(".title-card.hidden")
   ),
 ];
+for (const switcher of switches) switcher.backward();
 
 document.querySelector(".preview-switch-into").addEventListener("click", () => {
   updatePreview();
@@ -34,4 +36,6 @@ document.querySelector("button.save").addEventListener("click", () => {
   window.location.href = "/knowledge/post/";
 });
 
-for (const switcher of switches) switcher.backward();
+document.querySelector(".btn-action.save").addEventListener("click", () => {
+  window.location.href = `../?id=${post.id}`;
+});
