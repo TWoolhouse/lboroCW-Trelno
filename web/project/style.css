@@ -45,8 +45,7 @@
   font-size: 1.5em;
   font-weight: 600;
   margin: 0 0 1rem 0; /* top right bottom left */
-  /* margin-top: 2rem;
-  margin-bottom: 1rem; */
+  text-align: center;
 }
 
 .card-small-image {

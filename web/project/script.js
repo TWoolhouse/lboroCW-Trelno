@@ -35,10 +35,6 @@ function setup() {
   document
     .querySelector("#client-link")
     .setAttribute("href", "../client/?id=" + project.client.id);
-
-  console.log(project.client.id);
-
-  document.querySelector("#client-name").innerHTML = project.client.name;
 }
 
 // Update assignee list
@@ -53,7 +49,7 @@ function createProjectMemberCard(user) {
       <h3 class="title-card-small">${user.name}</h3>
       <img src=${user.profilePicture()}>
       <div class="link-list text-center">
-              <a href="#">View Employee details</a>
+              <a href="../profile/?id=${user.id}">View Employee details</a>
       </div>
     </div>
   `;
