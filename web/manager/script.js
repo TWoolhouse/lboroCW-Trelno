@@ -36,6 +36,7 @@ newProjectDialog.querySelector("form").onsubmit = async (event) => {
     newProjectDialog.querySelector(`[name="title"]`).value,
     newProjectDialog.querySelector(`[name="desc"]`).value
   );
+  currentUser.projectlist().add(project);
 };
 
 const projectOverviewWrapper = document.querySelector(
