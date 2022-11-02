@@ -28,7 +28,7 @@ newProjectDialog.querySelector("form").onsubmit = async (event) => {
       "Ada Lovelace",
       "0 avenue road",
       "asd",
-      "cum@bum.com",
+      "ada@client.com",
       "07123456"
     ),
     new Date(),
@@ -58,7 +58,10 @@ currentUser.projectlist().onChange((event) => {
  */
 function createProjectOverviewCard(project) {
   const tasks = project.tasks.snapshot;
-  const completedTasks = tasks.filter((task) => task.state == TaskState.Done);
+  const completedTasks = tasks.filter(
+    (projectTask) => projectTask.task.state === TaskState.Done
+  );
+  console.log(completedTasks);
   const percentage =
     (completedTasks.length / (tasks.length == 0 ? 1 : tasks.length)) * 100;
 
@@ -100,7 +103,7 @@ function createProjectOverviewCard(project) {
       <div class="progress-bar">
         <div
           class="progress-bar-fill"
-          style="width: ${percentage}%; --bar-fill: var(--${colour});"
+          style="width: ${percentage}%; --bar-fill: var(--colour-card-highlight);"
         ></div>
       </div>
       <p class="card-description">${completedTasks.length}/${tasks.length}
