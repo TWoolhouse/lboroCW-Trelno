@@ -2,6 +2,7 @@ import * as api from "./api/core.js";
 import { currentUser } from "./api/active.js";
 import { TaskSrc, TaskState } from "./api/model/task.js";
 import { HTMLasDOM } from "./nav.js";
+import { UserRank } from "./api/model/user.js";
 
 /** @typedef {import("./api/model/task.js").Task} Task */
 /** @typedef {import("./api/model/task.js").TaskRef} TaskRef */
@@ -66,7 +67,6 @@ export function kanban(
   function tasklistEvent(add, sub) {
     for (const ref of add) {
       const task = ref.task;
-      // console.log(task);
       const card = HTMLasDOM(createTaskHTML(task));
       kanbanSections[task.state].appendChild(card);
 
@@ -100,31 +100,36 @@ export function kanban(
 
   // Create New Task
   const newTaskButtonDOM = rootDOM.querySelector(`[data-action="new-task"]`);
-  newTaskButtonDOM.addEventListener("click", async () => {
-    // If it has the select projects options list. Ensure its up to date
-    const selectProject = newTaskDialogDOM.querySelector("#options-project");
-    const selectUser = newTaskDialogDOM.querySelector("#assign-user");
-    if (selectProject) {
-      selectProject.innerHTML = createNewTaskDialogProjectOptionHTML({
-        id: "user",
-        name: "Personal TODO List",
-      });
-      // FIXME: Permissions
-      for (const ref of await currentUser.projectlist()) {
-        if (!ref.manager) continue;
-        selectProject.innerHTML += createNewTaskDialogProjectOptionHTML(
-          ref.project
-        );
-      }
-    }
-    // Calin's code - adding user options to the new task dialog in project page
-    if (selectUser) {
-      for (let user of project.team.users.snapshot)
-        selectUser.innerHTML += createNewTaskDialogUserOptionHTML(user);
-    }
 
+  // Setting up new Task Dialog
+  const selectProject = newTaskDialogDOM.querySelector("#options-project");
+  if (selectProject) {
+    selectProject.innerHTML = createNewTaskDialogProjectOptionHTML({
+      id: "user",
+      name: "Personal TODO List",
+    });
+    currentUser.projectlist().onChange((event) => {
+      for (const project of event.add)
+        if (
+          currentUser.rank >= UserRank.ProjectManager ||
+          project.team.leader.id == currentUser.id
+        )
+          selectProject.innerHTML +=
+            createNewTaskDialogProjectOptionHTML(project);
+    });
+  }
+
+  // Calin's code - adding user options to the new task dialog in project page
+  const selectUser = newTaskDialogDOM.querySelector("#assign-user");
+  if (selectUser) {
+    for (let user of project.team.users.snapshot)
+      selectUser.innerHTML += createNewTaskDialogUserOptionHTML(user);
+  }
+
+  newTaskButtonDOM.addEventListener("click", () => {
     newTaskDialogDOM.showModal();
   });
+
   // Close the dialog
   newTaskDialogDOM
     .querySelector(".dialog-close")

@@ -17,7 +17,6 @@ const projectWrapper = document.querySelector("#project-wrapper");
 currentUser.projectlist().onChange((e) => {
   for (const project of e.add) {
     projectWrapper.innerHTML += createProjectCard(project);
-    console.log(project);
   }
 });
 
@@ -37,7 +36,7 @@ function createProjectCard(project) {
     /* HTML */ `
     <div class="card-small bg-accent">
       <a class="icon-link" href="/project/?id=${project.id}">
-        <h3 class="title-card-small text-center flex-row icon-link">${project.name}` 
+        <h3 class="title-card-small text-center flex-row icon-link">${project.name}`
         +
         icon
         +
