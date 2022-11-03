@@ -210,6 +210,12 @@ input[type="file"] {
   color: var(--colour-mid-grey);
   font-size: 10px;
   line-height: 0.1rem;
+
+}
+/* This @media code helps with formatting of the edit profile page in mobile view - the 
+password text doesnt get in the way of the password button*/
+@media (min-width: 400px) {
+  br {display:none}
 }
 
 
