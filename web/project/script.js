@@ -1,6 +1,7 @@
 import * as api from "../api/core.js";
 import { HTMLasDOM, navbar } from "../nav.js";
 import { kanban } from "../kanban.js";
+import { currentUser } from "../api/active.js";
 
 navbar();
 
@@ -12,6 +13,10 @@ if (project == null) {
   // Do something if the project can't be found and it was a broken link
   window.location.href = "/dashboard/";
 }
+
+// Remove new task button if user isn't a team leader or manager
+if (currentUser.rankTitle() == "Employee")
+  document.querySelector("#add-tast").classList.add("hidden");
 
 setup();
 kanban(
