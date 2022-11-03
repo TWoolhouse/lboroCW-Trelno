@@ -20,7 +20,9 @@ console.log(userID);
 //updates their name (on the main page)
 document.getElementById("title-card").innerHTML = userID["name"];
 
-//updating their profile picture cannot be done yet
+//updates their profile picture
+document.getElementById("card-profile-picture").src = currentUser.profilePicture();
+
 
 //updates their status (e.g. manager (which is the default option), team leader, nothing)
 // This should work but hasnt been tested

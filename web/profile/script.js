@@ -22,13 +22,12 @@ console.log(userID);
 document.getElementById("title-card").innerHTML = userID["name"];
 
 //updates their profile picture
-
+document.getElementById("card-profile-picture").src = userID.profilePicture();
 
 //updates their status (e.g. manager (which is the default option), team leader, nothing)
 // This should work but hasnt been tested
 
 if (userID["rank"]==1){
-    console.log("USER RANK 1")
     document.getElementById("heirarchy-card").innerHTML = "Team leader";
 } else if (userID["rank"]==0){
     document.getElementById("heirarchy-card").innerHTML = "Employee";
