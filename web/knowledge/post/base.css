@@ -1,6 +1,6 @@
-.post-edit [name="post"] {
+[name="post"] {
   /* The height of the placeholder text */
-  min-height: 10rem;
+  min-height: 50vh !important;
   resize: vertical;
   /* Worry about this later 😀 */
   height: auto;
@@ -9,6 +9,7 @@
 #preview {
   margin: 0.5rem 0;
   padding: 0 1rem;
+  overflow-x: clip;
 }
 
 .account-post {
@@ -23,8 +24,10 @@
   color: var(--colour-text);
 }
 
-.account-post img {
+.account-post a:has(img) {
   grid-area: img;
+}
+.account-post a img {
   border-radius: 50%;
 }
 

@@ -40,10 +40,12 @@ function createPostSearchResultHTML(post) {
         <span class="material-symbols-outlined">topic</span>
       </a>
       <div class="account">
+        <a href="/profile/?id=${post.owner.id}" class="user-name">
         <img
         src="${post.owner.profilePicture()}"
         alt="User Profile Picture"
         />
+        </a>
         <a href="/profile/?id=${post.owner.id}" class="user-name">${
     post.owner.name
   }</a>

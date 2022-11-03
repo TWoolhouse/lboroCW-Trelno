@@ -6,6 +6,9 @@ if (post == undefined) window.location.href = "/dashboard/";
 console.log("Post", post);
 
 const ownerDOM = document.querySelector(".account-post");
+ownerDOM.querySelectorAll("a").forEach((link) => {
+  link.href = `/profile/?id=${post.owner.id}`;
+});
 ownerDOM.querySelector(".user-name").innerHTML = post.owner.name;
 ownerDOM.querySelector(".user-rank").innerHTML = post.owner.rankTitle();
 ownerDOM.querySelector("img").src = post.owner.profilePicture();
