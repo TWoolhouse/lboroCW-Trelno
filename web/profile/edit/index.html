@@ -139,7 +139,7 @@
             <hr class="solid">
             <h1 class="h1">Invite Others</h1>
             <label for="invite-btn" class="label-subtext">Invite your co-workers who have not yet signed up</label>
-            <button class="invite-btn" data-action="invite-employee">
+            <button id="invite-btn">
               <p>Invite</p>
             </button>
             <hr class="solid">
@@ -199,7 +199,19 @@
     </dialog>
     <output></output>
 
-
+    <!--Dialog box for iniviting another user-->
+    <dialog id="inviteDialog">
+      <form method="dialog" id="invite-form">
+        <div id="invite-div">
+          <label for="invite-email" class="upload-class-text">Email of employee being invited:</label>
+          <input type="text" id="new-employee-email" name="new-employee-email" placeholder="Email"><br><br>
+        </div>
+          <button id="cancelBtn" value="cancel">Cancel</button>
+          <button id="confirmBtn" value="default">Confirm</button>
+        </div>
+      </form>
+    </dialog>
+    <output></output>
 
 
     

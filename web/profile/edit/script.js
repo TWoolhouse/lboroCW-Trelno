@@ -64,3 +64,33 @@ updateButtonPassword.addEventListener('click', () => {
 passwordDialog.addEventListener('close', () => {
 //will need to add code to acctually change the profile picture here
 });
+
+
+
+//Javascript for inivting another employee window
+const updateButtonInvite = document.getElementById('invite-btn');
+const inviteDialog = document.getElementById('inviteDialog');
+const outputBoxInvite = document.querySelector('output');
+
+// If a browser doesn't support the dialog, then hide the
+// dialog contents by default.
+if (typeof inviteDialog.showModal !== 'function') {
+  inviteDialog.hidden = true;
+  /* a fallback script to allow this dialog/form to function
+     for legacy browsers that do not support <dialog>
+     could be provided here.
+  */
+}
+// "Update details" button opens the <dialog> modally
+updateButtonInvite.addEventListener('click', () => {
+  if (typeof inviteDialog.showModal === "function") {
+    inviteDialog.showModal();
+  } else {
+    outputBoxInvite.value = "Sorry, the <dialog> API is not supported by this browser.";
+  }
+});
+
+// "Confirm" button of form triggers "close" on dialog because of [method="dialog"]
+inviteDialog.addEventListener('close', () => {
+//will need to add code to acctually change the profile picture here
+});

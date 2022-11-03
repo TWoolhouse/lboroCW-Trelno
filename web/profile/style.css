@@ -2,6 +2,26 @@
   --colour-red-logout:#DA0000;
 }
 
+
+#inviteDialog {
+  width: 80%;
+  max-width: 50ch;
+  border: none;
+  background-color: var(--colour-highlight);
+  color: var(--colour-text);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--card-radius);
+
+}
+
+#inviteDialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  
+}
+
+
+
+
 #passwordDialog {
   width: 80%;
   max-width: 50ch;
@@ -114,7 +134,7 @@ input[type="file"] {
   border-radius: 7px;
 }
 
-.invite-btn {
+#invite-btn {
   width: 54px;
   height: 19.85px;
   text-align: center;
