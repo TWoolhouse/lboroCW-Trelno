@@ -78,8 +78,9 @@ new Memoize(Post);
  */
 function matchSearch(post, queries) {
   const title = post.title.toLowerCase();
-  for (const query of queries) if (title.includes(query)) return true;
-  return false;
+  const count = queries.filter((q) => title.includes(q)).length;
+  console.log(title, count);
+  return count;
 }
 
 /**
@@ -88,10 +89,17 @@ function matchSearch(post, queries) {
  * @returns {Promise<Array<Post>>} Every post in the system
  */
 export async function search(query, topicId) {
-  const queries = query ?? "".toLowerCase().split();
+  const queries = (query ?? "").toLowerCase().split(/\s/);
+  console.log(query);
+  console.log(queries);
+  console.log(topicId);
   const posts = await (topicId ? db.topicPosts(topicId) : db.posts());
   if (!query) return posts;
-  return posts.filter((post) => matchSearch(post, queries));
+  return posts
+    .map((post) => [post, matchSearch(post, queries)])
+    .filter(([_, rank]) => rank > 0)
+    .sort(([_a, a], [_b, b]) => b - a)
+    .map(([post, _]) => post);
 }
 
 /**
