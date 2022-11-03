@@ -176,7 +176,7 @@ input[type="file"] {
   line-height: 0.1rem;
 }
 
-.email-box{
+#email-box{
   background-color: var(--colour-light-grey);
   font-size: 10px;
   float:right;
@@ -236,7 +236,7 @@ password text doesnt get in the way of the password button*/
 
 
 
-.title-card {
+#title-card {
   text-decoration: underline;
   text-decoration-color: var(--colour-accent);
 }

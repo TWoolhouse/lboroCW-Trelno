@@ -102,11 +102,11 @@
       </button>
       <section class="card">
         <div class="card-title-wrapper">
-          <h2 class="title-card">Neumann</h2>
+          <h2 id="title-card">Neumann</h2>
         </div>
         <div class="card-image-wrapper">
           <hr class="solid">
-        <!--This part below will eventually only need to show if the user is actually a manager-->
+        <!--This part below will only need to show if the user is actually a manager-->
           <h1 class="heirarchy-card">Manager</h1>
           <img id="card-profile-picture" src="https://ui-avatars.com/api/?name=Neumann&background=random&size=50&format=svg" alt="" />
         </div>
@@ -114,14 +114,14 @@
           <hr class="solid">
           <h1 class="h1">Email</h1>
           <label for="email-box" class="label-subtext">This is their assigned company email</label>
-          <label class="email-box">f.batmaz@lboro.ac.uk</label>
+          <label id="email-box">f.batmaz@lboro.ac.uk</label>
           <img class="email-lock-img" src="./lock.png" alt="" />
         </div>
       </section>
     </main>
 
 
-    <dialog class="modal" id="dialog-upload-photo">
+<!--   <dialog class="modal" id="dialog-upload-photo">
       <div class="flex-row kanban-title">
         <h2 class="title-card">Upload photo</h2>
         <button class="material-symbols-outlined btn-icon dialog-close">
@@ -133,6 +133,6 @@
         <input type="file" id="img" name="img" accept="image/*">
         <input type="submit">
       </form>
-    </dialog>
+    </dialog> --> 
   </body>
 </html>
