@@ -1,8 +1,7 @@
 import { navbar } from "/nav.js";
 navbar();
 
-import { redirectLogin } from "/api/active.js";
-import { currentUser } from "/api/active.js";
+import { redirectLogin,currentUser,logout } from "/api/active.js";
 
 redirectLogin();
 
@@ -127,4 +126,12 @@ updateButtonInvite.addEventListener('click', () => {
 // "Confirm" button of form triggers "close" on dialog because of [method="dialog"]
 inviteDialog.addEventListener('close', () => {
 //will need to add code to acctually change the profile picture here
+});
+
+
+
+// logout button functionality
+document.querySelector(".logout-btn").addEventListener("click", () => {
+  logout();
+  window.location.href = "/login/";
 });
