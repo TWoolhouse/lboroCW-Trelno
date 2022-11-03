@@ -35,12 +35,10 @@ topics().then((select) => {
 function createPostSearchResultHTML(post) {
   return /*HTML*/ `<article class="card post">
     <aside>
-      <div class="topic">
-        <a href="./?topic=${post.topic.id}" class="btn-action">
-          <p>${post.topic.name}</p>
-          <span class="material-symbols-outlined">topic</span>
-        </a>
-      </div>
+      <a href="./?topic=${post.topic.id}" class="topic btn-action">
+        <p>${post.topic.name}</p>
+        <span class="material-symbols-outlined">topic</span>
+      </a>
       <div class="account">
         <img
         src="${post.owner.profilePicture()}"

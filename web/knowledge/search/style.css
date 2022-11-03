@@ -11,37 +11,80 @@
   grid-template-rows: auto auto auto;
   align-items: stretch;
   justify-items: stretch;
+  width: 20ch;
+  max-width: 20ch;
+  overflow-x: clip;
+
+  --post-aside-border: 1px black solid;
 }
 
 .post aside > * {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  margin: 0;
+  padding: 0.5rem;
+  max-width: inherit;
+  box-sizing: border-box;
 }
 
-.post aside > :first-child {
-  border-radius: var(--post-radius) 0 0 0;
-}
-.post aside > :last-child {
-  border-radius: 0 0 0 var(--post-radius);
-}
-.post aside > :nth-child(2n - 1) {
+.post aside > :nth-child(n + 2) {
   background-color: var(--colour-accent-soft);
 }
+.post aside > :first-child {
+  border-radius: var(--post-radius) 0 0 0;
+  border-bottom: var(--post-aside-border);
+}
+.post aside > :last-child {
+  border-top: var(--post-aside-border);
+  border-radius: 0 0 0 var(--post-radius);
+}
 
-.post aside > :nth-child(2n) {
-  background-color: var(--colour-accent-trans);
+/* Disable the lil icon buttons */
+@media (max-width: 768px) {
+  .btn-action {
+    aspect-ratio: unset;
+    font-size: 1.5em;
+    border-radius: 0.5rem;
+    width: unset;
+    padding: 0.2rem 0.8rem;
+  }
+  .btn-action p {
+    display: block;
+    margin: 0 0.2rem;
+    font-size: 0.7em;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 768px) {
+  .post aside {
+    max-width: 14ch;
+  }
 }
 
 .post aside .account {
+  display: flex;
+  flex-direction: column;
+}
+.post aside .account img {
+  border-radius: 50%;
 }
 
 .post main {
   margin: 1rem;
+  overflow-x: auto;
+  overflow-y: clip;
 }
 
 .post main > :first-child {
   margin: 0;
+}
+
+.post main #preview {
+  max-height: 10em;
+  overflow-y: hidden;
+  overflow-x: clip;
 }
 
 .post main .btn-action {
