@@ -124,7 +124,7 @@
             <hr class="solid">
             <h1 class="h1">Password</h1>
             <label for="change-password-btn" class="label-subtext">Change your password to a more memorable one</label>
-            <button class="change-password-btn" data-action="change-password">
+            <button id="change-password-btn">
               <p>Change Password</p>
             </button>
           </div>
@@ -151,6 +151,7 @@
           </div>
         </div>
       </div>
+      
       </section>
     </main>
 
@@ -158,8 +159,7 @@
 
 
 
-
-    <!-- Simple modal dialog containing a form -->
+    <!--Dialog box for uploading a profile picture-->
     <dialog id="favDialog">
       <form method="dialog" id="photo-form">
         <div>
@@ -179,9 +179,26 @@
       </form>
     </dialog>
     <output></output>
+    
+    <!--Dialog box for changing your password-->
+    <dialog id="passwordDialog">
+      <form method="dialog" id="password-form">
+        <div>
+          <label for="new-password" class="upload-class-text">New password:</label>
+          
+        </div>
+        <div>
+          <button id="cancelBtnPassword" value="cancel">Cancel</button>
+          <button id="confirmBtnPassword" value="default">Confirm</button>
+        </div>
+      </form>
+    </dialog>
+    <output></output>
 
 
 
+
+    
 
 
   <script type="module" src="script.js"></script>

@@ -2,6 +2,30 @@
   --colour-red-logout:#DA0000;
 }
 
+#passwordDialog {
+  width: 80%;
+  max-width: 50ch;
+  border: none;
+  background-color: var(--colour-highlight);
+  color: var(--colour-text);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--card-radius);
+
+}
+
+#passwordDialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  
+}
+
+
+
+
+
+
+
+
+
 
 /* Hiding the old button and text(the defualt one with the input=file*/
 input[type="file"] {
@@ -14,7 +38,7 @@ input[type="file"] {
 }
 
 #confirmBtn {
-  width: 54px;
+  width: 60px;
   height: 19.85px;
   text-align: center;
   display: flex;
@@ -28,7 +52,7 @@ input[type="file"] {
 }
 
 #cancelBtn {
-  width: 54px;
+  width: 60px;
   height: 19.85px;
   text-align: center;
   display: flex;
@@ -120,7 +144,7 @@ input[type="file"] {
 
 /*The CSS below is for the password section of the user profile page*/
 
-.change-password-btn {
+#change-password-btn {
   width: 130px;
   height: 19.85px;
 
@@ -192,6 +216,7 @@ input[type="file"] {
   border: 1px solid var(--colour-accent);
   border-radius: 239.5px;
 }
+
 
 .new-item {
   background-color: var(--colour-accent);
