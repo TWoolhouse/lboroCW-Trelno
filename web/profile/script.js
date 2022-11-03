@@ -24,6 +24,8 @@ document.getElementById("title-card").innerHTML = userID["name"];
 //updating their profile picture cannot be done yet
 
 //updates their status (e.g. manager (which is the default option), team leader, nothing)
+// This should work but hasnt been tested
+
 if (userID["rank"]==1){
     document.getElementsByClassName("heirarchy-card").innerHTML = "Team leader";
 } else if (userID["rank"]==0){
