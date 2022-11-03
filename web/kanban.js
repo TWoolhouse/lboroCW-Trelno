@@ -116,49 +116,87 @@ export function kanban(
           ref.project
         );
       }
+      newTaskDashboard();
     }
     // Calin's code - adding user options to the new task dialog in project page
     if (selectUser) {
+      selectUser.options.length = 0;
+      selectUser.appendChild(new Option("Select user to assign task to"));
       for (let user of project.team.users.snapshot)
         selectUser.innerHTML += createNewTaskDialogUserOptionHTML(user);
+      newTaskProject();
     }
 
     newTaskDialogDOM.showModal();
   });
+
+  // Onsubmit of new task at dashboard
+  function newTaskDashboard() {
+    newTaskDialogDOM
+      .querySelector("form")
+      .addEventListener("submit", async (event) => {
+        event.preventDefault();
+        newTaskDialogDOM.close();
+        const form = event.target;
+        const taskPromise = api.createTask(
+          TaskState.Ready,
+          form.querySelector(`[name="title"]`).value,
+          Date.parse(form.querySelector(`[name="deadline"]`).value),
+          12, // TODO add man hours input
+          form.querySelector(`[name="desc"]`).value
+          // TODO: Add deadline
+        );
+        const projectId = (
+          form.querySelector(`[name="project"]`) ?? { value: project.id }
+        ).value;
+        // TODO: Clear the form
+
+        if (projectId == "user") {
+          currentUser.tasks.add(await taskPromise);
+        } else {
+          const project = await api.project(projectId);
+          project.tasks.add(await api.createProjectTask(await taskPromise));
+        }
+        return false;
+      });
+  }
+  // Onsubmit of new task at project page
+  function newTaskProject() {
+    newTaskDialogDOM
+      .querySelector("form")
+      .addEventListener("submit", async (event) => {
+        event.preventDefault();
+        newTaskDialogDOM.close();
+        const form = event.target;
+        const task = await api.createTask(
+          TaskState.Ready,
+          form.querySelector(`[name="title"]`).value,
+          Date.parse(form.querySelector(`[name="deadline"]`).value),
+          12, // TODO add man hours input
+          form.querySelector(`[name="desc"]`).value
+          // TODO: Add deadline
+        );
+        // TODO: Clear the form
+
+        const userId = form.querySelector(`[name="user"]`).value;
+        const user = await api.user(userId);
+        const urlParams = new URLSearchParams(window.location.search);
+        const project = await api.project(urlParams.get("id"));
+
+        const projectTask = await api.createProjectTask(task);
+        project.tasks.add(projectTask);
+        projectTask.assignees.add(user);
+
+        console.log(user.tasks);
+        return false;
+      });
+  }
+
   // Close the dialog
   newTaskDialogDOM
     .querySelector(".dialog-close")
     .addEventListener("click", () => {
       newTaskDialogDOM.close();
-    });
-
-  // Onsubmit of new task
-  newTaskDialogDOM
-    .querySelector("form")
-    .addEventListener("submit", async (event) => {
-      event.preventDefault();
-      newTaskDialogDOM.close();
-      const form = event.target;
-      const taskPromise = api.createTask(
-        TaskState.Ready,
-        form.querySelector(`[name="title"]`).value,
-        Date.parse(form.querySelector(`[name="deadline"]`).value),
-        12, // TODO add man hours input
-        form.querySelector(`[name="desc"]`).value
-        // TODO: Add deadline
-      );
-      const projectId = (
-        form.querySelector(`[name="project"]`) ?? { value: project.id }
-      ).value;
-      // TODO: Clear the form
-
-      if (projectId == "user") {
-        currentUser.tasks.add(await taskPromise);
-      } else {
-        const project = await api.project(projectId);
-        project.tasks.add(await api.createProjectTask(await taskPromise));
-      }
-      return false;
     });
 }
 
