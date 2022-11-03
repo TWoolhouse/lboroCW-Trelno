@@ -183,13 +183,17 @@
     <!--Dialog box for changing your password-->
     <dialog id="passwordDialog">
       <form method="dialog" id="password-form">
-        <div>
+        <div id="new-password-div">
           <label for="new-password" class="upload-class-text">New password:</label>
-          
+          <input type="text" id="new-password" name="new-password" placeholder="Password"><br><br>
+        </div>
+        <div class="confirm-password-div">
+          <label for="confirm-password" class="upload-class-text">Confirm Password:</label>
+          <input type="text" id="confirm-password" name="confirm-password" placeholder="Confirm password"><br><br>
         </div>
         <div>
-          <button id="cancelBtnPassword" value="cancel">Cancel</button>
-          <button id="confirmBtnPassword" value="default">Confirm</button>
+          <button id="cancelBtn" value="cancel">Cancel</button>
+          <button id="confirmBtn" value="default">Confirm</button>
         </div>
       </form>
     </dialog>
