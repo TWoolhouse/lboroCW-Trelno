@@ -105,11 +105,11 @@ export class User {
   projectlist() {
     if (this.rank >= UserRank.ProjectManager) {
       allProjects().then((values) => {
-        this._projectlist.add(...values);
+        this._projectlist.addIf((project) => project.id, ...values);
       });
     } else {
       userProjects(this.id).then((values) => {
-        this._projectlist.add(...values);
+        this._projectlist.addIf((project) => project.id, ...values);
       });
     }
     return this._projectlist;
