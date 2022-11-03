@@ -26,9 +26,9 @@ document.getElementById("title-card").innerHTML = userID["name"];
 // This should work but hasnt been tested
 
 if (userID["rank"]==1){
-    document.getElementsByClassName("heirarchy-card").innerHTML = "Team leader";
+    document.getElementById("heirarchy-card").innerHTML = "Team leader";
 } else if (userID["rank"]==0){
-    document.getElementsByClassName("heirarchy-card").innerHTML = "";
+    document.getElementById("heirarchy-card").innerHTML = "Employee";
 } 
 
 //updates their email address
