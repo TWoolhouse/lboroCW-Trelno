@@ -48,12 +48,12 @@ form.addEventListener("submit", async (event) => {
     const popup = document.querySelector("#dialog-new-topic");
     const name = await new Promise((resolve) => {
       popup.showModal();
-      popup
-        .querySelector('button[type="submit"]')
-        .addEventListener("click", () => {
-          popup.close();
-          resolve(popup.querySelector("input").value);
-        });
+      popup.querySelector("form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        popup.close();
+        resolve(popup.querySelector("input").value);
+        return false;
+      });
     });
     const topic = await api.createTopic(name);
     topicId = topic.id;

@@ -153,13 +153,23 @@
         <div id="preview"></div>
         <div><!--Empty Box but needed for Colour--></div>
       </section>
-      <dialog id="dialog-new-topic">
-        <h2>New Topic LOLOLOLOLOLOLOLOL</h2>
-        <input type="text" name="name" placeholder="Topic Name..." required />
-        <button type="submit" class="btn-action">
-          <p>Create</p>
-          <span class="material-symbols-outlined">send</span>
-        </button>
+
+      <dialog id="dialog-new-topic" class="modal dialog-new-task">
+        <div class="flex-row kanban-title">
+          <h2 class="title-card">Create a New Topic</h2>
+          <button class="material-symbols-outlined btn-icon dialog-close">
+            close
+          </button>
+        </div>
+        <form class="modal-form">
+          <input type="text" name="name" placeholder="Topic Name..." required />
+          <div class="end-button">
+            <button type="submit" class="btn-action">
+              <p>Create</p>
+              <span class="material-symbols-outlined">send</span>
+            </button>
+          </div>
+        </form>
       </dialog>
     </main>
   </body>
