@@ -21,12 +21,14 @@ import { UserRank } from "./api/model/user.js";
  * @param {Element} newTaskDialogDOM The dialog element for creating a new task
  * @param {Project} [project] A project this kanban is tied to, if any
  * @param {onDragCB} [ondrag] A callback when a kanban element is moved to another section
+ * @param {HTMLDialogElement} [subtaskDialog] If the task has subtasks, this is the dialog to show them in
  */
 export function kanban(
   rootDOM,
   newTaskDialogDOM,
   project,
-  ondrag = (task, card, section) => {}
+  ondrag = (task, card, section) => {},
+  subtaskDialog = null
 ) {
   // Find kanban sections
   const kanbanSections = rootDOM.querySelectorAll(".kanban-section");
@@ -75,6 +77,18 @@ export function kanban(
         event.dataTransfer.setData("task", task.id);
         event.dataTransfer.dropEffect = "move";
       });
+      console.log(subtaskDialog);
+
+      // subtask event handler
+      //  && task.subtasks != null && task.subtasks.length > 0
+      if (subtaskDialog != null) {
+        const expandButton = card.querySelector(".click-expander");
+        expandButton.addEventListener("click", () => {
+          subtaskDialog.innerHTML = subtaskDetailsHTML(task);
+
+          subtaskDialog.showModal();
+        });
+      }
     }
   }
 
@@ -165,6 +179,34 @@ export function kanban(
       }
       return false;
     });
+}
+
+/**
+ * Add details of a big task to the popup
+ * @param {Task} task
+ */
+function subtaskDetailsHTML(task) {
+  return /* HTML */ `
+    <div class="flex-row kanban-title">
+      <h2 class="title-card">${task.name}</h2>
+      <button class="material-symbols-outlined btn-icon dialog-close">
+        close
+      </button>
+    </div>
+    <div>
+      <p>${task.desc}</p>
+      <p class="dimmed flex-row">
+        <span class="material-symbols-outlined">schedule</span>${new Date(
+          task.deadline
+        ).toLocaleDateString()}
+      </p>
+      <ul>
+        <li>Subtask 1</li>
+        <li>Subtask 2</li>
+        <li>Subtask 3</li>
+      </ul>
+    </div>
+  `;
 }
 
 /**

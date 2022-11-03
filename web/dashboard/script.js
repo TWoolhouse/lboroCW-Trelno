@@ -9,7 +9,9 @@ navbar();
 kanban(
   document.querySelector("#kanban"),
   document.querySelector("#dialog-new-task"),
-  null
+  null,
+  null,
+  document.querySelector("#dialog-subtasks")
 );
 
 const projectWrapper = document.querySelector("#project-wrapper");
