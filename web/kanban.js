@@ -178,12 +178,12 @@ export function kanban(
         );
         // TODO: Clear the form
 
-        const userId = form.querySelector(`[name="user"]`).value;
-        const user = await api.user(userId);
+        const user = await api.user(form.querySelector(`[name="user"]`).value);
 
         const projectTask = await api.createProjectTask(task);
         project.tasks.add(projectTask);
         projectTask.assignees.add(user);
+        user.tasklist();
 
         // console.log(user.tasklist());
         return false;
