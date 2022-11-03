@@ -2,6 +2,24 @@
   --colour-red-logout:#DA0000;
 }
 
+.card {
+  margin-top: 50px;
+}
+
+.my-profile-button{
+  width: 90px;
+  height: 30px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+
+  float:right;
+
+  background: var(--colour-accent);
+  box-shadow: 0px 4px 4px var(--card-shadow);
+  border-radius: 7px;
+}
+
 
 #inviteDialog {
   width: 80%;
