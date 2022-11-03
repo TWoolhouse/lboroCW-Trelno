@@ -180,14 +180,12 @@ export function kanban(
 
         const userId = form.querySelector(`[name="user"]`).value;
         const user = await api.user(userId);
-        const urlParams = new URLSearchParams(window.location.search);
-        const project = await api.project(urlParams.get("id"));
 
         const projectTask = await api.createProjectTask(task);
         project.tasks.add(projectTask);
         projectTask.assignees.add(user);
 
-        console.log(user.tasks);
+        // console.log(user.tasklist());
         return false;
       });
   }
