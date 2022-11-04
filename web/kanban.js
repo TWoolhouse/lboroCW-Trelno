@@ -106,7 +106,17 @@ function taskListener(tasklistEvent, project) {
           project: project,
         };
       };
-      tasklistEvent(event.add.map(mapper), event.sub.map(mapper));
+
+      const filterer = (pt) => {
+        if (currentUser.rank == UserRank.Employee) {
+          if (pt.assignees.user.id == currentUser.id) return pt;
+        } else return pt;
+      };
+
+      tasklistEvent(
+        event.add.filter(filterer).map(mapper),
+        event.sub.filter(filterer).map(mapper)
+      );
     });
   } else {
     currentUser.tasklist().onChange((event) => {
@@ -144,7 +154,7 @@ function createDialogs(rootDOM, project) {
     event.preventDefault();
     return await submitNewTask(dialogTask, project);
   });
-  newTaskDynamicInformation(dialogTask);
+  newTaskDynamicInformation(dialogTask, project);
 
   // NEW SUBTASK
   dialogSubtask
@@ -163,6 +173,19 @@ function createDialogs(rootDOM, project) {
 function newTaskDynamicInformation(dialog, project) {
   // Selecting a project
   const selectProject = dialog.querySelector("#options-project");
+  const selectUser = dialog.querySelector("#options-user");
+
+  if (selectUser) {
+    project.team.users.onChange((event) => {
+      for (const user of event.add)
+        selectUser.appendChild(
+          HTMLasDOM(createNewTaskDialogUserOptionHTML(user))
+        );
+      for (const user of event.sub)
+        selectUser.querySelector(`option[value="${user.id}"]`).remove();
+    });
+  }
+
   if (selectProject) {
     currentUser.projectlist().onChange((event) => {
       for (const project of event.add)
@@ -237,6 +260,15 @@ async function submitNewTask(dialog, project) {
     form.querySelector(`[name="project"]`) ?? { value: project.id }
   ).value;
   // TODO: Clear the form
+  const userId = form.querySelector(`[name="user"]`).value;
+
+  if (userId) {
+    const user = await api.user(userId);
+    const projectTask = await api.createProjectTask(await taskPromise);
+    project.tasks.add(projectTask);
+    projectTask.assignees.add(user);
+    user.tasklist();
+  }
 
   if (projectId == "user") {
     currentUser.tasks.add(await taskPromise);
@@ -376,6 +408,17 @@ function createNewTaskDialogProjectOptionHTML(project) {
 }
 
 /**
+ * Create a User option for the new task dialog
+ * @param {Project} project
+ * @returns {String} HTML from user option.
+ */
+function createNewTaskDialogUserOptionHTML(user) {
+  return /*HTML*/ `
+    <option value="${user.id}">${user.name}</option>
+  `;
+}
+
+/**
  * Create Project options for the new task dialog
  * @returns {String} HTML from project selector options.
  */
@@ -389,13 +432,26 @@ function createNewTaskDialogProjectSelectorHTML() {
 }
 
 /**
+ * Create User options for the new task dialog
+ * @returns {String} HTML from user selector options.
+ */
+function createNewTaskDialogUserSelectorHTML() {
+  return /* HTML */ `
+    <select name="user" id="options-user" required>
+      <option value="">Select User to Add Task to...</option>
+    </select>
+  `;
+}
+
+/**
  * @param {Project} [project]
  * @returns {String}
  */
 function createNewTaskDialogWindowHTML(project) {
-  const projectSelector =
-    project == null ? createNewTaskDialogProjectSelectorHTML() : "";
-
+  const projectUserSelector =
+    project == null
+      ? createNewTaskDialogProjectSelectorHTML()
+      : createNewTaskDialogUserSelectorHTML();
   return /* HTML */ `
     <dialog class="modal" id="dialog-new-task">
       <div class="flex-row kanban-title">
@@ -410,7 +466,7 @@ function createNewTaskDialogWindowHTML(project) {
           name="desc"
           placeholder="Write Task description here..."
         ></textarea>
-        ${projectSelector}
+        ${projectUserSelector}
         <div class="input-label">
           <label for="task-date">Enter Deadline for Task:</label>
           <input name="deadline" type="date" id="task-date" required />
