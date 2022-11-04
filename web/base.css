@@ -620,6 +620,10 @@ a.btn-action {
   flex-direction: column;
 }
 
+.jc-start {
+  justify-content: start;
+}
+
 /* USE SPARINGLY */
 .mobile-hidden {
   display: none;

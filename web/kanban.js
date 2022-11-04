@@ -77,7 +77,6 @@ export function kanban(
         event.dataTransfer.setData("task", task.id);
         event.dataTransfer.dropEffect = "move";
       });
-      console.log(subtaskDialog);
 
       // subtask event handler
       //  && task.subtasks != null && task.subtasks.length > 0
@@ -207,16 +206,17 @@ export function kanban(
 function subtaskDetailsHTML(task) {
   console.log(task.subtasks);
   let subtasksHtml = "";
-  for (let subtask of Object.entries(task.subtasks)) {
+  for (let subtask of task.subtasks.snapshot) {
+    console.log(subtask);
     subtasksHtml += /*HTML*/ `
-    <div class="subtask">
-      <div class="subtask-title">${subtask.name}</div>
-      <div class="subtask-desc">${subtask.desc}</div>
-    </div>
+    <li class="flex-row">
+      <label for="${subtask.id}">${subtask.name}<label>
+      <input type="checkbox" class="checkbox" id="${subtask.id}"/>
+    </li>
     `;
   }
-  return (
-    /* HTML */ `
+  console.log(subtasksHtml);
+  return /* HTML */ `
     <div class="flex-row kanban-title">
       <h2 class="title-card">${task.name}</h2>
       <button class="material-symbols-outlined btn-icon dialog-close">
@@ -225,19 +225,16 @@ function subtaskDetailsHTML(task) {
     </div>
     <div>
       <p>${task.desc}</p>
-      <p class="dimmed flex-row">
+      <p class="dimmed flex-row jc-start">
         <span class="material-symbols-outlined">schedule</span>${new Date(
           task.deadline
         ).toLocaleDateString()}
       </p>
-      <ul>` +
-    +(
-      /*HTML*/ `
+      <ul>
+        ${subtasksHtml}
       </ul>
     </div>
-  `
-    )
-  );
+  `;
 }
 
 /**
