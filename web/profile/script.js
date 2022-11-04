@@ -8,30 +8,23 @@ import { currentUser } from "../api/active.js";
 
 redirectLogin();
 
-
 // Read query string parameters
 const urlParams = new URLSearchParams(window.location.search);
-let userID = await api.user(urlParams.get("id"));
-if (userID == undefined){
-    userID = currentUser;
+let user = await api.user(urlParams.get("id"));
+if (user == undefined) {
+  user = currentUser;
 }
 
-console.log(userID);
+console.log("User", user);
 
 //updates their name (on the main page)
-document.getElementById("title-card").innerHTML = userID["name"];
+document.getElementById("title-card").innerHTML = user.name;
 
 //updates their profile picture
-document.getElementById("card-profile-picture").src = userID.profilePicture();
+document.getElementById("card-profile-picture").src = user.profilePicture();
 
 //updates their status (e.g. manager (which is the default option), team leader, nothing)
-// This should work but hasnt been tested
-
-if (userID["rank"]==1){
-    document.getElementById("heirarchy-card").innerHTML = "Team leader";
-} else if (userID["rank"]==0){
-    document.getElementById("heirarchy-card").innerHTML = "Employee";
-} 
+document.getElementById("heirarchy-card").innerHTML = user.rankTitle();
 
 //updates their email address
-document.getElementById("email-box").innerHTML = userID["email"];
+document.getElementById("email-box").innerHTML = user.email;

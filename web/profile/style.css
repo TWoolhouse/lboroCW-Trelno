@@ -201,7 +201,7 @@ input[type="file"] {
   font-size: 1rem;
   line-height: 0.1rem;
 }
-/* This @media code helps with formatting of the edit profile page in mobile view - the 
+/* This @media code helps with formatting of the edit profile page in mobile view - the
 password text doesnt get in the way of the password button*/
 @media (min-width: 400px) {
   br {
@@ -222,7 +222,7 @@ password text doesnt get in the way of the password button*/
   box-shadow: var(--card-shadow);
   border-radius: 7px;
 }
-S #title-card {
+#title-card {
   text-decoration: underline;
   text-decoration-color: var(--colour-accent);
 }
