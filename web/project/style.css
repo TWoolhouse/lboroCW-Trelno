@@ -63,10 +63,6 @@
   font-weight: 600;
 }
 
-.link-list a {
-  color: var(--colour-accent);
-}
-
 .move-right {
   margin-left: 1rem;
 }

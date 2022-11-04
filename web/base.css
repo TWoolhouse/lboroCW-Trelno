@@ -265,6 +265,7 @@ body > main {
   margin: 1.5rem 0;
 }
 
+.card-small a,
 .card a {
   color: var(--colour-text);
   font-weight: 600;

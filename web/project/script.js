@@ -23,17 +23,22 @@ kanban(
 function setup() {
   document.querySelector("#project-name").innerHTML = project.name;
   document.querySelector("#project-description").innerHTML = project.desc;
-  document.querySelector("#project-leader").innerHTML =
-    project.team.leader.name;
+  const leaderDOM = document.querySelector("#project-leader");
+  leaderDOM.innerHTML = project.team.leader.name;
+  leaderDOM.parentElement.href = `../profile/?id=${project.team.leader.id}`;
+  leaderDOM.parentElement.querySelector("img").src =
+    project.team.leader.profilePicture();
   setProjectDeadlineDate(project.deadline);
 
   project.team.users.onChange((event) => event.add.map(addMember));
 
   project.tasks.onChange(updateProgressBar);
 
-  document
-    .querySelector("#client-link")
-    .setAttribute("href", "../client/?id=" + project.client.id);
+  const clientDOM = document.querySelector(".client-info");
+  clientDOM.href = `../client/?id=${project.client.id}`;
+  clientDOM.querySelector("#client-link").innerHTML = project.client.name;
+  clientDOM.querySelector("img").src =
+    project.client.representativeProfilePicture();
 }
 
 // Update assignee list
