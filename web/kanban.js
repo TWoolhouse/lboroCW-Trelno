@@ -251,6 +251,14 @@ async function submitNewTask(dialog, project) {
   ).value;
   // TODO: Clear the form
 
+  const userId = form.querySelector(`[name="user"]`).value;
+  const user = await api.user(userId);
+
+  const projectTask = await api.createProjectTask(await taskPromise);
+  project.tasks.add(projectTask);
+  projectTask.assignees.add(user);
+  user.tasklist();
+
   if (projectId == "user") {
     currentUser.tasks.add(await taskPromise);
   } else {
