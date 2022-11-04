@@ -376,7 +376,7 @@ body > main {
   border: none;
 }
 
-.kanban-dropdown {
+/* .kanban-dropdown {
   position: absolute;
   display: none;
   width: fit-content;
@@ -421,7 +421,7 @@ body > main {
 }
 .kanban-dropdown li:active {
   background-color: var(--colour-accent);
-}
+} */
 
 .expand-content:focus-within,
 div:has(.click-expander:focus) > .expand-content {

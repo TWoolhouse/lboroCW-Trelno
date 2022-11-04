@@ -187,6 +187,19 @@ function createTask(ref) {
   const task = ref.task;
   const dom = HTMLasDOM(createTaskHTML(task));
 
+  dom
+    .querySelector("select.kanban-mobile-options")
+    .addEventListener("change", (event) => {
+      const newState = +event.target.value;
+      task.state = newState;
+      const newSection = document.querySelector(
+        `.kanban-section[data-task-state="${newState}"]`
+      );
+      console.log(newSection);
+      dom.remove();
+      newSection.appendChild(dom);
+    });
+
   if (task.subtasks.snapshot.length == 0) {
     // Has no subtasks
     const showTaskModal = (modal) => {
@@ -283,6 +296,13 @@ function createSubtaskHTML(subtask) {
   `;
 }
 
+function isSelected(task, index) {
+  if (task.state == index) {
+    return "selected";
+  }
+  return "";
+}
+
 /**
  * Create checkbox/label/hr elements for a task
  * @param {Task} task
@@ -298,14 +318,11 @@ function createTaskHTML(task) {
   }">
       <div class="flex-row kanban-title">
         <h3 class="title-card-small">${task.name}</h3>
-        <button class="kanban-mobile-options material-symbols-outlined">more_horiz</button>
-        <div class="kanban-dropdown" >
-          <ul>
-            <li>Mark as To Do </li>
-            <li>Mark as In Progress </li>
-            <li>Mark as Completed </li>
-          </ul>
-        </div>
+       <select class="kanban-mobile-options">
+          <option value="0" ${isSelected(task, 0)}>To-Do</option>
+          <option value="1" ${isSelected(task, 1)}>In Progress</option>
+          <option value="2" ${isSelected(task, 2)}>Completed</option>
+        </select>
       </div>
       ${isSingle ? createTaskSingleHTML(task) : createTaskMultiHTML(task)}
     </div>
@@ -451,8 +468,8 @@ function createNewSubTaskDialogWindowHTML() {
           placeholder="Write Subtask description here..."
         ></textarea>
         <div class="input-label">
-          <label for="subtask-date">Enter Deadline for Subtask:</label>
-          <input name="deadline" type="date" id="subtask-date" required />
+          <label for="task-date">Enter Deadline for Subtask:</label>
+          <input name="deadline" type="date" id="task-date" required />
         </div>
         <div class="end-button">
           <button class="btn-action">
