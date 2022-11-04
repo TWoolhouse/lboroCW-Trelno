@@ -1,6 +1,8 @@
 import * as api from "../api/core.js";
 import { HTMLasDOM, navbar } from "../nav.js";
 import { kanban } from "../kanban.js";
+import { currentUser } from "../api/active.js";
+import { UserRank } from "../api/model/user.js";
 
 navbar();
 
@@ -12,6 +14,10 @@ if (project == null) {
   // Do something if the project can't be found and it was a broken link
   window.location.href = "/dashboard/";
 }
+
+// Check if currentUser can add tasks to project
+if (currentUser.rank < UserRank.TeamLeader)
+  document.querySelector(`[data-action="new-task"]`).classList.add("hidden");
 
 setup();
 kanban(
