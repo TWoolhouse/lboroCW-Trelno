@@ -14,45 +14,6 @@
   </head>
 
   <body>
-    <dialog class="nav-mobile">
-      <div class="flex-row kanban-title">
-        <h2>Menu</h2>
-        <button class="btn-icon material-symbols-outlined dialog-close">
-          close
-        </button>
-      </div>
-      <nav>
-        <ul>
-          <li>
-            <a href="/manager/">
-              <span class="material-symbols-outlined">leaderboard</span>
-              Dashboard
-            </a>
-            <hr />
-          </li>
-          <li>
-            <a href="/manager/">
-              <span class="material-symbols-outlined">surfing</span>
-              Managers
-            </a>
-            <hr />
-          </li>
-          <li>
-            <a href="/knowledge/">
-              <span class="material-symbols-outlined">menu_book</span>
-              Knowledge
-            </a>
-            <hr />
-          </li>
-          <li>
-            <a href="/profile/" data-active>
-              <span class="material-symbols-outlined">manage_accounts</span>
-              My Profile
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </dialog>
     <aside class="side-menu">
       <img src="/tools.svg" alt="Make-it-all" width="100%" />
       <nav>
@@ -104,23 +65,28 @@
           <h2 id="title-card">Neumann</h2>
         </div>
         <div class="card-image-wrapper">
-          <hr class="solid">
-        <!--This part below will only need to show if the user is actually a manager-->
+          <hr class="solid" />
+          <!--This part below will only need to show if the user is actually a manager-->
           <h1 id="heirarchy-card">Manager</h1>
-          <img id="card-profile-picture" src="https://ui-avatars.com/api/?name=Neumann&background=random&size=50&format=svg" alt="" />
+          <img
+            id="card-profile-picture"
+            src="https://ui-avatars.com/api/?name=Neumann&background=random&size=50&format=svg"
+            alt=""
+          />
         </div>
         <div class="wrapper-email">
-          <hr class="solid">
+          <hr class="solid" />
           <h1 class="h1">Email</h1>
-          <label for="email-box" class="label-subtext">This is their assigned company email</label>
+          <label for="email-box" class="label-subtext"
+            >This is their assigned company email</label
+          >
           <label id="email-box">f.batmaz@lboro.ac.uk</label>
           <img class="email-lock-img" src="./lock.png" alt="" />
         </div>
       </section>
     </main>
 
-
-<!--   <dialog class="modal" id="dialog-upload-photo">
+    <!--   <dialog class="modal" id="dialog-upload-photo">
       <div class="flex-row kanban-title">
         <h2 class="title-card">Upload photo</h2>
         <button class="material-symbols-outlined btn-icon dialog-close">
@@ -132,7 +98,7 @@
         <input type="file" id="img" name="img" accept="image/*">
         <input type="submit">
       </form>
-    </dialog> --> 
+    </dialog> -->
     <script type="module" src="script.js"></script>
   </body>
 </html>
