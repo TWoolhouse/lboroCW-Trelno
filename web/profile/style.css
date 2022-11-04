@@ -1,25 +1,24 @@
-:root{
-  --colour-red-logout:#DA0000;
+:root {
+  --colour-red-logout: #da0000;
 }
 
 .card {
-  margin-top: 50px;
+  margin-top: 3rem;
 }
 
-.my-profile-button{
-  width: 90px;
-  height: 30px;
+.my-profile-button {
+  width: fit-content;
+  height: 1.5rem;
   text-align: center;
   display: flex;
   align-items: center;
 
-  float:right;
+  float: right;
 
   background: var(--colour-accent);
   box-shadow: 0px 4px 4px var(--card-shadow);
-  border-radius: 7px;
+  border-radius: 0.5rem;
 }
-
 
 #inviteDialog {
   width: 80%;
@@ -29,16 +28,11 @@
   color: var(--colour-text);
   box-shadow: var(--card-shadow);
   border-radius: var(--card-radius);
-
 }
 
 #inviteDialog::backdrop {
   background: rgba(0, 0, 0, 0.5);
-  
 }
-
-
-
 
 #passwordDialog {
   width: 80%;
@@ -48,12 +42,10 @@
   color: var(--colour-text);
   box-shadow: var(--card-shadow);
   border-radius: var(--card-radius);
-
 }
 
 #passwordDialog::backdrop {
   background: rgba(0, 0, 0, 0.5);
-  
 }
 #password-form input {
   background: var(--colour-highlight);
@@ -65,60 +57,58 @@
   margin: 0.6rem;
 }
 
-
-
 /* Hiding the old button and text(the defualt one with the input=file*/
 input[type="file"] {
   display: none;
 }
 
-.p-upload-photo{
+.p-upload-photo {
   font-size: 2rem;
   text-align: center;
 }
 
 #confirmBtn {
-  width: 60px;
-  height: 19.85px;
+  width: fit-content;
+  height: 1.5rem;
   text-align: center;
   display: flex;
   align-items: center;
-
-  float:right;
+  cursor: pointer;
+  float: right;
 
   background: var(--colour-accent);
-  box-shadow: 0px 4px 4px var(--card-shadow);
+  box-shadow: var(--card-shadow);
   border-radius: 7px;
 }
 
 #cancelBtn {
-  width: 60px;
-  height: 19.85px;
+  width: fit-content;
+  height: 1.5rem;
   text-align: center;
   display: flex;
   align-items: center;
-
-  float:left;
+  cursor: pointer;
+  float: left;
 
   background: var(--colour-accent);
-  box-shadow: 0px 4px 4px var(--card-shadow);
+  box-shadow: var(--card-shadow);
   border-radius: 7px;
 }
 
 .upload-card-text {
   font-size: 1.5rem;
 
-  width: 100px;
-  height: 50px;
+  width: fit-content;
+  height: fit-content;
   text-align: center;
   display: flex;
   align-items: center;
   margin: auto;
-
+  padding: 1rem;
+  cursor: pointer;
   background: var(--colour-accent);
   box-shadow: 0px 4px 4px var(--card-shadow);
   border-radius: 7px;
-
 }
 
 #favDialog {
@@ -129,114 +119,110 @@ input[type="file"] {
   color: var(--colour-text);
   box-shadow: var(--card-shadow);
   border-radius: var(--card-radius);
-
 }
 
 #favDialog::backdrop {
   background: rgba(0, 0, 0, 0.5);
-  
 }
 
-
-.logout-btn{
-  width: 60px;
-  height: 20px;
+.logout-btn {
+  width: fit-content;
+  height: 1.5rem;
   text-align: center;
   display: flex;
   align-items: center;
-  margin:auto;
-  
-
+  margin: auto;
+  cursor: pointer;
   background: var(--colour-red-logout);
-  box-shadow: 0px 4px 4px var(--card-shadow);
+  box-shadow: var(--card-shadow);
   border-radius: 7px;
 }
 
-#invite-btn {
-  width: 54px;
-  height: 19.85px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-
-  float:right;
-
-  background: var(--colour-accent);
-  box-shadow: 0px 4px 4px var(--card-shadow);
-  border-radius: 7px;
+.email-lock-img {
+  float: right;
+  padding-right: 1rem;
 }
 
-
-.email-lock-img{
-  float:right;
-  padding-right: 10px;
-}
-
-.h1{
+.h1 {
   line-height: 0.1rem;
 }
 
-#email-box{
+#email-box {
   background-color: var(--colour-light-grey);
-  font-size: 10px;
-  float:right;
+  width: fit-content;
+  text-align: center;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  float: right;
+  padding-right: 1rem;
+  padding-left: 1rem;
 }
 
 /*The CSS below is for the password section of the user profile page*/
 
 #change-password-btn {
-  width: 130px;
-  height: 19.85px;
-
+  width: fit-content;
+  height: 1.5rem;
+  cursor: pointer;
   text-align: center;
   display: flex;
   align-items: center;
 
-  float:right;
-
+  float: right;
 
   background: var(--colour-accent);
-  box-shadow: 0px 4px 4px var(--card-shadow);
+  box-shadow: var(--card-shadow);
+  border-radius: 7px;
+}
+
+#invite-btn {
+  width: fit-content;
+  height: 1.5rem;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  align-items: center;
+
+  float: right;
+
+  background: var(--colour-accent);
+  box-shadow: var(--card-shadow);
   border-radius: 7px;
 }
 
 /*The CSS below is for the apppearance section of the user profile page*/
 .theme {
-  border:none;
-  float:right;
+  border: none;
+  float: right;
 }
 
-.label-subtext{
-  color: var(--colour-mid-grey);
-  font-size: 10px;
+.label-subtext {
+  color: var(--colour-darker-grey);
+  font-size: 1rem;
   line-height: 0.1rem;
-
 }
 /* This @media code helps with formatting of the edit profile page in mobile view - the 
 password text doesnt get in the way of the password button*/
 @media (min-width: 400px) {
-  br {display:none}
+  br {
+    display: none;
+  }
 }
 
-
 #card-upload-button {
-  width: 116px;
-  height: 26px;
+  width: fit-content;
+  height: 2rem;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin:auto;
-
-
+  margin: auto;
+  cursor: pointer;
   background: var(--colour-accent);
-  box-shadow: 0px 4px 4px var(--card-shadow);
+  box-shadow: var(--card-shadow);
   border-radius: 7px;
 }
-
-
-
-#title-card {
+S #title-card {
   text-decoration: underline;
   text-decoration-color: var(--colour-accent);
 }
@@ -245,8 +231,8 @@ password text doesnt get in the way of the password button*/
   text-align: center;
   font-style: normal;
   font-weight: 800;
-  font-size: 24px;
-  line-height: 15px;
+  font-size: 1.5rem;
+  line-height: 2em;
   /* or 69% */
   letter-spacing: 0.01em;
 
@@ -256,13 +242,12 @@ password text doesnt get in the way of the password button*/
 #card-profile-picture {
   box-sizing: border-box;
 
-  width: 70;
-  height: 122px;
+  width: fit-content;
+  height: 8rem;
 
   border: 1px solid var(--colour-accent);
-  border-radius: 239.5px;
+  border-radius: 120vh;
 }
-
 
 .new-item {
   background-color: var(--colour-accent);
