@@ -451,8 +451,8 @@ function createNewSubTaskDialogWindowHTML() {
           placeholder="Write Subtask description here..."
         ></textarea>
         <div class="input-label">
-          <label for="task-date">Enter Deadline for Subtask:</label>
-          <input name="deadline" type="date" id="task-date" required />
+          <label for="subtask-date">Enter Deadline for Subtask:</label>
+          <input name="deadline" type="date" id="subtask-date" required />
         </div>
         <div class="end-button">
           <button class="btn-action">
