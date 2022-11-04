@@ -687,6 +687,10 @@ a.btn-action {
   display: none !important;
 }
 
+.logout {
+  cursor: pointer;
+}
+
 #waves {
   margin: 0;
   position: absolute;
