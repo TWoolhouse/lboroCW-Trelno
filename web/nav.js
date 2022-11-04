@@ -5,7 +5,7 @@ const _wrapper = document.createElement("div");
 /**
  * Converts the HTML into a DOM Node
  * @param {String} html The HTML String
- * @returns {Node} A Node
+ * @returns {Element} An Element
  */
 export function HTMLasDOM(html) {
   _wrapper.innerHTML = html.trim();
