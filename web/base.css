@@ -286,7 +286,7 @@ body > main {
 .small-cards-wrapper {
   display: grid;
   --card-width: min(35ch, 80%);
-  grid-template-columns: repeat(auto-fit, minmaxvar((--card-width), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-width), 1fr));
   justify-items: center;
 }
 
