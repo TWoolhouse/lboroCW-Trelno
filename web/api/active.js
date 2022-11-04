@@ -25,6 +25,7 @@ function getUser() {
 function setUser(userId) {
   for (const storage of [localStorage, sessionStorage])
     storage.setItem(KEY, userId);
+  // 1 Week
   document.cookie = `${KEY}=${userId}; Max-Age=${60 * 60 * 24 * 7}; path=/`;
 }
 

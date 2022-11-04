@@ -386,13 +386,17 @@ body > main {
 }
 
 div:has(.click-expander:focus) > .expand-content {
-  max-height: 3rem;
+  max-height: 8em;
+  padding-bottom: 1rem;
 }
 
 .expand-content {
   max-height: 0;
+  padding-bottom: 0;
   overflow: hidden;
-  transition: max-height 0.1s ease-out;
+  transition-property: max-height padding-bottom;
+  transition-duration: 0.22s;
+  transition-timing-function: ease-out;
 }
 
 /* .kanban-section + .kanban-section {
