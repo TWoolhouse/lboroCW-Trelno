@@ -57,14 +57,15 @@
 
 .client-details-wrap {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(35ch, 1fr));
+  --card-width: min(35ch, 75%);
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-width), 1fr));
   gap: 1rem;
   justify-items: center;
   margin: 1rem 1rem; /* top right bottom left */
 }
 
 .card-bigger {
-  min-width: 35ch;
+  min-width: var(--card-width);
 }
 
 #client-web span {
