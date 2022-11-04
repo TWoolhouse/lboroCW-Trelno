@@ -3,10 +3,12 @@ import { Memoize } from "./interface/memoize.js";
 import { TaskState } from "./model/task.js";
 import { User, UserRank } from "./model/user.js";
 
+const dbStorage = sessionStorage;
+
 export async function faux() {
   // TODO: Temporary Faux database saved in session storage
-  if (sessionStorage.getItem("FAUX") != null) return;
-  sessionStorage.setItem("FAUX", "1");
+  if (dbStorage.getItem("FAUX") != null) return;
+  dbStorage.setItem("FAUX", "1");
 
   const random = (max, min = 0) => {
     return Math.min(max - 1, Math.floor(Math.random() * (max - min) + min));
