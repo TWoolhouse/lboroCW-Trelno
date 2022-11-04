@@ -83,3 +83,7 @@ export async function posts() {
 export async function topics() {
   return await allAs((topic) => topic, "Topic");
 }
+
+export async function users() {
+  return await allAs((user) => user, "User");
+}
