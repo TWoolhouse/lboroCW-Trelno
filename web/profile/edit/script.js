@@ -13,12 +13,12 @@ document.getElementById("card-profile-picture").src =
   currentUser.profilePicture();
 
 //updates their status (e.g. manager (which is the default option), team leader, nothing)
-// This should work but hasnt been tested
+// This should work but hasn't been tested
 
 if (currentUser["rank"] == 1) {
-  document.getElementById("heirarchy-card").innerHTML = "Team leader";
+  document.getElementById("hierarchy-card").innerHTML = "Team leader";
 } else if (currentUser["rank"] == 0) {
-  document.getElementById("heirarchy-card").innerHTML = "Employee";
+  document.getElementById("hierarchy-card").innerHTML = "Employee";
 }
 
 //updates their email address
@@ -52,7 +52,7 @@ updateButton.addEventListener("click", () => {
 
 // "Confirm" button of form triggers "close" on dialog because of [method="dialog"]
 favDialog.addEventListener("close", () => {
-  //will need to add code to acctually change the profile picture here
+  //will need to add code to actually change the profile picture here
 });
 
 //Javascript for changing your password window
@@ -82,10 +82,10 @@ updateButtonPassword.addEventListener("click", () => {
 
 // "Confirm" button of form triggers "close" on dialog because of [method="dialog"]
 passwordDialog.addEventListener("close", () => {
-  //will need to add code to acctually change the profile picture here
+  //will need to add code to actually change the profile picture here
 });
 
-//Javascript for inivting another employee window
+//Javascript for inviting another employee window
 const updateButtonInvite = document.getElementById("invite-btn");
 const inviteDialog = document.getElementById("inviteDialog");
 const outputBoxInvite = document.querySelector("output");
@@ -111,12 +111,11 @@ updateButtonInvite.addEventListener("click", () => {
 
 // "Confirm" button of form triggers "close" on dialog because of [method="dialog"]
 inviteDialog.addEventListener("close", () => {
-  //will need to add code to acctually change the profile picture here
+  //will need to add code to actually change the profile picture here
 });
 
 // logout button functionality
-const logoutButton = document.querySelectorAll(".logout-btn");
-logoutButton.addEventListener("click", () => {
+document.querySelector(".logout-btn").addEventListener("click", () => {
   logout();
   window.location.href = "/login/";
 });

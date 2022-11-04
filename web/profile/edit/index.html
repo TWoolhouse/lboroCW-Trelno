@@ -9,10 +9,12 @@
     <link rel="stylesheet" href="/base.css" />
     <link rel="stylesheet" href="../style.css" />
 
+    <script type="module" src="script.js"></script>
+
     <title>Profile page</title>
   </head>
 
-  <body>   
+  <body>
     <aside class="side-menu">
       <img src="/tools.svg" alt="Make-it-all" width="100%" />
       <nav>
@@ -46,7 +48,8 @@
           <h6 id="user-name">UserName</h6>
           <p id="user-rank" class="dimmed">UserRank</p>
         </div>
-        <img id="profile-picture-img"
+        <img
+          id="profile-picture-img"
           src="https://placekitten.com/50/50"
           alt="User Profile Picture"
           width="50"
@@ -62,10 +65,14 @@
           <h2 id="title-card">Account</h2>
         </div>
         <div class="card-image-wrapper">
-          <hr class="solid">
-        <!--This part below will eventually only need to show if the user is actually a manager-->
-          <h1 id="heirarchy-card">Manager</h1>
-          <img id="card-profile-picture" src="https://ui-avatars.com/api/?name=Neumann&background=random&size=50&format=svg" alt="" />
+          <hr class="solid" />
+          <!--This part below will eventually only need to show if the user is actually a manager-->
+          <h1 id="hierarchy-card">Manager</h1>
+          <img
+            id="card-profile-picture"
+            src="https://ui-avatars.com/api/?name=Neumann&background=random&size=50&format=svg"
+            alt=""
+          />
         </div>
         <div class="card-button-wrapper">
           <button id="card-upload-button">
@@ -74,65 +81,65 @@
         </div>
         <div class="card-customisation-wrapper">
           <div class="wrapper-appearance">
-            <hr class="solid">
+            <hr class="solid" />
             <h1 class="h1">Appearance</h1>
-            <label for="theme" class="label-subtext">Customize how Make-It-All looks on your device</label>
+            <label for="theme" class="label-subtext"
+              >Customize how Make-It-All looks on your device</label
+            >
             <select name="theme" class="theme">
               <option value="light">Light</option>
               <option value="dark">Dark</option>
             </select>
           </div>
           <div class="wrapper-password">
-            <hr class="solid">
+            <hr class="solid" />
             <h1 class="h1">Password</h1>
-            <label for="change-password-btn" class="label-subtext">Change your password to <br id="password-linebreak">a more memorable one</label>
+            <label for="change-password-btn" class="label-subtext"
+              >Change your password to <br id="password-linebreak" />a more
+              memorable one</label
+            >
             <button id="change-password-btn">
               <p>Change Password</p>
             </button>
           </div>
           <div class="wrapper-email">
-            <hr class="solid">
+            <hr class="solid" />
             <h1 class="h1">My Email</h1>
-            <label for="email-box" class="label-subtext">This is your assigned company email</label>
+            <label for="email-box" class="label-subtext"
+              >This is your assigned company email</label
+            >
             <label id="email-box">f.batmaz@lboro.ac.uk</label>
             <img class="email-lock-img" src="../lock.png" alt="" />
           </div>
           <div class="wrapper-invite">
-            <hr class="solid">
+            <hr class="solid" />
             <h1 class="h1">Invite Others</h1>
-            <label for="invite-btn" class="label-subtext">Invite your co-workers who have not yet signed up</label>
+            <label for="invite-btn" class="label-subtext"
+              >Invite your co-workers who have not yet signed up</label
+            >
             <button id="invite-btn">
               <p>Invite</p>
             </button>
-            <hr class="solid">
+            <hr class="solid" />
           </div>
-          <div class ="wrapper-logout">
-            <button class="logout-btn" id="logout"> 
+          <div class="wrapper-logout">
+            <button class="logout-btn" id="logout">
               <p>Logout</p>
             </button>
           </div>
         </div>
-      </div>
-      
       </section>
     </main>
-
-
-
-
 
     <!--Dialog box for uploading a profile picture-->
     <dialog id="favDialog">
       <form method="dialog" id="photo-form">
         <div>
-        <p class="p-upload-photo">Upload photo:
-          <label for="photo" class="upload-card-text">Choose file</label>
-            <input 
-              type="file"
-              id="photo" 
-              name="photo"
-              accept="image/*">
-        </p>
+          <p class="p-upload-photo">
+            Upload photo:
+            <label for="photo" class="upload-card-text">Choose file</label>
+            <input type="file" id="photo" name="photo" accept="image/*" />
+          </p>
         </div>
         <div>
           <button id="cancelBtn" value="cancel">Cancel</button>
@@ -141,17 +148,31 @@
       </form>
     </dialog>
     <output></output>
-    
+
     <!--Dialog box for changing your password-->
     <dialog id="passwordDialog">
       <form method="dialog" id="password-form">
         <div id="new-password-div">
-          <label for="new-password" class="upload-class-text">New password:</label>
-          <input type="password" id="new-password" name="new-password" placeholder="Password"><br><br>
+          <label for="new-password" class="upload-class-text"
+            >New password:</label
+          >
+          <input
+            type="password"
+            id="new-password"
+            name="new-password"
+            placeholder="Password"
+          /><br /><br />
         </div>
         <div class="confirm-password-div">
-          <label for="confirm-password" class="upload-class-text">Confirm Password:</label>
-          <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password"><br><br>
+          <label for="confirm-password" class="upload-class-text"
+            >Confirm Password:</label
+          >
+          <input
+            type="password"
+            id="confirm-password"
+            name="confirm-password"
+            placeholder="Confirm password"
+          /><br /><br />
         </div>
         <div>
           <button id="cancelBtn" value="cancel">Cancel</button>
@@ -161,24 +182,26 @@
     </dialog>
     <output></output>
 
-    <!--Dialog box for iniviting another user-->
+    <!--Dialog box for inviting another user-->
     <dialog id="inviteDialog">
       <form method="dialog" id="invite-form">
         <div id="invite-div">
-          <label for="invite-email" class="upload-class-text">Email of employee being invited:</label>
-          <input type="text" id="new-employee-email" name="new-employee-email" placeholder="Email"><br><br>
+          <label for="invite-email" class="upload-class-text"
+            >Email of employee being invited:</label
+          >
+          <input
+            type="text"
+            id="new-employee-email"
+            name="new-employee-email"
+            placeholder="Email"
+          /><br /><br />
         </div>
+        <div>
           <button id="cancelBtn" value="cancel">Cancel</button>
           <button id="confirmBtn" value="default">Confirm</button>
         </div>
       </form>
     </dialog>
     <output></output>
-
-
-    
-
-
-  <script type="module" src="script.js"></script>
   </body>
 </html>
