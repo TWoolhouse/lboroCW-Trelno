@@ -46,7 +46,7 @@ function createProjectMemberCard(user) {
   return /*HTML*/ `
     <div class="card-small bg-accent flex-col-center card-smaller">
       <h3 class="title-card-small">${user.name}</h3>
-      <img src=${user.profilePicture()}>
+      <img src=${user.profilePicture()} alt="User Profile Picture">
       <div class="link-list text-center">
               <a href="../profile/?id=${user.id}">View Employee details</a>
       </div>
