@@ -423,6 +423,7 @@ body > main {
   background-color: var(--colour-accent);
 }
 
+.expand-content:focus-within,
 div:has(.click-expander:focus) > .expand-content {
   max-height: 8em;
   padding-bottom: 1rem;
