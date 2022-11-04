@@ -26,6 +26,13 @@ function mobileNavigation() {
   mobileNavToggle.addEventListener("click", () => {
     const navMenu = document.querySelector(".side-menu");
     navMenu.toggleAttribute("data-open");
+    mobileNavToggle.toggleAttribute("data-open");
+
+    if (navMenu.getAttribute("data-open") !== null) {
+      mobileNavToggle.innerHTML = "close";
+    } else {
+      mobileNavToggle.innerHTML = "menu";
+    }
   });
 }
 
