@@ -621,6 +621,12 @@ a.btn-action {
 
 /* UTILITY */
 
+.profile-pic {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px var(--colour-accent-trans) solid;
+}
+
 .bg-accent {
   background-color: var(--colour-accent-trans);
 }

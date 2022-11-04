@@ -37,7 +37,7 @@ function createProjectCard(project) {
       </a>
       <p class="card-description text-center">${project.desc}</p>
       <a class="client" href="/client/?id=${project.client.id}">
-        <img src="${project.client.representativeProfilePicture()}" alt="Client Representative Profile Picture">
+        <img class="profile-pic" src="${project.client.representativeProfilePicture()}" alt="Client Representative Profile Picture">
         ${project.client.name}
       </a>
     </div>
