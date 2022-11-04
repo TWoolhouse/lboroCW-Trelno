@@ -5,8 +5,8 @@ import { Team } from "./model/team.js";
 import { Project, ProjectTask } from "./model/project.js";
 import { Client } from "./model/client.js";
 import { Topic, Post, search, topics } from "./model/post.js";
-import { users } from "./interface/db.js";
-export { users, search, topics };
+import { users, clients } from "./interface/db.js";
+export { users, search, topics, clients };
 
 import { faux } from "../api/faux.js";
 
