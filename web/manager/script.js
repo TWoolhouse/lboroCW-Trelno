@@ -2,7 +2,9 @@ import * as api from "../api/core.js";
 import { currentUser } from "../api/active.js";
 import { TaskState } from "../api/model/task.js";
 import { navbar, HTMLasDOM } from "../nav.js";
+import { Client } from "../api/model/client.js";
 
+/** @typedef {import("../api/model/user.js").User} User */
 /** @typedef {import("../api/model/project.js").Project} Project */
 
 navbar();
@@ -12,11 +14,13 @@ const newProjectDialog = document.querySelector("#dialog-new-project");
 
 newProject.addEventListener("click", () => {
   newProjectDialog.showModal();
-  const closeBtn = newProjectDialog.querySelector(".dialog-close");
-  closeBtn.addEventListener("click", () => {
+  setDynamicData();
+});
+newProjectDialog
+  .querySelector(".dialog-close")
+  .addEventListener("click", () => {
     newProjectDialog.close();
   });
-});
 
 newProjectDialog.querySelector("form").onsubmit = async (event) => {
   event.preventDefault();
@@ -24,19 +28,12 @@ newProjectDialog.querySelector("form").onsubmit = async (event) => {
   const form = event.target;
 
   const project = await api.createProject(
-    currentUser,
-    await api.createClient(
-      "Client Name",
-      "Ada Lovelace",
-      "0 avenue road",
-      "asd",
-      "ada@client.com",
-      "07123456"
-    ),
-    new Date(),
-    newProjectDialog.querySelector(`[name="deadline"]`).value,
-    newProjectDialog.querySelector(`[name="title"]`).value,
-    newProjectDialog.querySelector(`[name="desc"]`).value
+    await api.user(form.querySelector(`[name="teamLeader"]`).value),
+    await api.client(form.querySelector(`[name="client"]`).value),
+    Date.now(),
+    Date.parse(form.querySelector(`[name="deadline"]`).value),
+    form.querySelector(`[name="title"]`).value,
+    form.querySelector(`[name="desc"]`).value
   );
   currentUser.projectlist().add(project);
 };
@@ -52,6 +49,30 @@ currentUser.projectlist().onChange((event) => {
     );
   }
 });
+
+async function setDynamicData() {
+  const selectorClient = newProjectDialog.querySelector("#options-client");
+  selectorClient.innerHTML = createProjectOptionClientHTML({
+    id: "",
+    name: "Select a Client...",
+  });
+  for (const client of await api.clients())
+    selectorClient.appendChild(
+      HTMLasDOM(createProjectOptionClientHTML(client))
+    );
+
+  const selectorTeamLeader = newProjectDialog.querySelector(
+    "#options-team-leader"
+  );
+  selectorTeamLeader.innerHTML = createProjectOptionTeamLeaderHTML({
+    id: "",
+    name: "Select a Team Leader...",
+  });
+  for (const user of await api.users())
+    selectorTeamLeader.appendChild(
+      HTMLasDOM(createProjectOptionTeamLeaderHTML(user))
+    );
+}
 
 /**
  * Create a project overview progress card for managers
@@ -122,4 +143,20 @@ function createProjectOverviewCard(project) {
       </p>
     </div>
     `;
+}
+
+/**
+ * @param {Client} client
+ * @returns {String}
+ */
+function createProjectOptionClientHTML(client) {
+  return /* HTML */ `<option value="${client.id}">${client.name}</option>`;
+}
+
+/**
+ * @param {User} user
+ * @returns {String}
+ */
+function createProjectOptionTeamLeaderHTML(user) {
+  return /* HTML */ `<option value="${user.id}">${user.name}</option>`;
 }

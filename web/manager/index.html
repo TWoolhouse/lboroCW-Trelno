@@ -132,12 +132,13 @@
         <textarea
           name="desc"
           placeholder="Write Project description here..."
+          required
         ></textarea>
-        <select name="project" id="options-project">
-          <option value="">Select Client</option>
-          <option value="0x1">Client 1</option>
-          <option value="0x2">Client 2</option>
-          <option value="0x3">Client 3</option>
+        <select name="client" id="options-client" required>
+          <option value="">Select a Client...</option>
+        </select>
+        <select name="teamLeader" id="options-team-leader" required>
+          <option value="">Select a Team Leader...</option>
         </select>
         <div class="input-label">
           <label for="project-date">Enter Deadline for Project:</label>
