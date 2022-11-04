@@ -15,7 +15,7 @@ export function HTMLasDOM(html) {
 }
 
 function loggingOut() {
-  document.querySelector("#logout").addEventListener("click", () => {
+  document.querySelector(".logout").addEventListener("click", () => {
     logout();
     window.location.href = "/login/";
   });
