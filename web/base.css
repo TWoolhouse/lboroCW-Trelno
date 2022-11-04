@@ -32,6 +32,8 @@
   --card-small-radius: 14px;
 
   --dimmed-opacity: 0.65;
+
+  --nav-animation: 0.3s ease-in-out;
 }
 
 @media only screen and (prefers-color-scheme: dark) {
