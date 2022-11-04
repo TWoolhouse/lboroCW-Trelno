@@ -62,14 +62,13 @@ export class Task {
    * @returns {Task}
    */
   constructor(id, state, name, deadline, manhours, desc) {
-    if (!cereal.cereal(this, id)) {
-      this.id = id;
-      this.state = state;
-      this.name = name;
-      this.deadline = deadline;
-      this.manhours = manhours;
-      this.desc = desc;
-    }
+    if (cereal.cereal(this, id)) return this;
+    this.id = id;
+    this.state = state;
+    this.name = name;
+    this.deadline = deadline;
+    this.manhours = manhours;
+    this.desc = desc;
     this.subtasks = new CollectionDB(this.id, Task, Task);
   }
 }
