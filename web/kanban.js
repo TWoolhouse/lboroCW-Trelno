@@ -186,7 +186,18 @@ export function kanban(
  * @param {Task} task
  */
 function subtaskDetailsHTML(task) {
-  return /* HTML */ `
+  console.log(task.subtasks);
+  let subtasksHtml = "";
+  for (let subtask of Object.entries(task.subtasks)) {
+    subtasksHtml += /*HTML*/ `
+    <div class="subtask">
+      <div class="subtask-title">${subtask.name}</div>
+      <div class="subtask-desc">${subtask.desc}</div>
+    </div>
+    `;
+  }
+  return (
+    /* HTML */ `
     <div class="flex-row kanban-title">
       <h2 class="title-card">${task.name}</h2>
       <button class="material-symbols-outlined btn-icon dialog-close">
@@ -200,13 +211,14 @@ function subtaskDetailsHTML(task) {
           task.deadline
         ).toLocaleDateString()}
       </p>
-      <ul>
-        <li>Subtask 1</li>
-        <li>Subtask 2</li>
-        <li>Subtask 3</li>
+      <ul>` +
+    +(
+      /*HTML*/ `
       </ul>
     </div>
-  `;
+  `
+    )
+  );
 }
 
 /**

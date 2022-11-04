@@ -10,7 +10,7 @@ kanban(
   document.querySelector("#kanban"),
   document.querySelector("#dialog-new-task"),
   null,
-  null,
+  (ondrag = (task, card, section) => {}),
   document.querySelector("#dialog-subtasks")
 );
 
