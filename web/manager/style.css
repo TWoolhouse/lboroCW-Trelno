@@ -22,14 +22,6 @@
   max-width: var(--card-width, 20ch);
 }
 
-.wrap-grid a {
-  text-decoration: none;
-}
-
-a h3 {
-  text-decoration: underline;
-}
-
 .project-detail {
   display: flex;
   align-items: center;
