@@ -24,12 +24,8 @@ function loggingOut() {
 function mobileNavigation() {
   const mobileNavToggle = document.querySelector(".mobile-nav-toggle");
   mobileNavToggle.addEventListener("click", () => {
-    const navDialog = document.querySelector(".nav-mobile");
-    navDialog.showModal();
-    const closeBtn = navDialog.querySelector(".dialog-close");
-    closeBtn.addEventListener("click", () => {
-      navDialog.close();
-    });
+    const navMenu = document.querySelector(".side-menu");
+    navMenu.toggleAttribute("data-open");
   });
 }
 
