@@ -1,9 +1,11 @@
+import * as api from "../api/core.js";
 import { currentUser } from "../api/active.js";
 import { TaskState } from "../api/model/task.js";
 import { navbar, HTMLasDOM } from "../nav.js";
 
+/** @typedef {import("../api/model/project.js").Project} Project */
+
 navbar();
-import * as api from "../api/core.js";
 
 const newProject = document.querySelector("button[data-action='new-project']");
 const newProjectDialog = document.querySelector("#dialog-new-project");
@@ -23,7 +25,7 @@ newProjectDialog.querySelector("form").onsubmit = async (event) => {
 
   const project = await api.createProject(
     currentUser,
-    api.createClient(
+    await api.createClient(
       "Client Name",
       "Ada Lovelace",
       "0 avenue road",
@@ -58,12 +60,7 @@ currentUser.projectlist().onChange((event) => {
  */
 function createProjectOverviewCard(project) {
   const tasks = project.tasks.snapshot;
-  const completedTasks = tasks.filter(
-    (projectTask) => projectTask.task.state === TaskState.Done
-  );
-  console.log(completedTasks);
-  const percentage =
-    (completedTasks.length / (tasks.length == 0 ? 1 : tasks.length)) * 100;
+  const progress = project.progress();
 
   // sum the 'manhours' of tasks that aren't done
   const workerHoursRemaining = tasks.reduce((previous, current) => {
@@ -103,10 +100,12 @@ function createProjectOverviewCard(project) {
       <div class="progress-bar">
         <div
           class="progress-bar-fill"
-          style="width: ${percentage}%; --bar-fill: var(--colour-card-highlight);"
+          style="width: ${
+            progress.percentage * 100
+          }%; --bar-fill: var(--colour-card-highlight);"
         ></div>
       </div>
-      <p class="card-description">${completedTasks.length}/${tasks.length}
+      <p class="card-description">${progress.done}/${progress.total}
       Tasks Completed</p>
       <p class="card-description">
         Deadline: ${deadline.toLocaleDateString()}

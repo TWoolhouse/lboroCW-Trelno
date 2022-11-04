@@ -10,8 +10,6 @@ export { users, search, topics };
 
 import { faux } from "../api/faux.js";
 
-/** @typedef {import("./model/user.js").UserRank} UserRank */
-
 // TYPE GETTERS
 
 /**
