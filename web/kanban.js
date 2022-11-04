@@ -81,7 +81,7 @@ export function kanban(
 
       // subtask event handler
       //  && task.subtasks != null && task.subtasks.length > 0
-      if (subtaskDialog != null) {
+      if (subtaskDialog != null && task.subtasks.snapshot.length > 0) {
         const expandButton = card.querySelector(".click-expander");
         expandButton.addEventListener("click", () => {
           subtaskDialog.innerHTML = subtaskDetailsHTML(task);
@@ -170,12 +170,30 @@ export function kanban(
         form.querySelector(`[name="project"]`) ?? { value: project.id }
       ).value;
       // TODO: Clear the form
-
+      const task = await taskPromise;
+      task.subtasks.add(
+        await api.createTask(
+          TaskState.Ready,
+          "Subtask 1",
+          Date.parse(form.querySelector(`[name="deadline"]`).value),
+          8,
+          "This is a subtask"
+        )
+      );
+      task.subtasks.add(
+        await api.createTask(
+          TaskState.Ready,
+          "Subtask 2",
+          Date.parse(form.querySelector(`[name="deadline"]`).value),
+          4,
+          "This is another subtask"
+        )
+      );
       if (projectId == "user") {
-        currentUser.tasks.add(await taskPromise);
+        currentUser.tasks.add(task);
       } else {
         const project = await api.project(projectId);
-        project.tasks.add(await api.createProjectTask(await taskPromise));
+        project.tasks.add(await api.createProjectTask(task));
         currentUser.tasklist();
       }
       return false;
