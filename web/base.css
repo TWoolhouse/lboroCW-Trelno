@@ -284,7 +284,8 @@ body > main {
 
 .small-cards-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(40ch, 1fr));
+  --card-width: min(35ch, 80%);
+  grid-template-columns: repeat(auto-fit, minmaxvar((--card-width), 1fr));
   justify-items: center;
 }
 
@@ -308,7 +309,7 @@ body > main {
 }
 
 /* KANBAN */
-@media (min-width: 950px) {
+@media (min-width: 1100px) {
   .kanban-wrapper {
     display: flex;
     flex-direction: row;
