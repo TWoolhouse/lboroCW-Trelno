@@ -27,6 +27,7 @@ class UserRank {
 }
 
 User "1" o-- "0..n" Task: tasks
+Task "0..n" --o "1" Task: subtasks
 class Task {
 	+id: Int
 	+state: TaskState
@@ -34,6 +35,7 @@ class Task {
 	+manhours: Number
 	+name: String
 	+desc: String?
+	+subtasks: Collection~Task~
 }
 TaskState "0..n" --o "1" Task: state
 class TaskState {
