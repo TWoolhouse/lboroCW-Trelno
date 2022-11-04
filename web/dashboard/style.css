@@ -10,11 +10,17 @@
   color: var(--colour-accent) !important;
 }
 
-.myprojects-wrapper .card-small {
-  margin-inline: auto;
-}
-
 .icon-link {
   text-decoration: none;
   justify-content: center !important;
+}
+
+#project-wrapper .client {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#project-wrapper .client img {
+  border-radius: 50%;
+  margin-right: 1rem;
 }

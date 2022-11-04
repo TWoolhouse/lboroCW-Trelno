@@ -37,6 +37,14 @@ export class Client {
     this.email = email;
     this.phone = phone;
   }
+
+  /**
+   * @param {Number} size The size of the image in pixels
+   * @returns {String} URL of the image
+   */
+  representativeProfilePicture(size = 50) {
+    return `https://ui-avatars.com/api/?name=${this.representative}&background=random&size=${size}&format=svg`;
+  }
 }
 cereal.register(Client);
 new Memoize(Client);

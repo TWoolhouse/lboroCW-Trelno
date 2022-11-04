@@ -25,9 +25,8 @@ function setup() {
   document
     .querySelector("#client-web")
     .setAttribute("href", "https://" + client.website);
-  document.querySelector(
-    "#client-image"
-  ).src = `https://ui-avatars.com/api/?name=${client.representative}&background=random&size=50&format=svg`;
+  document.querySelector("#client-image").src =
+    client.representativeProfilePicture();
 }
 
 setup();
