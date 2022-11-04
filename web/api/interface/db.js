@@ -14,6 +14,12 @@ export function all(...names) {
     .map(([key, _]) => key.substring(name.length));
 }
 
+async function allAsIs(name, ...names) {
+  return await Promise.all(
+    all(name, ...names).map((id) => Memoize.Name(name).get(id))
+  );
+}
+
 async function allAs(mapping, name, ...names) {
   return await Promise.all(
     all(name, ...names).map(async (id) => {
@@ -23,7 +29,7 @@ async function allAs(mapping, name, ...names) {
 }
 
 export async function allProjects() {
-  return await allAs((project) => project, "Project");
+  return await allAsIs("Project");
 }
 
 export async function userTeams(userId) {
@@ -67,7 +73,7 @@ export async function userProjectTasks(userId) {
 
 export async function userProjects(userId) {
   const teams = (await userTeams(userId)).map((ref) => ref.team);
-  return (await allAs((p) => p, "Project")).filter((project) =>
+  return (await allAsIs("Project")).filter((project) =>
     teams.includes(project.team)
   );
 }
@@ -77,13 +83,13 @@ export async function topicPosts(topicId) {
 }
 
 export async function posts() {
-  return await allAs((post) => post, "Post");
+  return await allAsIs("Post");
 }
 
 export async function topics() {
-  return await allAs((topic) => topic, "Topic");
+  return await allAsIs("Topic");
 }
 
 export async function users() {
-  return await allAs((user) => user, "User");
+  return await allAsIs("User");
 }
