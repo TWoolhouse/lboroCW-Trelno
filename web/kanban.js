@@ -15,6 +15,8 @@ import { UserRank } from "./api/model/user.js";
  * @param {Element} section The DOM object of the kanban section the card is arriving into.
  */
 
+let TaskRefActive = null;
+
 /**
  * Creates a kanban on the page
  * @param {Element} rootDOM The root element of the whole kanban
@@ -25,7 +27,7 @@ import { UserRank } from "./api/model/user.js";
 export function kanban(rootDOM, project, ondrag = (task, card, section) => {}) {
   const tasklistEvent = kanbanEnable(rootDOM, ondrag);
   taskListener(tasklistEvent, project);
-  newTaskDialog(rootDOM, project);
+  createDialogs(rootDOM, project);
 }
 
 /**
@@ -74,7 +76,7 @@ function kanbanEnable(rootDOM, ondrag) {
   function tasklistEvent(add, sub) {
     for (const ref of add) {
       const task = ref.task;
-      const card = createTask(task);
+      const card = createTask(ref);
       kanbanSections[task.state].appendChild(card);
 
       // Kanban Drag Event Handler
@@ -117,10 +119,11 @@ function taskListener(tasklistEvent, project) {
  * @param {Element} rootDOM
  * @param {Project} [project]
  */
-function newTaskDialog(rootDOM, project) {
+function createDialogs(rootDOM, project) {
   const dialogTask = HTMLasDOM(createNewTaskDialogWindowHTML(project));
   const dialogSubtask = HTMLasDOM(createNewSubTaskDialogWindowHTML());
-  const dialogs = [dialogTask, dialogSubtask];
+  const dialogUsers = HTMLasDOM(createUsersDialogWindowHTML());
+  const dialogs = [dialogTask, dialogSubtask, dialogUsers];
 
   for (const dialog of dialogs) {
     document.body.appendChild(dialog);
@@ -141,7 +144,6 @@ function newTaskDialog(rootDOM, project) {
     event.preventDefault();
     return await submitNewTask(dialogTask, project);
   });
-
   newTaskDynamicInformation(dialogTask);
 
   // NEW SUBTASK
@@ -178,25 +180,28 @@ function newTaskDynamicInformation(dialog, project) {
 }
 
 /**
- * @param {Task} task
+ * @param {TaskRef} ref
  * @returns {Element}
  */
-function createTask(task) {
+function createTask(ref) {
+  const task = ref.task;
   const dom = HTMLasDOM(createTaskHTML(task));
 
   if (task.subtasks.snapshot.length == 0) {
     // Has no subtasks
+    const showTaskModal = (modal) => {
+      TaskRefActive = ref;
+      modal.showModal();
+    };
     dom
       .querySelector("button#subtask-add")
       .addEventListener("click", (event) => {
-        const modal = document.querySelector("#dialog-new-subtask");
-        modal.setAttribute("data-task", task.id);
-        modal.showModal();
+        showTaskModal(document.querySelector("#dialog-new-subtask"));
       });
     dom
       .querySelector("button#users-show")
       .addEventListener("click", (event) => {
-        console.log("SHOW USERS");
+        showTaskModal(document.querySelector("#dialog-task-users"));
       });
   } else {
     // subtask event handler
@@ -248,7 +253,7 @@ async function submitNewTask(dialog, project) {
  */
 async function submitNewSubtask(rootDOM, dialog) {
   dialog.close();
-  const parentTask = await api.task(dialog.getAttribute("data-task"));
+  const parentTask = TaskRefActive.task;
   const form = dialog.querySelector("form");
   parentTask.subtasks.add(
     await api.createTask(
@@ -262,7 +267,7 @@ async function submitNewSubtask(rootDOM, dialog) {
   );
   rootDOM
     .querySelector(`#task-${parentTask.id}`)
-    .replaceWith(createTask(parentTask));
+    .replaceWith(createTask(TaskRefActive));
 }
 
 /**
@@ -456,6 +461,24 @@ function createNewSubTaskDialogWindowHTML() {
           </button>
         </div>
       </form>
+    </dialog>
+  `;
+}
+
+/**
+ * The dialog which has all of the assigned users to a task
+ * @returns {String}
+ */
+function createUsersDialogWindowHTML() {
+  return /* HTML */ `
+    <dialog class="modal" id="dialog-task-users">
+      <div class="flex-row kanban-title">
+        <h2 class="title-card">Assigned Users</h2>
+        <button class="material-symbols-outlined btn-icon dialog-close">
+          close
+        </button>
+      </div>
+      <div>A PRETTY LIST OF USERS</div>
     </dialog>
   `;
 }
