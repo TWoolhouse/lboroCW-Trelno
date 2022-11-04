@@ -106,7 +106,17 @@ function taskListener(tasklistEvent, project) {
           project: project,
         };
       };
-      tasklistEvent(event.add.map(mapper), event.sub.map(mapper));
+
+      const filterer = (pt) => {
+        if (currentUser.rank == UserRank.Employee) {
+          if (pt.assignees.user.id == currentUser.id) return pt;
+        } else return pt;
+      };
+
+      tasklistEvent(
+        event.add.filter(filterer).map(mapper),
+        event.sub.filter(filterer).map(mapper)
+      );
     });
   } else {
     currentUser.tasklist().onChange((event) => {
@@ -250,14 +260,15 @@ async function submitNewTask(dialog, project) {
     form.querySelector(`[name="project"]`) ?? { value: project.id }
   ).value;
   // TODO: Clear the form
-
   const userId = form.querySelector(`[name="user"]`).value;
-  const user = await api.user(userId);
 
-  const projectTask = await api.createProjectTask(await taskPromise);
-  project.tasks.add(projectTask);
-  projectTask.assignees.add(user);
-  user.tasklist();
+  if (userId) {
+    const user = await api.user(userId);
+    const projectTask = await api.createProjectTask(await taskPromise);
+    project.tasks.add(projectTask);
+    projectTask.assignees.add(user);
+    user.tasklist();
+  }
 
   if (projectId == "user") {
     currentUser.tasks.add(await taskPromise);
