@@ -18,18 +18,23 @@ import { UserRank } from "./api/model/user.js";
 /**
  * Creates a kanban on the page
  * @param {Element} rootDOM The root element of the whole kanban
- * @param {Element} newTaskDialogDOM The dialog element for creating a new task
  * @param {Project} [project] A project this kanban is tied to, if any
  * @param {onDragCB} [ondrag] A callback when a kanban element is moved to another section
  * @param {HTMLDialogElement} [subtaskDialog] If the task has subtasks, this is the dialog to show them in
  */
-export function kanban(
-  rootDOM,
-  newTaskDialogDOM,
-  project,
-  ondrag = (task, card, section) => {},
-  subtaskDialog = null
-) {
+export function kanban(rootDOM, project, ondrag = (task, card, section) => {}) {
+  const tasklistEvent = kanbanEnable(rootDOM, ondrag);
+  taskListener(tasklistEvent, project);
+  newTaskDialog(rootDOM, project);
+}
+
+/**
+ * Enables the Kanban drag and drop behaviour
+ * @param {Element} rootDOM The kanban root Element
+ * @param {onDragCB} ondrag An event to fire when the drag drop is completed
+ * @returns {TaskEventCB} A function that takes the added and removed tasks and will edit the kanban respectively
+ */
+function kanbanEnable(rootDOM, ondrag) {
   // Find kanban sections
   const kanbanSections = rootDOM.querySelectorAll(".kanban-section");
   if (kanbanSections.length != Object.entries(TaskState).length)
@@ -69,7 +74,7 @@ export function kanban(
   function tasklistEvent(add, sub) {
     for (const ref of add) {
       const task = ref.task;
-      const card = HTMLasDOM(createTaskHTML(task));
+      const card = createTask(task);
       kanbanSections[task.state].appendChild(card);
 
       // Kanban Drag Event Handler
@@ -77,21 +82,17 @@ export function kanban(
         event.dataTransfer.setData("task", task.id);
         event.dataTransfer.dropEffect = "move";
       });
-
-      // subtask event handler
-      //  && task.subtasks != null && task.subtasks.length > 0
-      if (subtaskDialog != null && task.subtasks.snapshot.length > 0) {
-        const expandButton = card.querySelector(".click-expander");
-        expandButton.addEventListener("click", () => {
-          subtaskDialog.innerHTML = subtaskDetailsHTML(task);
-
-          subtaskDialog.showModal();
-        });
-      }
     }
   }
+  return tasklistEvent;
+}
 
-  // Add tasks to the kanban
+/**
+ * Adds the event listener for the tasklists
+ * @param {TaskEventCB} tasklistEvent
+ * @param {Project} [project]
+ */
+function taskListener(tasklistEvent, project) {
   if (project) {
     project.tasks.onChange((event) => {
       // TODO: Filter out tasks they shouldn't be able to see
@@ -110,130 +111,170 @@ export function kanban(
       tasklistEvent(event.add, event.sub);
     });
   }
+}
 
-  // Create New Task
-  const newTaskButtonDOM = rootDOM.querySelector(`[data-action="new-task"]`);
+/**
+ * @param {Element} rootDOM
+ * @param {Project} [project]
+ */
+function newTaskDialog(rootDOM, project) {
+  const dialogTask = HTMLasDOM(createNewTaskDialogWindowHTML(project));
+  const dialogSubtask = HTMLasDOM(createNewSubTaskDialogWindowHTML());
+  const dialogs = [dialogTask, dialogSubtask];
 
-  // Setting up new Task Dialog
-  const selectProject = newTaskDialogDOM.querySelector("#options-project");
-  if (selectProject) {
-    selectProject.innerHTML = createNewTaskDialogProjectOptionHTML({
-      id: "user",
-      name: "Personal TODO List",
+  for (const dialog of dialogs) {
+    document.body.appendChild(dialog);
+    // Close the dialog
+    dialog.querySelector(".dialog-close").addEventListener("click", () => {
+      dialog.close();
     });
+  }
+
+  // NEW TASK
+  const newTaskButtonDOM = rootDOM.querySelector(`[data-action="new-task"]`);
+  // Show the dialog
+  newTaskButtonDOM.addEventListener("click", () => {
+    dialogTask.showModal();
+  });
+  // Onsubmit of new task
+  dialogTask.querySelector("form").addEventListener("submit", async (event) => {
+    event.preventDefault();
+    return await submitNewTask(dialogTask, project);
+  });
+
+  newTaskDynamicInformation(dialogTask);
+
+  // NEW SUBTASK
+  dialogSubtask
+    .querySelector("form")
+    .addEventListener("submit", async (event) => {
+      event.preventDefault();
+      return await submitNewSubtask(rootDOM, dialogSubtask);
+    });
+}
+
+/**
+ * Set up event listeners for dynamic data inside of a new task dialog
+ * @param {Element} dialog
+ * @param {Project} [project]
+ */
+function newTaskDynamicInformation(dialog, project) {
+  // Selecting a project
+  const selectProject = dialog.querySelector("#options-project");
+  if (selectProject) {
     currentUser.projectlist().onChange((event) => {
       for (const project of event.add)
         if (
           currentUser.rank >= UserRank.ProjectManager ||
           project.team.leader.id == currentUser.id
         )
-          selectProject.innerHTML +=
-            createNewTaskDialogProjectOptionHTML(project);
+          selectProject.appendChild(
+            HTMLasDOM(createNewTaskDialogProjectOptionHTML(project))
+          );
+      for (const project of event.sub)
+        selectProject.querySelector(`option[value="${project.id}"]`).remove();
     });
   }
-
-  // Calin's code - adding user options to the new task dialog in project page
-  const selectUser = newTaskDialogDOM.querySelector("#assign-user");
-  if (selectUser) {
-    for (let user of project.team.users.snapshot)
-      selectUser.innerHTML += createNewTaskDialogUserOptionHTML(user);
-  }
-
-  newTaskButtonDOM.addEventListener("click", () => {
-    newTaskDialogDOM.showModal();
-  });
-
-  // Close the dialog
-  newTaskDialogDOM
-    .querySelector(".dialog-close")
-    .addEventListener("click", () => {
-      newTaskDialogDOM.close();
-    });
-
-  // Onsubmit of new task
-  newTaskDialogDOM
-    .querySelector("form")
-    .addEventListener("submit", async (event) => {
-      event.preventDefault();
-      newTaskDialogDOM.close();
-      const form = event.target;
-      const taskPromise = api.createTask(
-        TaskState.Ready,
-        form.querySelector(`[name="title"]`).value,
-        Date.parse(form.querySelector(`[name="deadline"]`).value),
-        12, // TODO add man hours input
-        form.querySelector(`[name="desc"]`).value
-        // TODO: Add deadline
-      );
-      const projectId = (
-        form.querySelector(`[name="project"]`) ?? { value: project.id }
-      ).value;
-      // TODO: Clear the form
-      const task = await taskPromise;
-      task.subtasks.add(
-        await api.createTask(
-          TaskState.Ready,
-          "Subtask 1",
-          Date.parse(form.querySelector(`[name="deadline"]`).value),
-          8,
-          "This is a subtask"
-        )
-      );
-      task.subtasks.add(
-        await api.createTask(
-          TaskState.Ready,
-          "Subtask 2",
-          Date.parse(form.querySelector(`[name="deadline"]`).value),
-          4,
-          "This is another subtask"
-        )
-      );
-      if (projectId == "user") {
-        currentUser.tasks.add(task);
-      } else {
-        const project = await api.project(projectId);
-        project.tasks.add(await api.createProjectTask(task));
-        currentUser.tasklist();
-      }
-      return false;
-    });
 }
 
 /**
- * Add details of a big task to the popup
  * @param {Task} task
+ * @returns {Element}
  */
-function subtaskDetailsHTML(task) {
-  console.log(task.subtasks);
-  let subtasksHtml = "";
-  for (let subtask of task.subtasks.snapshot) {
-    console.log(subtask);
-    subtasksHtml += /*HTML*/ `
+function createTask(task) {
+  const dom = HTMLasDOM(createTaskHTML(task));
+
+  if (task.subtasks.snapshot.length == 0) {
+    // Has no subtasks
+    dom
+      .querySelector("button#subtask-add")
+      .addEventListener("click", (event) => {
+        const modal = document.querySelector("#dialog-new-subtask");
+        modal.setAttribute("data-task", task.id);
+        modal.showModal();
+      });
+    dom
+      .querySelector("button#users-show")
+      .addEventListener("click", (event) => {
+        console.log("SHOW USERS");
+      });
+  } else {
+    // subtask event handler
+    //  && task.subtasks != null && task.subtasks.length > 0
+    // if (subtaskDialog != null) {
+    //   const expandButton = card.querySelector(".click-expander");
+    //   expandButton.addEventListener("click", () => {
+    //     subtaskDialog.innerHTML = subtaskDetailsHTML(task);
+    //     subtaskDialog.showModal();
+    //   });
+    // }
+  }
+  return dom;
+}
+
+/**
+ * @param {Element} dialog
+ * @param {Project} [project]
+ * @returns
+ */
+async function submitNewTask(dialog, project) {
+  dialog.close();
+  const form = dialog.querySelector("form");
+  const taskPromise = api.createTask(
+    TaskState.Ready,
+    form.querySelector(`[name="title"]`).value,
+    Date.parse(form.querySelector(`[name="deadline"]`).value),
+    12, // TODO add man hours input
+    form.querySelector(`[name="desc"]`).value
+    // TODO: Add deadline
+  );
+  const projectId = (
+    form.querySelector(`[name="project"]`) ?? { value: project.id }
+  ).value;
+  // TODO: Clear the form
+
+  if (projectId == "user") {
+    currentUser.tasks.add(await taskPromise);
+  } else {
+    const project = await api.project(projectId);
+    project.tasks.add(await api.createProjectTask(await taskPromise));
+    currentUser.tasklist(); // Need to force an event update
+  }
+}
+
+/**
+ * @param {Element} rootDOM
+ * @param {Element} dialog
+ */
+async function submitNewSubtask(rootDOM, dialog) {
+  dialog.close();
+  const parentTask = await api.task(dialog.getAttribute("data-task"));
+  const form = dialog.querySelector("form");
+  parentTask.subtasks.add(
+    await api.createTask(
+      TaskState.Ready,
+      form.querySelector(`[name="title"]`).value,
+      Date.parse(form.querySelector(`[name="deadline"]`).value),
+      12, // TODO add man hours input
+      form.querySelector(`[name="desc"]`).value
+      // TODO: Add deadline
+    )
+  );
+  rootDOM
+    .querySelector(`#task-${parentTask.id}`)
+    .replaceWith(createTask(parentTask));
+}
+
+/**
+ * @param {Task} subtask
+ * @return {String}
+ */
+function createSubtaskHTML(subtask) {
+  return /*HTML*/ `
     <li class="flex-row">
       <label for="${subtask.id}">${subtask.name}<label>
       <input type="checkbox" class="checkbox" id="${subtask.id}"/>
     </li>
-    `;
-  }
-  console.log(subtasksHtml);
-  return /* HTML */ `
-    <div class="flex-row kanban-title">
-      <h2 class="title-card">${task.name}</h2>
-      <button class="material-symbols-outlined btn-icon dialog-close">
-        close
-      </button>
-    </div>
-    <div>
-      <p>${task.desc}</p>
-      <p class="dimmed flex-row jc-start">
-        <span class="material-symbols-outlined">schedule</span>${new Date(
-          task.deadline
-        ).toLocaleDateString()}
-      </p>
-      <ul>
-        ${subtasksHtml}
-      </ul>
-    </div>
   `;
 }
 
@@ -261,14 +302,6 @@ function createTaskHTML(task) {
           </ul>
         </div>
       </div>
-      <div class="flex-row">
-        <button class="flex-row dimmed btn-icon ${
-          isSingle ? "click-expander" : ""
-        }"><span class="material-symbols-outlined">analytics</span>View More Info</button>
-        <p class="dimmed flex-row"><span class="material-symbols-outlined">schedule</span>${new Date(
-          task.deadline
-        ).toLocaleDateString()}</p>
-      </div>
       ${isSingle ? createTaskSingleHTML(task) : createTaskMultiHTML(task)}
     </div>
     `;
@@ -281,14 +314,20 @@ function createTaskHTML(task) {
  */
 function createTaskSingleHTML(task) {
   return /*HTML*/ `
+    <div class="flex-row">
+      <button class="flex-row dimmed btn-icon click-expander"><span class="material-symbols-outlined">analytics</span>View More Info</button>
+      <p class="dimmed flex-row"><span class="material-symbols-outlined">schedule</span>${new Date(
+        task.deadline
+      ).toLocaleDateString()}</p>
+    </div>
     <div class="expand-content">
       <p>${task.desc}</p>
       <div class="flex-row">
-        <button type="button" class="btn-action">
+        <button id="users-show" type="button" class="btn-action">
           <p>Users</p>
           <span class="material-symbols-outlined">people</span>
         </button>
-        <button type="button" class="btn-action">
+        <button id="subtask-add" type="button" class="btn-action">
           <p>Subtasks</p>
           <span class="material-symbols-outlined">add</span>
         </button>
@@ -297,9 +336,26 @@ function createTaskSingleHTML(task) {
     `;
 }
 
+/**
+ * @param {Task} task
+ * @returns {String}
+ */
 function createTaskMultiHTML(task) {
+  const subtasksHTML = task.subtasks.snapshot
+    .map((subtask) => createSubtaskHTML(subtask))
+    .join("");
   return /*HTML*/ `
-    <div class="progress-bar">COLOURFUL PROGRESS BAR</div>
+    <div>
+      <p>${task.desc}</p>
+      <p class="dimmed flex-row jc-start">
+        <span class="material-symbols-outlined">schedule</span>${new Date(
+          task.deadline
+        ).toLocaleDateString()}
+      </p>
+      <ul>
+        ${subtasksHTML}
+      </ul>
+    </div>
     `;
 }
 
@@ -315,23 +371,91 @@ function createNewTaskDialogProjectOptionHTML(project) {
 }
 
 /**
- * Create a User option for the new task dialog
- * @param {Project} project
- * @returns {String} HTML from project option.
+ * Create Project options for the new task dialog
+ * @returns {String} HTML from project selector options.
  */
-function createNewTaskDialogUserOptionHTML(user) {
-  return /*HTML*/ `
-    <option value="${user.id}">${user.name}</option>
+function createNewTaskDialogProjectSelectorHTML() {
+  return /* HTML */ `
+    <select name="project" id="options-project" required>
+      <option value="">Select Project to Add Task to...</option>
+      <option value="user">Personal TODO</option>
+    </select>
+  `;
+}
+
+/**
+ * @param {Project} [project]
+ * @returns {String}
+ */
+function createNewTaskDialogWindowHTML(project) {
+  const projectSelector =
+    project == null ? createNewTaskDialogProjectSelectorHTML() : "";
+
+  return /* HTML */ `
+    <dialog class="modal" id="dialog-new-task">
+      <div class="flex-row kanban-title">
+        <h2 class="title-card">Add New Task</h2>
+        <button class="material-symbols-outlined btn-icon dialog-close">
+          close
+        </button>
+      </div>
+      <form class="modal-form">
+        <input name="title" type="text" placeholder="Task Title..." required />
+        <textarea
+          name="desc"
+          placeholder="Write Task description here..."
+        ></textarea>
+        ${projectSelector}
+        <div class="input-label">
+          <label for="task-date">Enter Deadline for Task:</label>
+          <input name="deadline" type="date" id="task-date" required />
+        </div>
+        <div class="end-button">
+          <button class="btn-action">
+            <p>Submit Item</p>
+            <span class="material-symbols-outlined">send</span>
+          </button>
+        </div>
+      </form>
+    </dialog>
   `;
 }
 
 /**
  * @returns {String}
  */
-function createDialogWindow() {
+function createNewSubTaskDialogWindowHTML() {
+  // FIXME: Not a complete copy paste
   return /* HTML */ `
-    <select name="user" id="assign-user">
-      <option value="">Select user to assign task to</option></select
-    >;
+    <dialog class="modal" id="dialog-new-subtask">
+      <div class="flex-row kanban-title">
+        <h2 class="title-card">Add New Subtask</h2>
+        <button class="material-symbols-outlined btn-icon dialog-close">
+          close
+        </button>
+      </div>
+      <form class="modal-form">
+        <input
+          name="title"
+          type="text"
+          placeholder="Subtask Title..."
+          required
+        />
+        <textarea
+          name="desc"
+          placeholder="Write Subtask description here..."
+        ></textarea>
+        <div class="input-label">
+          <label for="task-date">Enter Deadline for Subtask:</label>
+          <input name="deadline" type="date" id="task-date" required />
+        </div>
+        <div class="end-button">
+          <button class="btn-action">
+            <p>Submit Item</p>
+            <span class="material-symbols-outlined">send</span>
+          </button>
+        </div>
+      </form>
+    </dialog>
   `;
 }

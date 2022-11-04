@@ -200,34 +200,5 @@
         <div class="project-members-wrap" id="project-members-wrap"></div>
       </section>
     </main>
-
-    <dialog class="modal" id="dialog-new-task">
-      <div class="flex-row kanban-title">
-        <h2 class="title-card">Add New Task</h2>
-        <button class="material-symbols-outlined btn-icon dialog-close">
-          close
-        </button>
-      </div>
-      <form class="modal-form">
-        <input name="title" type="text" placeholder="Task Title..." required />
-        <textarea
-          name="desc"
-          placeholder="Write Task description here..."
-        ></textarea>
-        <select name="user" id="assign-user">
-          <option value="">Select user to assign task to</option>
-        </select>
-        <div class="input-label">
-          <label for="task-date">Enter Deadline for Task:</label>
-          <input name="deadline" type="date" id="task-date" required />
-        </div>
-        <div class="end-button">
-          <button class="btn-action">
-            <p>Submit Item</p>
-            <span class="material-symbols-outlined">send</span>
-          </button>
-        </div>
-      </form>
-    </dialog>
   </body>
 </html>

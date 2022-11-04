@@ -16,7 +16,6 @@ if (project == null) {
 setup();
 kanban(
   document.querySelector("#kanban"),
-  document.querySelector("#dialog-new-task"),
   project,
   (ondrag = updateProgressBar)
 );

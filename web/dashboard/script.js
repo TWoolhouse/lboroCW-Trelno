@@ -6,13 +6,7 @@ import { currentUser } from "../api/active.js";
 
 navbar();
 
-kanban(
-  document.querySelector("#kanban"),
-  document.querySelector("#dialog-new-task"),
-  null,
-  (ondrag = (task, card, section) => {}),
-  document.querySelector("#dialog-subtasks")
-);
+kanban(document.querySelector("#kanban"), null);
 
 const projectWrapper = document.querySelector("#project-wrapper");
 
