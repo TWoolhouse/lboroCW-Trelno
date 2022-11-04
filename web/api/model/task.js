@@ -1,5 +1,6 @@
 import * as cereal from "../interface/cereal.js";
-import { Memoize } from "../interface/memoize.js";
+import { CollectionDB } from "../interface/collectionDB.js";
+import { Memoize, MemoizePair } from "../interface/memoize.js";
 
 /** @typedef {import("./project.js").Project} Project */
 /** @typedef {import("./project.js").ProjectTask} ProjectTask */
@@ -48,6 +49,8 @@ export class Task {
   deadline;
   /** @property {Number} manhours The estimated man hours to complete the task. */
   manhours;
+  /** @property {CollectionDB<Task>} subtasks Tasks subtasks as a collection of more Tasks. */
+  subtasks;
 
   /**
    * @param {Number} id Unique TaskID
@@ -59,14 +62,17 @@ export class Task {
    * @returns {Task}
    */
   constructor(id, state, name, deadline, manhours, desc) {
-    if (cereal.cereal(this, id)) return this;
-    this.id = id;
-    this.state = state;
-    this.name = name;
-    this.deadline = deadline;
-    this.manhours = manhours;
-    this.desc = desc;
+    if (!cereal.cereal(this, id)) {
+      this.id = id;
+      this.state = state;
+      this.name = name;
+      this.deadline = deadline;
+      this.manhours = manhours;
+      this.desc = desc;
+    }
+    this.subtasks = new CollectionDB(this.id, Task, Task);
   }
 }
 cereal.register(Task);
 new Memoize(Task);
+new MemoizePair(Task, Task);

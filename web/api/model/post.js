@@ -32,6 +32,10 @@ export class Topic {
     });
     return this._posts;
   }
+
+  static cereal = {
+    ignore: ["_posts"],
+  };
 }
 cereal.register(Topic);
 new Memoize(Topic);

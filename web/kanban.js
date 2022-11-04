@@ -176,6 +176,7 @@ export function kanban(
       } else {
         const project = await api.project(projectId);
         project.tasks.add(await api.createProjectTask(await taskPromise));
+        currentUser.tasklist();
       }
       return false;
     });
@@ -274,5 +275,16 @@ function createNewTaskDialogProjectOptionHTML(project) {
 function createNewTaskDialogUserOptionHTML(user) {
   return /*HTML*/ `
     <option value="${user.id}">${user.name}</option>
+  `;
+}
+
+/**
+ * @returns {String}
+ */
+function createDialogWindow() {
+  return /* HTML */ `
+    <select name="user" id="assign-user">
+      <option value="">Select user to assign task to</option></select
+    >;
   `;
 }
