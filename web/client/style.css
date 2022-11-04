@@ -66,3 +66,7 @@
 .card-bigger {
   min-width: 35ch;
 }
+
+#client-web span {
+  font-size: 1em;
+}
