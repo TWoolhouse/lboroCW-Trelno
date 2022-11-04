@@ -169,15 +169,17 @@ export function kanban(
 }
 
 /**
- * Create checkbox/label/hr elements for a task
  * @param {Task} task
  * @returns {string} HTML for task list item
  */
 function createTaskHTML(task) {
+  const isSingle = task.subtasks.snapshot.length == 0;
   return /*HTML*/ `
-    <div class="card-small bg-accent" draggable="true" id="task-${
-      task.id
-    }" data-task-id="${task.id}">
+    <div class="card-small task-${
+      isSingle ? "single" : "multi"
+    } bg-accent" draggable="true" id="task-${task.id}" data-task-id="${
+    task.id
+  }">
       <div class="flex-row kanban-title">
         <h3 class="title-card-small">${task.name}</h3>
         <button class="kanban-mobile-options material-symbols-outlined">more_horiz</button>
@@ -190,15 +192,44 @@ function createTaskHTML(task) {
         </div>
       </div>
       <div class="flex-row">
-        <button class="flex-row dimmed btn-icon click-expander"><span class="material-symbols-outlined">analytics</span>View More Info</button>
+        <button class="flex-row dimmed btn-icon ${
+          isSingle ? "click-expander" : ""
+        }"><span class="material-symbols-outlined">analytics</span>View More Info</button>
         <p class="dimmed flex-row"><span class="material-symbols-outlined">schedule</span>${new Date(
           task.deadline
         ).toLocaleDateString()}</p>
       </div>
-      <div class="expand-content">
-        <p>${task.desc}</p>
+      ${isSingle ? createTaskSingleHTML(task) : createTaskMultiHTML(task)}
+    </div>
+    `;
+}
+
+/**
+ * Create checkbox/label/hr elements for a task
+ * @param {Task} task
+ * @returns {string} HTML for task list item
+ */
+function createTaskSingleHTML(task) {
+  return /*HTML*/ `
+    <div class="expand-content">
+      <p>${task.desc}</p>
+      <div class="flex-row">
+        <button type="button" class="btn-action">
+          <p>Users</p>
+          <span class="material-symbols-outlined">people</span>
+        </button>
+        <button type="button" class="btn-action">
+          <p>Subtasks</p>
+          <span class="material-symbols-outlined">add</span>
+        </button>
       </div>
     </div>
+    `;
+}
+
+function createTaskMultiHTML(task) {
+  return /*HTML*/ `
+    <div class="progress-bar">COLOURFUL PROGRESS BAR</div>
     `;
 }
 
