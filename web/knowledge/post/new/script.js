@@ -54,6 +54,11 @@ form.addEventListener("submit", async (event) => {
         resolve(popup.querySelector("input").value);
         return false;
       });
+      popup.querySelector(".dialog-close").addEventListener("click", () => {
+        popup.close();
+        // Have discovered a couple of bugs, For example when you type a topic in then close it, and then click share post, it creates two versions of the topic for somes reason
+        //I have no idea how to stop or fix this however, probably not worth fixing for the prototype for now
+      });
     });
     const topic = await api.createTopic(name);
     topicId = topic.id;
