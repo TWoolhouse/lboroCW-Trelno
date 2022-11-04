@@ -44,6 +44,7 @@ function createPostSearchResultHTML(post) {
         <img
         src="${post.owner.profilePicture()}"
         alt="User Profile Picture"
+        class="profile-pic"
         />
         </a>
         <a href="/profile/?id=${post.owner.id}" class="user-name">${

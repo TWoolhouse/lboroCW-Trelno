@@ -27,9 +27,6 @@
 .account-post a:has(img) {
   grid-area: img;
 }
-.account-post a img {
-  border-radius: 50%;
-}
 
 /* Title */
 .account-post .title {
