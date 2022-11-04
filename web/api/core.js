@@ -224,6 +224,4 @@ async function id_gen(func) {
   return id;
 }
 
-// import { memoized } from "./interface/memoize.js";
 await faux();
-// console.log(memoized);

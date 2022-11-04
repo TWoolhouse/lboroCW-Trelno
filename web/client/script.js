@@ -8,9 +8,8 @@ navbar();
 // Read query string parameters
 const urlParams = new URLSearchParams(window.location.search);
 const client = await api.client(urlParams.get("id"));
-console.log(client);
-if (client == null); // Do something if the client can't be found and it was a broken link
 console.log("Client", client);
+if (client == null); // Do something if the client can't be found and it was a broken link
 
 // Get client details
 function setup() {

@@ -83,7 +83,6 @@ new Memoize(Post);
 function matchSearch(post, queries) {
   const title = post.title.toLowerCase();
   const count = queries.filter((q) => title.includes(q)).length;
-  console.log(title, count);
   return count;
 }
 
@@ -94,9 +93,6 @@ function matchSearch(post, queries) {
  */
 export async function search(query, topicId) {
   const queries = (query ?? "").toLowerCase().split(/\s/);
-  console.log(query);
-  console.log(queries);
-  console.log(topicId);
   const posts = await (topicId ? db.topicPosts(topicId) : db.posts());
   if (!query) return posts;
   return posts

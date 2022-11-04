@@ -52,7 +52,6 @@ const users = [
  * @returns success and the UserID if valid credentials, else error
  */
 export function login(email, password) {
-  console.log(email, password);
   // FIXME: Makes life easier when testing the program
   // if (!email.endsWith("@make-it-all.co.uk"))
   //   return {
