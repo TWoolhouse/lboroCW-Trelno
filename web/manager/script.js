@@ -1,8 +1,9 @@
 import * as api from "../api/core.js";
 import { currentUser } from "../api/active.js";
-import { TaskState } from "../api/model/task.js";
+import { TaskSrc, TaskState } from "../api/model/task.js";
 import { navbar, HTMLasDOM } from "../nav.js";
 import { Client } from "../api/model/client.js";
+import { UserRank } from "../api/model/user.js";
 
 /** @typedef {import("../api/model/user.js").User} User */
 /** @typedef {import("../api/model/project.js").Project} Project */
@@ -49,6 +50,40 @@ currentUser.projectlist().onChange((event) => {
     );
   }
 });
+
+if (currentUser.rank < UserRank.ProjectManager)
+  document.querySelector("#user-overview-wrapper").classList.add("hidden");
+else {
+  const userOverviewDOM = document.querySelector("#user-overview");
+  api.users().then((users) => {
+    for (const user of users) {
+      const card = HTMLasDOM(createUserOverviewCard(user));
+      user.tasklist().onChange((event) => {
+        const tasks = event.all.filter(
+          (ref) =>
+            ref.source == TaskSrc.Project &&
+            ref.projectTask.assignees.snapshot.includes(user) &&
+            ref.task.state < TaskState.Done
+        );
+        const totalHours = tasks.reduce(
+          (total, current) => total + current.task.manhours,
+          0
+        );
+        const hoursPerWeek = 37.5;
+        const colour =
+          totalHours >= hoursPerWeek
+            ? "red"
+            : totalHours >= 0.75 * hoursPerWeek
+            ? "amber"
+            : "green";
+        card.setAttribute("data-rag", colour);
+        card.querySelector(".detail-highlight").innerHTML = totalHours;
+      });
+
+      userOverviewDOM.appendChild(card);
+    }
+  });
+}
 
 async function setDynamicData() {
   const selectorClient = newProjectDialog.querySelector("#options-client");
@@ -159,4 +194,30 @@ function createProjectOptionClientHTML(client) {
  */
 function createProjectOptionTeamLeaderHTML(user) {
   return /* HTML */ `<option value="${user.id}">${user.name}</option>`;
+}
+
+/**
+ * @param {User} user
+ * @returns {String}
+ */
+function createUserOverviewCard(user) {
+  return /* HTML */ `
+    <div class="member-view card-small bg-accent flex-col-center card-smaller">
+      <a href="../profile/?id=${user.id}">
+        <img
+          src="${user.profilePicture()}"
+          alt="User Profile Picture"
+          class="profile-pic"
+          width="50"
+          height="50"
+        />
+        <h3>${user.name}</h3>
+      </a>
+      <p class="dimmed">${user.rankTitle()}</p>
+      <p class="hours">
+        Assigned Hours
+        <span class="detail-highlight">0</span>
+      </p>
+    </div>
+  `;
 }

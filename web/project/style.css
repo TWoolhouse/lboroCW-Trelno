@@ -72,18 +72,6 @@
   max-width: 20ch;
 }
 
-.project-members-wrap {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20ch, 1fr));
-  gap: 1rem 2rem;
-  justify-items: center;
-  margin: 1rem 1rem; /* top right bottom left */
-}
-
-.project-members-wrap a {
-  text-align: center;
-}
-
 /* CIRCULAR PROGRESS BAR */
 
 /* PROGRESS SPINNER */

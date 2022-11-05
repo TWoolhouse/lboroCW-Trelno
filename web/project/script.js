@@ -4,6 +4,8 @@ import { kanban } from "../kanban.js";
 import { currentUser } from "../api/active.js";
 import { UserRank } from "../api/model/user.js";
 
+/** @typedef {import("../api/model/user.js").User} User */
+
 navbar();
 
 // Read query string parameters
@@ -47,19 +49,60 @@ function setup() {
     project.client.representativeProfilePicture();
 }
 
-// Update assignee list
+/**
+ * Update assignee list
+ * @param {User} user
+ */
 function addMember(user) {
   const projectMembersWrap = document.querySelector("#project-members-wrap");
-  projectMembersWrap.appendChild(HTMLasDOM(createProjectMemberCard(user)));
+  const card = HTMLasDOM(createUserOverviewCard(user));
+  user.tasklist().onChange((event) => {
+    const tasks = event.all.filter(
+      (ref) =>
+        ref.source == TaskSrc.Project &&
+        ref.project.id == project.id &&
+        ref.projectTask.assignees.snapshot.includes(user) &&
+        ref.task.state < TaskState.Done
+    );
+    const totalHours = tasks.reduce(
+      (total, current) => total + current.task.manhours,
+      0
+    );
+    const hoursPerWeek = 37.5;
+    const colour =
+      totalHours >= hoursPerWeek
+        ? "red"
+        : totalHours >= 0.75 * hoursPerWeek
+        ? "amber"
+        : "green";
+    card.setAttribute("data-rag", colour);
+    card.querySelector(".detail-highlight").innerHTML = totalHours;
+  });
+  projectMembersWrap.appendChild(card);
 }
 
-function createProjectMemberCard(user) {
-  return /*HTML*/ `
-    <div class="card-small bg-accent flex-col-center card-smaller">
+/**
+ * @param {User} user
+ * @returns {String}
+ */
+function createUserOverviewCard(user) {
+  return /* HTML */ `
+    <div class="member-view card-small bg-accent flex-col-center card-smaller">
       <a href="../profile/?id=${user.id}">
-        <img src=${user.profilePicture()} alt="User Profile Picture" class="profile-pic">
-        <h3 class="title-card-small">${user.name}</h3>
+        <img
+          src="${user.profilePicture()}"
+          alt="User Profile Picture"
+          class="profile-pic"
+          width="50"
+          height="50"
+        />
+        <h3>${user.name}</h3>
       </a>
+      <p class="dimmed">${user.rankTitle()}</p>
+      <p class="hours">
+        Assigned Hours
+        <span class="detail-highlight">0</span>
+      </p>
     </div>
   `;
 }

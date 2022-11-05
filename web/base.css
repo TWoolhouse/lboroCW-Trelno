@@ -517,6 +517,33 @@ input[type="checkbox"]:checked + label {
   justify-content: flex-end;
 }
 
+/* USER OVERVIEW */
+.member-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20ch, 1fr));
+  gap: 1rem 2rem;
+  justify-items: center;
+  margin: 1rem 1rem;
+}
+
+.member-overview * {
+  margin-top: 0rem;
+  margin-bottom: 0.25rem;
+}
+
+.member-view .hours span {
+  margin-left: 0.5rem;
+}
+
+.detail-highlight {
+  font-weight: 800;
+  background-color: var(--colour-card-highlight);
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  margin-left: auto;
+  display: inline-flex;
+}
+
 /* BUTTONS */
 
 .btn-action {
