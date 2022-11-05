@@ -44,7 +44,7 @@ function accountInfo() {
 }
 
 function managerView() {
-  if (currentUser.rank < UserRank.ProjectManager)
+  if (!(currentUser.rank > UserRank.Employee))
     for (const selector of ['.side-menu [href="/manager/"]'])
       document.querySelector(selector).parentElement.classList.add("hidden");
 }
