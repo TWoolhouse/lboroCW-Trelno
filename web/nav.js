@@ -15,9 +15,11 @@ export function HTMLasDOM(html) {
 }
 
 function loggingOut() {
-  document.querySelector(".logout").addEventListener("click", () => {
-    logout();
-    window.location.href = "/login/";
+  document.querySelectorAll(".logout").forEach((element) => {
+    element.addEventListener("click", () => {
+      logout();
+      window.location.href = "/login/";
+    });
   });
 }
 
