@@ -146,6 +146,7 @@ function createProjectOverviewCard(project) {
   } else {
     colour = "green";
   }
+  if (workerHoursRemaining <= 0) colour = "green";
 
   return /*HTML*/ `
     <div class="card-small bg-accent rag-band" data-rag="${colour}">
@@ -173,7 +174,7 @@ function createProjectOverviewCard(project) {
       </p>
       <p class="card-description project-detail">
         Worker-hours available:  <span class="detail-highlight">
-          ${workerHoursAvailable}
+          ${workerHoursRemaining <= 0 ? "Done" : workerHoursAvailable}
         </span>
       </p>
     </div>
