@@ -3,6 +3,7 @@ import { HTMLasDOM, navbar } from "../nav.js";
 import { kanban } from "../kanban.js";
 import { currentUser } from "../api/active.js";
 import { UserRank } from "../api/model/user.js";
+import { TaskSrc, TaskState } from "../api/model/task.js";
 
 /** @typedef {import("../api/model/user.js").User} User */
 
@@ -65,7 +66,7 @@ function addMember(user) {
         ref.task.state < TaskState.Done
     );
     const totalHours = tasks.reduce(
-      (total, current) => total + current.task.manhours,
+      (total, current) => total + current.task.workerhours,
       0
     );
     const hoursPerWeek = 37.5;
