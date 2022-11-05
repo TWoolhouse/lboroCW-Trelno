@@ -47,9 +47,19 @@ header-includes: |
 
 ## Rowan Murphy
 
-- p1
-- p2
-- p3
+<!-- quick first draft, hopefully gives everyone else an idea of what im thinking this will look like, might have rambled a bit :)-->
+
+- built and developed Login and registration pages
+  - Created the front of the login and registration pages from scratch as well as the basic functionalilty needed.
+- Search and parts of search results page
+  - Created the search page elements to be used over a number of pages.
+  - Used these elements to make the pages responsive and easy to use. Positioned them accordingly to aid in design and the flow of the pages
+- checked through code and caught bugs and features that people missed
+  - proof reading code and caught some issues such as a button missing funtion
+  - also discovered bugs with certain elements of data usage etc.
+- partook in decisions regarding the project and creation of requirements
+  - assisted in creating the initial requirements draft to give a basis of what the project aimed to do
+  - proived opinions and feedback to make the best decisions when designing, creating and building the project as well as suggesting changes etc. to offer an aternative solutions and a different approach to problems in development where there were multiple viable answers.
 
 ## Thomas Woolhouse
 
