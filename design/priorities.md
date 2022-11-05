@@ -1,8 +1,8 @@
 ### Priorities
 
 - ~~Logout button mobile~~
-- Empolyeee Overview All users
-  - Workload
+- ~~Empolyeee Overview All users~~
+  - ~~Workload~~
 - Vertical Task List w/ hacky css :)
 - Tasks display all information
   - If it came from a project
