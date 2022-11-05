@@ -66,7 +66,7 @@ else {
             ref.task.state < TaskState.Done
         );
         const totalHours = tasks.reduce(
-          (total, current) => total + current.task.manhours,
+          (total, current) => total + current.task.workerhours,
           0
         );
         const hoursPerWeek = 37.5;
@@ -118,10 +118,10 @@ function createProjectOverviewCard(project) {
   const tasks = project.tasks.snapshot;
   const progress = project.progress();
 
-  // sum the 'manhours' of tasks that aren't done
+  // sum the 'workerhours' of tasks that aren't done
   const workerHoursRemaining = tasks.reduce((previous, current) => {
     if (current.task.state != TaskState.Done) {
-      return previous + current.task.manhours;
+      return previous + current.task.workerhours;
     }
     return previous;
   }, 0);

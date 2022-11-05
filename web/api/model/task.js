@@ -47,8 +47,8 @@ export class Task {
   desc;
   /** @property {Number} deadline The deadline of the project in unix epoch */
   deadline;
-  /** @property {Number} manhours The estimated man hours to complete the task. */
-  manhours;
+  /** @property {Number} workerhours The estimated man hours to complete the task. */
+  workerhours;
   /** @property {CollectionDB<Task>} subtasks Tasks subtasks as a collection of more Tasks. */
   subtasks;
 
@@ -57,17 +57,17 @@ export class Task {
    * @param {Number} state A TaskState
    * @param {String} name Display name of the task
    * @param {Number} deadline The deadline of the project in unix epoch
-   * @param {Number} manhours The estimated man hours to complete the task.
+   * @param {Number} workerhours The estimated man hours to complete the task.
    * @param {String} [desc] An optional description of the task
    * @returns {Task}
    */
-  constructor(id, state, name, deadline, manhours, desc) {
+  constructor(id, state, name, deadline, workerhours, desc) {
     if (cereal.cereal(this, id)) return this;
     this.id = id;
     this.state = state;
     this.name = name;
     this.deadline = deadline;
-    this.manhours = manhours;
+    this.workerhours = workerhours;
     this.desc = desc;
     this.subtasks = new CollectionDB(this.id, Task, Task);
   }

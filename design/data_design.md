@@ -32,7 +32,7 @@ class Task {
 	+id: Int
 	+state: TaskState
 	+deadline: Number
-	+manhours: Number
+	+workerhours: Number
 	+name: String
 	+desc: String?
 	+subtasks: Collection~Task~

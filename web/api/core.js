@@ -81,11 +81,17 @@ export async function post(id) {
  * @param {Number} state TaskState
  * @param {String} name The display name of the task
  * @param {Number} deadline The deadline of the project in unix epoch time
- * @param {Number} manhours The estimated man hours to complete the task.
+ * @param {Number} workerhours The estimated man hours to complete the task.
  * @param {String} [description] An optional description of the task
  * @returns {Promise<Task>}
  */
-export async function createTask(state, name, deadline, manhours, description) {
+export async function createTask(
+  state,
+  name,
+  deadline,
+  workerhours,
+  description
+) {
   return await createMemoize(Task, task, ...arguments);
 }
 
