@@ -7,7 +7,7 @@ author:
   - Jack Humphrey
   - Adam Hutton
   - Rowan Murphy
-  - Tom Woolhouse
+  - Thomas Woolhouse
 date: November 2022
 toc: true
 numbersections: false
@@ -51,7 +51,7 @@ header-includes: |
 - p2
 - p3
 
-## Tom Woolhouse
+## Thomas Woolhouse
 
 - p1
 - p2
@@ -59,10 +59,12 @@ header-includes: |
 
 # Requirements
 
-## 1. Log in page requirements & login requirements.
+Requirements are taken from the client specification letter unless stated otherwise
+
+## 1. Log in / Registration requirements.
 
 1. The system **must** allow logging in using the user's work email.
-2. The user **must** be registered in the system to be able to log in and access the system.
+2. The user **must** be registered in the system to be able to log in and access the system.^[20/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=360825>]
 
 ## 2. Registration page requirements & registration requirements.
 
