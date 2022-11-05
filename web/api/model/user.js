@@ -92,7 +92,7 @@ export class User {
    */
   tasklist() {
     userProjectTasks(this.id).then((values) => {
-      this._tasklist.add(...values);
+      this._tasklist.addIf((ref) => ref.task.id, ...values);
     });
     return this._tasklist;
   }

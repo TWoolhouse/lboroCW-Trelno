@@ -10,7 +10,7 @@ import { UserRank } from "./api/model/user.js";
 
 /**
  * @callback onDragCB
- * @param {Task} task The task that is being moved.
+ * @param {TaskRef} task The task that is being moved.
  * @param {Element} card The DOM object of the card being moved.
  * @param {Element} section The DOM object of the kanban section the card is arriving into.
  */
@@ -60,8 +60,19 @@ function kanbanEnable(rootDOM, ondrag) {
         const task = await api.task(taskId);
         task.state = +section.getAttribute("data-task-state");
         const card = rootDOM.querySelector(`#task-${task.id}`);
-        console.log("Kanban Card:", task, card);
-        ondrag(task, card, section);
+        let project = undefined;
+        const projectID = card.getAttribute("data-project");
+        if (projectID) project = await api.project(projectID);
+        const ref = {
+          task: task,
+          source: project ? TaskSrc.Project : TaskSrc.User,
+          projectTask: project
+            ? await api.projectTask(card.getAttribute("data-project-task"))
+            : undefined,
+          project: project,
+        };
+        console.log("Kanban Card:", ref, card);
+        ondrag(ref, card, section);
         card.remove();
         section.appendChild(card);
       });
@@ -209,6 +220,10 @@ function newTaskDynamicInformation(dialog, project) {
 function createTask(ref) {
   const task = ref.task;
   const dom = HTMLasDOM(createTaskHTML(task));
+  if (ref.source == TaskSrc.Project) {
+    dom.setAttribute("data-project", ref.project.id);
+    dom.setAttribute("data-project-task", ref.projectTask.id);
+  }
 
   dom
     .querySelector("select.kanban-mobile-options")
@@ -273,21 +288,17 @@ async function submitNewTask(dialog, project) {
     form.querySelector(`[name="project"]`) ?? { value: project.id }
   ).value;
   // TODO: Clear the form
-  const userId = form.querySelector(`[name="user"]`).value;
-
-  if (userId) {
-    const user = await api.user(userId);
-    const projectTask = await api.createProjectTask(await taskPromise);
-    project.tasks.add(projectTask);
-    projectTask.assignees.add(user);
-    user.tasklist();
-  }
 
   if (projectId == "user") {
     currentUser.tasks.add(await taskPromise);
   } else {
     const project = await api.project(projectId);
-    project.tasks.add(await api.createProjectTask(await taskPromise));
+    const projectTask = await api.createProjectTask(await taskPromise);
+    project.tasks.add(projectTask);
+
+    const userId = form.querySelector(`[name="user"]`).value;
+    if (userId) projectTask.assignees.add(await api.user(userId));
+
     currentUser.tasklist(); // Need to force an event update
   }
 }

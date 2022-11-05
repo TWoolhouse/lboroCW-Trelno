@@ -26,7 +26,17 @@ setup();
 kanban(
   document.querySelector("#kanban"),
   project,
-  (ondrag = updateProgressBar)
+  async (taskref, card, section) => {
+    updateProgressBar();
+    if (taskref.source == TaskSrc.Project) {
+      for (const user of taskref.projectTask.assignees)
+        setUserWorkerhours(
+          user,
+          (await user.tasklist()).snapshot,
+          document.querySelector(`#user-${user.id}`)
+        );
+    }
+  }
 );
 
 function setup() {
@@ -57,29 +67,37 @@ function setup() {
 function addMember(user) {
   const projectMembersWrap = document.querySelector("#project-members-wrap");
   const card = HTMLasDOM(createUserOverviewCard(user));
-  user.tasklist().onChange((event) => {
-    const tasks = event.all.filter(
-      (ref) =>
-        ref.source == TaskSrc.Project &&
-        ref.project.id == project.id &&
-        ref.projectTask.assignees.snapshot.includes(user) &&
-        ref.task.state < TaskState.Done
-    );
-    const totalHours = tasks.reduce(
-      (total, current) => total + current.task.workerhours,
-      0
-    );
-    const hoursPerWeek = 37.5;
-    const colour =
-      totalHours >= hoursPerWeek
-        ? "red"
-        : totalHours >= 0.75 * hoursPerWeek
-        ? "amber"
-        : "green";
-    card.setAttribute("data-rag", colour);
-    card.querySelector(".detail-highlight").innerHTML = totalHours;
-  });
+  user
+    .tasklist()
+    .onChange((event) => setUserWorkerhours(user, event.all, card));
   projectMembersWrap.appendChild(card);
+}
+
+/**
+ * @param {User} user
+ * @param {Element} card
+ */
+function setUserWorkerhours(user, tasklist, card) {
+  const tasks = tasklist.filter(
+    (ref) =>
+      ref.source == TaskSrc.Project &&
+      ref.project.id == project.id &&
+      ref.projectTask.assignees.snapshot.includes(user) &&
+      ref.task.state < TaskState.Done
+  );
+  const totalHours = tasks.reduce(
+    (total, current) => total + current.task.workerhours,
+    0
+  );
+  const hoursPerWeek = 37.5;
+  const colour =
+    totalHours >= hoursPerWeek
+      ? "red"
+      : totalHours >= 0.75 * hoursPerWeek
+      ? "amber"
+      : "green";
+  card.setAttribute("data-rag", colour);
+  card.querySelector(".detail-highlight").innerHTML = totalHours;
 }
 
 /**
@@ -88,7 +106,10 @@ function addMember(user) {
  */
 function createUserOverviewCard(user) {
   return /* HTML */ `
-    <div class="member-view card-small bg-accent flex-col-center card-smaller">
+    <div
+      id="user-${user.id}"
+      class="member-view card-small bg-accent flex-col-center card-smaller"
+    >
       <a href="../profile/?id=${user.id}">
         <img
           src="${user.profilePicture()}"
