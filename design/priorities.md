@@ -1,6 +1,6 @@
 ### Priorities
 
-- Logout button mobile
+- ~~Logout button mobile~~
 - Empolyeee Overview All users
   - Workload
 - Vertical Task List w/ hacky css :)
