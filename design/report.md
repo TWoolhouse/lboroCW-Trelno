@@ -29,9 +29,21 @@ header-includes: |
 
 ## Calin Corcimaru
 
-- p1
-- p2
-- p3
+- Requirements document
+  - Gathered and documented the project's requirements.
+  - Delivered constant updates to the requirements document.
+- Project page
+  - Developed the Project page and its elements that dynamically updates based on the URL id.
+  - Implemented functionality that allows Managers to assign tasks to users and a filter that shows tasks on the page based on User's rank.
+- Client page
+  - Modeled the Client page and included all relative information that dynamically updates based on the URL id.
+- Communications with Client
+  - Clarified requirements by sending messages and reminders to the Client.
+  - Drafted some of the emails and messages that were sent to the Client.
+- Leadership
+  - Coordinated the team (planning, task allocation, decision making, etc) during meetings.
+  - Ensured the team is on track with task progression and deadlines.
+
 
 ## Jack Humphrey
 
