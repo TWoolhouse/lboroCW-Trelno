@@ -1,5 +1,5 @@
 import { Memoize } from "./interface/memoize.js";
-import { User } from "./model/user.js";
+import { User, UserRank } from "./model/user.js";
 import { Task } from "./model/task.js";
 import { Team } from "./model/team.js";
 import { Project, ProjectTask } from "./model/project.js";
@@ -117,6 +117,7 @@ export async function createUser(email, rank, name, id) {
  * @returns {Promise<Team>}
  */
 export async function createTeam(leader) {
+  if (leader.rank < UserRank.TeamLeader) leader.rank = UserRank.TeamLeader;
   return await createMemoize(Team, team, ...arguments);
 }
 
