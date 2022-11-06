@@ -62,14 +62,22 @@ export class Task {
    * @returns {Task}
    */
   constructor(id, state, name, deadline, workerhours, desc) {
-    if (cereal.cereal(this, id)) return this;
-    this.id = id;
-    this.state = state;
-    this.name = name;
-    this.deadline = deadline;
-    this.workerhours = workerhours;
-    this.desc = desc;
-    this.subtasks = new CollectionDB(this.id, Task, Task);
+    if (!cereal.cereal(this, id)) {
+      this.id = id;
+      this.state = state;
+      this.name = name;
+      this.deadline = deadline;
+      this.workerhours = workerhours;
+      this.desc = desc;
+      this.subtasks = new CollectionDB(this.id, Task, Task);
+    }
+    this.subtasks.onChange((event) => {
+      if (event.all.length <= 0) return;
+      this.workerhours = event.all.reduce(
+        (total, subtask) => total + subtask.workerhours,
+        0
+      );
+    });
   }
 }
 cereal.register(Task);

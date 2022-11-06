@@ -208,10 +208,17 @@ function createDialogs(rootDOM, project) {
         );
         ref.projectTask.assignees.replace(...users);
       } else;
-      // TODO: Adding to a team
     });
 
   // SUBTASK VIEW
+  dialogSubtasksView
+    .querySelector("button.users")
+    .addEventListener("click", showDialogUsers);
+  dialogSubtasksView
+    .querySelector("button.add")
+    .addEventListener("click", () => {
+      dialogSubtask.showModal();
+    });
 }
 
 /**
@@ -292,6 +299,7 @@ function createTask(ref) {
     TaskRefActive = ref;
     modal.showModal();
   };
+
   if (task.subtasks.snapshot.length == 0) {
     // Has no subtasks
     dom
@@ -300,60 +308,62 @@ function createTask(ref) {
         showTaskModal(document.querySelector("#dialog-new-subtask"));
       });
     if (ref.source == TaskSrc.Project) {
-      dom
-        .querySelector("button#users-show")
-        .addEventListener("click", (event) => {
-          TaskRefActive = ref;
-          const dialog = document.querySelector("#dialog-task-users");
-          const userListDOM = dialog.querySelector(".user-list");
-          userListDOM.innerHTML = "";
-          const IsPowerUser =
-            currentUser.rank >= UserRank.ProjectManager ||
-            ref.project.team.leader.id == currentUser.id;
-          const onChangeUserAssigned = (event) => {
-            if (TaskRefActive.task.id != ref.task.id) return;
-            for (const user of event.add) {
-              const cardUser = HTMLasDOM(createUserAssignedHTML(user));
-              const remove = cardUser.querySelector(".remove");
-              if (IsPowerUser)
-                remove.addEventListener("click", () => {
-                  cardUser.remove();
-                  ref.projectTask.assignees.remove(user);
-                });
-              else remove.classList.add("hidden");
-              userListDOM.appendChild(cardUser);
-            }
-            for (const user of event.sub) {
-              const cardUser = userListDOM.querySelector(
-                `[data-user-assigned="${user.id}"]`
-              );
-              if (cardUser) cardUser.remove();
-            }
-          };
-          ref.projectTask.assignees.onChange(onChangeUserAssigned);
-          const buttonAdd = dialog.querySelector("button.add");
-          if (IsPowerUser) {
-            buttonAdd.classList.remove("hidden");
-            buttonAdd.addEventListener("click", async () => {
-              TaskRefActive = ref;
-              assignUsers(
-                (await api.users()).filter(
-                  (user) => user.rank <= UserRank.Employee
-                ),
-                ref.projectTask.assignees.snapshot,
-                true
-              );
-            });
-          } else buttonAdd.classList.add("hidden");
-          showTaskModal(dialog);
-        });
+      dom.querySelector("button#users-show").addEventListener("click", () => {
+        TaskRefActive = ref;
+        showDialogUsers();
+      });
     } else dom.querySelector("button#users-show").classList.add("hidden");
   } else {
     dom.querySelector(".analytics").addEventListener("click", () => {
       showMultiTask(ref);
     });
+    dom.querySelector("button.add");
   }
   return dom;
+}
+
+function showDialogUsers() {
+  const ref = TaskRefActive;
+  const dialog = document.querySelector("#dialog-task-users");
+  const userListDOM = dialog.querySelector(".user-list");
+  userListDOM.innerHTML = "";
+  const IsPowerUser =
+    currentUser.rank >= UserRank.ProjectManager ||
+    ref.project.team.leader.id == currentUser.id;
+  const onChangeUserAssigned = (event) => {
+    if (TaskRefActive.task.id != ref.task.id) return;
+    for (const user of event.add) {
+      const cardUser = HTMLasDOM(createUserAssignedHTML(user));
+      const remove = cardUser.querySelector(".remove");
+      if (IsPowerUser)
+        remove.addEventListener("click", () => {
+          cardUser.remove();
+          ref.projectTask.assignees.remove(user);
+        });
+      else remove.classList.add("hidden");
+      userListDOM.appendChild(cardUser);
+    }
+    for (const user of event.sub) {
+      const cardUser = userListDOM.querySelector(
+        `[data-user-assigned="${user.id}"]`
+      );
+      if (cardUser) cardUser.remove();
+    }
+  };
+  ref.projectTask.assignees.onChange(onChangeUserAssigned);
+  const buttonAdd = dialog.querySelector("button.add");
+  if (IsPowerUser) {
+    buttonAdd.classList.remove("hidden");
+    buttonAdd.addEventListener("click", async () => {
+      TaskRefActive = ref;
+      assignUsers(
+        (await api.users()).filter((user) => user.rank <= UserRank.Employee),
+        ref.projectTask.assignees.snapshot,
+        true
+      );
+    });
+  } else buttonAdd.classList.add("hidden");
+  dialog.showModal();
 }
 
 /**
@@ -386,17 +396,18 @@ function showMultiTask(ref) {
   TaskRefActive = ref;
   const dialog = document.querySelector("#dialog-multitask");
   dialog.querySelector("h2").innerHTML = ref.task.name;
-  if (ref.source != TaskSrc.Project)
-    dialog.querySelector("button.users").classList.add("hidden");
-  else dialog.querySelector("button.users").classList.remove("hidden");
+  const buttonUserShow = dialog.querySelector("button.users");
+  if (ref.source != TaskSrc.Project) buttonUserShow.classList.add("hidden");
+  else buttonUserShow.classList.remove("hidden");
+  const buttonSubtaskAdd = dialog.querySelector("button.add");
   if (
     currentUser.rank >= UserRank.ProjectManager ||
     (ref.source == TaskSrc.Project &&
       ref.project.team.leader.id == currentUser.id) ||
     ref.source == TaskSrc.User
   )
-    dialog.querySelector("button.add").classList.remove("hidden");
-  else dialog.querySelector("button.add").classList.add("hidden");
+    buttonSubtaskAdd.classList.remove("hidden");
+  else buttonSubtaskAdd.classList.add("hidden");
   const tasklistDOM = dialog.querySelector(".subtask-list");
   if (MultiTasking.ref)
     MultiTasking.ref.task.subtasks.onChangeRemove(MultiTasking.func);
