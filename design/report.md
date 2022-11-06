@@ -82,17 +82,17 @@ header-includes: |
 
 <!-- quick first draft, hopefully gives everyone else an idea of what im thinking this will look like, might have rambled a bit :)-->
 
-- built and developed Login and registration pages
-  - Created the front of the login and registration pages from scratch as well as the basic functionality needed.
+- Built and developed Login and registration pages
+  - Created the front of the registration page from scratch and expanded on Jacks' initial draft of the login page.
 - Search and parts of search results page
   - Created the search page elements to be used over a number of pages.
   - Used these elements to make the pages responsive and easy to use. Positioned them accordingly to aid in design and the flow of the pages
-- checked through code and caught bugs and features that people missed
-  - proof reading code and caught some issues such as a button missing function
-  - also discovered bugs with certain elements of data usage etc.
-- partook in decisions regarding the project and creation of requirements
-  - assisted in creating the initial requirements draft to give a basis of what the project aimed to do
-  - provided opinions and feedback to make the best decisions when designing, creating and building the project as well as suggesting changes etc. to offer an alternative solutions and a different approach to problems in development where there were multiple viable answers.
+- Checked through code and caught bugs and features that people missed
+  - Proof reading code and caught some issues such as a button missing function
+  - Also discovered bugs with certain elements of data usage etc.
+- Partook in decisions regarding the project and creation of requirements
+  - Assisted in creating the initial requirements draft to give a basis of what the project aimed to do
+  - Provided opinions and feedback to make the best decisions when designing, creating and building the project as well as suggesting changes etc. to offer an alternative solutions and a different approach to problems in development where there were multiple viable answers.
 
 ## Thomas Woolhouse
 
@@ -104,6 +104,7 @@ header-includes: |
   - Implemented a schemeless database.
   - Custom serialistion system to allow for content parity between individual webpages.
 - Login
+
   - Enabled the user to login
   - Keep track of the current logged-in user
   - logging out.
