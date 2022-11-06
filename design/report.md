@@ -42,18 +42,19 @@ header-includes: |
 ## Calin Corcimaru
 
 - Requirements document
-  - Gathered and documented the project's requirements.
-  - Delivered constant updates to the requirements document.
+  - Gathered and documented the project's requirements from the specification letter and subsequent communications with Client representatives.
+  - Delivered constant updates to the requirements document for maintainign current and adding new requirements.
 - Project page
-  - Developed the Project page and its elements that dynamically updates based on the URL id.
-  - Implemented functionality that allows Managers to assign tasks to users and a filter that shows tasks on the page based on User's rank.
+  - Developed the Project page and its elements that dynamically displays information based on the Project id.
+  - Implemented functionality that allows Managers to assign tasks to users when creating a new task.
+  - Developed a filter that allowed the system to display tasks on the page based on User's rank.
 - Client page
-  - Modeled the Client page and included all relative information that dynamically updates based on the URL id.
+  - Modeled the Client page that dynamically displays all the client information based on the Client id.
 - Communications with Client
   - Clarified requirements by sending messages and reminders to the Client.
-  - Drafted some of the emails and messages that were sent to the Client.
+  - Drafted some of the emails and messages that were then sent to the Client.
 - Leadership
-  - Coordinated the team (planning, task allocation, decision making, etc) during meetings.
+  - Coordinated the team (planning, task allocation, decision making, etc) during meetings and other channels of communcations (WhatsApp, etc).
   - Ensured the team is on track with task progression and deadlines.
 
 ## Jack Humphrey
@@ -61,11 +62,11 @@ header-includes: |
 - Communication with clients
   - Completed the majority of communication with the clients. This involved drafting questions, sending questions and updating our own document with our questions and the clients responses.
 - User view page
-- Responsible for creating the user view page. This is a page for users to see information about other users in the system.
+  - Responsible for creating the user view page. This is a page for users to see information about other users in the system.
 - User edit page
-- Responsible for creating the user edit page. This is a page for users to edit their own account information (such as password).
+  - Responsible for creating the user edit page. This is a page for users to edit their own account information (such as password).
 - Login page draft
-- Created an initial draft of the login page which was then reworked by Rowan.
+  - Created an initial draft of the login page which was then reworked by Rowan.
 
 ## Adam Hutton
 
@@ -80,8 +81,6 @@ header-includes: |
 
 ## Rowan Murphy
 
-<!-- quick first draft, hopefully gives everyone else an idea of what im thinking this will look like, might have rambled a bit :)-->
-
 - Built and developed Login and registration pages
   - Created the front of the registration page from scratch and expanded on Jacks' initial draft of the login page.
 - Search and parts of search results page
@@ -94,35 +93,27 @@ header-includes: |
   - Assisted in creating the initial requirements draft to give a basis of what the project aimed to do
   - Provided opinions and feedback to make the best decisions when designing, creating and building the project as well as suggesting changes etc. to offer an alternative solutions and a different approach to problems in development where there were multiple viable answers.
 
-\pagebreak
-
 ## Thomas Woolhouse
 
 - Design the class diagram
   - Modelled the system as a diagram.
-  - Modelled the system in js classes.
-- Designed and created the api
+  - Modelled the system in JavaScript classes.
+- Designed and created the api (Application Programming Interface)
   - Created a consistent api to be reused throughout the project to make the project reactive.
   - Implemented a schemeless database.
   - Custom serialistion system to allow for content parity between individual webpages.
 - Login
-
-  - Enabled the user to login
-  - Keep track of the current logged-in user
-  - logging out.
-
-- Ensuring the kanban on the dashboard and the project page are consistent.
-- Subtasks.
-- Assigning Users to task.
-- creating / editing / viewing posts.
-- searching through posts.
-- creating topics.
-- creating clients.
-- displaying an employees current workload on both the manager and project page.
-
-- Helped teamates do some cssssssss & jssssssssssss.
-- Had a breakdown
-- Got bullied by Adam (for good reason)
+  - Functionality to keep track of the current logged-in user.
+  - Developed the functionality that allowed users to log in/log out.
+- Other contributions
+  - Ensured the 'Kanban' on the dashboard and the project page are consistent.
+  - Coded the system for dividing a task into multiple subtasks.
+  - Developed the functionality that allowed Users to be assigned to a task.
+  - Coded the functionality that allowede creating, editing and viewing posts.
+  - Developed the seach functionality that allows searching through posts.
+  - Responsible for developing the functionality for creating topics.
+  - Responsible for developing the functionality for creating clients.
+  - Displaying an employees current workload on both the manager and project page.
 
 # Requirements
 
@@ -148,8 +139,8 @@ Requirements are taken from the client specification letter unless stated otherw
 
 1. The system **must** allow a user to have at least one of the following roles: Employee, Team leader or Project Manager.
 2. The system **must** allow a user to have different permissions dependant on their currently assigned role. [^6]
-3. A user **must** be able to be assigned to a _Project_. [^3]
-4. A user **must** be able to work on any number of _Projects_. [^4]
+3. A user **must** be able to be assigned to a project. [^3]
+4. A user **must** be able to work on any number of projects. [^4]
 5. A user **must** be able to create a private task for their private to-do list. [^5]
 <!-- 6. A user **should** be able to be part of multiple teams. -->
 
@@ -160,23 +151,23 @@ Requirements are taken from the client specification letter unless stated otherw
 3. The system **must** allow a user to be a team leader for multiple projects. [^6]
 4. A team leader **must** be able to manage the members of their team (add, remove).[^6]
 5. A team leader **must** be able to assign tasks to users in their team. [^7]
-6. A team leader **must** be able to create tasks for a _Project_ they supervise. [^6]
-7. A team leader **must** be able to track task progress of a _Project_.
+6. A team leader **must** be able to create tasks for a project they supervise. [^6]
+7. A team leader **must** be able to track task progress of a project.
 
 \pagebreak
-   
+
 ## 5. Project Manager requirements
 
-1. A _Project_ manager **must** be able to manage all the _Projects_ in the system. [^6]
-2. A project manager **must** be able to add tasks to any current _Project_. [^6]
-3. A project manager **must** be able to assign users to _Project_ tasks. [^6]
-4. A project manager **must** be able to create a new _Project_. [^6]
+1. A project manager **must** be able to manage all the projects in the system. [^6]
+2. A project manager **must** be able to add tasks to any current project. [^6]
+3. A project manager **must** be able to assign users to project tasks. [^6]
+4. A project manager **must** be able to create a new project. [^6]
 5. A project manager **must** be able to assign users to a team. [^6]
 
 ## 6. Productivity Management requirements
 
-1. A user **must** also have access to their private to-do list that is not related to any _Projects_ and is only viewable by that user. [^5]
-2. A user **must** have access to their personal dashboard, which will contain task they are assigned to from _Projects_ they are working on and their own private todo list. A private todo list is a users personal to-do list which contains tasks that are not related to any _Projects_.
+1. A user **must** also have access to their private to-do list that is not related to any projects and is only viewable by that user. [^5]
+2. A user **must** have access to their personal dashboard, which will contain task they are assigned to from projects they are working on and their own private todo list. A private todo list is a users personal to-do list which contains tasks that are not related to any projects.
 3. The board **must** have columns in the 'Kanban' view that tasks can be placed in. [^9]
 4. The system **should** allow users to switch between a Kanban and 'to-do list' view. [^9]
 
@@ -190,7 +181,7 @@ Requirements are taken from the client specification letter unless stated otherw
 6. If a task has sub-tasks, then its worker-hours **should** be calculated as a sum of the worker-hours of the smaller tasks. [^11]
 7. A task **must** be able to display the current state it is in. (To-Do, In Progress, Complete). [^11]
 8. A task with subtasks **should** display the percentage of sub-tasks that are completed. [^11]
-9. A task **should** be able to be categorized as either a _Project_-specific (select which _Project_) or private task (not related to any project). [^5]
+9. A task **should** be able to be categorized as either a project-specific or private task (not related to any project). [^5]
 10. The system **should** allow a Project Manager/Team leader to modify and re-assign a Task. [^25]
 11. The system **could** allow a Sub-Task to be divided into multiple Sub-Tasks. [^26]
 
@@ -198,24 +189,24 @@ Requirements are taken from the client specification letter unless stated otherw
 
 ## 8. Project requirements
 
-1.  A _Project_ **must** have a title. [^12]
-2.  A _Project_ **should** have a description.
-3.  A _Project_ **must** have a date for a deadline.[^13]
-4.  A _Project_ **must** have a progress displayed, which is measured by the percentage of tasks completed. [^14]
-5.  A _Project_ **must** have a client. [^12]
-6.  A _Project_ **must** have a team assigned to it. [^6]
+1.  A project **must** have a title. [^12]
+2.  A project **should** have a description.
+3.  A project **must** have a date for a deadline.[^13]
+4.  A project **must** have a progress displayed, which is measured by the percentage of tasks completed. [^14]
+5.  A project **must** have a client. [^12]
+6.  A project **must** have a team assigned to it. [^6]
 7.  The system **should** allow users to view the teams of their projects.
 
-## 9. _Project_ manager dashboard
+## 9. Project Manager dashboard
 
-1. The project manager **should** be able to access and manage _Project_ details from their dashboard. [^15]
-2. The project manager dashboard **should** allow the project manager to manage teams and users that are assigned to their _Project_. [^16]
+1. The project manager **should** be able to access and manage project details from their dashboard. [^15]
+2. The project manager dashboard **should** allow the project manager to manage teams and users that are assigned to their project. [^16]
 
 ## 10. Manager dashboard requirements
 
 1.  The manager dashboard **should** allow a team leader or project manager be able to see how many tasks a user currently has assigned.
-2.  The _Project_ tasks **could** be able to be filtered based on _Project_ or team member assigned to it.
-3.  A _Project_ **should** display whether it is sufficiently resourced. This is determined based on the sum of worker-hours required by its tasks, the number of workers assigned and the Project's deadline. [^17]
+2.  The project tasks **could** be able to be filtered based on project or team member assigned to it.
+3.  A project **should** display whether it is sufficiently resourced. This is determined based on the sum of worker-hours required by its tasks, the number of workers assigned and the Project's deadline. [^17]
 4.  The manager dashboard **could** display a warning to a Project Manager/Team Leader if the project is expected to fall behind the deadline, based on worker hours (see above)
 5.  A manager/team leader **could** be warned that a employee needs training if they are behind a deadline or having trouble working on a specific task. [^18]
 
@@ -245,55 +236,28 @@ Requirements are taken from the client specification letter unless stated otherw
 4. The system **must** be accessed via a dedicated web address.
 5. The system **must** follow the GDPR regulations.
 
-
 [^1]: 04/11/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=358985>
-
 [^2]: 04/11/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=358983#p554513>
-
 [^3]: 22/10/2022 https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355047
-
 [^4]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355049>
-
 [^5]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355053#p549541>
-
 [^6]: 04/11/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355151#p554145>
-
 [^7]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355075#p549565>
-
-[^8]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355061#p549551>
-
-[^9]: 14/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=356809>
-
-[^10]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355045#p549487>
-
-[^11]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355051#p549539>
-
-[^12]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355047#p549501>
-
-[^13]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355067#p549557>
-
-[^14]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355063#p549553>
-
-[^15]: 13/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355039#p546189>
-
-[^16]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355151#p549485>
-
-[^17]: 04/11/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355067#p554135>
-
-[^18]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355071#p549561>
-
-[^19]: 24/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=357789#p550055>
-
-[^20]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355057#p549547>
-
-[^21]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355055#p549545>
-
-[^22]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355043#p549491>
-
-[^23]: 24/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355047#p550039>
-
-[^24]: 11/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355077#p545293>
-
+[^8]: 14/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=356809>
+[^9]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355045#p549487>
+[^10]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355051#p549539>
+[^11]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355047#p549501>
+[^12]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355067#p549557>
+[^13]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355063#p549553>
+[^14]: 13/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355039#p546189>
+[^15]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355151#p549485>
+[^16]: 04/11/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355067#p554135>
+[^17]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355071#p549561>
+[^18]: 24/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=357789#p550055>
+[^19]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355057#p549547>
+[^20]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355055#p549545>
+[^21]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355043#p549491>
+[^22]: 24/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355047#p550039>
+[^23]: 11/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355077#p545293>
+[^24]: 04/11/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=359721#p554115>
 [^25]: 04/11/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=359721#p554115>
-
-[^26]: 04/11/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=359721#p554115>
