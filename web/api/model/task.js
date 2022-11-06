@@ -71,13 +71,19 @@ export class Task {
       this.desc = desc;
       this.subtasks = new CollectionDB(this.id, Task, Task);
     }
-    this.subtasks.onChange((event) => {
-      if (event.all.length <= 0) return;
-      this.workerhours = event.all.reduce(
-        (total, subtask) => total + subtask.workerhours,
-        0
-      );
-    });
+  }
+
+  /**
+   * Get the total number of workerhours including un-completed subtasks.
+   * @returns {Number}
+   */
+  activeWorkerHours() {
+    if (this.subtasks.snapshot.length <= 0) return this.workerhours;
+    return this.subtasks.snapshot.reduce(
+      (total, subtask) =>
+        subtask.state < TaskState.Done ? total + subtask.workerhours : total,
+      0
+    );
   }
 }
 cereal.register(Task);
