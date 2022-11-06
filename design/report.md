@@ -47,7 +47,7 @@ header-includes: |
 ## Jack Humphrey
 
 - Communication with clients
-  - Completed the majority of communication with the clients. This invloved drafting questions, sending questions and updating our own document with our questions and the clients reponses.
+  - Completed the majority of communication with the clients. This involved drafting questions, sending questions and updating our own document with our questions and the clients responses.
 - User view page
 - Responsible for creating the user view page. This is a page for users to see information about other users in the system.
 - User edit page
@@ -71,16 +71,16 @@ header-includes: |
 <!-- quick first draft, hopefully gives everyone else an idea of what im thinking this will look like, might have rambled a bit :)-->
 
 - built and developed Login and registration pages
-  - Created the front of the login and registration pages from scratch as well as the basic functionalilty needed.
+  - Created the front of the login and registration pages from scratch as well as the basic functionality needed.
 - Search and parts of search results page
   - Created the search page elements to be used over a number of pages.
   - Used these elements to make the pages responsive and easy to use. Positioned them accordingly to aid in design and the flow of the pages
 - checked through code and caught bugs and features that people missed
-  - proof reading code and caught some issues such as a button missing funtion
+  - proof reading code and caught some issues such as a button missing function
   - also discovered bugs with certain elements of data usage etc.
 - partook in decisions regarding the project and creation of requirements
   - assisted in creating the initial requirements draft to give a basis of what the project aimed to do
-  - proived opinions and feedback to make the best decisions when designing, creating and building the project as well as suggesting changes etc. to offer an aternative solutions and a different approach to problems in development where there were multiple viable answers.
+  - provided opinions and feedback to make the best decisions when designing, creating and building the project as well as suggesting changes etc. to offer an alternative solutions and a different approach to problems in development where there were multiple viable answers.
 
 ## Thomas Woolhouse
 
