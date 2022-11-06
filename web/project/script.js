@@ -93,7 +93,7 @@ function setUserWorkerhours(user, tasklist, card) {
   );
   const tasks = allTasks.filter((ref) => ref.task.state < TaskState.Done);
   const totalHours = tasks.reduce(
-    (total, current) => total + current.task.workerhours,
+    (total, current) => total + current.task.activeWorkerHours(),
     0
   );
   const hoursPerWeek = 37.5;

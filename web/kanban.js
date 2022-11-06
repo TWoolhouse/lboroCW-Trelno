@@ -16,6 +16,8 @@ import { UserRank } from "./api/model/user.js";
  * @param {Element} section The DOM object of the kanban section the card is arriving into.
  */
 
+let kanbanSections = [];
+
 let TaskRefActive = {
   task: {
     id: null,
@@ -26,6 +28,8 @@ let MultiTasking = {
   func: null,
 };
 
+let ondragfunc = null;
+
 /**
  * Creates a kanban on the page
  * @param {Element} rootDOM The root element of the whole kanban
@@ -35,6 +39,7 @@ let MultiTasking = {
  */
 export function kanban(rootDOM, project, ondrag = (task, card, section) => {}) {
   const tasklistEvent = kanbanEnable(rootDOM, ondrag);
+  ondragfunc = ondrag;
   taskListener(tasklistEvent, project);
   createDialogs(rootDOM, project);
 }
@@ -47,7 +52,7 @@ export function kanban(rootDOM, project, ondrag = (task, card, section) => {}) {
  */
 function kanbanEnable(rootDOM, ondrag) {
   // Find kanban sections
-  const kanbanSections = rootDOM.querySelectorAll(".kanban-section");
+  kanbanSections = rootDOM.querySelectorAll(".kanban-section");
   if (kanbanSections.length != Object.entries(TaskState).length)
     console.warn(
       "There are not enough Kanban sections for the number of task states"
@@ -98,12 +103,6 @@ function kanbanEnable(rootDOM, ondrag) {
       const task = ref.task;
       const card = createTask(ref);
       kanbanSections[task.state].appendChild(card);
-
-      // Kanban Drag Event Handler
-      card.addEventListener("dragstart", (event) => {
-        event.dataTransfer.setData("task", task.id);
-        event.dataTransfer.dropEffect = "move";
-      });
     }
   }
   return tasklistEvent;
@@ -267,6 +266,12 @@ function newTaskDynamicInformation(dialog, project) {
 function createTask(ref) {
   const task = ref.task;
   const dom = HTMLasDOM(createTaskHTML(task));
+
+  // Kanban Drag Event Handler
+  dom.addEventListener("dragstart", (event) => {
+    event.dataTransfer.setData("task", task.id);
+    event.dataTransfer.dropEffect = "move";
+  });
   if (ref.source == TaskSrc.Project) {
     dom.setAttribute("data-project", ref.project.id);
     dom.setAttribute("data-project-task", ref.projectTask.id);
@@ -314,6 +319,9 @@ function createTask(ref) {
       });
     } else dom.querySelector("button#users-show").classList.add("hidden");
   } else {
+    dom.querySelector(".progress-bar-fill").style.width = `${
+      taskSubtaskProgress(ref) * 100
+    }%`;
     dom.querySelector(".analytics").addEventListener("click", () => {
       showMultiTask(ref);
     });
@@ -417,8 +425,15 @@ function showMultiTask(ref) {
       const subtaskDOM = HTMLasDOM(createSubtaskHTML(subtask));
       subtaskDOM
         .querySelector('input[type="checkbox"]')
-        .addEventListener("change", () => {
-          console.log("SUBTASK STATE CHANGE");
+        .addEventListener("change", (event) => {
+          subtask.state = event.target.checked
+            ? TaskState.Done
+            : TaskState.Ready;
+          const taskCard = document.querySelector(`#task-${ref.task.id}`);
+          taskCard.querySelector(".progress-bar-fill").style.width = `${
+            taskSubtaskProgress(ref) * 100
+          }%`;
+          ondragfunc(ref, taskCard);
         });
       tasklistDOM.appendChild(subtaskDOM);
     }
@@ -494,7 +509,9 @@ function createSubtaskHTML(subtask) {
   return /*HTML*/ `
     <li class="flex-row">
       <label for="${subtask.id}">${subtask.name}<label>
-      <input type="checkbox" class="checkbox" id="${subtask.id}"/>
+      <input type="checkbox" id="${subtask.id}" ${
+    subtask.state >= TaskState.Done ? "checked" : ""
+  }/>
     </li>
   `;
 }
@@ -562,11 +579,40 @@ function createTaskSingleHTML(task) {
 }
 
 /**
+ * @param {TaskRef} ref
+ * @returns {Number}
+ */
+function taskSubtaskProgress(ref) {
+  const task = ref.task;
+  const percentage =
+    task.subtasks.snapshot.filter((subtask) => subtask.state >= TaskState.Done)
+      .length / task.subtasks.snapshot.length;
+  let change = false;
+  if (percentage < 1 && task.state >= TaskState.Done) {
+    change = true;
+    task.state = TaskState.Active;
+  } else if (percentage >= 1 && task.state < TaskState.Done) {
+    change = true;
+    task.state = TaskState.Done;
+  } else if (percentage > 0 && task.state <= TaskState.Ready) {
+    change = true;
+    task.state = TaskState.Active;
+  }
+  if (change) {
+    const card = document.querySelector(`#task-${task.id}`);
+    if (card) {
+      card.remove();
+      kanbanSections[task.state].appendChild(card);
+    }
+  }
+  return percentage;
+}
+
+/**
  * @param {Task} task
  * @returns {String}
  */
 function createTaskMultiHTML(task) {
-  const percentage = 0.0;
   return /* HTML */ `
     <div class="flex-row">
       <button class="flex-row dimmed btn-icon analytics">
@@ -579,25 +625,9 @@ function createTaskMultiHTML(task) {
       </p>
     </div>
     <div class="progress-bar">
-      <div class="progress-bar-fill" style="width: ${percentage * 100}%"></div>
+      <div class="progress-bar-fill" style="width: 0%"></div>
     </div>
   `;
-  const subtasksHTML = task.subtasks.snapshot
-    .map((subtask) => createSubtaskHTML(subtask))
-    .join("");
-  return /*HTML*/ `
-    <div>
-      <p>${task.desc}</p>
-      <p class="dimmed flex-row jc-start">
-        <span class="material-symbols-outlined">schedule</span>${new Date(
-          task.deadline
-        ).toLocaleDateString()}
-      </p>
-      <ul>
-        ${subtasksHTML}
-      </ul>
-    </div>
-    `;
 }
 
 /**
