@@ -30,7 +30,7 @@ header-includes: |
     - Created designs for the productivity management sub-system including different views based on user rank, taking into consideration all features and functionalities and ensuring designs are available for them.
     - Designed all 'dashboards' and the kanban board used across the site which served as a starting point for further design by other team members during implementation.
   - Knowledge Management Sub-system
-    - Designed the knowledge management sub-system with seperate designs for the search page, results page, post page, edit post page and more.
+    - Designed the knowledge management sub-system with separate designs for the search page, results page, post page, edit post page and more.
   - Mobile Views
     - Designed basic mobile views as a template for the team to implement mobile first development to produce a more responsive site.
 - Re-design based on client communications
@@ -43,7 +43,7 @@ header-includes: |
 
 - Requirements document
   - Gathered and documented the project's requirements from the specification letter and subsequent communications with Client representatives.
-  - Delivered constant updates to the requirements document for maintainign current and adding new requirements.
+  - Delivered constant updates to the requirements document for maintaining current and adding new requirements.
 - Project page
   - Developed the Project page and its elements that dynamically displays information based on the Project id.
   - Implemented functionality that allows Managers to assign tasks to users when creating a new task.
@@ -54,7 +54,7 @@ header-includes: |
   - Clarified requirements by sending messages and reminders to the Client.
   - Drafted some of the emails and messages that were then sent to the Client.
 - Leadership
-  - Coordinated the team (planning, task allocation, decision making, etc) during meetings and other channels of communcations (WhatsApp, etc).
+  - Coordinated the team (planning, task allocation, decision making, etc) during meetings and other channels of communications (WhatsApp, etc).
   - Ensured the team is on track with task progression and deadlines.
 
 ## Jack Humphrey
@@ -101,7 +101,7 @@ header-includes: |
 - Designed and created the api (Application Programming Interface)
   - Created a consistent api to be reused throughout the project to make the project reactive.
   - Implemented a schemeless database.
-  - Custom serialistion system to allow for content parity between individual webpages.
+  - Custom serialisation system to allow for content parity between individual webpages.
 - Login
   - Functionality to keep track of the current logged-in user.
   - Developed the functionality that allowed users to log in/log out.
@@ -109,8 +109,8 @@ header-includes: |
   - Ensured the 'Kanban' on the dashboard and the project page are consistent.
   - Coded the system for dividing a task into multiple subtasks.
   - Developed the functionality that allowed Users to be assigned to a task.
-  - Coded the functionality that allowede creating, editing and viewing posts.
-  - Developed the seach functionality that allows searching through posts.
+  - Coded the functionality that allowed creating, editing and viewing posts.
+  - Developed the search functionality that allows searching through posts.
   - Responsible for developing the functionality for creating topics.
   - Responsible for developing the functionality for creating clients.
   - Displaying an employees current workload on both the manager and project page.
