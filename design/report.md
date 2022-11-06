@@ -96,9 +96,30 @@ header-includes: |
 
 ## Thomas Woolhouse
 
-- p1
-- p2
-- p3
+- Design the class diagram
+  - Modelled the system as a diagram.
+  - Modelled the system in js classes.
+- Designed and created the api
+  - Created a consistent api to be reused throughout the project to make the project reactive.
+  - Implemented a schemeless database.
+  - Custom serialistion system to allow for content parity between individual webpages.
+- Login
+  - Enabled the user to login
+  - Keep track of the current logged-in user
+  - logging out.
+
+- Ensuring the kanban on the dashboard and the project page are consistent.
+- Subtasks.
+- Assigning Users to task.
+- creating / editing / viewing posts.
+- searching through posts.
+- creating topics.
+- creating clients.
+- displaying an employees current workload on both the manager and project page.
+
+- Helped teamates do some cssssssss & jssssssssssss.
+- Had a breakdown
+- Got bullied by Adam (for good reason)
 
 # Requirements
 
