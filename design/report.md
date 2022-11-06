@@ -23,9 +23,21 @@ header-includes: |
 
 ## Arshad Chati
 
-- p1
-- p2
-- p3
+- System Design
+  - Login/Registration
+    - Created Login and Registration designs on Figma as a basis for the rest of the team to begin implementing front-end elements.
+  - Productivity Management Sub-system
+    - Created designs for the productivity management sub-system including different views based on user rank, taking into consideration all features and functionalities and ensuring designs are available for them.
+    - Designed all 'dashboards' and the kanban board used across the site which served as a starting point for further design by other team members during implementation.
+  - Knowledge Management Sub-system
+    - Designed the knowledge management sub-system with seperate designs for the search page, results page, post page, edit post page and more.
+  - Mobile Views
+    - Designed basic mobile views as a template for the team to implement mobile first development to produce a more responsive site.
+- Re-design based on client communications
+  - Responsible for taking client feedback and re-working existing designs to meet their needs or replacing some designs entirely with new ones.
+- Part One Presentation
+  - Joint responsibility in creating the prototype presentation for the client.
+  - Ensuring all relevant information is included, working on timing and ensuring information is kept concise yet informative.
 
 ## Calin Corcimaru
 
