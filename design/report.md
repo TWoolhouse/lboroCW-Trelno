@@ -42,18 +42,19 @@ header-includes: |
 ## Calin Corcimaru
 
 - Requirements document
-  - Gathered and documented the project's requirements.
-  - Delivered constant updates to the requirements document.
+  - Gathered and documented the project's requirements from the specification letter and subsequent communications with Client representatives.
+  - Delivered constant updates to the requirements document for maintainign current and adding new requirements.
 - Project page
-  - Developed the Project page and its elements that dynamically updates based on the URL id.
-  - Implemented functionality that allows Managers to assign tasks to users and a filter that shows tasks on the page based on User's rank.
+  - Developed the Project page and its elements that dynamically displays information based on the Project id.
+  - Implemented functionality that allows Managers to assign tasks to users when creating a new task.
+  - Developed a filter that allowed the system to display tasks on the page based on User's rank.
 - Client page
-  - Modeled the Client page and included all relative information that dynamically updates based on the URL id.
+  - Modeled the Client page that dynamically displays all the client information based on the Client id.
 - Communications with Client
   - Clarified requirements by sending messages and reminders to the Client.
-  - Drafted some of the emails and messages that were sent to the Client.
+  - Drafted some of the emails and messages that were then sent to the Client.
 - Leadership
-  - Coordinated the team (planning, task allocation, decision making, etc) during meetings.
+  - Coordinated the team (planning, task allocation, decision making, etc) during meetings and other channels of communcations (WhatsApp, etc).
   - Ensured the team is on track with task progression and deadlines.
 
 ## Jack Humphrey
@@ -61,11 +62,11 @@ header-includes: |
 - Communication with clients
   - Completed the majority of communication with the clients. This involved drafting questions, sending questions and updating our own document with our questions and the clients responses.
 - User view page
-- Responsible for creating the user view page. This is a page for users to see information about other users in the system.
+  - Responsible for creating the user view page. This is a page for users to see information about other users in the system.
 - User edit page
-- Responsible for creating the user edit page. This is a page for users to edit their own account information (such as password).
+  - Responsible for creating the user edit page. This is a page for users to edit their own account information (such as password).
 - Login page draft
-- Created an initial draft of the login page which was then reworked by Rowan.
+  - Created an initial draft of the login page which was then reworked by Rowan.
 
 ## Adam Hutton
 
@@ -79,8 +80,6 @@ header-includes: |
 - Contributed to the requirements document, helping to reword/rewrite requirements to aid in conciseness and reduce ambiguity
 
 ## Rowan Murphy
-
-<!-- quick first draft, hopefully gives everyone else an idea of what im thinking this will look like, might have rambled a bit :)-->
 
 - Built and developed Login and registration pages
   - Created the front of the registration page from scratch and expanded on Jacks' initial draft of the login page.
@@ -106,23 +105,17 @@ header-includes: |
   - Implemented a schemeless database.
   - Custom serialistion system to allow for content parity between individual webpages.
 - Login
-
-  - Enabled the user to login
-  - Keep track of the current logged-in user
-  - logging out.
-
-- Ensuring the kanban on the dashboard and the project page are consistent.
-- Subtasks.
-- Assigning Users to task.
-- creating / editing / viewing posts.
-- searching through posts.
-- creating topics.
-- creating clients.
-- displaying an employees current workload on both the manager and project page.
-
-- Helped teamates do some cssssssss & jssssssssssss.
-- Had a breakdown
-- Got bullied by Adam (for good reason)
+  - Functionality to keep track of the current logged-in user.
+  - Developed the functionality that allowed users to log in/log out.
+- Other contributions
+  - Ensured the kanban on the dashboard and the project page are consistent.
+  - Coded the system for dividing a task into multiple subtasks.
+  - Developed the functionality that allowed Users to be assigned to a task.
+  - Coded the functionality that allowede creating, editing and viewing posts.
+  - Developed the seach functionality that allows searching through posts.
+  - Responsible for developing the functionality for creating topics.
+  - Responsible for developing the functionality for creating clients.
+  - Displaying an employees current workload on both the manager and project page.
 
 # Requirements
 
@@ -260,40 +253,38 @@ Requirements are taken from the client specification letter unless stated otherw
 
 [^7]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355075#p549565>
 
-[^8]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355061#p549551>
+[^8]: 14/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=356809>
 
-[^9]: 14/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=356809>
+[^9]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355045#p549487>
 
-[^10]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355045#p549487>
+[^10]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355051#p549539>
 
-[^11]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355051#p549539>
+[^11]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355047#p549501>
 
-[^12]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355047#p549501>
+[^12]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355067#p549557>
 
-[^13]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355067#p549557>
+[^13]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355063#p549553>
 
-[^14]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355063#p549553>
+[^14]: 13/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355039#p546189>
 
-[^15]: 13/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355039#p546189>
+[^15]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355151#p549485>
 
-[^16]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355151#p549485>
+[^16]: 04/11/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355067#p554135>
 
-[^17]: 04/11/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355067#p554135>
+[^17]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355071#p549561>
 
-[^18]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355071#p549561>
+[^18]: 24/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=357789#p550055>
 
-[^19]: 24/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=357789#p550055>
+[^19]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355057#p549547>
 
-[^20]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355057#p549547>
+[^20]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355055#p549545>
 
-[^21]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355055#p549545>
+[^21]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355043#p549491>
 
-[^22]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355043#p549491>
+[^22]: 24/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355047#p550039>
 
-[^23]: 24/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355047#p550039>
+[^23]: 11/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355077#p545293>
 
-[^24]: 11/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355077#p545293>
+[^24]: 04/11/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=359721#p554115>
 
 [^25]: 04/11/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=359721#p554115>
-
-[^26]: 04/11/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=359721#p554115>
