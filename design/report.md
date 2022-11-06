@@ -47,9 +47,14 @@ header-includes: |
 
 ## Jack Humphrey
 
-- p1
-- p2
-- p3
+- Communication with clients
+  - Completed the majority of communication with the clients. This invloved drafting questions, sending questions and updating our own document with our questions and the clients reponses.
+- User view page
+ - Responsible for creating the user view page. This is a page for users to see information about other users in the system.
+- User edit page
+ - Responsible for creating the user edit page. This is a page for users to edit their own account information (such as password).
+- Login page draft
+ - Created an initial draft of the login page which was then reworked by Rowan.
 
 ## Adam Hutton
 
