@@ -130,5 +130,42 @@
         </div>
       </form>
     </dialog>
+    <dialog id="dialog-new-client" class="modal">
+      <div class="flex-row kanban-title">
+        <h2 class="title-card">Create a New Client</h2>
+        <!-- <button class="material-symbols-outlined btn-icon dialog-close">
+          close
+        </button> -->
+      </div>
+      <form class="modal-form">
+        <input type="text" name="name" placeholder="Company Name..." required />
+        <input
+          type="text"
+          name="representative"
+          placeholder="Representative Name..."
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Representative Email Address..."
+          required
+        />
+        <input
+          type="text"
+          name="address"
+          placeholder="Postal Address..."
+          required
+        />
+        <input type="tel" name="phone" placeholder="Phone Number ..." />
+        <input type="url" name="website" placeholder="Website URL..." />
+        <div class="end-button">
+          <button type="submit" class="btn-action">
+            <p>Create</p>
+            <span class="material-symbols-outlined">send</span>
+          </button>
+        </div>
+      </form>
+    </dialog>
   </body>
 </html>

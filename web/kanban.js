@@ -455,9 +455,8 @@ async function submitNewTask(dialog, project) {
     TaskState.Ready,
     form.querySelector(`[name="title"]`).value,
     Date.parse(form.querySelector(`[name="deadline"]`).value),
-    12, // TODO add man hours input
+    form.querySelector(`[name="workerhours"]`).value,
     form.querySelector(`[name="desc"]`).value
-    // TODO: Add deadline
   );
   const projectId = (
     form.querySelector(`[name="project"]`) ?? { value: project.id }
@@ -491,9 +490,8 @@ async function submitNewSubtask(rootDOM, dialog) {
       TaskState.Ready,
       form.querySelector(`[name="title"]`).value,
       Date.parse(form.querySelector(`[name="deadline"]`).value),
-      12, // TODO add man hours input
+      form.querySelector(`[name="workerhours"]`).value,
       form.querySelector(`[name="desc"]`).value
-      // TODO: Add deadline
     )
   );
   rootDOM
@@ -701,6 +699,19 @@ function createNewTaskDialogWindowHTML(project) {
           name="desc"
           placeholder="Write Task description here..."
         ></textarea>
+        <div class="input-label">
+          <label for="task-input-workerhours"
+            >Enter Estimated Workerhours for Task:</label
+          >
+          <input
+            id="task-input-workerhours"
+            name="workerhours"
+            type="number"
+            min="1"
+            value="1"
+            required
+          />
+        </div>
         ${projectUserSelector}
         <div class="input-label">
           <label for="task-date">Enter Deadline for Task:</label>
@@ -741,6 +752,19 @@ function createNewSubTaskDialogWindowHTML() {
           name="desc"
           placeholder="Write Subtask description here..."
         ></textarea>
+        <div class="input-label">
+          <label for="subtask-input-workerhours"
+            >Enter Estimated Workerhours for Subtask:</label
+          >
+          <input
+            id="subtask-input-workerhours"
+            name="workerhours"
+            type="number"
+            min="1"
+            value="1"
+            required
+          />
+        </div>
         <div class="input-label">
           <label for="task-date">Enter Deadline for Subtask:</label>
           <input name="deadline" type="date" id="task-date" required />

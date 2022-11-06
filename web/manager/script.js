@@ -28,9 +28,46 @@ newProjectDialog.querySelector("form").onsubmit = async (event) => {
   newProjectDialog.close();
   const form = event.target;
 
+  const selectorClient = form.querySelector(`[name="client"]`);
+  let clientID = selectorClient.value;
+  if (clientID == "new") {
+    const popup = document.querySelector("#dialog-new-client");
+    clientID = await new Promise((resolve) => {
+      popup.showModal();
+      popup.querySelector("form").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        popup.close();
+
+        const client = await api.createClient(
+          popup.querySelector(`[name="name"]`).value,
+          popup.querySelector(`[name="representative"]`).value,
+          popup.querySelector(`[name="address"]`).value,
+          popup.querySelector(`[name="website"]`).value,
+          popup.querySelector(`[name="email"]`).value,
+          popup.querySelector(`[name="phone"]`).value
+        );
+
+        selectorClient.appendChild(
+          HTMLasDOM(createProjectOptionClientHTML(client))
+        );
+        selectorClient.value = client.id;
+        resolve(client.id);
+        return false;
+      });
+      // popup.querySelector(".dialog-close").addEventListener("click", () => {
+      //   popup.close();
+      // FIXME: Same closing bug as new topic
+      // });
+    });
+  }
+
+  if (!clientID) {
+    return false;
+  }
+
   const project = await api.createProject(
     await api.user(form.querySelector(`[name="teamLeader"]`).value),
-    await api.client(form.querySelector(`[name="client"]`).value),
+    await api.client(clientID),
     Date.now(),
     Date.parse(form.querySelector(`[name="deadline"]`).value),
     form.querySelector(`[name="title"]`).value,
@@ -90,6 +127,10 @@ async function setDynamicData() {
   selectorClient.innerHTML = createProjectOptionClientHTML({
     id: "",
     name: "Select a Client...",
+  });
+  selectorClient.innerHTML += createProjectOptionClientHTML({
+    id: "new",
+    name: "Create a New Client",
   });
   for (const client of await api.clients())
     selectorClient.appendChild(
