@@ -16,7 +16,15 @@ import { UserRank } from "./api/model/user.js";
  * @param {Element} section The DOM object of the kanban section the card is arriving into.
  */
 
-let TaskRefActive = null;
+let TaskRefActive = {
+  task: {
+    id: null,
+  },
+};
+let MultiTasking = {
+  ref: null,
+  func: null,
+};
 
 /**
  * Creates a kanban on the page
@@ -189,6 +197,7 @@ function createDialogs(rootDOM, project) {
     .querySelector('button[type="submit"]')
     .addEventListener("click", async () => {
       dialogAssign.close();
+      const ref = TaskRefActive;
       if (dialogAssign.getAttribute("data-isTask")) {
         const users = await Promise.all(
           new Array(
@@ -197,7 +206,7 @@ function createDialogs(rootDOM, project) {
             .filter((input) => input.checked)
             .map((input) => api.user(input.value))
         );
-        TaskRefActive.projectTask.assignees.replace(...users);
+        ref.projectTask.assignees.replace(...users);
       } else;
       // TODO: Adding to a team
     });
@@ -221,8 +230,10 @@ function newTaskDynamicInformation(dialog, project) {
         selectUser.appendChild(
           HTMLasDOM(createNewTaskDialogUserOptionHTML(user))
         );
-      for (const user of event.sub)
-        selectUser.querySelector(`option[value="${user.id}"]`).remove();
+      for (const user of event.sub) {
+        const opt = selectUser.querySelector(`option[value="${user.id}"]`);
+        if (opt) opt.remove();
+      }
     });
   }
 
@@ -252,6 +263,16 @@ function createTask(ref) {
   if (ref.source == TaskSrc.Project) {
     dom.setAttribute("data-project", ref.project.id);
     dom.setAttribute("data-project-task", ref.projectTask.id);
+
+    ref.projectTask.assignees.onChange(async (event) => {
+      ref.project.team.users.add(...event.add);
+      const users = ref.project.tasks.snapshot.flatMap(
+        (pt) => pt.assignees.snapshot
+      );
+      ref.project.team.users.remove(
+        ...event.sub.filter((user) => !users.find((u) => u.id == user.id))
+      );
+    });
   }
 
   dom
@@ -282,47 +303,55 @@ function createTask(ref) {
       dom
         .querySelector("button#users-show")
         .addEventListener("click", (event) => {
+          TaskRefActive = ref;
           const dialog = document.querySelector("#dialog-task-users");
           const userListDOM = dialog.querySelector(".user-list");
           userListDOM.innerHTML = "";
           const IsPowerUser =
             currentUser.rank >= UserRank.ProjectManager ||
-            ref.project.team.leader.id != currentUser.id;
-          for (const user of ref.projectTask.assignees) {
-            const cardUser = HTMLasDOM(createUserAssignedHTML(user));
-            const remove = cardUser.querySelector(".remove");
-            if (IsPowerUser)
-              remove.addEventListener("click", () => {
-                cardUser.remove();
-                ref.projectTask.assignees.remove(user);
-              });
-            else remove.classList.add("hidden");
-            userListDOM.appendChild(cardUser);
-          }
+            ref.project.team.leader.id == currentUser.id;
+          const onChangeUserAssigned = (event) => {
+            if (TaskRefActive.task.id != ref.task.id) return;
+            for (const user of event.add) {
+              const cardUser = HTMLasDOM(createUserAssignedHTML(user));
+              const remove = cardUser.querySelector(".remove");
+              if (IsPowerUser)
+                remove.addEventListener("click", () => {
+                  cardUser.remove();
+                  ref.projectTask.assignees.remove(user);
+                });
+              else remove.classList.add("hidden");
+              userListDOM.appendChild(cardUser);
+            }
+            for (const user of event.sub) {
+              const cardUser = userListDOM.querySelector(
+                `[data-user-assigned="${user.id}"]`
+              );
+              if (cardUser) cardUser.remove();
+            }
+          };
+          ref.projectTask.assignees.onChange(onChangeUserAssigned);
           const buttonAdd = dialog.querySelector("button.add");
-          if (IsPowerUser)
-            buttonAdd.addEventListener("click", () => {
+          if (IsPowerUser) {
+            buttonAdd.classList.remove("hidden");
+            buttonAdd.addEventListener("click", async () => {
               TaskRefActive = ref;
               assignUsers(
-                ref.project.team.users.snapshot,
+                (await api.users()).filter(
+                  (user) => user.rank <= UserRank.Employee
+                ),
                 ref.projectTask.assignees.snapshot,
                 true
               );
             });
-          else buttonAdd.classList.add("hidden");
+          } else buttonAdd.classList.add("hidden");
           showTaskModal(dialog);
         });
     } else dom.querySelector("button#users-show").classList.add("hidden");
   } else {
-    // subtask event handler
-    //  && task.subtasks != null && task.subtasks.length > 0
-    // if (subtaskDialog != null) {
-    //   const expandButton = card.querySelector(".click-expander");
-    //   expandButton.addEventListener("click", () => {
-    //     subtaskDialog.innerHTML = subtaskDetailsHTML(task);
-    //     subtaskDialog.showModal();
-    //   });
-    // }
+    dom.querySelector(".analytics").addEventListener("click", () => {
+      showMultiTask(ref);
+    });
   }
   return dom;
 }
@@ -347,6 +376,44 @@ function assignUsers(userlist, assigned, isTask = false) {
       )
     );
   dialog.close();
+  dialog.showModal();
+}
+
+/**
+ * @param {TaskRef} ref
+ */
+function showMultiTask(ref) {
+  TaskRefActive = ref;
+  const dialog = document.querySelector("#dialog-multitask");
+  dialog.querySelector("h2").innerHTML = ref.task.name;
+  if (ref.source != TaskSrc.Project)
+    dialog.querySelector("button.users").classList.add("hidden");
+  else dialog.querySelector("button.users").classList.remove("hidden");
+  if (
+    currentUser.rank >= UserRank.ProjectManager ||
+    (ref.source == TaskSrc.Project &&
+      ref.project.team.leader.id == currentUser.id) ||
+    ref.source == TaskSrc.User
+  )
+    dialog.querySelector("button.add").classList.remove("hidden");
+  else dialog.querySelector("button.add").classList.add("hidden");
+  const tasklistDOM = dialog.querySelector(".subtask-list");
+  if (MultiTasking.ref)
+    MultiTasking.ref.task.subtasks.onChangeRemove(MultiTasking.func);
+  MultiTasking.ref = ref;
+  MultiTasking.func = (event) => {
+    for (const subtask of event.add) {
+      const subtaskDOM = HTMLasDOM(createSubtaskHTML(subtask));
+      subtaskDOM
+        .querySelector('input[type="checkbox"]')
+        .addEventListener("change", () => {
+          console.log("SUBTASK STATE CHANGE");
+        });
+      tasklistDOM.appendChild(subtaskDOM);
+    }
+  };
+  tasklistDOM.innerHTML = "";
+  ref.task.subtasks.onChange(MultiTasking.func);
   dialog.showModal();
 }
 
@@ -491,7 +558,7 @@ function createTaskMultiHTML(task) {
   const percentage = 0.0;
   return /* HTML */ `
     <div class="flex-row">
-      <button class="flex-row dimmed btn-icon">
+      <button class="flex-row dimmed btn-icon analytics">
         <span class="material-symbols-outlined">analytics</span>View More Info
       </button>
       <p class="dimmed flex-row">
@@ -563,8 +630,9 @@ function createNewTaskDialogProjectSelectorHTML() {
  */
 function createNewTaskDialogUserSelectorHTML() {
   return /* HTML */ `
-    <select name="user" id="options-user" required>
+    <select name="user" id="options-user">
       <option value="">Select User to Add Task to...</option>
+      <option value="">None</option>
     </select>
   `;
 }
@@ -674,7 +742,7 @@ function createUsersDialogWindowHTML() {
  * @returns {String}
  */
 function createUserAssignedHTML(user) {
-  return /* HTML */ `<div>
+  return /* HTML */ `<div data-user-assigned="${user.id}">
     <a
       ><img
         class="profile-pic"
@@ -704,7 +772,7 @@ function createUsersAddDialogHTML() {
           close
         </button>
       </div>
-      <div class="user-list"></div>
+      <ul class="user-list"></ul>
       <button type="submit" class="btn-action add">
         <p>Save</p>
         <span class="material-symbols-outlined">save</span>
@@ -737,18 +805,24 @@ function createUserAssigningHTML(user, assigned) {
  */
 function createSubtaskViewerDialogHTML() {
   return /* HTML */ `
-    <dialog class="modal" id="dialog-task-users">
+    <dialog class="modal" id="dialog-multitask">
       <div class="flex-row kanban-title">
         <h2 class="title-card">TaskName</h2>
         <button class="material-symbols-outlined btn-icon dialog-close">
           close
         </button>
       </div>
-      <div class="user-list">A PRETTY LIST OF SUBTASKS</div>
-      <button type="button" class="btn-action add">
-        <p>Add User</p>
-        <span class="material-symbols-outlined">add</span>
-      </button>
+      <div class="flex-row">
+        <button type="button" class="btn-action users">
+          <p>Users</p>
+          <span class="material-symbols-outlined">people</span>
+        </button>
+        <button type="button" class="btn-action add">
+          <p>New Subtask</p>
+          <span class="material-symbols-outlined">add</span>
+        </button>
+      </div>
+      <div class="subtask-list"></div>
     </dialog>
   `;
 }
