@@ -44,23 +44,27 @@ header-includes: |
   - Coordinated the team (planning, task allocation, decision making, etc) during meetings.
   - Ensured the team is on track with task progression and deadlines.
 
-
 ## Jack Humphrey
 
 - Communication with clients
   - Completed the majority of communication with the clients. This invloved drafting questions, sending questions and updating our own document with our questions and the clients reponses.
 - User view page
- - Responsible for creating the user view page. This is a page for users to see information about other users in the system.
+- Responsible for creating the user view page. This is a page for users to see information about other users in the system.
 - User edit page
- - Responsible for creating the user edit page. This is a page for users to edit their own account information (such as password).
+- Responsible for creating the user edit page. This is a page for users to edit their own account information (such as password).
 - Login page draft
- - Created an initial draft of the login page which was then reworked by Rowan.
+- Created an initial draft of the login page which was then reworked by Rowan.
 
 ## Adam Hutton
 
-- p1
-- p2
-- p3
+- Created the Dashboard/Task view
+  - Including the 'Kanban' section reused elsewhere
+- Created the Manager's Dashboard
+- Developed ways of displaying progress to the user, including the horizontal progress bar, and the 'spinner' one used in the project page
+- Created the navigation, reworked it to work on mobile
+- Created the base css used everywhere in the project
+  - Including the card and title styles, navigation and ensuring that the designs are consistent and responsive throughout the website.
+- Contributed to the requirements document, helping to reword/rewrite requirements to aid in conciseness and reduce ambiguity
 
 ## Rowan Murphy
 
