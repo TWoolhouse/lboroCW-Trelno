@@ -93,14 +93,12 @@ header-includes: |
   - Assisted in creating the initial requirements draft to give a basis of what the project aimed to do
   - Provided opinions and feedback to make the best decisions when designing, creating and building the project as well as suggesting changes etc. to offer an alternative solutions and a different approach to problems in development where there were multiple viable answers.
 
-\pagebreak
-
 ## Thomas Woolhouse
 
 - Design the class diagram
   - Modelled the system as a diagram.
-  - Modelled the system in js classes.
-- Designed and created the api
+  - Modelled the system in JavaScript classes.
+- Designed and created the api (Application Programming Interface)
   - Created a consistent api to be reused throughout the project to make the project reactive.
   - Implemented a schemeless database.
   - Custom serialistion system to allow for content parity between individual webpages.
@@ -108,7 +106,7 @@ header-includes: |
   - Functionality to keep track of the current logged-in user.
   - Developed the functionality that allowed users to log in/log out.
 - Other contributions
-  - Ensured the kanban on the dashboard and the project page are consistent.
+  - Ensured the 'Kanban' on the dashboard and the project page are consistent.
   - Coded the system for dividing a task into multiple subtasks.
   - Developed the functionality that allowed Users to be assigned to a task.
   - Coded the functionality that allowede creating, editing and viewing posts.
@@ -141,8 +139,8 @@ Requirements are taken from the client specification letter unless stated otherw
 
 1. The system **must** allow a user to have at least one of the following roles: Employee, Team leader or Project Manager.
 2. The system **must** allow a user to have different permissions dependant on their currently assigned role. [^6]
-3. A user **must** be able to be assigned to a _Project_. [^3]
-4. A user **must** be able to work on any number of _Projects_. [^4]
+3. A user **must** be able to be assigned to a project. [^3]
+4. A user **must** be able to work on any number of projects. [^4]
 5. A user **must** be able to create a private task for their private to-do list. [^5]
 <!-- 6. A user **should** be able to be part of multiple teams. -->
 
@@ -153,17 +151,17 @@ Requirements are taken from the client specification letter unless stated otherw
 3. The system **must** allow a user to be a team leader for multiple projects. [^6]
 4. A team leader **must** be able to manage the members of their team (add, remove).[^6]
 5. A team leader **must** be able to assign tasks to users in their team. [^7]
-6. A team leader **must** be able to create tasks for a _Project_ they supervise. [^6]
-7. A team leader **must** be able to track task progress of a _Project_.
+6. A team leader **must** be able to create tasks for a project they supervise. [^6]
+7. A team leader **must** be able to track task progress of a project.
 
 \pagebreak
-   
+
 ## 5. Project Manager requirements
 
-1. A _Project_ manager **must** be able to manage all the _Projects_ in the system. [^6]
-2. A project manager **must** be able to add tasks to any current _Project_. [^6]
-3. A project manager **must** be able to assign users to _Project_ tasks. [^6]
-4. A project manager **must** be able to create a new _Project_. [^6]
+1. A project manager **must** be able to manage all the projects in the system. [^6]
+2. A project manager **must** be able to add tasks to any current project. [^6]
+3. A project manager **must** be able to assign users to project tasks. [^6]
+4. A project manager **must** be able to create a new project. [^6]
 5. A project manager **must** be able to assign users to a team. [^6]
 
 ## 6. Productivity Management requirements
@@ -199,7 +197,7 @@ Requirements are taken from the client specification letter unless stated otherw
 6.  A _Project_ **must** have a team assigned to it. [^3]
 7.  The system **should** allow users to view the teams of their projects.
 
-## 9. _Project_ manager dashboard
+## 9. Project Manager dashboard
 
 1. The project manager **should** be able to access and manage _Project_ details from their dashboard. [^14]
 2. The project manager dashboard **should** allow the project manager to manage teams and users that are assigned to their _Project_. [^15]
@@ -238,51 +236,27 @@ Requirements are taken from the client specification letter unless stated otherw
 4. The system **must** be accessed via a dedicated web address.
 5. The system **must** follow the GDPR regulations.
 
-
 [^1]: 04/11/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=358985>
-
 [^2]: 04/11/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=358983#p554513>
-
 [^3]: 22/10/2022 https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355047
-
 [^4]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355049>
-
 [^5]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355053#p549541>
-
 [^6]: 04/11/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355151#p554145>
-
 [^7]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355075#p549565>
-
 [^8]: 14/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=356809>
-
 [^9]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355045#p549487>
-
 [^10]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355051#p549539>
-
 [^11]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355047#p549501>
-
 [^12]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355067#p549557>
-
 [^13]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355063#p549553>
-
 [^14]: 13/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355039#p546189>
-
 [^15]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355151#p549485>
-
 [^16]: 04/11/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355067#p554135>
-
 [^17]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355071#p549561>
-
 [^18]: 24/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=357789#p550055>
-
 [^19]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355057#p549547>
-
 [^20]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355055#p549545>
-
 [^21]: 22/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355043#p549491>
-
 [^22]: 24/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355047#p550039>
-
 [^23]: 11/10/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355077#p545293>
-
 [^24]: 04/11/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=359721#p554115>
