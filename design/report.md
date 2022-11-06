@@ -94,6 +94,8 @@ header-includes: |
   - Assisted in creating the initial requirements draft to give a basis of what the project aimed to do
   - Provided opinions and feedback to make the best decisions when designing, creating and building the project as well as suggesting changes etc. to offer an alternative solutions and a different approach to problems in development where there were multiple viable answers.
 
+\pagebreak
+
 ## Thomas Woolhouse
 
 - Design the class diagram
@@ -160,6 +162,8 @@ Requirements are taken from the client specification letter unless stated otherw
 5. A team leader **must** be able to assign tasks to users in their team. [^7]
 6. A team leader **must** be able to create tasks for a _Project_ they supervise. [^6]
 7. A team leader **must** be able to track task progress of a _Project_.
+
+\pagebreak
    
 ## 5. Project Manager requirements
 
@@ -189,6 +193,8 @@ Requirements are taken from the client specification letter unless stated otherw
 9. A task **should** be able to be categorized as either a _Project_-specific (select which _Project_) or private task (not related to any project). [^5]
 10. The system **should** allow a Project Manager/Team leader to modify and re-assign a Task. [^25]
 11. The system **could** allow a Sub-Task to be divided into multiple Sub-Tasks. [^26]
+
+\pagebreak
 
 ## 8. Project requirements
 
@@ -223,6 +229,8 @@ Requirements are taken from the client specification letter unless stated otherw
 6. The subsystem **should** offer users a way to contact author of post for specific questions. [^19]
 7. A Post **must** only have 1 topic assigned to it. [^22]
 8. The system **must** allow a Topic have multiple Posts. [^22]
+
+\pagebreak
 
 ## 12. Client requirements
 
