@@ -23,9 +23,21 @@ header-includes: |
 
 ## Arshad Chati
 
-- p1
-- p2
-- p3
+- System Design
+  - Login/Registration
+    - Created Login and Registration designs on Figma as a basis for the rest of the team to begin implementing front-end elements.
+  - Productivity Management Sub-system
+    - Created designs for the productivity management sub-system including different views based on user rank, taking into consideration all features and functionalities and ensuring designs are available for them.
+    - Designed all 'dashboards' and the kanban board used across the site which served as a starting point for further design by other team members during implementation.
+  - Knowledge Management Sub-system
+    - Designed the knowledge management sub-system with seperate designs for the search page, results page, post page, edit post page and more.
+  - Mobile Views
+    - Designed basic mobile views as a template for the team to implement mobile first development to produce a more responsive site.
+- Re-design based on client communications
+  - Responsible for taking client feedback and re-working existing designs to meet their needs or replacing some designs entirely with new ones.
+- Part One Presentation
+  - Joint responsibility in creating the prototype presentation for the client.
+  - Ensuring all relevant information is included, working on timing and ensuring information is kept concise yet informative.
 
 ## Calin Corcimaru
 
@@ -70,23 +82,45 @@ header-includes: |
 
 <!-- quick first draft, hopefully gives everyone else an idea of what im thinking this will look like, might have rambled a bit :)-->
 
-- built and developed Login and registration pages
-  - Created the front of the login and registration pages from scratch as well as the basic functionality needed.
+- Built and developed Login and registration pages
+  - Created the front of the registration page from scratch and expanded on Jacks' initial draft of the login page.
 - Search and parts of search results page
   - Created the search page elements to be used over a number of pages.
   - Used these elements to make the pages responsive and easy to use. Positioned them accordingly to aid in design and the flow of the pages
-- checked through code and caught bugs and features that people missed
-  - proof reading code and caught some issues such as a button missing function
-  - also discovered bugs with certain elements of data usage etc.
-- partook in decisions regarding the project and creation of requirements
-  - assisted in creating the initial requirements draft to give a basis of what the project aimed to do
-  - provided opinions and feedback to make the best decisions when designing, creating and building the project as well as suggesting changes etc. to offer an alternative solutions and a different approach to problems in development where there were multiple viable answers.
+- Checked through code and caught bugs and features that people missed
+  - Proof reading code and caught some issues such as a button missing function
+  - Also discovered bugs with certain elements of data usage etc.
+- Partook in decisions regarding the project and creation of requirements
+  - Assisted in creating the initial requirements draft to give a basis of what the project aimed to do
+  - Provided opinions and feedback to make the best decisions when designing, creating and building the project as well as suggesting changes etc. to offer an alternative solutions and a different approach to problems in development where there were multiple viable answers.
 
 ## Thomas Woolhouse
 
-- p1
-- p2
-- p3
+- Design the class diagram
+  - Modelled the system as a diagram.
+  - Modelled the system in js classes.
+- Designed and created the api
+  - Created a consistent api to be reused throughout the project to make the project reactive.
+  - Implemented a schemeless database.
+  - Custom serialistion system to allow for content parity between individual webpages.
+- Login
+
+  - Enabled the user to login
+  - Keep track of the current logged-in user
+  - logging out.
+
+- Ensuring the kanban on the dashboard and the project page are consistent.
+- Subtasks.
+- Assigning Users to task.
+- creating / editing / viewing posts.
+- searching through posts.
+- creating topics.
+- creating clients.
+- displaying an employees current workload on both the manager and project page.
+
+- Helped teamates do some cssssssss & jssssssssssss.
+- Had a breakdown
+- Got bullied by Adam (for good reason)
 
 # Requirements
 

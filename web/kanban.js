@@ -4,6 +4,7 @@ import { TaskSrc, TaskState } from "./api/model/task.js";
 import { HTMLasDOM } from "./nav.js";
 import { UserRank } from "./api/model/user.js";
 
+/** @typedef {import("./api/model/user.js").User} User */
 /** @typedef {import("./api/model/task.js").Task} Task */
 /** @typedef {import("./api/model/task.js").TaskRef} TaskRef */
 /** @typedef {import("./api/model/project.js").Project} Project */
@@ -15,7 +16,15 @@ import { UserRank } from "./api/model/user.js";
  * @param {Element} section The DOM object of the kanban section the card is arriving into.
  */
 
-let TaskRefActive = null;
+let TaskRefActive = {
+  task: {
+    id: null,
+  },
+};
+let MultiTasking = {
+  ref: null,
+  func: null,
+};
 
 /**
  * Creates a kanban on the page
@@ -144,7 +153,15 @@ function createDialogs(rootDOM, project) {
   const dialogTask = HTMLasDOM(createNewTaskDialogWindowHTML(project));
   const dialogSubtask = HTMLasDOM(createNewSubTaskDialogWindowHTML());
   const dialogUsers = HTMLasDOM(createUsersDialogWindowHTML());
-  const dialogs = [dialogTask, dialogSubtask, dialogUsers];
+  const dialogAssign = HTMLasDOM(createUsersAddDialogHTML());
+  const dialogSubtasksView = HTMLasDOM(createSubtaskViewerDialogHTML());
+  const dialogs = [
+    dialogTask,
+    dialogSubtask,
+    dialogUsers,
+    dialogAssign,
+    dialogSubtasksView,
+  ];
 
   for (const dialog of dialogs) {
     document.body.appendChild(dialog);
@@ -174,6 +191,34 @@ function createDialogs(rootDOM, project) {
       event.preventDefault();
       return await submitNewSubtask(rootDOM, dialogSubtask);
     });
+
+  // ASSIGN USERS
+  dialogAssign
+    .querySelector('button[type="submit"]')
+    .addEventListener("click", async () => {
+      dialogAssign.close();
+      const ref = TaskRefActive;
+      if (dialogAssign.getAttribute("data-isTask")) {
+        const users = await Promise.all(
+          new Array(
+            ...dialogAssign.querySelectorAll('input[type="checkbox"]').values()
+          )
+            .filter((input) => input.checked)
+            .map((input) => api.user(input.value))
+        );
+        ref.projectTask.assignees.replace(...users);
+      } else;
+    });
+
+  // SUBTASK VIEW
+  dialogSubtasksView
+    .querySelector("button.users")
+    .addEventListener("click", showDialogUsers);
+  dialogSubtasksView
+    .querySelector("button.add")
+    .addEventListener("click", () => {
+      dialogSubtask.showModal();
+    });
 }
 
 /**
@@ -192,8 +237,10 @@ function newTaskDynamicInformation(dialog, project) {
         selectUser.appendChild(
           HTMLasDOM(createNewTaskDialogUserOptionHTML(user))
         );
-      for (const user of event.sub)
-        selectUser.querySelector(`option[value="${user.id}"]`).remove();
+      for (const user of event.sub) {
+        const opt = selectUser.querySelector(`option[value="${user.id}"]`);
+        if (opt) opt.remove();
+      }
     });
   }
 
@@ -223,6 +270,16 @@ function createTask(ref) {
   if (ref.source == TaskSrc.Project) {
     dom.setAttribute("data-project", ref.project.id);
     dom.setAttribute("data-project-task", ref.projectTask.id);
+
+    ref.projectTask.assignees.onChange(async (event) => {
+      ref.project.team.users.add(...event.add);
+      const users = ref.project.tasks.snapshot.flatMap(
+        (pt) => pt.assignees.snapshot
+      );
+      ref.project.team.users.remove(
+        ...event.sub.filter((user) => !users.find((u) => u.id == user.id))
+      );
+    });
   }
 
   dom
@@ -238,34 +295,137 @@ function createTask(ref) {
       newSection.appendChild(dom);
     });
 
+  const showTaskModal = (modal) => {
+    TaskRefActive = ref;
+    modal.showModal();
+  };
+
   if (task.subtasks.snapshot.length == 0) {
     // Has no subtasks
-    const showTaskModal = (modal) => {
-      TaskRefActive = ref;
-      modal.showModal();
-    };
     dom
       .querySelector("button#subtask-add")
       .addEventListener("click", (event) => {
         showTaskModal(document.querySelector("#dialog-new-subtask"));
       });
-    dom
-      .querySelector("button#users-show")
-      .addEventListener("click", (event) => {
-        showTaskModal(document.querySelector("#dialog-task-users"));
+    if (ref.source == TaskSrc.Project) {
+      dom.querySelector("button#users-show").addEventListener("click", () => {
+        TaskRefActive = ref;
+        showDialogUsers();
       });
+    } else dom.querySelector("button#users-show").classList.add("hidden");
   } else {
-    // subtask event handler
-    //  && task.subtasks != null && task.subtasks.length > 0
-    // if (subtaskDialog != null) {
-    //   const expandButton = card.querySelector(".click-expander");
-    //   expandButton.addEventListener("click", () => {
-    //     subtaskDialog.innerHTML = subtaskDetailsHTML(task);
-    //     subtaskDialog.showModal();
-    //   });
-    // }
+    dom.querySelector(".analytics").addEventListener("click", () => {
+      showMultiTask(ref);
+    });
+    dom.querySelector("button.add");
   }
   return dom;
+}
+
+function showDialogUsers() {
+  const ref = TaskRefActive;
+  const dialog = document.querySelector("#dialog-task-users");
+  const userListDOM = dialog.querySelector(".user-list");
+  userListDOM.innerHTML = "";
+  const IsPowerUser =
+    currentUser.rank >= UserRank.ProjectManager ||
+    ref.project.team.leader.id == currentUser.id;
+  const onChangeUserAssigned = (event) => {
+    if (TaskRefActive.task.id != ref.task.id) return;
+    for (const user of event.add) {
+      const cardUser = HTMLasDOM(createUserAssignedHTML(user));
+      const remove = cardUser.querySelector(".remove");
+      if (IsPowerUser)
+        remove.addEventListener("click", () => {
+          cardUser.remove();
+          ref.projectTask.assignees.remove(user);
+        });
+      else remove.classList.add("hidden");
+      userListDOM.appendChild(cardUser);
+    }
+    for (const user of event.sub) {
+      const cardUser = userListDOM.querySelector(
+        `[data-user-assigned="${user.id}"]`
+      );
+      if (cardUser) cardUser.remove();
+    }
+  };
+  ref.projectTask.assignees.onChange(onChangeUserAssigned);
+  const buttonAdd = dialog.querySelector("button.add");
+  if (IsPowerUser) {
+    buttonAdd.classList.remove("hidden");
+    buttonAdd.addEventListener("click", async () => {
+      TaskRefActive = ref;
+      assignUsers(
+        (await api.users()).filter((user) => user.rank <= UserRank.Employee),
+        ref.projectTask.assignees.snapshot,
+        true
+      );
+    });
+  } else buttonAdd.classList.add("hidden");
+  dialog.showModal();
+}
+
+/**
+ * @param {Array<User>} userlist
+ * @param {Array<User>} assigned
+ * @param {Boolean} isTask
+ */
+function assignUsers(userlist, assigned, isTask = false) {
+  const dialog = document.querySelector("#dialog-assign-user");
+  dialog.setAttribute("data-isTask", isTask);
+  const userListDOM = dialog.querySelector(".user-list");
+  userListDOM.innerHTML = "";
+  for (const user of userlist)
+    userListDOM.appendChild(
+      HTMLasDOM(
+        createUserAssigningHTML(
+          user,
+          assigned.find((u) => user.id == u.id) != undefined
+        )
+      )
+    );
+  dialog.close();
+  dialog.showModal();
+}
+
+/**
+ * @param {TaskRef} ref
+ */
+function showMultiTask(ref) {
+  TaskRefActive = ref;
+  const dialog = document.querySelector("#dialog-multitask");
+  dialog.querySelector("h2").innerHTML = ref.task.name;
+  const buttonUserShow = dialog.querySelector("button.users");
+  if (ref.source != TaskSrc.Project) buttonUserShow.classList.add("hidden");
+  else buttonUserShow.classList.remove("hidden");
+  const buttonSubtaskAdd = dialog.querySelector("button.add");
+  if (
+    currentUser.rank >= UserRank.ProjectManager ||
+    (ref.source == TaskSrc.Project &&
+      ref.project.team.leader.id == currentUser.id) ||
+    ref.source == TaskSrc.User
+  )
+    buttonSubtaskAdd.classList.remove("hidden");
+  else buttonSubtaskAdd.classList.add("hidden");
+  const tasklistDOM = dialog.querySelector(".subtask-list");
+  if (MultiTasking.ref)
+    MultiTasking.ref.task.subtasks.onChangeRemove(MultiTasking.func);
+  MultiTasking.ref = ref;
+  MultiTasking.func = (event) => {
+    for (const subtask of event.add) {
+      const subtaskDOM = HTMLasDOM(createSubtaskHTML(subtask));
+      subtaskDOM
+        .querySelector('input[type="checkbox"]')
+        .addEventListener("change", () => {
+          console.log("SUBTASK STATE CHANGE");
+        });
+      tasklistDOM.appendChild(subtaskDOM);
+    }
+  };
+  tasklistDOM.innerHTML = "";
+  ref.task.subtasks.onChange(MultiTasking.func);
+  dialog.showModal();
 }
 
 /**
@@ -406,6 +566,22 @@ function createTaskSingleHTML(task) {
  * @returns {String}
  */
 function createTaskMultiHTML(task) {
+  const percentage = 0.0;
+  return /* HTML */ `
+    <div class="flex-row">
+      <button class="flex-row dimmed btn-icon analytics">
+        <span class="material-symbols-outlined">analytics</span>View More Info
+      </button>
+      <p class="dimmed flex-row">
+        <span class="material-symbols-outlined">schedule</span>${new Date(
+          task.deadline
+        ).toLocaleDateString()}
+      </p>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-bar-fill" style="width: ${percentage * 100}%"></div>
+    </div>
+  `;
   const subtasksHTML = task.subtasks.snapshot
     .map((subtask) => createSubtaskHTML(subtask))
     .join("");
@@ -465,8 +641,9 @@ function createNewTaskDialogProjectSelectorHTML() {
  */
 function createNewTaskDialogUserSelectorHTML() {
   return /* HTML */ `
-    <select name="user" id="options-user" required>
+    <select name="user" id="options-user">
       <option value="">Select User to Add Task to...</option>
+      <option value="">None</option>
     </select>
   `;
 }
@@ -562,7 +739,101 @@ function createUsersDialogWindowHTML() {
           close
         </button>
       </div>
-      <div>A PRETTY LIST OF USERS</div>
+      <div class="user-list"></div>
+      <button type="button" class="btn-action add">
+        <p>Add User</p>
+        <span class="material-symbols-outlined">add</span>
+      </button>
+    </dialog>
+  `;
+}
+
+/**
+ * @param {User} user
+ * @returns {String}
+ */
+function createUserAssignedHTML(user) {
+  return /* HTML */ `<div data-user-assigned="${user.id}">
+    <a
+      ><img
+        class="profile-pic"
+        src="${user.profilePicture()}"
+        width="50"
+        height="50"
+      />${user.name}</a
+    >
+    <button type="button" class="remove btn-action">
+      <p>Remove</p>
+      <p>
+        <span class="material-symbols-outlined">delete</span>
+      </p>
+    </button>
+  </div>`;
+}
+
+/**
+ * @returns {String}
+ */
+function createUsersAddDialogHTML() {
+  return /* HTML */ `
+    <dialog class="modal" id="dialog-assign-user">
+      <div class="flex-row kanban-title">
+        <h2 class="title-card">Assign Users</h2>
+        <button class="material-symbols-outlined btn-icon dialog-close">
+          close
+        </button>
+      </div>
+      <ul class="user-list"></ul>
+      <button type="submit" class="btn-action add">
+        <p>Save</p>
+        <span class="material-symbols-outlined">save</span>
+      </button>
+    </dialog>
+  `;
+}
+
+/**
+ * @param {User} user
+ * @param {Boolean} assigned
+ * @returns {String}
+ */
+function createUserAssigningHTML(user, assigned) {
+  return /* HTML */ `<li>
+    <a
+      ><img
+        class="profile-pic"
+        src="${user.profilePicture()}"
+        width="50"
+        height="50"
+      />${user.name}</a
+    >
+    <input type="checkbox" value="${user.id}" ${assigned ? "checked" : ""} />
+  </li>`;
+}
+
+/**
+ * @returns {String}
+ */
+function createSubtaskViewerDialogHTML() {
+  return /* HTML */ `
+    <dialog class="modal" id="dialog-multitask">
+      <div class="flex-row kanban-title">
+        <h2 class="title-card">TaskName</h2>
+        <button class="material-symbols-outlined btn-icon dialog-close">
+          close
+        </button>
+      </div>
+      <div class="flex-row">
+        <button type="button" class="btn-action users">
+          <p>Users</p>
+          <span class="material-symbols-outlined">people</span>
+        </button>
+        <button type="button" class="btn-action add">
+          <p>New Subtask</p>
+          <span class="material-symbols-outlined">add</span>
+        </button>
+      </div>
+      <div class="subtask-list"></div>
     </dialog>
   `;
 }

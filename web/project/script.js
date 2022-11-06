@@ -29,12 +29,11 @@ kanban(
   async (taskref, card, section) => {
     updateProgressBar();
     if (taskref.source == TaskSrc.Project) {
-      for (const user of taskref.projectTask.assignees)
-        setUserWorkerhours(
-          user,
-          (await user.tasklist()).snapshot,
-          document.querySelector(`#user-${user.id}`)
-        );
+      for (const user of taskref.projectTask.assignees) {
+        const cardUser = document.querySelector(`#user-${user.id}`);
+        if (cardUser)
+          setUserWorkerhours(user, (await user.tasklist()).snapshot, cardUser);
+      }
     }
   }
 );
@@ -49,7 +48,15 @@ function setup() {
     project.team.leader.profilePicture();
   setProjectDeadlineDate(project.deadline);
 
-  project.team.users.onChange((event) => event.add.map(addMember));
+  project.team.users.onChange((event) => {
+    event.add.map(addMember);
+    for (const user of event.sub) {
+      const card = document.querySelector(
+        `#project-members-wrap #user-${user.id}`
+      );
+      if (card) card.remove();
+    }
+  });
 
   project.tasks.onChange(updateProgressBar);
 
@@ -69,7 +76,7 @@ function addMember(user) {
   const card = HTMLasDOM(createUserOverviewCard(user));
   user
     .tasklist()
-    .onChange((event) => setUserWorkerhours(user, event.all, card));
+    .onChange((event) => setUserWorkerhours(user, event.all, card), false);
   projectMembersWrap.appendChild(card);
 }
 
@@ -78,13 +85,13 @@ function addMember(user) {
  * @param {Element} card
  */
 function setUserWorkerhours(user, tasklist, card) {
-  const tasks = tasklist.filter(
+  const allTasks = tasklist.filter(
     (ref) =>
       ref.source == TaskSrc.Project &&
       ref.project.id == project.id &&
-      ref.projectTask.assignees.snapshot.includes(user) &&
-      ref.task.state < TaskState.Done
+      ref.projectTask.assignees.snapshot.includes(user)
   );
+  const tasks = allTasks.filter((ref) => ref.task.state < TaskState.Done);
   const totalHours = tasks.reduce(
     (total, current) => total + current.task.workerhours,
     0
@@ -98,6 +105,10 @@ function setUserWorkerhours(user, tasklist, card) {
       : "green";
   card.setAttribute("data-rag", colour);
   card.querySelector(".detail-highlight").innerHTML = totalHours;
+  if (allTasks.length <= 0) {
+    card.remove();
+    project.team.users.remove(user);
+  }
 }
 
 /**
