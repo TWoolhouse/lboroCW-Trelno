@@ -252,8 +252,6 @@ Requirements are taken from the client specification letter unless stated otherw
 
 # Class diagrams of the System
 
-\
-
 ![Class Diagram](./diagram/class_diagram_all.png)
 
 <!-- \pagebreak
