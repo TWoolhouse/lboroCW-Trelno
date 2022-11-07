@@ -4,11 +4,6 @@ if (currentUser) window.location.href = "/dashboard/";
 
 const users = [
   {
-    email: "test",
-    password: "pw",
-    id: 1,
-  },
-  {
     email: "king@make-it-all.co.uk",
     password: "pleasegiveusgoodmarks",
     id: 1,
@@ -53,11 +48,11 @@ const users = [
  */
 export function login(email, password) {
   // FIXME: Makes life easier when testing the program
-  // if (!email.endsWith("@make-it-all.co.uk"))
-  //   return {
-  //     status: "error",
-  //     message: "Invalid Email",
-  //   };
+  if (!email.endsWith("@make-it-all.co.uk"))
+    return {
+      status: "error",
+      message: "Invalid Email",
+    };
 
   const match = users.filter(
     (user) => user.email == email && user.password == password
