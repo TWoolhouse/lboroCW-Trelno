@@ -100,31 +100,29 @@ header-includes: |
 
 ## Thomas Woolhouse
 
-- Design the class diagram
+- Designing Class Diagrams
   - Modelled the system as a diagram.
   - Modelled the system in JavaScript classes.
-- Designed and created the API
+- Designed and Created the API (Application Programming Interface)
   - Created a consistent API to be reused throughout the project and make webpage elements reactive.
   - Implemented a schemeless database.
   - Curated a custom serialistion system to allow for content parity between individual webpages.
 - Login
-
   - Developed functionality that enables the user to login and will stay logged in for the duration of the session.
   - Additionally implemented the function to havethe user log outfrom anywhere within the system.
   - Also added functionality to keep track of the current logged-in user.
-
 - Posts
-  - creating / editing / viewing posts.
-  - searching through posts.
-  - creating topics.
-  - integrate API md
-
-- Other Contributions
+  - Implemented all pages related to creating, viewing, editing.
+  - Integrated an external API into the system to convert between Markdown and HTML.
+  - Introduced the ability to search through posts in the system based on a search query as well as filter them by topics.
+  - Added functionality to create a new topic.
+- Dashboard & Kanban
   - Ensuring the kanban on the dashboard and the project page are consistent.
   - Coded the system for dividing a task into multiple subtasks.
   - Integrated functionality allowing users to be assigned to task.
-  - Developed the code and interactivity to create clients within the system.
   - Designed and created the ability to display an employees current workload on both the manager and project page.
+- Other Contributions
+  - Developed the code and interactivity to create clients within the system.
   - Contributed to teamates knowledge of both CSS and JavaScript, leading them to progress throughout more of the projectand supporting them in that.
 
 # Requirements
