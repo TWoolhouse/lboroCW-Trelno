@@ -36,6 +36,7 @@ class Task {
 	+name: String
 	+desc: String?
 	+subtasks: Collection~Task~
+	+activeWorkerHours() Number
 }
 TaskState "0..n" --o "1" Task: state
 class TaskState {
@@ -96,6 +97,7 @@ class Client {
   +website: String
   +email: String
   +phone: String
+  +representativeProfilePicture() String
 }
 
 Topic "1" *-- "0..n" Post: topic
@@ -122,8 +124,10 @@ classDiagram
 class Collection~T~ {
 	+Collection(...items: T)
 	+onChange(callback: CollectionEvent~T~ => void) this
+	+onChangeRemove(callback: CollectionEvent~T~ => void) this
 	+[Symbol.iterator]() Generator~T~
 	+add(...items: T) void
+	+addIf(transformer, ...items: T) void
 	+remove(...items: T) void
 	+replace(...items: T) void
 	-sync(func: void => void) void
@@ -142,6 +146,7 @@ Collection <.. CollectionEvent: onChange
 ```
 
 # Backend Database Diagram
+
 ```mermaid
 erDiagram
 
@@ -216,6 +221,7 @@ PostTopic {
 - The usage of ID's will allow for the display name to be changed without breaking all references.
 
 # To Be Decided
+
 ## Post
 
 The data of a post depends on how we do it. If it's a wiki then we need nothing more than the link to data resource (html).
