@@ -212,7 +212,7 @@ export async function faux() {
     ),
     await api.createPost(
       topics[2],
-      user[6],
+      users[6],
       "Keyboard Not working",
       "# What to do if your keyboard is unresponsive\n- Check if your keyboard is plugged in to the computer, if not plug it in and wait a little for it to start up.\n- If it is plugged in an nothing is happening, open the settings and type Keyboard, check to see if it is there\n- If it's not there plesae unplug your keyboard and bring it down to IT to have it checked out. "
     ),
