@@ -66,7 +66,7 @@ export async function faux() {
   ];
 
   /** @const {Array<User>} users */
-  const users = [userKing, ...managers, ...leaders];
+  const users = [userKing, ...managers, ...leaders, ...employees];
 
   userKing.tasks.add(
     // A User Task with no subtasks
@@ -206,7 +206,7 @@ export async function faux() {
     ),
     await api.createPost(
       topics[2],
-      users[6],
+      users[5],
       "Monitor Not working",
       "# What to do if your monitor is not working\n- Begin by checking the power cables and switches.\n- If everything is plugged in, hold down the power button and wait for the screen to flash.\n- If nothing above works plesae bring it down to IT to have it checked out."
     ),
