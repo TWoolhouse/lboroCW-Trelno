@@ -165,24 +165,24 @@ Requirements are taken from the client specification letter unless stated otherw
 
 ## 6. Productivity Management requirements
 
-1. A user **must** also have access to their private to-do list that is not related to any Projects and is only viewable by that user. [^5]
+1. A user **must** also have access to their private to-do list that is not related to any Projects and is only viewable by that user. \footref{footnote 5}
 2. A user **must** have access to their personal dashboard, which will contain task they are assigned to from Projects they are working on and their own private todo list. A private todo list is a users personal to-do list which contains tasks that are not related to any Projects.
 3. The board **must** have columns in the 'Kanban' view that tasks can be placed in. \footnote{14/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=356809} \label{footnote 8}}
-4. The system **should** allow users to switch between a Kanban and 'to-do list' view. [^8]
+4. The system **should** allow users to switch between a Kanban and 'to-do list' view. \footref{footnote 8}
 
 ## 7. Task requirements
 
 1. A task **must** have a name that will be displayed.
 2. A task **should** have a description.
 3. A task **must** have a date for a deadline. \footnote{22/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355045\#p549487} \label{footnote 9}}
-4. A task **must** have an estimated number of worker-hours needed to complete the task.[^10]
+4. A task **must** have an estimated number of worker-hours needed to complete the task.\footref{footnote 10}
 5. A task **should** have the option of being divided into smaller sub-tasks. A sub-task is a task, that the parent tasks depends on. \footnote{22/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355051\#p549539} \label{footnote 10}}
-6. If a task has sub-tasks, then its worker-hours **should** be calculated as a sum of the worker-hours of the smaller tasks. [^10]
-7. A task **must** be able to display the current state it is in. (To-Do, In Progress, Complete). [^10]
-8. A task with subtasks **should** display the percentage of sub-tasks that are completed. [^10]
-9. A task **should** be able to be categorized as either a Project-specific (select which Project) or private task (not related to any project). [^5]
+6. If a task has sub-tasks, then its worker-hours **should** be calculated as a sum of the worker-hours of the smaller tasks. \footref{footnote 10}
+7. A task **must** be able to display the current state it is in. (To-Do, In Progress, Complete). \footref{footnote 10}
+8. A task with subtasks **should** display the percentage of sub-tasks that are completed. \footref{footnote 10}
+9. A task **should** be able to be categorized as either a Project-specific (select which Project) or private task (not related to any project). \footref{footnote 5}
 10. The system **should** allow a Project Manager/Team leader to modify and re-assign a Task. \footnote{04/11/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=359721\#p554115} \label{footnote 24}}
-11. The system **could** allow a Sub-Task to be divided into multiple Sub-Tasks. [^10]
+11. The system **could** allow a Sub-Task to be divided into multiple Sub-Tasks. \footref{footnote 10}
 
 \pagebreak
 
@@ -192,7 +192,7 @@ Requirements are taken from the client specification letter unless stated otherw
 2.  A Project **should** have a description.
 3.  A Project **must** have a date for a deadline.\footnote{22/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355067\#p549557} \label{footnote 12}}
 4.  A Project **must** have a progress displayed, which is measured by the percentage of tasks completed. \footnote{22/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355063\#p549553} \label{footnote 13}}
-5.  A Project **must** have a client. [^11]
+5.  A Project **must** have a client. \footref{footnote 11}
 6.  A Project **must** have a team assigned to it. \footref{footnote 3}
 7.  The system **should** allow users to view the teams of their projects.
 
@@ -215,10 +215,10 @@ Requirements are taken from the client specification letter unless stated otherw
 2. The knowledge management subsystem **must** have a search functionality where a User can search Posts by specific Topics. \footnote{24/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=357789\#p550055} \label{footnote 18}}
 3. Posts **could** be viewable by all users by default. This option can be changed to be accessible only by an employee with certain permissions (Manager, Team lead, User). \footnote{22/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355057\#p549547} \label{footnote 19}}
 4. Posts **must** only be able to be edited by a Manager or the User who has created it. \footnote{22/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355055\#p549545} \label{footnote 20}}
-5. The subsystem **could** contain a FAQ page. [^18]
-6. The subsystem **should** offer users a way to contact author of post for specific questions. [^18]
+5. The subsystem **could** contain a FAQ page. \footref{footnote 18}
+6. The subsystem **should** offer users a way to contact author of post for specific questions. \footref{footnote 18}
 7. A Post **must** only have 1 topic assigned to it. \footnote{22/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355043\#p549491} \label{footnote 21}}
-8. The system **must** allow a Topic have multiple Posts. [^21]
+8. The system **must** allow a Topic have multiple Posts. \footref{footnote 21}
 
 \pagebreak
 
