@@ -81,7 +81,7 @@ export class Task {
     if (this.subtasks.snapshot.length <= 0) return +this.workerhours;
     return +this.subtasks.snapshot.reduce(
       (total, subtask) =>
-        subtask.state < TaskState.Done ? total + subtask.workerhours : total,
+        subtask.state < TaskState.Done ? +total + +subtask.workerhours : total,
       0
     );
   }
