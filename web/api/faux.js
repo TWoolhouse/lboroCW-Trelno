@@ -116,6 +116,14 @@ export async function faux() {
       "F.Batmaz@lboro.ac.uk",
       "+44 (0) 1509 222 699"
     ),
+    await api.createClient(
+      "PepsiCo",
+      "John Smith",
+      "Green Park, Oak Way, Reading RG2 6UW",
+      "pepsico.co.uk",
+      "J.Smith@pepsico.co.uk",
+      "+44 1189 160 000"
+    ),
   ];
 
   const projects = [
@@ -126,6 +134,14 @@ export async function faux() {
       Date.parse("2022-12-25"),
       "Really Cool Idea",
       "This is a really cool idea for a project ngl."
+    ),
+    await api.createProject(
+      leaders[0],
+      clients[1],
+      Date.now(),
+      Date.parse("2022-12-05"),
+      "Update Bottle Design",
+      "PepsiCo wishes to update their bottle design."
     ),
   ];
 
@@ -167,6 +183,7 @@ export async function faux() {
   const topics = [
     await api.createTopic("Latin"),
     await api.createTopic("Movies"),
+    await api.createTopic("PC issues"),
   ];
   const posts = [
     await api.createPost(
@@ -180,6 +197,24 @@ export async function faux() {
       users[2],
       "Movie Watchlist",
       "# Movie List\n- Star Wars\n- Shaw Shank Redemption\n- The Bee Movie\n- Shrek\n- E.T\n- Apollo 13\n- Cast Away\n- Forest Gump\n- Toy Story"
+    ),
+    await api.createPost(
+      topics[1],
+      users[4],
+      "Best Movies",
+      "# Best Movies\n- The Bee Movie\n- Joker\n- Jaws\n- Misson Impossible\n- Nightmare before Christmas\n- Avatar\n- Monty Python and the holy grail"
+    ),
+    await api.createPost(
+      topics[2],
+      users[6],
+      "Monitor Not working",
+      "# What to do if your monitor is not working\n- Begin by checking the power cables and switches.\n- If everything is plugged in, hold down the power button and wait for the screen to flash.\n- If nothing above works plesae bring it down to IT to have it checked out."
+    ),
+    await api.createPost(
+      topics[2],
+      user[6],
+      "Keyboard Not working",
+      "# What to do if your keyboard is unresponsive\n- Check if your keyboard is plugged in to the computer, if not plug it in and wait a little for it to start up.\n- If it is plugged in an nothing is happening, open the settings and type Keyboard, check to see if it is there\n- If it's not there plesae unplug your keyboard and bring it down to IT to have it checked out. "
     ),
   ];
 }
