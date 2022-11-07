@@ -570,7 +570,7 @@ function createTaskHTML(task) {
 function createTaskSingleHTML(task) {
   return /*HTML*/ `
     <div class="flex-row">
-      <p class="dimmed flex-row"><span class="material-symbols-outlined">hourglass_bottom</span>${task.activeWorkerHours()} Hours</p>
+      <p class="dimmed flex-row"><span class="material-symbols-outlined">hourglass_bottom</span><span class="workerhours">${task.activeWorkerHours()}</span>&nbsp;Hours</p>
       <button class="flex-row dimmed btn-icon click-expander"><span class="material-symbols-outlined">analytics</span>View More Info</button>
       <p class="dimmed flex-row"><span class="material-symbols-outlined">schedule</span>${new Date(
         task.deadline
