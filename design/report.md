@@ -153,8 +153,6 @@ Requirements are taken from the client specification letter unless stated otherw
 6. A team leader **must** be able to create tasks for a project they supervise. \footref{footnote 6}
 7. A team leader **must** be able to track task progress of a project.
 
-\pagebreak
-
 ## 5. Project Manager requirements
 
 1. A project manager **must** be able to manage all the projects in the system. \footref{footnote 6}
@@ -183,8 +181,6 @@ Requirements are taken from the client specification letter unless stated otherw
 9. A task **should** be able to be categorized as either a Project-specific (select which Project) or private task (not related to any project). \footref{footnote 5}
 10. The system **should** allow a Project Manager/Team leader to modify and re-assign a Task. \footnote{04/11/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=359721\#p554115} \label{footnote 24}}
 11. The system **could** allow a Sub-Task to be divided into multiple Sub-Tasks. \footref{footnote 10}
-
-\pagebreak
 
 ## 8. Project requirements
 
@@ -219,8 +215,6 @@ Requirements are taken from the client specification letter unless stated otherw
 6. The subsystem **should** offer users a way to contact author of post for specific questions. \footref{footnote 18}
 7. A Post **must** only have 1 topic assigned to it. \footnote{22/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355043\#p549491} \label{footnote 21}}
 8. The system **must** allow a Topic have multiple Posts. \footref{footnote 21}
-
-\pagebreak
 
 ## 12. Client requirements
 
