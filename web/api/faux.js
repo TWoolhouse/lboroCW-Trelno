@@ -130,16 +130,16 @@ export async function faux() {
     await api.createProject(
       leaders[0],
       clients[0],
-      Date.now(),
+      Date.parse("2022-11-03"),
       Date.parse("2022-12-25"),
-      "Really Cool Idea",
-      "This is a really cool idea for a project ngl."
+      "Create a Website for Tracking Tasks",
+      "A website for tracking many users daily tasks."
     ),
     await api.createProject(
       leaders[0],
       clients[1],
-      Date.now(),
-      Date.parse("2022-12-05"),
+      Date.parse("2022-11-06"),
+      Date.parse("2023-2-05"),
       "Update Bottle Design",
       "PepsiCo wishes to update their bottle design."
     ),
@@ -150,10 +150,10 @@ export async function faux() {
     await api.createProjectTask(
       await api.createTask(
         TaskState.Active,
-        "Task 1",
+        "Task that we're doing now",
         Date.parse("2022-11-31"),
         19,
-        "Project Task Description"
+        "A very important task that we are completing right now!"
       )
     ),
     // A project task with subtasks
@@ -161,18 +161,18 @@ export async function faux() {
       await (async () => {
         const task = await api.createTask(
           TaskState.Active,
-          "Task Project",
+          "A Big Task with lots to do",
           Date.parse("2022-12-13"),
           7,
-          "Project Task Description"
+          "This big task has a list of small tasks"
         );
         task.subtasks.add(
           await api.createTask(
             TaskState.Ready, // A subtask should either be Ready OR Done, Never Active
-            "Water the Plants",
+            "Water more plants",
             Date.parse("2022-11-19"),
             1,
-            "Go water the tullips"
+            "Go water the roses"
           )
         );
         return task;
