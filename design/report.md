@@ -255,9 +255,9 @@ Requirements are taken from the client specification letter unless stated otherw
 
 ![Class Diagram](./diagram/class_diagram.png){height=70% width=90%}
 
-\pagebreak
+<!-- \pagebreak
 
-![Collection Class Diagram](./diagram/collection.png){height=50% width=90%}
+![Collection Class Diagram](./diagram/collection.png){height=50% width=90%} -->
 
 <!-- [^1]: 04/11/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=358985> -->
 
