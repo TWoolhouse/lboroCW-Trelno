@@ -508,12 +508,22 @@ async function submitNewSubtask(rootDOM, dialog) {
  */
 function createSubtaskHTML(subtask) {
   return /*HTML*/ `
-    <li class="flex-row">
-      <label for="${subtask.id}">${subtask.name}<label>
+    <div class="flex-row">
       <input type="checkbox" id="${subtask.id}" ${
     subtask.state >= TaskState.Done ? "checked" : ""
   }/>
-    </li>
+      <div>
+        <label for="${subtask.id}">
+          <span>${subtask.name}</span>
+          <span class="dimmed flex-row">
+            <span class="material-symbols-outlined">hourglass_bottom</span>
+            <span class="workerhours">${subtask.activeWorkerHours()}</span>
+            &nbsp;Hours
+          </span>
+        </label>
+        <p>${subtask.desc}</p>
+      </div>
+    </div>
   `;
 }
 
@@ -816,7 +826,7 @@ function createUsersDialogWindowHTML() {
  */
 function createUserAssignedHTML(user) {
   return /* HTML */ `<div data-user-assigned="${user.id}">
-    <a
+    <a href="/profile/?id=${user.id}"
       ><img
         class="profile-pic"
         src="${user.profilePicture()}"
@@ -826,9 +836,7 @@ function createUserAssignedHTML(user) {
     >
     <button type="button" class="remove btn-action">
       <p>Remove</p>
-      <p>
-        <span class="material-symbols-outlined">delete</span>
-      </p>
+      <span class="material-symbols-outlined">delete</span>
     </button>
   </div>`;
 }
@@ -861,7 +869,7 @@ function createUsersAddDialogHTML() {
  */
 function createUserAssigningHTML(user, assigned) {
   return /* HTML */ `<li>
-    <a
+    <a href="/profile/?id=${user.id}"
       ><img
         class="profile-pic"
         src="${user.profilePicture()}"

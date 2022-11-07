@@ -537,7 +537,7 @@ input[type="checkbox"]:checked + label {
 
 .detail-highlight {
   font-weight: 800;
-  background-color: var(--colour-card-highlight);
+  background-color: var(--colour-card-highlight, var(--colour-green));
   padding: 0.5rem;
   border-radius: 0.25rem;
   margin-left: auto;
@@ -756,4 +756,82 @@ a.btn-action {
   border: 1px solid var(--colour-block);
   backdrop-filter: blur(2px);
   z-index: -1;
+}
+
+/* IM *STRUGGLING* */
+
+/* User Popup */
+.user-list > * {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.user-list a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--colour-text);
+  text-decoration-color: var(--colour-accent);
+}
+#dialog-assign-user > .btn-action,
+#dialog-task-users > .btn-action {
+  margin-top: 1rem;
+  margin-left: auto;
+}
+
+#dialog-multitask .subtask-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 1rem;
+}
+
+.user-list input[type="checkbox"],
+.subtask-list input[type="checkbox"] {
+  aspect-ratio: 1/1;
+  width: 1.2em;
+  margin: 1rem;
+}
+
+.subtask-list > * {
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
+}
+.subtask-list > * > div {
+  width: 95%;
+}
+
+.subtask-list label {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  width: 95%;
+}
+
+.subtask-list p {
+  margin: 0;
+  margin-top: 0.2rem;
+}
+
+.subtask-list label :first-child {
+  font-size: 1.2em;
+  font-weight: bold;
 }
