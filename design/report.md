@@ -58,6 +58,8 @@ header-includes: |
   - Coordinated the team (planning, task allocation, decision making, etc) during meetings and other channels of communications (WhatsApp, etc).
   - Ensured the team is on track with task progression and deadlines.
 
+\pagebreak
+
 ## Jack Humphrey
 
 - Communication with clients
@@ -93,6 +95,8 @@ header-includes: |
 - Partook in decisions regarding the project and creation of requirements
   - Assisted in creating the initial requirements draft to give a basis of what the project aimed to do
   - Provided opinions and feedback to make the best decisions when designing, creating and building the project as well as suggesting changes etc. to offer an alternative solutions and a different approach to problems in development where there were multiple viable answers.
+
+\pagebreak
 
 ## Thomas Woolhouse
 
@@ -206,6 +210,8 @@ Requirements are taken from the client specification letter unless stated otherw
 1. The project manager **should** be able to access and manage Project details from their dashboard. \footnote{13/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355039\#p546189} \label{footnote 14}}
 2. The project manager dashboard **should** allow the project manager to manage teams and users that are assigned to their Project. \footnote{22/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355151\#p549485} \label{footnote 15}}
 
+\pagebreak
+
 ## 10. Manager dashboard requirements
 
 1.  The manager dashboard **should** allow a team leader or project manager be able to see how many tasks a user currently has assigned.
@@ -238,7 +244,13 @@ Requirements are taken from the client specification letter unless stated otherw
 4. The system **must** be accessed via a dedicated web address.
 5. The system **must** follow the GDPR regulations.
 
-![Class Diagram](./diagram/class_diagram.png)
+# Class diagrams of the System
+\
+
+![Class Diagram](./diagram/class_diagram.png){height=70% width=90%}
+
+\pagebreak
+
 ![Collection Class Diagram](./diagram/collection.png)
 
 <!-- [^1]: 04/11/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=358985> -->
