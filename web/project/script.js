@@ -92,7 +92,7 @@ function setUserWorkerhours(user, tasklist, card) {
       ref.projectTask.assignees.snapshot.includes(user)
   );
   const tasks = allTasks.filter((ref) => ref.task.state < TaskState.Done);
-  const totalHours = tasks.reduce(
+  const totalHours = +tasks.reduce(
     (total, current) => total + current.task.activeWorkerHours(),
     0
   );
@@ -120,6 +120,7 @@ function createUserOverviewCard(user) {
     <div
       id="user-${user.id}"
       class="member-view card-small bg-accent flex-col-center card-smaller"
+      data-rag="green"
     >
       <a href="../profile/?id=${user.id}">
         <img
