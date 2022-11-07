@@ -22,6 +22,8 @@ header-includes: |
 
 # Contributions
 
+Below you can find every member's contribution to Part 1 of this module's coursework.
+
 ## Arshad Chati
 
 - System Design
@@ -129,7 +131,7 @@ header-includes: |
 
 # Requirements
 
-Requirements are taken from the client specification letter unless stated otherwise.
+Requirements are taken from the client specification letter unless stated otherwise by a footnote.
 
 <!-- FOOT NOTE NUMBERS HERE DO NOT MATCH THE ONES IN THE EXPORTED PDF -->
 
