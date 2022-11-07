@@ -298,6 +298,7 @@ function createTask(ref) {
       console.log(newSection);
       dom.remove();
       newSection.appendChild(dom);
+      ondragfunc(ref, dom, newSection);
     });
 
   const showTaskModal = (modal) => {
