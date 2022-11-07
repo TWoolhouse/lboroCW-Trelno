@@ -2,40 +2,43 @@ import { currentUser, setActiveUser } from "../api/active.js";
 
 if (currentUser) window.location.href = "/dashboard/";
 
+// Passwords
+// 12 characters long. 1 Uppercase. 1 Lowercase. 1 Numeric. 1 Special
+
 const users = [
   {
     email: "king@make-it-all.co.uk",
-    password: "pleasegiveusgoodmarks",
+    password: "KingPassword@07",
     id: 1,
   },
   {
     email: "queen@make-it-all.co.uk",
-    password: "QueenPassword",
+    password: "QueenPassword@07",
     id: 2,
   },
   {
     email: "dilip@make-it-all.co.uk",
-    password: "DilipPassword",
+    password: "DilipPassword@07",
     id: 3,
   },
   {
     email: "emma@make-it-all.co.uk",
-    password: "EmmaPassword",
+    password: "EmmaPassword@07",
     id: 4,
   },
   {
     email: "alice@make-it-all.co.uk",
-    password: "AlicePassword",
+    password: "AlicePassword@07",
     id: 5,
   },
   {
     email: "bert@make-it-all.co.uk",
-    password: "BertPassword",
+    password: "BertPassword@07",
     id: 6,
   },
   {
     email: "clara@make-it-all.co.uk",
-    password: "ClaraPassword",
+    password: "ClaraPassword@07",
     id: 7,
   },
 ];
