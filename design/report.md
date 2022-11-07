@@ -120,6 +120,8 @@ header-includes: |
 
 Requirements are taken from the client specification letter unless stated otherwise.
 
+<!-- FOOT NOTE NUMBERS HERE DO NOT MATCH THE ONES IN THE EXPORTED PDF -->
+
 ## 1. Log in / Registration requirements.
 
 1. A user **must** be able to login to the system using their work email and password.
