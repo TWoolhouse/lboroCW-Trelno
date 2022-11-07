@@ -405,6 +405,7 @@ function showMultiTask(ref) {
   TaskRefActive = ref;
   const dialog = document.querySelector("#dialog-multitask");
   dialog.querySelector("h2").innerHTML = ref.task.name;
+  dialog.querySelector(".task-desc").innerHTML = ref.task.desc;
   const buttonUserShow = dialog.querySelector("button.users");
   if (ref.source != TaskSrc.Project) buttonUserShow.classList.add("hidden");
   else buttonUserShow.classList.remove("hidden");
@@ -893,6 +894,7 @@ function createSubtaskViewerDialogHTML() {
           close
         </button>
       </div>
+      <p class="task-desc">TaskDesc</p>
       <div class="flex-row">
         <button type="button" class="btn-action users">
           <p>Users</p>
