@@ -99,22 +99,29 @@ header-includes: |
 - Design the class diagram
   - Modelled the system as a diagram.
   - Modelled the system in JavaScript classes.
-- Designed and created the api (Application Programming Interface)
-  - Created a consistent api to be reused throughout the project to make the project reactive.
+- Designed and created the API
+  - Created a consistent API to be reused throughout the project and make webpage elements reactive.
   - Implemented a schemeless database.
-  - Custom serialisation system to allow for content parity between individual webpages.
+  - Curated a custom serialistion system to allow for content parity between individual webpages.
 - Login
-  - Functionality to keep track of the current logged-in user.
-  - Developed the functionality that allowed users to log in/log out.
-- Other contributions
-  - Ensured the 'Kanban' on the dashboard and the project page are consistent.
+
+  - Developed functionality that enables the user to login and will stay logged in for the duration of the session.
+  - Additionally implemented the function to havethe user log outfrom anywhere within the system.
+  - Also added functionality to keep track of the current logged-in user.
+
+- Posts
+  - creating / editing / viewing posts.
+  - searching through posts.
+  - creating topics.
+  - integrate API md
+
+- Other Contributions
+  - Ensuring the kanban on the dashboard and the project page are consistent.
   - Coded the system for dividing a task into multiple subtasks.
-  - Developed the functionality that allowed Users to be assigned to a task.
-  - Coded the functionality that allowed creating, editing and viewing posts.
-  - Developed the search functionality that allows searching through posts.
-  - Responsible for developing the functionality for creating topics.
-  - Responsible for developing the functionality for creating clients.
-  - Displaying an employees current workload on both the manager and project page.
+  - Integrated functionality allowing users to be assigned to task.
+  - Developed the code and interactivity to create clients within the system.
+  - Designed and created the ability to display an employees current workload on both the manager and project page.
+  - Contributed to teamates knowledge of both CSS and JavaScript, leading them to progress throughout more of the projectand supporting them in that.
 
 # Requirements
 
@@ -230,6 +237,9 @@ Requirements are taken from the client specification letter unless stated otherw
 3. A user **should** be directed to the employee dashboard after logging in.
 4. The system **must** be accessed via a dedicated web address.
 5. The system **must** follow the GDPR regulations.
+
+![Class Diagram](./diagram/class_diagram.png)
+![Collection Class Diagram](./diagram/collection.png)
 
 <!-- [^1]: 04/11/2022 <https://learn.lboro.ac.uk/mod/forum/discuss.php?d=358985> -->
 
