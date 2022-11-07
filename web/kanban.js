@@ -341,6 +341,7 @@ function showDialogUsers() {
   const onChangeUserAssigned = (event) => {
     if (TaskRefActive.task.id != ref.task.id) return;
     for (const user of event.add) {
+      if (document.querySelector(`[data-user-assigned="${user.id}"]`)) return;
       const cardUser = HTMLasDOM(createUserAssignedHTML(user));
       const remove = cardUser.querySelector(".remove");
       if (IsPowerUser)
