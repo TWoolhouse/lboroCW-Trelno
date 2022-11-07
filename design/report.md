@@ -13,9 +13,9 @@ toc: true
 numbersections: false
 geometry: margin=2.5cm
 header-includes: |
- \usepackage{sectsty}
- \sectionfont{\clearpage}
- \usepackage{hyperref}
+  \usepackage{sectsty}
+  \sectionfont{\clearpage}
+  \usepackage{hyperref}
 ---
 
 <!-- to compile: pandoc report.md -o report.pdf -->
@@ -78,7 +78,7 @@ Below you can find every member's contribution to Part 1 of this module's course
 ## Adam Hutton
 
 - Created the Dashboard/Task view
-  - Including the 'Kanban' section reused elsewhere
+  - Including the 'Kanban' section reused elsewhere.
 - Created the Manager's Dashboard
 - Developed ways of displaying progress to the user, including the horizontal progress bar, and the 'spinner' one used in the project page
 - Created the navigation, reworked it to work on mobile
@@ -92,13 +92,13 @@ Below you can find every member's contribution to Part 1 of this module's course
   - Created the front of the registration page from scratch and expanded on Jacks' initial draft of the login page.
 - Search and parts of search results page
   - Created the search page elements to be used over a number of pages.
-  - Used these elements to make the pages responsive and easy to use. Positioned them accordingly to aid in design and the flow of the pages
+  - Used these elements to make the pages responsive and easy to use. Positioned them accordingly to aid in design and the flow of the pages.
 - Checked through code and caught bugs and features that people missed
-  - Proof reading code and caught some issues such as a button missing function
+  - Proof reading code and caught some issues such as a button missing function.
   - Also discovered bugs with certain elements of data usage etc.
 - Partook in decisions regarding the project and creation of requirements
-  - Assisted in creating the initial requirements draft to give a basis of what the project aimed to do
-  - Provided opinions and feedback to make the best decisions when designing, creating and building the project as well as suggesting changes etc. to offer an alternative solutions and a different approach to problems in development where there were multiple viable answers.
+  - Assisted in creating the initial requirements draft to give a basis of what the project aimed to do.
+  - Provided opinions and feedback to make the best decisions when designing, creating and building the project as well as suggesting changes etc. to offer alternative solutions and a different approach to problems in development where there were multiple viable answers.
 
 \pagebreak
 
@@ -251,6 +251,7 @@ Requirements are taken from the client specification letter unless stated otherw
 5. The system **must** follow the GDPR regulations.
 
 # Class diagrams of the System
+
 \
 
 ![Class Diagram](./diagram/class_diagram_all.png)
