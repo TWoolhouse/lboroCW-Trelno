@@ -1,6 +1,6 @@
 import * as api from "./core.js";
 import { Memoize } from "./interface/memoize.js";
-import { TaskState } from "./model/task.js";
+import { Task, TaskState } from "./model/task.js";
 import { User, UserRank } from "./model/user.js";
 
 const dbStorage = sessionStorage;
@@ -10,17 +10,7 @@ export async function faux() {
   if (dbStorage.getItem("FAUX") != null) return;
   dbStorage.setItem("FAUX", "1");
 
-  const random = (max, min = 0) => {
-    return Math.min(max - 1, Math.floor(Math.random() * (max - min) + min));
-  };
-
-  const range = (count) => {
-    const arr = [];
-    for (let index = 0; index < count; index++) {
-      arr.push(index + 1);
-    }
-    return arr;
-  };
+  // FAKE DATA GOES HERE!
 
   const userKing = await api.createUser(
     "king@make-it-all.co.uk",
@@ -28,12 +18,15 @@ export async function faux() {
     "Neumann",
     1
   );
-  const userQueen = await api.createUser(
-    "queen@make-it-all.co.uk",
-    UserRank.ProjectManager,
-    "Queen",
-    2
-  );
+
+  const managers = [
+    await api.createUser(
+      "queen@make-it-all.co.uk",
+      UserRank.ProjectManager,
+      "Queen",
+      2
+    ),
+  ];
 
   const leaders = [
     await api.createUser(
@@ -73,19 +66,46 @@ export async function faux() {
   ];
 
   /** @const {Array<User>} users */
-  const users = [userKing, userQueen, ...leaders];
+  const users = [userKing, ...managers, ...leaders];
 
-  for (const it of range(random(8, 5))) {
-    userKing.tasks.add(
-      await api.createTask(
-        random(TaskState.Done + 1, TaskState.Ready),
-        `Task #${it}`,
-        Date.parse(`2022-${random(13, 11)}-${random(31, 1)}`),
-        random(10, 1),
-        "User Task Description"
-      )
-    );
-  }
+  userKing.tasks.add(
+    // A User Task with no subtasks
+    await api.createTask(
+      TaskState.Ready,
+      "Water the Plants",
+      Date.parse("2022-11-19"),
+      1,
+      "Go water the tullips"
+    ),
+
+    // A User Task with subtasks
+    await (async () => {
+      const task = await api.createTask(
+        TaskState.Active,
+        "Big Task",
+        Date.parse("2022-11-30"),
+        5, // Doesn't matter as the subtasks will override this
+        "Big Task Description"
+      );
+      task.subtasks.add(
+        // Subtask
+        await api.createTask(
+          TaskState.Ready, // A subtask should either be Ready OR Done, Never Active
+          "Water the Plants",
+          Date.parse("2022-11-19"),
+          1,
+          "Go water the tullips"
+        )
+      );
+      return task;
+    })()
+  );
+
+  // TODO: Add Emma's tasks
+  leaders[1].tasks.add();
+
+  // TODO: Add Clara's tasks
+  employees[2].tasks.add();
 
   const clients = [
     await api.createClient(
@@ -103,34 +123,46 @@ export async function faux() {
       leaders[0],
       clients[0],
       Date.now(),
-      Date.parse(`2022-${random(13, 11)}-${random(31, 1)}`),
+      Date.parse("2022-12-25"),
       "Really Cool Idea",
       "This is a really cool idea for a project ngl."
     ),
   ];
 
-  projects[0].team.users.add(
-    await api.createUser("coah@make-it-all.co.uk", UserRank.Employee, "Adam"),
-    await api.createUser("coa?@make-it-all.co.uk", UserRank.Employee, "Arshad"),
-    await api.createUser("cocc@make-it-all.co.uk", UserRank.Employee, "Calin"),
-    await api.createUser("coj?@make-it-all.co.uk", UserRank.Employee, "Jack"),
-    await api.createUser("cor?@make-it-all.co.uk", UserRank.Employee, "Rowan"),
-    await api.createUser("cotrw@make-it-all.co.uk", UserRank.Employee, "Tom")
-  );
-
-  for (const it of range(random(8, 2))) {
-    projects[0].tasks.add(
-      await api.createProjectTask(
-        await api.createTask(
-          random(TaskState.Done + 1, TaskState.Ready),
-          "Task Project",
-          Date.parse(`2022-${random(13, 11)}-${random(31, 1)}`),
-          random(7, 1),
-          "Project Task Description"
-        )
+  projects[0].tasks.add(
+    // A single project task with no subtasks
+    await api.createProjectTask(
+      await api.createTask(
+        TaskState.Active,
+        "Task 1",
+        Date.parse("2022-11-31"),
+        19,
+        "Project Task Description"
       )
-    );
-  }
+    ),
+    // A project task with subtasks
+    await api.createProjectTask(
+      await (async () => {
+        const task = await api.createTask(
+          TaskState.Active,
+          "Task Project",
+          Date.parse("2022-12-13"),
+          7,
+          "Project Task Description"
+        );
+        task.subtasks.add(
+          await api.createTask(
+            TaskState.Ready, // A subtask should either be Ready OR Done, Never Active
+            "Water the Plants",
+            Date.parse("2022-11-19"),
+            1,
+            "Go water the tullips"
+          )
+        );
+        return task;
+      })()
+    )
+  );
 
   const topics = [
     await api.createTopic("Latin"),
@@ -145,7 +177,7 @@ export async function faux() {
     ),
     await api.createPost(
       topics[1],
-      userQueen,
+      users[2],
       "Movie Watchlist",
       "# Movie List\n- Star Wars\n- Shaw Shank Redemption\n- The Bee Movie\n- Shrek\n- E.T\n- Apollo 13\n- Cast Away\n- Forest Gump\n- Toy Story"
     ),
