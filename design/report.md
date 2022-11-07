@@ -57,6 +57,8 @@ header-includes: |
 - Leadership
   - Coordinated the team (planning, task allocation, decision making, etc) during meetings and other channels of communications (WhatsApp, etc).
   - Ensured the team is on track with task progression and deadlines.
+- Report
+  - Handled the writing, editing and publishing of the report.
 
 \pagebreak
 
@@ -174,8 +176,8 @@ Requirements are taken from the client specification letter unless stated otherw
 
 ## 6. Productivity Management requirements
 
-1. A user **must** also have access to their private to-do list that is not related to any Projects and is only viewable by that user. \footref{footnote 5}
-2. A user **must** have access to their personal dashboard, which will contain task they are assigned to from Projects they are working on and their own private todo list. A private todo list is a users personal to-do list which contains tasks that are not related to any Projects.
+1. A user **must** have access to their private to-do list, which is a user's personal to-do list containing tasks that are not related to any Projects.\footref{footnote 5}
+2. A user **must** have access to their personal dashboard, which will contain task they are assigned to from Projects they are working on and their own private todo list.
 3. The board **must** have columns in the 'Kanban' view that tasks can be placed in. \footnote{14/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=356809} \label{footnote 8}}
 4. The system **should** allow users to switch between a Kanban and 'to-do list' view. \footref{footnote 8}
 
@@ -201,45 +203,49 @@ Requirements are taken from the client specification letter unless stated otherw
 4.  A Project **must** have a progress displayed, which is measured by the percentage of tasks completed. \footnote{22/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355063\#p549553} \label{footnote 13}}
 5.  A Project **must** have a client. \footref{footnote 11}
 6.  A Project **must** have a team assigned to it. \footref{footnote 3}
-7.  The system **should** allow users to view the teams of their projects.
+7.  The system **should** allow a user to view the team members of their Project.
+8.  The system **should** allow a user to view their assigned tasks if they are part of a Project.
+9.  The system **must** allow a Project to be created by a Manager. \footref{footnote 6}
+ 
+## 9. Project Manager
 
-## 9. Project Manager dashboard
-
-1. The project manager **should** be able to access and manage Project details from their dashboard. \footnote{13/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355039\#p546189} \label{footnote 14}}
-2. The project manager dashboard **should** allow the project manager to manage teams and users that are assigned to their Project. \footnote{22/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355151\#p549485} \label{footnote 15}}
+1. The project manager **should** be able to access and manage any Project details from their dashboard. \footnote{13/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355039\#p546189} \label{footnote 14}}
+2. The system **should** allow a project manager to manage teams and users that are assigned to any Project. \footnote{22/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355151\#p549485} \label{footnote 15}}
 
 \pagebreak
 
 ## 10. Manager dashboard requirements
 
-1.  The manager dashboard **should** allow a team leader or project manager be able to see how many tasks a user currently has assigned.
-2.  The Project tasks **could** be able to be filtered based on Project or team member assigned to it.
-3.  A Project **should** display whether it is sufficiently resourced. This is determined based on the sum of worker-hours required by its tasks, the number of workers assigned and the Project's deadline. \footnote{04/11/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355067\#p554135} \label{footnote 16}}
-4.  The manager dashboard **could** display a warning to a Project Manager/Team Leader if the project is expected to fall behind the deadline, based on worker hours (see above)
-5.  A manager/team leader **could** be warned that a employee needs training if they are behind a deadline or having trouble working on a specific task. \footnote{22/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355071\#p549561} \label{footnote 17}}
+1.  The manager dashboard **should** allow a team leader or project manager be able to see how many tasks and total worker-hours a user currently has assigned.
+2.  The manager dashboard **should** display a warning to a Project Manager/Team Leader if a user's assigned effort load exceeds 37.5 worker hours per week.  \label{footnote 16}}
+3.  The Project tasks **could** be able to be filtered based on Project or team member assigned to it.
+4.  A Project **should** display whether it is sufficiently resourced. This is determined based on the sum of worker-hours required by its tasks, the number of workers assigned (and their daily work capacity) and the Project's deadline. \footnote{04/11/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355067\#p554135} \label{footnote 16}}
+5.  The manager dashboard **could** display a warning to a Project Manager/Team Leader if the project is expected to fall behind the deadline, based on worker hours.
+6.  A manager/team leader **could** be warned that a employee needs training if they are behind a deadline or having trouble working on a specific task. \footnote{22/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355071\#p549561} \label{footnote 17}}
 
 ## 11. Knowledge Management requirements
 
 1. The system **must** allow a user to create a new post.
 2. The knowledge management subsystem **must** have a search functionality where a User can search Posts by specific Topics. \footnote{24/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=357789\#p550055} \label{footnote 18}}
-3. Posts **could** be viewable by all users by default. This option can be changed to be accessible only by an employee with certain permissions (Manager, Team lead, User). \footnote{22/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355057\#p549547} \label{footnote 19}}
-4. Posts **must** only be able to be edited by a Manager or the User who has created it. \footnote{22/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355055\#p549545} \label{footnote 20}}
-5. The subsystem **could** contain a FAQ page. \footref{footnote 18}
-6. The subsystem **should** offer users a way to contact author of post for specific questions. \footref{footnote 18}
-7. A Post **must** only have 1 topic assigned to it. \footnote{22/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355043\#p549491} \label{footnote 21}}
-8. The system **must** allow a Topic have multiple Posts. \footref{footnote 21}
+3. Posts **must** be viewable by all users by default. \footnote{22/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355057\#p549547} \label{footnote 19}}
+4. The system **could** allow to change the permissions of accessing specific Posts only by an employee with certain permissions. \label{footnote 19}}
+5. Posts **must** only be able to be edited by a Manager or the User who has created it. \footnote{22/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355055\#p549545} \label{footnote 20}}
+6. The subsystem **could** contain a FAQ page. \footref{footnote 18}
+7. The subsystem **should** offer users a way to contact author of post for specific questions. \footref{footnote 18}
+8. A Post **must** only have 1 topic assigned to it. \footnote{22/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355043\#p549491} \label{footnote 21}}
+9. The system **must** allow a Topic have multiple Posts. \footref{footnote 21}
 
 ## 12. Client requirements
 
 1. A Client **must** have key information including Company name, Client Representative, Office Address, and Contact Information. \footnote{24/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355047\#p550039} \label{footnote 22}}
-2. The system **must** allow a new client to be added.
+2. The system **must** allow a new Client to be added.
 
 ## 13. System Requirements
 
 1. The system **must** have a responsive design that will cater for different platforms and screen sizes.\footnote{11/10/2022 \url{https://learn.lboro.ac.uk/mod/forum/discuss.php?d=355077\#p545293} \label{footnote 23}}
 2. The system **must** be able to be accessed 24 hours a day.
 3. A user **should** be directed to the employee dashboard after logging in.
-4. The system **must** be accessed via a dedicated web address.
+4. The system **could** be accessed via a dedicated web address.
 5. The system **must** follow the GDPR regulations.
 
 # Class diagrams of the System
