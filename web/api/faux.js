@@ -199,14 +199,14 @@ export async function faux() {
       "Create a Website for Tracking Tasks",
       "A website for tracking many users daily tasks."
     ),
-    await api.createProject(
+    /* await api.createProject(
       leaders[0],
       clients[1],
       Date.parse("2022-11-06"),
       Date.parse("2023-2-05"),
       "Update Bottle Design",
       "PepsiCo wishes to update their bottle design."
-    ),
+    ), */
     await api.createProject(
       leaders[0],
       clients[2],
@@ -259,6 +259,77 @@ export async function faux() {
       })()
     )
   );
+
+  const projectTask1 = await api.createProjectTask(
+    await api.createTask(
+      TaskState.Done,
+      "Initial Design Drafts",
+      Date.parse("2022-11-20"),
+      37,
+      "Create initial drafts before the meeting with the client."
+    )
+  );
+  projectTask1.assignees.add(leaders[1]);
+
+  // A single project task with no subtasks
+  const projectTask2 = await api.createProjectTask(
+    await api.createTask(
+      TaskState.Active,
+      "Final Website design",
+      Date.parse("2022-11-27"),
+      37,
+      "More refined design ideas fit for creation"
+    )
+  );
+  projectTask2.assignees.add(employees[0]);
+
+  projects[1].tasks.add(
+    projectTask1,
+    projectTask2,
+    await api.createProjectTask(
+      await api.createTask(
+        TaskState.Ready,
+        "Initial Design Drafts",
+        Date.parse("2022-12-25"),
+        100,
+        "Create a demonstration Landing Page for client approval"
+      )
+    ),
+    // A project task with subtasks
+    await api.createProjectTask(
+      await (async () => {
+        const task = await api.createTask(
+          TaskState.Ready,
+          "Create a finalized prototype for demonstration",
+          Date.parse("2023-02-01"),
+          7,
+          "A prototype product"
+        );
+        task.subtasks.add(
+          await api.createTask(
+            TaskState.Ready, // A subtask should either be Ready OR Done, Never Active
+            "Design",
+            Date.parse("2022-12-01"),
+            50,
+            "Designing the prototype site"
+          )
+        );
+        task.subtasks.add(
+          await api.createTask(
+            TaskState.Ready, // A subtask should either be Ready OR Done, Never Active
+            "Manufacture",
+            Date.parse("2022-12-20"),
+            200,
+            "Manufacturing the prototype line"
+          )
+        );
+        return task;
+      })()
+    )
+  );
+
+  // projects[1].assignees.add(leaders[1]);
+  console.log(projects[1]);
 
   const topics = [
     await api.createTopic("Latin"),
