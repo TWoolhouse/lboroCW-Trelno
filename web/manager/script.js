@@ -182,7 +182,7 @@ function createProjectOverviewCard(project) {
   let colour;
   if (workerHoursAvailable < workerHoursRemaining) {
     colour = "red";
-  } else if (workerHoursAvailable < 0.75 * workerHoursRemaining) {
+  } else if (workerHoursRemaining > 0.75 * workerHoursAvailable) {
     colour = "amber";
   } else {
     colour = "green";
