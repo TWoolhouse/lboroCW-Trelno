@@ -172,6 +172,22 @@ export async function faux() {
       "J.Smith@pepsico.co.uk",
       "+44 1189 160 000"
     ),
+    await api.createClient(
+      "Babbage and Co.",
+      "Charles Babbage",
+      "Green Park, Oak Way, Reading RG2 6UW",
+      "babbage.co.uk",
+      "Charles@babbage.co.uk",
+      "+44 0123 456 789"
+    ),
+    await api.createClient(
+      "Love Lace",
+      "Ada Byron",
+      "Green Park, Oak Way, Reading RG2 6UW",
+      "LoveLace.co.uk",
+      "ada@LoveLace.co.uk",
+      "+44 0123 456 789"
+    ),
   ];
 
   const projects = [
@@ -190,6 +206,22 @@ export async function faux() {
       Date.parse("2023-2-05"),
       "Update Bottle Design",
       "PepsiCo wishes to update their bottle design."
+    ),
+    await api.createProject(
+      leaders[0],
+      clients[2],
+      Date.parse("2022-11-06"),
+      Date.parse("2023-2-05"),
+      "Edit website for new branch - Babbage's Cabbages",
+      "Babbage and Co. are looking to expand into the fresh produce business"
+    ),
+    await api.createProject(
+      leaders[0],
+      clients[3],
+      Date.parse("2022-11-06"),
+      Date.parse("2023-2-05"),
+      "Love Lace",
+      "A start up selling a new kind of shoe-lace"
     ),
   ];
 
