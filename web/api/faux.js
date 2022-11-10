@@ -219,7 +219,7 @@ export async function faux() {
       leaders[0],
       clients[3],
       Date.parse("2022-11-06"),
-      Date.parse("2023-2-05"),
+      Date.parse("2022-11-11"),
       "Love Lace",
       "A start up selling a new kind of shoe-lace"
     ),
@@ -327,6 +327,19 @@ export async function faux() {
       })()
     )
   );
+
+  const justBarelyResourced = await api.createProjectTask(
+    await api.createTask(
+      TaskState.Active,
+      "Shoe design",
+      Date.parse("2022-11-11"),
+      7,
+      "More refined design ideas fit for creation"
+    )
+  );
+  justBarelyResourced.assignees.add(employees[1]);
+
+  projects[2].tasks.add(justBarelyResourced);
 
   // projects[1].assignees.add(leaders[1]);
   console.log(projects[1]);
