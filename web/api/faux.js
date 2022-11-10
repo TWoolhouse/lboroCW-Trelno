@@ -74,27 +74,75 @@ export async function faux() {
       TaskState.Ready,
       "Water the Plants",
       Date.parse("2022-11-19"),
-      1,
+      2,
       "Go water the tullips"
+    ),
+    await api.createTask(
+      TaskState.Done,
+      "Make Coffee for my team",
+      Date.parse("2022-11-19"),
+      1,
+      "They really deserve it :)"
+    ),
+    await api.createTask(
+      TaskState.Active,
+      "Make notes for presentation",
+      Date.parse("2022-11-10"),
+      5,
+      "Don't wanna slip up"
+    ),
+    await api.createTask(
+      TaskState.Ready,
+      "Buy Alan T. a Thank-You Card",
+      Date.parse("2022-11-10"),
+      2,
+      "They did a great job on their last project"
+    ),
+    await api.createTask(
+      TaskState.Ready,
+      "Attend Meeting",
+      Date.parse("2022-11-12"),
+      1,
+      "It's a big one!"
     ),
 
     // A User Task with subtasks
     await (async () => {
       const task = await api.createTask(
         TaskState.Active,
-        "Big Task",
+        "Create and populate database",
         Date.parse("2022-11-30"),
         5, // Doesn't matter as the subtasks will override this
-        "Big Task Description"
+        "Just an example of a task that may have multiple components"
+      );
+      task.subtasks.add(
+        // Subtask
+        await api.createTask(
+          TaskState.Done, // A subtask should either be Ready OR Done, Never Active
+          "Create a business account",
+          Date.parse("2022-11-12"),
+          2,
+          "Create an account with a database provider with support for businesses"
+        )
       );
       task.subtasks.add(
         // Subtask
         await api.createTask(
           TaskState.Ready, // A subtask should either be Ready OR Done, Never Active
-          "Water the Plants",
-          Date.parse("2022-11-19"),
+          "Upload test data",
+          Date.parse("2022-11-13"),
+          2,
+          "Generate some random test data to upload to the database and use for testing"
+        )
+      );
+      task.subtasks.add(
+        // Subtask
+        await api.createTask(
+          TaskState.Ready, // A subtask should either be Ready OR Done, Never Active
+          "Publish on a test domain",
+          Date.parse("2022-11-14"),
           1,
-          "Go water the tullips"
+          "Even a local one will do"
         )
       );
       return task;
