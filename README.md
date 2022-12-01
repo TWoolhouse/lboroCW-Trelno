@@ -1,2 +1,4 @@
 # Trelno
-Team Project (static at first)
+Team Project
+
+![Screenshot of Site](design/img/example.png)
